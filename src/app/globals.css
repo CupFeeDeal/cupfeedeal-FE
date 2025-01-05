@@ -9,6 +9,10 @@
     box-sizing: border-box;
   }
 
+  html {
+    background: #eaf4ff;
+  }
+
   button {
     border: none;
     background-color: transparent;

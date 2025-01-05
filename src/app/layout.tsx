@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import LayoutProvider from "@common/LayoutProvider";
 
 export const metadata: Metadata = {
   title: "Cupfee Deal",
@@ -13,7 +14,10 @@ export default function RootLayout({
 }>) {
   return (
     <html>
-      <body>{children}</body>
+      <body className="min-h-[calc(var--vh)*100] max-w-[390px] mx-auto bg-white">
+        <LayoutProvider />
+        {children}
+      </body>
     </html>
   );
 }
