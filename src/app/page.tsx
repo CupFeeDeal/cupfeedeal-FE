@@ -1,9 +1,9 @@
-import TopBar from "@common/TopBar";
+import HomeTap from "@common/HomeTap";
 
 export default function Home() {
   return (
     <div>
-      <TopBar title="커피딜 지도" />
+      <HomeTap />
     </div>
   );
 }

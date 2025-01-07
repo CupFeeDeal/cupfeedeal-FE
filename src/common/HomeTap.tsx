@@ -17,8 +17,8 @@ const HomeTap = () => {
       <div className="flex justify-between items-center py-3 px-5">
         <Logo className="w-11" />
         <Link
-          className="Caption_bold py-[0.31rem] px-[0.88rem] border border-solid border-black rounded-3xl"
           href={"/mypage"}
+          className="Caption_bold py-[0.31rem] px-[0.88rem] border border-solid border-black rounded-3xl"
         >
           마이페이지
         </Link>
