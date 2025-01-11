@@ -1,5 +1,6 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import Lottie from "react-lottie-player";
 import { useRouter } from "next/navigation";
 
@@ -22,15 +23,26 @@ const OnboardingContent = ({
   const router = useRouter();
   const handleNext = () => {
     if (isLast) {
-      router.push("/home");
+      router.push("/main");
     } else {
       router.push(`/onboarding?step=${step + 1}`);
     }
   };
 
+  // lottie만 늦게 렌더링되는 문제 해결하기 위해 timeout과 애니메이션 적용
+  const [isReady, setIsReady] = useState(false);
+  useEffect(() => {
+    const timer = setTimeout(() => setIsReady(true), 300);
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
-    <>
-      <div className="w-[20.875rem] flex flex-col gap-3">
+    <div
+      className={`h-full flex flex-col items-center justify-between pt-[4.5rem] pb-[5.5rem] transition-opacity duration-1000 ${
+        isReady ? "opacity-100" : "opacity-0"
+      }`}
+    >
+      <div className="w-[20.875rem] flex flex-col gap-3 ">
         <h1 className="Headline_3 whitespace-pre-line">{title}</h1>
         <p className="Body_2_med text-Grey-600 whitespace-pre-line">
           {description}
@@ -51,7 +63,7 @@ const OnboardingContent = ({
           {isLast ? "커피딜 시작하기" : "다음"}
         </button>
       </div>
-    </>
+    </div>
   );
 };
 

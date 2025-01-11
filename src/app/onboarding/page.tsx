@@ -43,11 +43,11 @@ const Onboarding = ({ searchParams }: { searchParams: SearchParams }) => {
 
   // 잘못된 step 처리
   if (step < 1 || step > steps.length) {
-    redirect("/home");
+    redirect("/main");
   }
 
   return (
-    <div className="h-full flex flex-col items-center justify-between">
+    <div className="h-full overflow-scroll">
       <OnboardingContent
         step={step}
         lottie={steps[step - 1].lottie}
