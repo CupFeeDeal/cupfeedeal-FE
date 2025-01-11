@@ -47,7 +47,7 @@ const Onboarding = ({ searchParams }: { searchParams: SearchParams }) => {
   }
 
   return (
-    <div className="flex flex-col items-center justify-between">
+    <div className="h-full flex flex-col items-center justify-between">
       <OnboardingContent
         step={step}
         lottie={steps[step - 1].lottie}
