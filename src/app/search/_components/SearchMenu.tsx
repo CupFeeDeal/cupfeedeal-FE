@@ -1,13 +1,31 @@
 "use client";
 import { useState } from "react";
 import { EmptyHeart, FullHeart, Crosshair } from "@assets/icons";
+import useMap from "./useMap";
 
 const defaultBtnStyle = `w-11 h-11 flex justify-center items-center bg-white rounded-[1.375rem] shadow-[0_0_11px_0_rgba(153,153,159,0.26)] cursor-pointer`;
 const clickedBtnStyle = `w-11 h-11 flex justify-center items-center bg-Main_Blue rounded-[1.375rem] shadow-[0_0_11px_0_rgba(153,153,159,0.26)] cursor-pointer`;
 
 const SearchMenu = () => {
+  const { setCurrentLocation } = useMap();
   const [showNear, setShowNear] = useState(false);
   const [showHeart, setShowHeart] = useState(false);
+
+  const handleCurrentLocation = () => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const { latitude, longitude } = position.coords;
+          setCurrentLocation(latitude, longitude);
+        },
+        (error) => {
+          console.error("Geolocation error ", error);
+        }
+      );
+    } else {
+      alert("현재 위치를 가져올 수 없습니다.");
+    }
+  };
 
   return (
     <div className="w-full flex flex-row justify-between px-5 absolute z-10 top-[4.75rem]">
@@ -37,7 +55,7 @@ const SearchMenu = () => {
             <EmptyHeart width={24} height={24} />
           </div>
         )}
-        <div className={defaultBtnStyle}>
+        <div className={defaultBtnStyle} onClick={handleCurrentLocation}>
           <Crosshair width={24} height={24} />
         </div>
       </span>

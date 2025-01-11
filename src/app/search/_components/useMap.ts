@@ -22,6 +22,23 @@ const useMap = () => {
     map.morph(new naver.maps.LatLng(...INITIAL_CENTER), INITIAL_ZOOM);
   }, [map]);
 
+  // 현재 위치 설정
+  const setCurrentLocation = useCallback(
+    (latitude: number, longitude: number) => {
+      if (!map) return;
+
+      const currentLocation = new naver.maps.LatLng(latitude, longitude);
+      // new naver.maps.Marker({
+      //   position: currentLocation,
+      //   map,
+      //   title: "Current location",
+      // });
+
+      map.setCenter(currentLocation);
+    },
+    [map]
+  );
+
   // 지도 옵션 가져오기
   const getMapOptions = useCallback(() => {
     const mapCenter = map.getCenter();
@@ -34,6 +51,7 @@ const useMap = () => {
   return {
     initializeMap,
     resetMapOptions,
+    setCurrentLocation,
     getMapOptions,
   };
 };
