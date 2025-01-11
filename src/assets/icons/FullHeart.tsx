@@ -4,7 +4,7 @@ const SvgFullHeart = (props: SVGProps<SVGSVGElement>) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     fill="none"
-    viewBox="0 0 11 11"
+    viewBox="0 0 12 12"
     {...props}
   >
     <path
