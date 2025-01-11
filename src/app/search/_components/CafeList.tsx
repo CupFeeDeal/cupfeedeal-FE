@@ -1,7 +1,7 @@
 "use client";
 import { useRouter } from "next/navigation";
 
-interface Item {
+interface ListItem {
   distance: number;
   name: string;
   address: string;
@@ -10,7 +10,7 @@ interface Item {
 }
 
 interface ListProps {
-  cafeList: Item[];
+  cafeList: ListItem[];
 }
 
 export default function CafeList({ cafeList }: ListProps) {
