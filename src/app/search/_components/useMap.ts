@@ -106,12 +106,35 @@ const useMap = () => {
               <img src="/svg/CoffeeBeanMarker.svg" style="width: 18px; height: 18px;" />
               </div>
             </div>`,
+            anchor: new naver.maps.Point(20, 23),
           },
+          zIndex: isSelected ? 10 : 5,
         });
 
         // 마커 클릭 이벤트리스너
         naver.maps.Event.addListener(marker, "click", () => {
           setSelectedCafeId(isSelected ? null : location.id);
+          // map.setCenter(
+          //   new naver.maps.LatLng(location.address_lat, location.address_lng)
+          // );
+
+          // 바텀시트를 고려한 정중앙 배치
+          if (map) {
+            const currentCenter = new naver.maps.LatLng(
+              location.address_lat,
+              location.address_lng
+            );
+
+            // 지도 중심에서 253px만큼 위로 이동된 좌표 계산
+            const pixelOffset = 253 / 2;
+            const proj = map.getProjection();
+            const point = proj.fromCoordToOffset(currentCenter);
+            point.y += pixelOffset;
+            const newCenter = proj.fromOffsetToCoord(point);
+
+            // 지도 중심 이동
+            map.panTo(newCenter);
+          }
         });
 
         markersRef.current.push(marker);
