@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback } from "react";
+import { useCallback, useRef } from "react";
 import { Coordinates, NaverMap } from "src/types/search";
 import useSWR, { mutate } from "swr";
 
@@ -9,8 +9,8 @@ export const INITIAL_ZOOM = 15;
 export const MAP_KEY = "/serach";
 
 const useMap = () => {
-  // 지도 상태 관리
-  const { data: map } = useSWR(MAP_KEY);
+  const { data: map } = useSWR(MAP_KEY); // 지도 상태 관리
+  const markersRef = useRef<naver.maps.Marker[]>([]); // 마커 배열 관리
 
   // 지도 초기화
   const initializeMap = useCallback((map: NaverMap) => {
@@ -48,6 +48,12 @@ const useMap = () => {
     return { center, zoom };
   }, [map]);
 
+  // 마커 리셋
+  const clearMarkers = useCallback(() => {
+    markersRef.current.forEach((marker) => marker.setMap(null));
+    markersRef.current = [];
+  }, []);
+
   // 마커 추가하기
   const addMarker = useCallback(
     (
@@ -56,12 +62,17 @@ const useMap = () => {
         name: string;
         address_lat: number;
         address_lng: number;
-      }[]
+      }[],
+      selectedCafeId: number | null,
+      setSelectedCafeId: (id: number | null) => void
     ) => {
       if (!map) return;
+      clearMarkers();
 
       locations.forEach((location) => {
-        new naver.maps.Marker({
+        const isSelected = selectedCafeId === location.id;
+
+        const marker = new naver.maps.Marker({
           position: new naver.maps.LatLng(
             location.address_lat,
             location.address_lng
@@ -69,7 +80,19 @@ const useMap = () => {
           map: map,
           title: location.name,
           icon: {
-            content: `
+            content: isSelected
+              ? `
+              <div style="
+                width: 40px; 
+                height: 46px; 
+                display: flex; 
+                justify-content: center; 
+                align-items: center;
+              ">
+              <img src='/svg/PinMarker.svg' style="width: 100%; height: 100%; object-fit: contain;"/>
+              </div>`
+              : `
+              <div style="width: 40px; height: 46px; display: flex; justify-content: center; align-items: center;">
               <div style="
                 width: 30px;
                 height: 30px;
@@ -81,12 +104,20 @@ const useMap = () => {
                 box-shadow: 0px 0px 12.7px 0px rgba(175, 176, 187, 0.31);
               ">
               <img src="/svg/CoffeeBeanMarker.svg" style="width: 18px; height: 18px;" />
+              </div>
             </div>`,
           },
         });
+
+        // 마커 클릭 이벤트리스너
+        naver.maps.Event.addListener(marker, "click", () => {
+          setSelectedCafeId(isSelected ? null : location.id);
+        });
+
+        markersRef.current.push(marker);
       });
     },
-    [map]
+    [map, clearMarkers]
   );
 
   return {

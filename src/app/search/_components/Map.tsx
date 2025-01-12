@@ -5,6 +5,8 @@ import { Coordinates, NaverMap } from "src/types/search";
 import useMap, { INITIAL_CENTER, INITIAL_ZOOM } from "./useMap";
 import { nearCafe } from "./mock";
 
+import useSelectedCafeStore from "@store/useSelectedCafeStore";
+
 type MapProps = {
   mapId?: string;
   initialCenter?: Coordinates;
@@ -19,6 +21,9 @@ const Map = ({
   const mapRef = useRef<HTMLDivElement | null>(null);
   const { initializeMap, addMarker } = useMap();
   const [isMapLoaded, setIsMapLoaded] = useState(false);
+
+  // 현재 선택한 카페
+  const { selectedCafeId, setSelectedCafeId } = useSelectedCafeStore();
 
   // naver 스크립트 로드 확인
   useEffect(() => {
@@ -53,9 +58,9 @@ const Map = ({
 
   useEffect(() => {
     if (isMapLoaded) {
-      addMarker(nearCafe);
+      addMarker(nearCafe, selectedCafeId, setSelectedCafeId);
     }
-  }, [addMarker, isMapLoaded]);
+  }, [addMarker, isMapLoaded, selectedCafeId, setSelectedCafeId]);
 
   return (
     <div id={mapId} ref={mapRef} style={{ width: "100%", height: "100vh" }} />
