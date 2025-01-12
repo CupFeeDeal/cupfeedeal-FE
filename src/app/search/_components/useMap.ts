@@ -48,11 +48,53 @@ const useMap = () => {
     return { center, zoom };
   }, [map]);
 
+  // 마커 추가하기
+  const addMarker = useCallback(
+    (
+      locations: {
+        id: number;
+        name: string;
+        address_lat: number;
+        address_lng: number;
+      }[]
+    ) => {
+      if (!map) return;
+
+      locations.forEach((location) => {
+        new naver.maps.Marker({
+          position: new naver.maps.LatLng(
+            location.address_lat,
+            location.address_lng
+          ),
+          map: map,
+          title: location.name,
+          icon: {
+            content: `
+              <div style="
+                width: 30px;
+                height: 30px;
+                background-color: #1b7be8;
+                border-radius: 15px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                box-shadow: 0px 0px 12.7px 0px rgba(175, 176, 187, 0.31);
+              ">
+              <img src="/svg/CoffeeBeanMarker.svg" style="width: 18px; height: 18px;" />
+            </div>`,
+          },
+        });
+      });
+    },
+    [map]
+  );
+
   return {
     initializeMap,
     resetMapOptions,
     setCurrentLocation,
     getMapOptions,
+    addMarker,
   };
 };
 

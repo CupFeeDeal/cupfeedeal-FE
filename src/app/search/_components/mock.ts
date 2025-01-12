@@ -17,6 +17,21 @@ export const cafeList = [
   },
 ];
 
+export const nearCafe = [
+  {
+    id: 1,
+    name: "투썸플레이스 신촌기차역",
+    address_lat: 37.559262,
+    address_lng: 126.941984,
+  },
+  {
+    id: 2,
+    name: "영미김밥",
+    address_lat: 37.558702,
+    address_lng: 126.942486,
+  },
+];
+
 export const cafeInfo = {
   id: 1,
   name: "카페플레이스",

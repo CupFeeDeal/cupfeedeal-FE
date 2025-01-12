@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { Coordinates, NaverMap } from "src/types/search";
 import useMap, { INITIAL_CENTER, INITIAL_ZOOM } from "./useMap";
+import { nearCafe } from "./mock";
 
 type MapProps = {
   mapId?: string;
@@ -16,7 +17,7 @@ const Map = ({
   initialZoom = INITIAL_ZOOM,
 }: MapProps) => {
   const mapRef = useRef<HTMLDivElement | null>(null);
-  const { initializeMap } = useMap();
+  const { initializeMap, addMarker } = useMap();
   const [isMapLoaded, setIsMapLoaded] = useState(false);
 
   // naver 스크립트 로드 확인
@@ -48,11 +49,13 @@ const Map = ({
 
     const map = new naver.maps.Map(mapRef.current, mapOptions);
     initializeMap(map);
-
-    return () => {
-      map.destroy();
-    };
   }, [initializeMap, initialCenter, initialZoom, isMapLoaded]);
+
+  useEffect(() => {
+    if (isMapLoaded) {
+      addMarker(nearCafe);
+    }
+  }, [addMarker, isMapLoaded]);
 
   return (
     <div id={mapId} ref={mapRef} style={{ width: "100%", height: "100vh" }} />
