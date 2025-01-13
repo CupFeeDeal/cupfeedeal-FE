@@ -34,12 +34,8 @@ const steps = [
   },
 ] as const;
 
-interface SearchParams {
-  step?: string;
-}
-
-const Onboarding = ({ searchParams }: { searchParams: SearchParams }) => {
-  const step = parseInt(searchParams.step || "1", 10);
+const Onboarding = ({ searchParams }: { searchParams: { step?: string } }) => {
+  const step = Number(searchParams.step) || 1;
 
   // 잘못된 step 처리
   if (step < 1 || step > steps.length) {
