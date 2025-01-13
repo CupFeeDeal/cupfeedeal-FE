@@ -8,13 +8,18 @@ interface SectionProps {
 
 export const Section = ({ title, children, scroll }: SectionProps) => (
   <section className="px-5 mt-14">
-    <h2 className="Subhead_1_bold mb-4">{title}</h2>
+    <h2 className="Subhead_1_bold">{title}</h2>
     {scroll ? (
-      <div className="overflow-x-auto">
-        <div className="flex">{children}</div>
+      <div className="overflow-x-auto -mx-5">
+        <div className="flex gap-4 px-5 py-5">
+          {children}
+          <div className="w-1 shrink-0" />
+        </div>
       </div>
     ) : (
-      children
+      <div className="shadow-basic rounded-lg mt-5 overflow-hidden">
+        {children}
+      </div>
     )}
   </section>
 );
