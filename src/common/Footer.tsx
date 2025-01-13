@@ -24,7 +24,7 @@ const Footer = () => (
         사업자등록번호 : 452-88-03211&ensp;‖&ensp;대표자 : 서다원
       </p>
       <p className="Caption_bold">
-        호스팅 제공자&emsp;<span className="Caption_med">송유선</span>
+        호스팅 제공자&ensp;<span className="Caption_med">Vercel Inc.</span>
       </p>
     </section>
 
