@@ -1,5 +1,3 @@
-"use client";
-
 import { BannerInit, BannerCup, BannerCat } from "@assets/icons";
 
 interface BannerVariant {
