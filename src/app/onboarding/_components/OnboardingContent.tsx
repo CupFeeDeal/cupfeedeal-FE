@@ -42,13 +42,13 @@ const OnboardingContent = ({
         isReady ? "opacity-100" : "opacity-0"
       }`}
     >
-      <div className="w-[20.875rem] flex flex-col gap-3 ">
+      <div className="w-[20.875rem] space-y-3 ">
         <h1 className="Headline_3 whitespace-pre-line">{title}</h1>
         <p className="Body_2_med text-Grey-600 whitespace-pre-line">
           {description}
         </p>
       </div>
-      <div className="flex flex-col gap-16">
+      <div className="space-y-16">
         <Lottie
           key={step}
           animationData={lottie}

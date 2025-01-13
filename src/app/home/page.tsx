@@ -1,7 +1,9 @@
 import HomeTap from "@common/HomeTap";
-import HomeBanner from "./_components/HomeBanner";
+import Footer from "@common/Footer";
 import { Map } from "@assets/icons";
+
 import Section from "./_components/Section";
+import HomeBanner from "./_components/HomeBanner";
 import RecommendCard from "./_components/RecommendCard";
 import NewCard from "./_components/NewCard";
 
@@ -88,6 +90,9 @@ const Home = () => {
             <NewCard key={cafe.id} {...cafe} />
           ))}
         </Section>
+
+        <div className="h-14" />
+        <Footer />
       </div>
     </div>
   );

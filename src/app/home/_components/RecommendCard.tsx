@@ -8,9 +8,9 @@ interface RecommendCardProps {
 }
 
 const RecommendCard = ({ img, name, location, price }: RecommendCardProps) => (
-  <article className="flex flex-col p-3 rounded-lg shadow-card gap-3">
+  <article className="space-y-3 p-3 rounded-lg shadow-card">
     {/* 카페 이미지 */}
-    <div className="w-48 h-32 relative rounded-lg shrink-0 overflow-hidden">
+    <section className="w-48 h-32 relative rounded-lg shrink-0 overflow-hidden">
       {img ? (
         <Image
           src={img}
@@ -25,7 +25,7 @@ const RecommendCard = ({ img, name, location, price }: RecommendCardProps) => (
       <h5 className="absolute bottom-3 left-3 Subhead_1_bold  text-white truncate w-[85%]">
         {name}
       </h5>
-    </div>
+    </section>
 
     {/* 카페 정보 */}
     <div className="flex gap-3">

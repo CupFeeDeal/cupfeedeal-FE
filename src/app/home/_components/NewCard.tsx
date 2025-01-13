@@ -7,7 +7,7 @@ interface NewCardProps {
 }
 
 const NewCard = ({ img, name, info }: NewCardProps) => (
-  <article className="flex flex-col p-3 rounded-lg shadow-card gap-3">
+  <article className="space-y-3 p-3 rounded-lg shadow-card">
     {/* 카페 이미지 */}
     <div className="w-36 h-36 rounded-lg overflow-hidden">
       {img ? (
@@ -23,7 +23,7 @@ const NewCard = ({ img, name, info }: NewCardProps) => (
     </div>
 
     {/* 카페 정보 */}
-    <div className="flex flex-col gap-1.5 text-center">
+    <div className="space-y-1.5 text-center">
       <div className="Body_1_bold line-clamp-1 px-2">{name}</div>
       <div className="Body_2_med line-clamp-2">{info}</div>
     </div>
