@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 
-const useViewport = () => {
+export default function useViewport() {
   useEffect(() => {
     const setViewport = () => {
       const vh = window.innerHeight * 0.01;
@@ -12,6 +12,4 @@ const useViewport = () => {
 
     return () => window.removeEventListener("resize", setViewport);
   }, []);
-};
-
-export default useViewport;
+}
