@@ -43,7 +43,7 @@ const Onboarding = ({ searchParams }: { searchParams: SearchParams }) => {
 
   // 잘못된 step 처리
   if (step < 1 || step > steps.length) {
-    redirect("/main");
+    redirect("/home");
   }
 
   return (

@@ -23,7 +23,7 @@ const OnboardingContent = ({
   const router = useRouter();
   const handleNext = () => {
     if (isLast) {
-      router.push("/main");
+      router.push("/home");
     } else {
       router.push(`/onboarding?step=${step + 1}`);
     }
