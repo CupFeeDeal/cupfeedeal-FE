@@ -32,7 +32,7 @@ const Footer = () => (
     <section className="flex justify-between">
       <div className="space-y-3 self-end Caption_bold ">
         <p>Contact</p>
-        <button className="text-white w-12 h-12 rounded-full bg-Grey-500 flex justify-center items-center">
+        <button className="text-white w-12 h-12 rounded-full bg-Grey-500 grid place-items-center">
           카카오
         </button>
       </div>

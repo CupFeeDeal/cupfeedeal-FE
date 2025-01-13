@@ -1,13 +1,21 @@
 import Image from "next/image";
+import Link from "next/link";
 
 interface RecommendCardProps {
+  id: number;
   img: string;
   name: string;
   location: string;
   price: number;
 }
 
-const RecommendCard = ({ img, name, location, price }: RecommendCardProps) => (
+const RecommendCard = ({
+  id,
+  img,
+  name,
+  location,
+  price,
+}: RecommendCardProps) => (
   <article className="space-y-3 p-3 rounded-lg shadow-card">
     {/* 카페 이미지 */}
     <section className="w-48 h-32 relative rounded-lg shrink-0 overflow-hidden">
@@ -38,9 +46,12 @@ const RecommendCard = ({ img, name, location, price }: RecommendCardProps) => (
     </div>
 
     {/* 버튼 */}
-    <button className="Body_2_bold text-white bg-Grey-800 w-full h-10 rounded-lg">
+    <Link
+      href={`/detail/${id}`}
+      className="Body_2_bold text-white bg-Grey-800 rounded-lg h-10 grid place-items-center"
+    >
       자세히 보기
-    </button>
+    </Link>
   </article>
 );
 

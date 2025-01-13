@@ -1,3 +1,4 @@
+import Link from "next/link";
 import HomeTap from "@common/HomeTap";
 import Footer from "@common/Footer";
 import { Map } from "@assets/icons";
@@ -74,7 +75,9 @@ const Home = () => {
 
         {/* 지도 */}
         <Section title="커피딜 지도에서 카페를 찾아봐요!">
-          <Map />
+          <Link href={"/search"}>
+            <Map />
+          </Link>
         </Section>
 
         {/* 추천 카페 */}
