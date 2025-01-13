@@ -7,12 +7,7 @@ interface RecommendCardProps {
   price: number;
 }
 
-export const RecommendCard = ({
-  img,
-  name,
-  location,
-  price,
-}: RecommendCardProps) => (
+const RecommendCard = ({ img, name, location, price }: RecommendCardProps) => (
   <article className="flex flex-col p-3 rounded-lg shadow-card gap-3">
     {/* 카페 이미지 */}
     <div className="w-48 h-32 relative rounded-lg shrink-0 overflow-hidden">
@@ -24,7 +19,7 @@ export const RecommendCard = ({
           className="object-cover"
         />
       ) : (
-        <div className="w-full h-full bg-gray-300" />
+        <div className="w-full h-full bg-Grey-300" />
       )}
       <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(0,0,0,0)_0%,rgba(0,0,0,0.59)_100%)]" />
       <h5 className="absolute bottom-3 left-3 Subhead_1_bold  text-white truncate w-[85%]">
@@ -48,3 +43,5 @@ export const RecommendCard = ({
     </button>
   </article>
 );
+
+export default RecommendCard;

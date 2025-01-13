@@ -1,8 +1,9 @@
 import HomeTap from "@common/HomeTap";
 import HomeBanner from "./_components/HomeBanner";
 import { Map } from "@assets/icons";
-import { Section } from "./_components/Section";
-import { RecommendCard } from "./_components/RecommendCard";
+import Section from "./_components/Section";
+import RecommendCard from "./_components/RecommendCard";
+import NewCard from "./_components/NewCard";
 
 const MOCK_RECOMMEND_CAFES = [
   {
@@ -35,6 +36,33 @@ const MOCK_RECOMMEND_CAFES = [
   },
 ];
 
+const MOCK_NEW_CAFES = [
+  {
+    id: 1,
+    img: "",
+    name: "카페이름카페이름카페이름카페이름",
+    info: "텍스트텍스트텍스트텍스트텍스트텍스트텍스트텍스트텍스트텍스트",
+  },
+  {
+    id: 2,
+    img: "",
+    name: "카페이름카페이름카페이름카페이름",
+    info: "텍스트텍스트텍스트텍스트텍스트텍스트텍스트텍스트텍스트텍스트",
+  },
+  {
+    id: 3,
+    img: "",
+    name: "카페이름카페이름카페이름카페이름",
+    info: "텍스트텍스트텍스트텍스트텍스트텍스트텍스트텍스트텍스트텍스트",
+  },
+  {
+    id: 4,
+    img: "",
+    name: "카페이름카페이름카페이름카페이름",
+    info: "텍스트텍스트텍스트텍스트텍스트텍스트텍스트텍스트텍스트텍스트",
+  },
+];
+
 const Home = () => {
   return (
     <div className="flex flex-col h-full">
@@ -51,6 +79,13 @@ const Home = () => {
         <Section title="이런 카페도 있어요!" scroll>
           {MOCK_RECOMMEND_CAFES.map((cafe) => (
             <RecommendCard key={cafe.id} {...cafe} />
+          ))}
+        </Section>
+
+        {/* 신상 카페 */}
+        <Section title="새로 오픈했어요!" scroll>
+          {MOCK_NEW_CAFES.map((cafe) => (
+            <NewCard key={cafe.id} {...cafe} />
           ))}
         </Section>
       </div>

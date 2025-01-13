@@ -6,11 +6,11 @@ interface SectionProps {
   scroll?: boolean;
 }
 
-export const Section = ({ title, children, scroll }: SectionProps) => (
+const Section = ({ title, children, scroll }: SectionProps) => (
   <section className="px-5 mt-14">
     <h2 className="Subhead_1_bold">{title}</h2>
     {scroll ? (
-      <div className="overflow-x-auto -mx-5">
+      <div className="overflow-x-auto -mx-5 -mb-5">
         <div className="flex gap-4 px-5 py-5">
           {children}
           <div className="w-1 shrink-0" />
@@ -23,3 +23,5 @@ export const Section = ({ title, children, scroll }: SectionProps) => (
     )}
   </section>
 );
+
+export default Section;
