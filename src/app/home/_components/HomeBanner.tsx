@@ -13,6 +13,7 @@ const MOCK_STATE = {
   subs: 1,
 };
 
+// 로그인 여부, 구독권 개수에 따라 다르게 렌더링
 const HomeBanner = () => {
   const variant: BannerVariant = !MOCK_STATE.loggedIn
     ? { img: BannerInit }
@@ -36,7 +37,7 @@ const HomeBanner = () => {
           <h1 className="Headline_3 mb-2 whitespace-pre-line">
             {variant.title}
           </h1>
-          <h3 className="Body_2_med">{variant.subtitle}</h3>
+          <h4 className="Body_2_med">{variant.subtitle}</h4>
         </div>
       )}
     </div>

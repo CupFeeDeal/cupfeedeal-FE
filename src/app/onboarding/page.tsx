@@ -47,7 +47,7 @@ const Onboarding = ({ searchParams }: { searchParams: SearchParams }) => {
   }
 
   return (
-    <div className="h-full overflow-scroll">
+    <div className="h-full overflow-auto">
       <OnboardingContent
         step={step}
         lottie={steps[step - 1].lottie}
