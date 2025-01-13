@@ -23,14 +23,14 @@ const HomeTap = () => {
           마이페이지
         </Link>
       </div>
-      <div className="Body_1_bold flex mt-2">
+      <header className="Body_1_bold flex mt-2">
         <Link href={"/home"} className={tapClass(pathname === "/home")}>
           HOME
         </Link>
         <Link href={"/card"} className={tapClass(pathname === "/card")}>
           구독권
         </Link>
-      </div>
+      </header>
     </>
   );
 };

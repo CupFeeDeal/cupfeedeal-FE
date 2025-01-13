@@ -32,7 +32,7 @@ const steps = [
     description:
       "원두님이 구독한 카페를 자주 방문하면\n해당 카페에 발자국을 찍을 수 있어요.\n발자국을 찍어 레벨을 올리고, 더 다양한 컵캣을 만나봐요.",
   },
-];
+] as const;
 
 interface SearchParams {
   step?: string;
@@ -43,11 +43,11 @@ const Onboarding = ({ searchParams }: { searchParams: SearchParams }) => {
 
   // 잘못된 step 처리
   if (step < 1 || step > steps.length) {
-    redirect("/main");
+    redirect("/home");
   }
 
   return (
-    <div className="h-full overflow-scroll">
+    <div className="h-full overflow-auto">
       <OnboardingContent
         step={step}
         lottie={steps[step - 1].lottie}
