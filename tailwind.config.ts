@@ -32,11 +32,15 @@ const config: Config = {
         },
       },
       fontFamily: {
-        suite: ["SUITE", "sans-serif"],
-        suit: ["SUIT", "sans-serif"],
+        suite: ["var(--font-suite)"],
+        suit: ["var(--font-suit)"],
       },
       screens: {
         pc: { min: "768px" },
+      },
+      boxShadow: {
+        card: "0px 0px 20px 0px rgba(125, 125, 131, 0.2)",
+        basic: "0px 0px 12.7px 0px rgba(175, 176, 187, 0.31)",
       },
     },
   },

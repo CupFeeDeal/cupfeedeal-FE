@@ -14,9 +14,14 @@
     "next": "15.1.3",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
+<<<<<<< HEAD
     "router": "^1.3.8",
     "swr": "^2.3.0",
     "zustand": "^5.0.3"
+=======
+    "react-lottie-player": "^2.1.0",
+    "router": "^1.3.8"
+>>>>>>> 8c172c8e78c2849fbed613d2089467df85bede17
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
