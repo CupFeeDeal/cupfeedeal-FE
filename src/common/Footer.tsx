@@ -2,9 +2,18 @@ import { LogoText, Front } from "@assets/icons";
 import Link from "next/link";
 
 const FOOTER_LINKS = [
-  { text: "이용약관", href: "https://notion.url/terms" },
-  { text: "개인정보처리방침", href: "https://notion.url/privacy" },
-  { text: "사업자정보확인", href: "https://notion.url/business" },
+  {
+    text: "이용약관",
+    href: "https://rhealabs.notion.site/17b60d5f308780199bd4d04f711fcc0d?pvs=4",
+  },
+  {
+    text: "개인정보처리방침",
+    href: "https://rhealabs.notion.site/17b60d5f308780a3bc9ed8600f1bdd73?pvs=4",
+  },
+  {
+    text: "사업자정보확인",
+    href: "https://rhealabs.notion.site/17b60d5f308780b98ff2cf214f776670?pvs=4",
+  },
 ] as const;
 
 const Footer = () => (
