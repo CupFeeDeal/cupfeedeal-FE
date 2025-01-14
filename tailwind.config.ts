@@ -32,8 +32,8 @@ const config: Config = {
         },
       },
       fontFamily: {
-        suite: ["SUITE", "sans-serif"],
-        suit: ["SUIT", "sans-serif"],
+        suite: ["var(--font-suite)"],
+        suit: ["var(--font-suit)"],
       },
       screens: {
         pc: { min: "768px" },
