@@ -2,9 +2,18 @@ import { LogoText, Front } from "@assets/icons";
 import Link from "next/link";
 
 const FOOTER_LINKS = [
-  { text: "이용약관", href: "https://notion.url/terms" },
-  { text: "개인정보처리방침", href: "https://notion.url/privacy" },
-  { text: "사업자정보확인", href: "https://notion.url/business" },
+  {
+    text: "이용약관",
+    href: "https://rhealabs.notion.site/17b60d5f308780199bd4d04f711fcc0d?pvs=4",
+  },
+  {
+    text: "개인정보처리방침",
+    href: "https://rhealabs.notion.site/17b60d5f308780a3bc9ed8600f1bdd73?pvs=4",
+  },
+  {
+    text: "사업자정보확인",
+    href: "https://rhealabs.notion.site/17b60d5f308780b98ff2cf214f776670?pvs=4",
+  },
 ] as const;
 
 const Footer = () => (
@@ -24,7 +33,7 @@ const Footer = () => (
         사업자등록번호 : 452-88-03211&ensp;‖&ensp;대표자 : 서다원
       </p>
       <p className="Caption_bold">
-        호스팅 제공자&emsp;<span className="Caption_med">송유선</span>
+        호스팅 제공자&ensp;<span className="Caption_med">Vercel Inc.</span>
       </p>
     </section>
 
