@@ -38,31 +38,29 @@ const OnboardingContent = ({
 
   return (
     <div
-      className={`h-full flex flex-col items-center justify-between pt-[4.5rem] pb-[5.5rem] transition-opacity duration-1000 ${
+      className={`flex flex-col items-center justify-between transition-opacity duration-1000 ${
         isReady ? "opacity-100" : "opacity-0"
       }`}
     >
-      <div className="w-[20.875rem] space-y-3 ">
+      <div className="w-[20.875rem] h-36  shrink-0 space-y-3 ">
         <h1 className="Headline_3 whitespace-pre-line">{title}</h1>
         <p className="Body_2_med text-Grey-600 whitespace-pre-line">
           {description}
         </p>
       </div>
-      <div className="space-y-16">
-        <Lottie
-          key={step}
-          animationData={lottie}
-          loop
-          play
-          style={{ width: "20.875rem" }}
-        />
-        <button
-          onClick={handleNext}
-          className="Body_1_bold w-[20.875rem] bg-Main_Blue  text-white px-6 py-3.5 rounded-xl"
-        >
-          {isLast ? "커피딜 시작하기" : "다음"}
-        </button>
-      </div>
+      <Lottie
+        key={step}
+        animationData={lottie}
+        loop
+        play
+        style={{ width: "20.875rem" }}
+      />
+      <button
+        onClick={handleNext}
+        className="Body_1_bold w-[20.875rem] bg-Main_Blue  text-white px-6 py-3.5  mt-4 rounded-xl"
+      >
+        {isLast ? "커피딜 시작하기" : "다음"}
+      </button>
     </div>
   );
 };
