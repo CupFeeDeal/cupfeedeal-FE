@@ -1,6 +1,6 @@
 "use client";
 import { Back, MyTabCupcatBg, MyTabHistoryBg } from "@assets/icons";
-import { useRouter } from "next/navigation";
+// import { useRouter } from "next/navigation";
 
 const MyTab = () => {
   //const router = useRouter();
@@ -14,14 +14,14 @@ const MyTab = () => {
   ];
 
   return (
-    <div className="flex flex-col bg-white mb-[30px]">
+    <div className="flex flex-col relative bg-white mb-[30px] rounded rounded-t-[20px] z-10 -mt-7">
       {/*탭 카드*/}
       <div className="flex flex-row justify-center gap-3 mt-7 mb-5">
-        <span className="relative">
+        <span className="relative cursor-pointer">
           <MyTabHistoryBg width={169} height={120} />
           <div className="absolute Body_1_bold top-3 left-4">구독 내역</div>
         </span>
-        <span className="relative">
+        <span className="relative cursor-pointer">
           <MyTabCupcatBg width={169} height={120} />
           <div className="absolute Body_1_bold top-3 left-4">지나간 컵캣</div>
         </span>
@@ -29,7 +29,10 @@ const MyTab = () => {
 
       {/*탭 메뉴*/}
       {menuList.map((tab) => (
-        <div className="flex flex-row w-full p-5 items-center justify-between border-b-[0.5px] border-b-Grey-200 ">
+        <div
+          key={tab.id}
+          className="flex flex-row w-full p-5 items-center justify-between border-b-[0.5px] border-b-Grey-200 cursor-pointer"
+        >
           <span className="Body_1_bold bg-white">{tab.menu}</span>
           <Back className="-scale-x-100" />
         </div>

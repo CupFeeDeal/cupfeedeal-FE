@@ -10,6 +10,7 @@ export { default as Front } from "./Front";
 export { default as FullHeart } from "./FullHeart";
 export { default as HeartMarker } from "./HeartMarker";
 export { default as Information } from "./Information";
+export { default as LevelBannerBg } from "./LevelBannerBg";
 export { default as Logo } from "./Logo";
 export { default as LogoText } from "./LogoText";
 export { default as Map } from "./Map";
