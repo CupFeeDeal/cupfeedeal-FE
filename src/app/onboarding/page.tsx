@@ -34,12 +34,12 @@ const steps = [
   },
 ] as const;
 
+// Next15부터 searchParams가 단순 객체로 오는 게 아니라 Promise로 감싸져서 오는 듯함.
 interface OnboardingProps {
   searchParams: Promise<{ step?: string }>;
 }
 
 async function Onboarding(props: OnboardingProps) {
-  // 원래 await 안 쓰고 force-dynamic만 써도 문제 없어야 하는데 계속 searchParams 관련해서 콘솔에 경고가 뜸. searchParams가 단순 객체로 와야하는데 Promise로 감싸져서 오는 버그때문인 듯 함. 우회하기 위해 직접 await 사용
   const sp = await props.searchParams;
   const step = Number(sp.step) || 1;
 
@@ -49,7 +49,7 @@ async function Onboarding(props: OnboardingProps) {
   }
 
   return (
-    <div className="h-full overflow-auto">
+    <div className="h-full grid place-content-center overflow-auto">
       <OnboardingContent
         step={step}
         lottie={steps[step - 1].lottie}
