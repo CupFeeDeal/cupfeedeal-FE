@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { Coordinates, NaverMap } from "src/types/search";
+import { Coordinates } from "src/types/search";
 import useMap, { INITIAL_CENTER, INITIAL_ZOOM } from "./useMap";
 import { nearCafe } from "./mock";
 

@@ -1,9 +1,9 @@
 "use client";
-import { useState } from "react";
+//import { useState } from "react";
 import { Search } from "@assets/icons";
 
 const SearchBar = () => {
-  const [query, setQuery] = useState("");
+  //const [query, setQuery] = useState("");
 
   return (
     <div className="w-full px-5 absolute z-10 top-4">

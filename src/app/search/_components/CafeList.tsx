@@ -15,6 +15,7 @@ interface ListProps {
 
 export default function CafeList({ cafeList }: ListProps) {
   const router = useRouter();
+  console.log(router);
 
   return (
     <div className="flex flex-col w-full">

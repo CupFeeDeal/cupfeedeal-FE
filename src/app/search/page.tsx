@@ -17,7 +17,7 @@ export default function Search() {
         <SearchMenu />
         <Map />
       </div>
-      {/* <BottomSheet cafeInfo={cafeInfo} /> */}
+      <BottomSheet cafeInfo={cafeInfo} />
     </div>
   );
 }

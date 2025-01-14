@@ -37,6 +37,7 @@ export default function BottomSheet({
   cafeInfo: BottomSheetProps;
 }) {
   const [isOpen, setIsOpen] = useState(false);
+  console.log(setIsOpen);
 
   return (
     <>
