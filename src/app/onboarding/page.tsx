@@ -34,12 +34,14 @@ const steps = [
   },
 ] as const;
 
-interface SearchParams {
-  step?: string;
+interface OnboardingProps {
+  searchParams: Promise<{ step?: string }>;
 }
 
-const Onboarding = ({ searchParams }: { searchParams: SearchParams }) => {
-  const step = parseInt(searchParams.step || "1", 10);
+async function Onboarding(props: OnboardingProps) {
+  // 원래 await 안 쓰고 force-dynamic만 써도 문제 없어야 하는데 계속 searchParams 관련해서 콘솔에 경고가 뜸. searchParams가 단순 객체로 와야하는데 Promise로 감싸져서 오는 버그때문인 듯 함. 우회하기 위해 직접 await 사용
+  const sp = await props.searchParams;
+  const step = Number(sp.step) || 1;
 
   // 잘못된 step 처리
   if (step < 1 || step > steps.length) {
@@ -57,6 +59,6 @@ const Onboarding = ({ searchParams }: { searchParams: SearchParams }) => {
       />
     </div>
   );
-};
+}
 
 export default Onboarding;

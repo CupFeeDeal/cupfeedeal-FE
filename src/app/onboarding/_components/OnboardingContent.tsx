@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 
 interface OnboardingProps {
   step: number;
-  lottie: any;
+  lottie: object;
   title: string;
   description: string;
   isLast: boolean;

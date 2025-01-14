@@ -26,15 +26,3 @@
 ::-webkit-scrollbar {
   display: none;
 }
-
-@font-face {
-  font-family: "SUITE";
-  font-weight: 300 400 500 600 700 800 900;
-  src: url("/fonts/SUITE-Variable.woff2") format("woff2-variations");
-}
-
-@font-face {
-  font-family: "SUIT";
-  font-weight: 100 200 300 400 500 600 700 800 900;
-  src: url("/fonts/SUIT-Variable.woff2") format("woff2-variations");
-}
