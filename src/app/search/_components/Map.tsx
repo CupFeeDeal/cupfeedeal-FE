@@ -72,7 +72,15 @@ const Map = ({
       setIsSheetOpen(false);
       setSelectedCafeId(null);
     });
-  }, [initializeMap, initialCenter, initialZoom, isMapLoaded]);
+  }, [
+    initializeMap,
+    initialCenter,
+    initialZoom,
+    isMapLoaded,
+    setIsSheetOpen,
+    setSelectedCafeId,
+    setShowBottomSheet,
+  ]);
 
   useEffect(() => {
     if (isMapLoaded) {
