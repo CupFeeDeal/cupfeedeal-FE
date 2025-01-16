@@ -108,15 +108,12 @@ const useMap = () => {
             </div>`,
             anchor: new naver.maps.Point(20, 23),
           },
-          zIndex: isSelected ? 10 : 5,
+          zIndex: isSelected ? 40 : 35,
         });
 
         // 마커 클릭 이벤트리스너
         naver.maps.Event.addListener(marker, "click", () => {
           setSelectedCafeId(isSelected ? null : location.id);
-          // map.setCenter(
-          //   new naver.maps.LatLng(location.address_lat, location.address_lng)
-          // );
 
           // 바텀시트를 고려한 정중앙 배치
           if (map) {

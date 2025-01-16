@@ -62,7 +62,7 @@ const MyBanner = ({ isLevel }: BannerProps) => {
                   width={20}
                   height={20}
                   className="cursor-pointer"
-                  onClick={() => router.push("/my/level")}
+                  onClick={() => router.push("/mypage/level")}
                 />
               </span>
             </div>

@@ -23,7 +23,12 @@ const Map = ({
   const [isMapLoaded, setIsMapLoaded] = useState(false);
 
   // 현재 선택한 카페
-  const { selectedCafeId, setSelectedCafeId } = useSelectedCafeStore();
+  const {
+    selectedCafeId,
+    setSelectedCafeId,
+    setShowBottomSheet,
+    setIsSheetOpen,
+  } = useSelectedCafeStore();
 
   // naver 스크립트 로드 확인
   useEffect(() => {
@@ -54,16 +59,42 @@ const Map = ({
 
     const map = new naver.maps.Map(mapRef.current, mapOptions);
     initializeMap(map);
+
+    // 지도 클릭/드래그 시 showBottomSheet 비활성화
+    naver.maps.Event.addListener(map, "click", () => {
+      setShowBottomSheet(false);
+      setIsSheetOpen(false);
+      setSelectedCafeId(null);
+    });
+
+    naver.maps.Event.addListener(map, "dragstart", () => {
+      setShowBottomSheet(false);
+      setIsSheetOpen(false);
+      setSelectedCafeId(null);
+    });
   }, [initializeMap, initialCenter, initialZoom, isMapLoaded]);
 
   useEffect(() => {
     if (isMapLoaded) {
-      addMarker(nearCafe, selectedCafeId, setSelectedCafeId);
+      addMarker(nearCafe, selectedCafeId, (id) => {
+        setSelectedCafeId(id);
+        setShowBottomSheet(!!id);
+      });
     }
-  }, [addMarker, isMapLoaded, selectedCafeId, setSelectedCafeId]);
+  }, [
+    addMarker,
+    isMapLoaded,
+    selectedCafeId,
+    setSelectedCafeId,
+    setShowBottomSheet,
+  ]);
 
   return (
-    <div id={mapId} ref={mapRef} style={{ width: "100%", height: "100vh" }} />
+    <div
+      id={mapId}
+      ref={mapRef}
+      style={{ width: "100%", height: "calc(100vh - 48px)" }}
+    />
   );
 };
 
