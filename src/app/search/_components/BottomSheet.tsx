@@ -9,7 +9,7 @@ import { motion } from "framer-motion";
 import { cafeInfo } from "./mock";
 import useBottomSheet from "@hooks/useBottomSheet";
 //import { MAX_Y, MIN_Y } from "@constants/BottomSheetOption";
-import useSelectedCafeStore from "@store/useSelectedCafeStore";
+// import useSelectedCafeStore from "@store/useSelectedCafeStore";
 
 const BottomSheet = () => {
   const { sheet, content } = useBottomSheet();

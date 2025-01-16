@@ -27,7 +27,7 @@ const BottomSheetHeader = () => {
     } else {
       setFade(false);
     }
-  }, [isSheetOpen]);
+  }, [isSheetOpen, showBottomSheet]);
 
   const handleBackClick = () => {
     if (sheet.current) {

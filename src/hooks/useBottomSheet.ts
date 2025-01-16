@@ -1,4 +1,4 @@
-import { useRef, useEffect, useState } from "react";
+import { useRef, useEffect } from "react";
 import { MIN_Y, MAX_Y } from "@constants/BottomSheetOption";
 import useSelectedCafeStore from "@store/useSelectedCafeStore";
 
@@ -122,7 +122,7 @@ export default function useBottomSheet() {
       }
     };
 
-    const handleTouchEnd = (e: TouchEvent) => {
+    const handleTouchEnd = () => {
       document.body.style.overflowY = "auto";
       const { touchMove } = metrics.current;
 
@@ -161,7 +161,7 @@ export default function useBottomSheet() {
     sheet.current!.addEventListener("touchstart", handleTouchStart);
     sheet.current!.addEventListener("touchmove", handleTouchMove);
     sheet.current!.addEventListener("touchend", handleTouchEnd);
-  }, []);
+  }, [setIsSheetOpen]);
 
   useEffect(() => {
     const handleTouchStart = () => {
