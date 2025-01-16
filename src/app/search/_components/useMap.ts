@@ -28,11 +28,11 @@ const useMap = () => {
       if (!map) return;
 
       const currentLocation = new naver.maps.LatLng(latitude, longitude);
-      new naver.maps.Marker({
-        position: currentLocation,
-        map,
-        title: "Current location",
-      });
+      // new naver.maps.Marker({
+      //   position: currentLocation,
+      //   map,
+      //   title: "Current location",
+      // });
 
       map.setCenter(currentLocation);
     },

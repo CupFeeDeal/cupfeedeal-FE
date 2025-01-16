@@ -1,11 +1,17 @@
+"use client";
+
 import { useEffect, useState } from "react";
 import { BottomLine, Back } from "@assets/icons";
 import useSelectedCafeStore from "@store/useSelectedCafeStore";
+import useBottomSheet from "@hooks/useBottomSheet";
 
 const BottomSheetHeader = () => {
-  const { showBottomSheet, isSheetOpen } = useSelectedCafeStore();
+  const { showBottomSheet, isSheetOpen, setIsSheetOpen } =
+    useSelectedCafeStore();
   const [showBackIcon, setShowBackIcon] = useState(false);
   const [fade, setFade] = useState(false);
+
+  const { sheet } = useBottomSheet();
 
   useEffect(() => {
     if (showBottomSheet) {
@@ -23,6 +29,14 @@ const BottomSheetHeader = () => {
     }
   }, [isSheetOpen]);
 
+  const handleBackClick = () => {
+    if (sheet.current) {
+      sheet.current!.style.setProperty("transform", "translateY(0)");
+      setIsSheetOpen(false);
+    }
+    console.log("click");
+  };
+
   return (
     <div
       className={`transition-opacity duration-500 ${
@@ -31,7 +45,7 @@ const BottomSheetHeader = () => {
     >
       {showBackIcon ? (
         <div className="bg-white">
-          <Back className="-rotate-90 mt-3 ml-5" />
+          <Back className="-rotate-90 mt-3 ml-5" onClick={handleBackClick} />
         </div>
       ) : (
         <div className="bg-white h-8 px-5 pt-3 flex flex-col justify-start items-center rounded-t-2xl shadow-[0_0_17px_4px_rgba(116,116,128,0.21)]">

@@ -22,7 +22,7 @@ export default function useBottomSheet() {
   console.log("isSheetOpen: ", isSheetOpen);
 
   useEffect(() => {
-    // 화면 스크롤 잠금금
+    // 화면 스크롤 잠금
     const timeout = setTimeout(() => {
       if (isSheetOpen) {
         document.body.style.overflow = "auto";
@@ -157,6 +157,7 @@ export default function useBottomSheet() {
       };
     };
 
+    if (!sheet.current || !content.current) return;
     sheet.current!.addEventListener("touchstart", handleTouchStart);
     sheet.current!.addEventListener("touchmove", handleTouchMove);
     sheet.current!.addEventListener("touchend", handleTouchEnd);
@@ -166,6 +167,8 @@ export default function useBottomSheet() {
     const handleTouchStart = () => {
       metrics.current!.isContentAreaTouched = true;
     };
+
+    if (!content.current) return;
     content.current!.addEventListener("touchstart", handleTouchStart);
   }, []);
 
