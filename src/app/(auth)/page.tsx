@@ -1,10 +1,12 @@
 import { Logo } from "@assets/icons";
 import { LogoText } from "@assets/icons";
 import { SpeachBubble } from "@assets/icons";
-import { Kakao } from "@assets/icons";
+import KakaoBtn from "./_components/KakaoBtn";
 import Link from "next/link";
 
-export default function Home() {
+export default function Auth() {
+  const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?client_id=${process.env.NEXT_PUBLIC_KAKAO_CLIENT_ID}&redirect_uri=${process.env.NEXT_PUBLIC_KAKAO_REDIRECT_URI}&response_type=code`;
+
   return (
     <div className="h-full flex flex-col justify-center">
       {/* 로고 */}
@@ -16,10 +18,7 @@ export default function Home() {
       {/* 로그인 버튼 */}
       <div className="flex flex-col items-center px-5 gap-4">
         <SpeachBubble className="relative drop-shadow-basic" />
-        <div className="flex justify-center items-center gap-2 w-full h-12 bg-[#F5E14B] rounded-xl">
-          <Kakao />
-          <p className="Body_1_med">카카오톡으로 계속하기</p>
-        </div>
+        <KakaoBtn />
         <Link
           href={"/onboarding"}
           className="Body_2_reg text-Grey-500 underline w-fit "
