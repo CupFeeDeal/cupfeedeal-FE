@@ -1,4 +1,5 @@
-import { Setting, Coffee, Stamp, Cup } from "@assets/icons";
+import { Setting, Coffee, Stamp } from "@assets/icons";
+import Cups from "./Cups";
 
 const Card = () => {
   return (
@@ -19,8 +20,7 @@ const Card = () => {
       {/* <Stamp className="absolute -top-[1.63rem] -right-[3.69rem] " /> */}
 
       <div className="flex gap-2">
-        <Cup />
-        <Cup />
+        <Cups count={1.5} />
         <p className="Body_2_bold text-white whitespace-pre-line">
           {"한 잔 반 만큼의\n커피값을 아꼈어요!"}
         </p>
