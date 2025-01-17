@@ -2,6 +2,7 @@ export { default as Back } from "./Back";
 export { default as BannerCat } from "./BannerCat";
 export { default as BannerCup } from "./BannerCup";
 export { default as BannerInit } from "./BannerInit";
+export { default as BottomLine } from "./BottomLine";
 export { default as CoffeeBeanMarker } from "./CoffeeBeanMarker";
 export { default as Crosshair } from "./Crosshair";
 export { default as CupcatEx } from "./CupcatEx";
