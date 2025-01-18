@@ -39,7 +39,11 @@ export default function BottomSheetContent({
   const { isSheetOpen } = useSelectedCafeStore();
 
   return (
-    <div className="bg-white z-30 overflow-scroll pb-[5.5rem] ">
+    <div
+      className={`bg-white z-30 overflow-scroll pb-[5.5rem] ${
+        isSheetOpen ? "max-h-screen" : "max-h-full"
+      } `}
+    >
       <div className={`w-full px-5 ${isSheetOpen ? "pt-5" : ""}`}>
         {/*거리*/}
         <div className="Caption_bold text-Grey-500">
