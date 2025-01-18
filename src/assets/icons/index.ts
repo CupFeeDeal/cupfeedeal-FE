@@ -10,6 +10,7 @@ export { default as CardBackground } from "./CardBackground";
 export { default as Coffee } from "./Coffee";
 export { default as CoffeeBeanMarker } from "./CoffeeBeanMarker";
 export { default as Crosshair } from "./Crosshair";
+export { default as Cup } from "./Cup";
 export { default as CupcatEx } from "./CupcatEx";
 export { default as EmptyHeart } from "./EmptyHeart";
 export { default as Front } from "./Front";

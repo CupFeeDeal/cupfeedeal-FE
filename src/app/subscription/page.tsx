@@ -1,8 +1,8 @@
 import HomeTap from "@common/HomeTap";
 import { CardBackground } from "@assets/icons";
-import Card from "./_components/Card";
+import CardList from "./_components/CardList";
 
-const subscription = () => {
+export default function SubscriptionPage() {
   return (
     <div className="flex flex-col h-full">
       <HomeTap />
@@ -11,14 +11,12 @@ const subscription = () => {
           {"오늘의 커피 한 잔 마시고\n발자국을 모아봐요!"}
         </p>
 
-        {/* 구독권 카드 */}
-        <div className="relative my-8">
-          <CardBackground className="drop-shadow-basic" />
-          <Card />
+        {/* 구독권 카드 리스트 */}
+        <div className="relative my-8 drop-shadow-basic overflow-hidden rounded-[1.25rem]">
+          <CardBackground />
+          <CardList />
         </div>
       </div>
     </div>
   );
-};
-
-export default subscription;
+}

@@ -9,7 +9,6 @@ const Cups = ({ count }: CupsProps) => {
   const fullCups = Math.floor(count);
   // 반만 채워진 컵
   const hasHalfCup = count % 1 !== 0;
-  console.log({ fullCups, hasHalfCup });
 
   return (
     <div className="flex gap-2 items-center">
