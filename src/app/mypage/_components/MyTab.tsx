@@ -4,13 +4,12 @@ import { useRouter } from "next/navigation";
 
 const MyTab = () => {
   const router = useRouter();
-  // const handleWithdraw = router.push("/"); // 임시
 
   const menuList = [
-    { id: 1, menu: "닉네임 변경" },
-    { id: 2, menu: "문의하기", href: "/ask" },
+    { id: 1, menu: "닉네임 변경", href: "/mypage/nickname" },
+    { id: 2, menu: "문의하기", href: "/mypage/ask" },
     { id: 3, menu: "로그아웃", href: "/" },
-    { id: 4, menu: "회원 탈퇴" },
+    { id: 4, menu: "회원 탈퇴", href: "/mypage/withdraw" },
   ];
 
   return (
@@ -38,6 +37,7 @@ const MyTab = () => {
         <div
           key={tab.id}
           className="flex flex-row w-full p-5 items-center justify-between border-b-[0.5px] border-b-Grey-200 cursor-pointer"
+          onClick={() => router.push(tab.href)}
         >
           <span className="Body_1_bold bg-white">{tab.menu}</span>
           <Back className="-scale-x-100" />
