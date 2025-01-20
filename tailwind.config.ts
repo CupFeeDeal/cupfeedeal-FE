@@ -2,7 +2,6 @@ import type { Config } from "tailwindcss";
 import plugin from "tailwindcss/plugin";
 
 const config: Config = {
-  darkMode: ["class"],
   content: [
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/common/**/*.{js,ts,jsx,tsx,mdx}",
@@ -31,46 +30,6 @@ const config: Config = {
           "800": "#333D4B",
           "900": "#191F28",
         },
-        background: "hsl(var(--background))",
-        foreground: "hsl(var(--foreground))",
-        card: {
-          DEFAULT: "hsl(var(--card))",
-          foreground: "hsl(var(--card-foreground))",
-        },
-        popover: {
-          DEFAULT: "hsl(var(--popover))",
-          foreground: "hsl(var(--popover-foreground))",
-        },
-        primary: {
-          DEFAULT: "hsl(var(--primary))",
-          foreground: "hsl(var(--primary-foreground))",
-        },
-        secondary: {
-          DEFAULT: "hsl(var(--secondary))",
-          foreground: "hsl(var(--secondary-foreground))",
-        },
-        muted: {
-          DEFAULT: "hsl(var(--muted))",
-          foreground: "hsl(var(--muted-foreground))",
-        },
-        accent: {
-          DEFAULT: "hsl(var(--accent))",
-          foreground: "hsl(var(--accent-foreground))",
-        },
-        destructive: {
-          DEFAULT: "hsl(var(--destructive))",
-          foreground: "hsl(var(--destructive-foreground))",
-        },
-        border: "hsl(var(--border))",
-        input: "hsl(var(--input))",
-        ring: "hsl(var(--ring))",
-        chart: {
-          "1": "hsl(var(--chart-1))",
-          "2": "hsl(var(--chart-2))",
-          "3": "hsl(var(--chart-3))",
-          "4": "hsl(var(--chart-4))",
-          "5": "hsl(var(--chart-5))",
-        },
       },
       fontFamily: {
         suite: ["var(--font-suite)"],
@@ -88,10 +47,13 @@ const config: Config = {
       dropShadow: {
         basic: "0px 0px 12.7px rgba(175, 176, 187, 0.31)",
       },
-      borderRadius: {
-        lg: "var(--radius)",
-        md: "calc(var(--radius) - 2px)",
-        sm: "calc(var(--radius) - 4px)",
+      backgroundImage: {
+        card1: "url('/svg/Card1.svg')",
+        card2: "url('/svg/Card2.svg')",
+        card3: "url('/svg/Card3.svg')",
+        foot1: "url('/svg/Foot1.svg')",
+        foot2: "url('/svg/Foot2.svg')",
+        foot3: "url('/svg/Foot3.svg')",
       },
     },
   },
@@ -223,6 +185,7 @@ const config: Config = {
     }),
     require("tailwindcss-animate"),
   ],
+  safelist: ["bg-foot1", "bg-foot2", "bg-foot3"],
 };
 
 export default config;

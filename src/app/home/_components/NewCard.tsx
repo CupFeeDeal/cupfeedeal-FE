@@ -3,10 +3,10 @@ import Image from "next/image";
 interface NewCardProps {
   img: string;
   name: string;
-  info: string;
+  location: string;
 }
 
-const NewCard = ({ img, name, info }: NewCardProps) => (
+const NewCard = ({ img, name, location }: NewCardProps) => (
   <article className="space-y-3 p-3 rounded-lg shadow-card">
     {/* 카페 이미지 */}
     <div className="w-36 h-36 rounded-lg overflow-hidden">
@@ -25,7 +25,7 @@ const NewCard = ({ img, name, info }: NewCardProps) => (
     {/* 카페 정보 */}
     <div className="space-y-1.5 text-center">
       <div className="Body_1_bold line-clamp-1 px-2">{name}</div>
-      <div className="Body_2_med line-clamp-2">{info}</div>
+      <div className="Body_2_med line-clamp-2">{location}</div>
     </div>
   </article>
 );

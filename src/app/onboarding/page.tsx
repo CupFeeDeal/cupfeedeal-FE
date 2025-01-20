@@ -13,7 +13,7 @@ interface OnboardingProps {
   searchParams: Promise<{ step?: string; user?: string }>;
 }
 
-async function Onboarding(props: OnboardingProps) {
+async function OnboardingPage(props: OnboardingProps) {
   const sp = await props.searchParams;
   const step = Number(sp.step) || 1;
   const user = sp.user ? decodeURIComponent(sp.user) : "원두";
@@ -62,4 +62,4 @@ async function Onboarding(props: OnboardingProps) {
   );
 }
 
-export default Onboarding;
+export default OnboardingPage;

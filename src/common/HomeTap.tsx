@@ -27,7 +27,10 @@ const HomeTap = () => {
         <Link href={"/home"} className={tapClass(pathname === "/home")}>
           HOME
         </Link>
-        <Link href={"/card"} className={tapClass(pathname === "/card")}>
+        <Link
+          href={"/subscription"}
+          className={tapClass(pathname === "/subscription")}
+        >
           구독권
         </Link>
       </header>

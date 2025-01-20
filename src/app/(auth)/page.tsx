@@ -18,7 +18,7 @@ export default function Auth() {
         <SpeachBubble className="relative drop-shadow-basic" />
         <KakaoBtn />
         <Link
-          href={"/onboarding"}
+          href={"/home"}
           className="Body_2_reg text-Grey-500 underline w-fit "
         >
           먼저 둘러보고 싶어요
