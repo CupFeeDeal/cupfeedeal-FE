@@ -1,0 +1,95 @@
+"use client";
+
+import { useState } from "react";
+import Dropdown from "./Dropdown";
+
+interface Input {
+  email: string;
+  category: string;
+  description: string;
+}
+
+const AskContents = () => {
+  const [inputInfo, setInputInfo] = useState<Input>({
+    email: "",
+    category: "",
+    description: "",
+  });
+
+  const askCategory = [
+    "기술적 오류",
+    "디자인 오류",
+    "환불 및 취소 관련",
+    "결제 관련",
+    "구독 관련 기타",
+  ];
+
+  const handleInputChange = (name: string, value: string) => {
+    setInputInfo((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
+  const handleDescription = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    const value = e.target.value;
+    if (value.length <= 100) {
+      setInputInfo((prev) => ({
+        ...prev,
+        description: value,
+      }));
+    }
+  };
+
+  return (
+    <div className="w-full flex flex-col px-5 pt-12">
+      <div className="flex flex-col gap-12">
+        <div>
+          <div className="Body_1_bold px-2 mb-3">답변받을 이메일</div>
+          <input
+            name="email"
+            value={inputInfo.email}
+            onChange={(e) => handleInputChange("email", e.target.value)}
+            placeholder="aaaaaaaa@aaaa.com"
+            className="flex w-full px-4 py-[14px] Body_2_med border rounded-[10px] rounded-Grey-300"
+          />
+        </div>
+
+        <div>
+          <div className="Body_1_bold px-2 mb-3">문의 유형</div>
+          <Dropdown
+            options={askCategory}
+            placeholder="문의 유형"
+            value={inputInfo.category}
+            onChange={(value) => handleInputChange("category", value)}
+          />
+        </div>
+
+        <div>
+          <div className="Body_1_bold px-2 mb-3">문의 내용</div>
+          <textarea
+            name="description"
+            placeholder="문의 내용을 작성해 주세요."
+            value={inputInfo.description}
+            onChange={handleDescription}
+            className="flex w-full h-32 resize-none p-3 Body_2_reg border rounded-[10px] rounded-Grey-300"
+          ></textarea>
+          <div className=" Caption_med text-gray-400 mt-1 px-3 justify-self-end">
+            {inputInfo.description.length} / 100
+          </div>
+        </div>
+      </div>
+      <div
+        className={`flex w-full justify-center Body_1_bold rounded-xl px-6 py-[0.88rem] mt-[3.6rem] ${
+          Object.values(inputInfo).every((value) => value.trim() !== "")
+            ? "bg-Main_Blue text-white cursor-pointer"
+            : "bg-Grey-200 text-Grey-400"
+        }`}
+      >
+        문의하기
+      </div>
+    </div>
+  );
+};
+
+export default AskContents;
