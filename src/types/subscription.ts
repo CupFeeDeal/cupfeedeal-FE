@@ -1,19 +1,15 @@
-interface Card {
-  id: number;
-  cafeName: string;
-  menuName: string;
+// 구독 카드
+export interface SubscriptionCardData {
+  name: string;
+  menu: string;
   period: number;
-  savedAmount: number;
+  savedCups: number;
 }
 
-export interface CardListProps {
-  cards: Card[];
-}
-
-export interface CardProps extends Card {
-  isSelected: boolean;
-  index: number;
-  totalCards: number;
-  onSelect: (id: number) => void;
-  cardBg: string; // 추가된 prop
+// Card에 필요한 props
+export interface CardProps extends SubscriptionCardData {
+  backgroundClass: string;
+  showDetails: boolean;
+  idx: number;
+  total: number;
 }

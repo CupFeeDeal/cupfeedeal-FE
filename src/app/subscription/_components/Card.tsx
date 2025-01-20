@@ -1,77 +1,36 @@
 import { Setting, Coffee } from "@assets/icons";
 import Cups from "./Cups";
+import { CardProps } from "src/types/subscription";
+import { CARD_STYLES } from "../_utils/CardStyles";
+import { getBottomSpacing } from "../_utils/CardHelpers";
 
-interface CardProps {
-  cafeName: string;
-  menuName: string;
-  period: number;
-  savedCups: number;
-  backgroundClass: string;
-  showDetails: boolean;
-  savedInfoPosition?: string;
-  idx: number;
-  total: number;
-}
-
-function cupsToKorean(count: number): string {
-  const base = Math.floor(count);
-  const hasHalf = count % 1 !== 0;
-
-  const dict = ["", "한 잔", "두 잔", "세 잔", "네 잔", "다섯 잔"];
-  let result = "";
-
-  if (base < dict.length) {
-    result = dict[base];
-  } else {
-    result = `${base}잔`;
-  }
-
-  if (hasHalf) {
-    if (!result) {
-      result = "반 잔";
-    } else {
-      result += " 반";
-    }
-  }
-
-  return result.trim() || "0 잔";
-}
-
-export default function Card({
-  cafeName,
-  menuName,
+function Card({
+  name,
+  menu,
   period,
   savedCups,
   backgroundClass,
   showDetails,
-  savedInfoPosition,
-  idx,
   total,
 }: CardProps) {
-  const savedText = cupsToKorean(savedCups);
-
-  const getBottomPercentage = () => {
-    if (total === 1) return "bottom-[13%]";
-    if (total === 2) return "bottom-[27%]";
-    return "bottom-[42%]";
-  };
+  const bottomSpacing = getBottomSpacing(total);
 
   return (
-    <div
-      className={`absolute w-full aspect-[21.8125/23] rounded-[1.25rem] ${backgroundClass} bg-cover p-6 overflow-hidden`}
-    >
+    <div className={`${CARD_STYLES.common.cardContainer} ${backgroundClass}`}>
       {/* 상단 영역 */}
       <div className="space-y-1">
         <p className="Headline_3 text-white inline-flex gap-3 items-center">
-          {cafeName}
+          {name}
           <Setting />
         </p>
         {showDetails && (
           <p className="Body_1_bold text-white">
-            {menuName}∙{period}주권
+            {menu}∙{period}주권
           </p>
         )}
       </div>
+
+      {/* 구독권 사용 버튼 */}
       {showDetails && (
         <div className="absolute top-6 right-6 flex flex-col justify-center items-center py-4 px-3 rounded-xl w-fit bg-white">
           <Coffee className="w-[3.125rem]" />
@@ -79,14 +38,14 @@ export default function Card({
         </div>
       )}
 
+      {/* 이득 정보 */}
       {showDetails && (
-        <div className={`absolute flex gap-2 ${getBottomPercentage()}`}>
+        <div className={`absolute flex gap-2 ${bottomSpacing}`}>
           <Cups count={savedCups} />
-          <p className="Body_2_bold text-white whitespace-pre-line">
-            {`${savedText} 만큼의\n커피값을 아꼈어요!`}
-          </p>
         </div>
       )}
     </div>
   );
 }
+
+export default Card;

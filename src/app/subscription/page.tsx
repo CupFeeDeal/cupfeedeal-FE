@@ -2,7 +2,28 @@ import HomeTap from "@common/HomeTap";
 import { CardBackground } from "@assets/icons";
 import CardList from "./_components/CardList";
 
-export default function SubscriptionPage() {
+const MOCK_CARDS = [
+  {
+    name: "지구커피",
+    menu: "아이스 아메리카노",
+    period: 2,
+    savedCups: 0.5,
+  },
+  {
+    name: "카페플레이스",
+    menu: "아이스 아메리카노",
+    period: 4,
+    savedCups: 1,
+  },
+  {
+    name: "카페앤",
+    menu: "아이스 아메리카노",
+    period: 4,
+    savedCups: 2.5,
+  },
+];
+
+function SubscriptionPage() {
   return (
     <div className="flex flex-col h-full">
       <HomeTap />
@@ -14,9 +35,11 @@ export default function SubscriptionPage() {
         {/* 구독권 카드 리스트 */}
         <div className="relative my-8 drop-shadow-basic overflow-hidden rounded-[1.25rem]">
           <CardBackground />
-          <CardList />
+          <CardList data={MOCK_CARDS} />
         </div>
       </div>
     </div>
   );
 }
+
+export default SubscriptionPage;
