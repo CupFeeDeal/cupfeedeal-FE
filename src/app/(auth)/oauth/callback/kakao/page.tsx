@@ -1,18 +1,16 @@
 "use client";
 
-export const dynamic = "force-dynamic";
-
 import { useEffect } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { authApi } from "@api/auth";
 import { token } from "@api/client";
 
 export default function KakaoCallback() {
   const router = useRouter();
-  const searchParams = useSearchParams();
 
   useEffect(() => {
-    const code = searchParams.get("code");
+    const params = new URLSearchParams(window.location.search);
+    const code = params.get("code");
 
     if (!code) {
       router.replace("/");
@@ -38,7 +36,7 @@ export default function KakaoCallback() {
     };
 
     handleKakaoCallback();
-  }, [router, searchParams]);
+  }, [router]);
 
   return (
     // 나중에 로딩 화면 디자인 추가되면 교체
