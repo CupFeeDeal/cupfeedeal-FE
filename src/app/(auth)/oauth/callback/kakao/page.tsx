@@ -24,7 +24,8 @@ export default function KakaoCallback() {
 
         // 첫 로그인 시에만 온보딩 이동
         if (response.result.is_first) {
-          router.replace("/onboarding");
+          const encodedUsername = encodeURIComponent(response.result.username);
+          router.replace(`/onboarding?step=1&user=${encodedUsername}`);
         } else {
           router.replace("/home");
         }
