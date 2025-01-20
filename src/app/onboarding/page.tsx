@@ -1,6 +1,5 @@
 import OnboardingContent from "./_components/OnboardingContent";
 import { redirect } from "next/navigation";
-import { token } from "@api/client";
 
 // 로티 파일 불러오기
 import lottie1 from "@assets/json/onboarding_1.json";
