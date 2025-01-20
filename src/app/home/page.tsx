@@ -44,29 +44,29 @@ const MOCK_NEW_CAFES = [
     id: 1,
     img: "",
     name: "카페이름카페이름카페이름카페이름",
-    info: "텍스트텍스트텍스트텍스트텍스트텍스트텍스트텍스트텍스트텍스트",
+    location: "텍스트텍스트텍스트텍스트텍스트텍스트텍스트텍스트텍스트텍스트",
   },
   {
     id: 2,
     img: "",
     name: "카페이름카페이름카페이름카페이름",
-    info: "텍스트텍스트텍스트텍스트텍스트텍스트텍스트텍스트텍스트텍스트",
+    location: "텍스트텍스트텍스트텍스트텍스트텍스트텍스트텍스트텍스트텍스트",
   },
   {
     id: 3,
     img: "",
     name: "카페이름카페이름카페이름카페이름",
-    info: "텍스트텍스트텍스트텍스트텍스트텍스트텍스트텍스트텍스트텍스트",
+    location: "텍스트텍스트텍스트텍스트텍스트텍스트텍스트텍스트텍스트텍스트",
   },
   {
     id: 4,
     img: "",
     name: "카페이름카페이름카페이름카페이름",
-    info: "텍스트텍스트텍스트텍스트텍스트텍스트텍스트텍스트텍스트텍스트",
+    location: "텍스트텍스트텍스트텍스트텍스트텍스트텍스트텍스트텍스트텍스트",
   },
 ];
 
-const Home = () => {
+function HomePage() {
   return (
     <div className="flex flex-col h-full">
       <HomeTap />
@@ -99,6 +99,6 @@ const Home = () => {
       </div>
     </div>
   );
-};
+}
 
-export default Home;
+export default HomePage;

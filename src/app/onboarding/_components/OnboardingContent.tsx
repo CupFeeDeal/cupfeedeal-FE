@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 
 interface OnboardingProps {
   step: number;
+  user: string;
   lottie: object;
   title: string;
   description: string;
@@ -14,6 +15,7 @@ interface OnboardingProps {
 
 const OnboardingContent = ({
   step,
+  user,
   lottie,
   title,
   description,
@@ -25,7 +27,9 @@ const OnboardingContent = ({
     if (isLast) {
       router.push("/home");
     } else {
-      router.push(`/onboarding?step=${step + 1}`);
+      router.push(
+        `/onboarding?step=${step + 1}&user=${encodeURIComponent(user)}`
+      );
     }
   };
 

@@ -19,16 +19,16 @@ const config: Config = {
         Yellow: "#FFEFB1",
         Red: "#DF4646",
         Grey: {
-          50: "#F9FAFB",
-          100: "#F2F4F6",
-          200: "#E5E8EB",
-          300: "#D1D6DB",
-          400: "#B0B8C1",
-          500: "#8B95A1",
-          600: "#6B7684",
-          700: "#4E5968",
-          800: "#333D4B",
-          900: "#191F28",
+          "50": "#F9FAFB",
+          "100": "#F2F4F6",
+          "200": "#E5E8EB",
+          "300": "#D1D6DB",
+          "400": "#B0B8C1",
+          "500": "#8B95A1",
+          "600": "#6B7684",
+          "700": "#4E5968",
+          "800": "#333D4B",
+          "900": "#191F28",
         },
       },
       fontFamily: {
@@ -36,11 +36,24 @@ const config: Config = {
         suit: ["var(--font-suit)"],
       },
       screens: {
-        pc: { min: "768px" },
+        pc: {
+          min: "768px",
+        },
       },
       boxShadow: {
         card: "0px 0px 20px 0px rgba(125, 125, 131, 0.2)",
         basic: "0px 0px 12.7px 0px rgba(175, 176, 187, 0.31)",
+      },
+      dropShadow: {
+        basic: "0px 0px 12.7px rgba(175, 176, 187, 0.31)",
+      },
+      backgroundImage: {
+        card1: "url('/svg/Card1.svg')",
+        card2: "url('/svg/Card2.svg')",
+        card3: "url('/svg/Card3.svg')",
+        foot1: "url('/svg/Foot1.svg')",
+        foot2: "url('/svg/Foot2.svg')",
+        foot3: "url('/svg/Foot3.svg')",
       },
     },
   },
@@ -170,7 +183,9 @@ const config: Config = {
         },
       });
     }),
+    require("tailwindcss-animate"),
   ],
+  safelist: ["bg-foot1", "bg-foot2", "bg-foot3"],
 };
 
 export default config;
