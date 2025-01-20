@@ -5,18 +5,20 @@ export function getCardPosition(
   selectedIdx: number,
   total: number
 ) {
-  const { baseWidth, heights, collapsedHeights, common } = CARD_STYLES;
+  const { aspects, collapsedAspects, common } = CARD_STYLES;
 
   // 선택된 카드 앞에 있는 건 접기(height 줄임)
   if (idx < selectedIdx) {
-    const height = idx === 0 ? collapsedHeights.first : collapsedHeights.second;
-    return `bottom-0 aspect-[${baseWidth}/${height}] ${common.transition}`;
+    const collapsedAspect =
+      idx === 0 ? collapsedAspects.first : collapsedAspects.second;
+
+    return `bottom-0 ${collapsedAspect} ${common.transition}`;
   }
 
-  // 그 외에는 정상 height
-  const height = heights[total as keyof typeof heights][idx];
+  // 그 외에는 정상 aspect
+  const aspect = aspects[total as keyof typeof aspects][idx];
 
-  return `bottom-0 aspect-[${baseWidth}/${height}] ${common.transition}`;
+  return `bottom-0 ${aspect} ${common.transition}`;
 }
 
 // 배경 이미지 불러오기

@@ -1,3 +1,4 @@
+import Link from "next/link";
 import HomeTap from "@common/HomeTap";
 import { CardBackground } from "@assets/icons";
 import CardList from "./_components/CardList";
@@ -35,6 +36,12 @@ function SubscriptionPage() {
         {/* 구독권 카드 리스트 */}
         <div className="relative my-8 drop-shadow-basic overflow-hidden rounded-[1.25rem]">
           <CardBackground />
+          {/* <Link
+            href="/search"
+            className="absolute top-[7.25rem] left-1/2 -translate-x-1/2 Body_2_bold text-white bg-Grey-800 px-8 py-3 rounded-lg"
+          >
+            구독권 둘러보기
+          </Link> */}
           <CardList data={MOCK_CARDS} />
         </div>
       </div>

@@ -15,7 +15,7 @@ function CardList({ data }: CardListProps) {
   if (data.length === 0) return null;
 
   return (
-    <div className="relative">
+    <>
       {data
         .map((item, idx) => {
           const positionClass = getCardPosition(idx, selectedIdx, data.length);
@@ -43,7 +43,7 @@ function CardList({ data }: CardListProps) {
           );
         })
         .reverse()}
-    </div>
+    </>
   );
 }
 

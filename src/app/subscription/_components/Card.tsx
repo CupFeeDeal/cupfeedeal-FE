@@ -3,6 +3,7 @@ import Cups from "./Cups";
 import { CardProps } from "src/types/subscription";
 import { CARD_STYLES } from "../_utils/CardStyles";
 import { getBottomSpacing } from "../_utils/CardHelpers";
+import { Stamp } from "@assets/icons";
 
 function Card({
   name,
@@ -16,7 +17,7 @@ function Card({
   const bottomSpacing = getBottomSpacing(total);
 
   return (
-    <div className={`${CARD_STYLES.common.cardContainer} ${backgroundClass}`}>
+    <div className={`${CARD_STYLES.common.cardContainer} ${backgroundClass} `}>
       {/* 상단 영역 */}
       <div className="space-y-1">
         <p className="Headline_3 text-white inline-flex gap-3 items-center">
@@ -37,6 +38,8 @@ function Card({
           <p className="Caption_bold text-Main_Blue">구독권 사용하기</p>
         </div>
       )}
+
+      {/* <Stamp className="absolute -top-5 -right-8 " /> */}
 
       {/* 이득 정보 */}
       {showDetails && (

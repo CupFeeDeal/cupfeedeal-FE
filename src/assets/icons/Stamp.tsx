@@ -5,7 +5,7 @@ const SvgStamp = (props: SVGProps<SVGSVGElement>) => (
     xmlns="http://www.w3.org/2000/svg"
     fill="none"
     viewBox="0 0 249 249"
-    width="15.56rem"
+    width="11.25rem"
     {...props}
   >
     <g opacity={0.49}>
