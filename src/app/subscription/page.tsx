@@ -42,7 +42,7 @@ function SubscriptionPage() {
         </p>
 
         {/* 구독권 카드 리스트 */}
-        <div className="relative my-8 drop-shadow-basic overflow-hidden rounded-[1.25rem]">
+        <div className="relative my-8 drop-shadow-basic rounded-[1.25rem]">
           <CardBackground />
           <Link
             href="/search"

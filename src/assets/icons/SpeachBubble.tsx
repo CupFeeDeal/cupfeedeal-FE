@@ -15,7 +15,7 @@ const SvgSpeachBubble = (props: SVGProps<SVGSVGElement>) => (
       clipRule="evenodd"
     />
     <foreignObject x="0" y="0" width="100%" height="100%">
-      <div className="self-center mt-4">
+      <div className="h-16 grid place-content-center">
         <p className="Caption_med text-center">
           간편하게 로그인하고
           <br />

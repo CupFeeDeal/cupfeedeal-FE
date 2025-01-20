@@ -8,7 +8,7 @@ export default function Auth() {
   return (
     <div className="h-full flex flex-col justify-center">
       {/* 로고 */}
-      <div className="flex flex-col items-center gap-2 my-40">
+      <div className="flex flex-col items-center gap-2 my-36">
         <Logo className="w-24 " />
         <LogoText className="w-32 " />
       </div>
