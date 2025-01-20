@@ -183,7 +183,6 @@ const config: Config = {
         },
       });
     }),
-    require("tailwindcss-animate"),
   ],
   safelist: ["bg-foot1", "bg-foot2", "bg-foot3"],
 };
