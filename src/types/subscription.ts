@@ -4,6 +4,7 @@ export interface SubscriptionCardData {
   menu: string;
   period: number;
   savedCups: number;
+  isUsed: boolean;
 }
 
 // Card에 필요한 props

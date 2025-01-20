@@ -35,7 +35,6 @@ function CardList({ data }: CardListProps) {
                 {...item}
                 idx={idx}
                 total={data.length}
-                period={item.period}
                 backgroundClass={backgroundClass}
                 showDetails={idx === selectedIdx}
               />

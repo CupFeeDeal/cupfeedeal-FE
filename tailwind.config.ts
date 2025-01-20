@@ -51,6 +51,9 @@ const config: Config = {
         card1: "url('/svg/Card1.svg')",
         card2: "url('/svg/Card2.svg')",
         card3: "url('/svg/Card3.svg')",
+        foot1: "url('/svg/Foot1.svg')",
+        foot2: "url('/svg/Foot2.svg')",
+        foot3: "url('/svg/Foot3.svg')",
       },
     },
   },
@@ -182,6 +185,7 @@ const config: Config = {
     }),
     require("tailwindcss-animate"),
   ],
+  safelist: ["bg-foot1", "bg-foot2", "bg-foot3"],
 };
 
 export default config;
