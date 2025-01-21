@@ -29,7 +29,10 @@ const Modal = ({
       <div className="relative bg-white rounded-[0.625rem] p-4 w-[90%] overflow-visible">
         {/* X 버튼 */}
         {showCloseButton && (
-          <Close onClick={onClose} className=" w-6 absolute top-4 right-4" />
+          <Close
+            onClick={onClose}
+            className=" w-6 absolute top-4 right-4 cursor-pointer"
+          />
         )}
 
         {/* 모달 내용 */}

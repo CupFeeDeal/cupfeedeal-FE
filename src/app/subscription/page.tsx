@@ -46,7 +46,7 @@ const SubscriptionPage = () => {
           <CardBackground />
           <Link
             href="/search"
-            className="absolute top-[7.25rem] left-1/2 -translate-x-1/2 Body_2_bold text-white bg-Grey-800 px-8 py-3 rounded-lg"
+            className="absolute top-[33%] left-1/2 -translate-x-1/2 Body_2_bold text-white bg-Grey-800 px-8 py-3 rounded-lg"
           >
             구독권 둘러보기
           </Link>

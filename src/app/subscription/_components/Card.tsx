@@ -33,7 +33,9 @@ const Card = ({
   const bottomSpacing = getBottomSpacing(total);
 
   return (
-    <div className={`${CARD_STYLES.common.cardContainer} ${backgroundClass} `}>
+    <div
+      className={`${CARD_STYLES.common.cardContainer} ${backgroundClass} cursor-pointer `}
+    >
       <p className="Headline_3 text-white inline-flex gap-3 items-center mb-1">
         {name}
         <Setting />
@@ -55,7 +57,7 @@ const Card = ({
                 e.stopPropagation();
                 setIsUseModalOpen(true);
               }}
-              className="absolute top-6 right-6 flex flex-col justify-center items-center py-4 px-3 rounded-xl w-fit bg-white"
+              className="absolute top-6 right-6 flex flex-col justify-center items-center py-4 px-3 rounded-xl w-fit bg-white cursor-pointer"
             >
               <Coffee className="w-[3.125rem]" />
               <p className="Caption_bold text-Main_Blue">구독권 사용하기</p>
