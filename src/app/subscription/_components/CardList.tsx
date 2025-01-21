@@ -26,7 +26,7 @@ const CardList = ({ data }: CardListProps) => {
               key={`card-${idx}`}
               className={`
               absolute left-0 right-0
-              transition-all duration-300 overflow-hidden rounded-[1.25rem] ${positionClass}
+              transition-all duration-300 rounded-[1.25rem] ${positionClass}
             `}
               onClick={() => setSelectedIdx(idx)}
             >
