@@ -32,6 +32,7 @@ export { default as Map } from "./Map";
 export { default as MyBannerBg } from "./MyBannerBg";
 export { default as MyTabCupcatBg } from "./MyTabCupcatBg";
 export { default as MyTabHistoryBg } from "./MyTabHistoryBg";
+export { default as Notice } from "./Notice";
 export { default as PinMarker } from "./PinMarker";
 export { default as Price } from "./Price";
 export { default as Search } from "./Search";

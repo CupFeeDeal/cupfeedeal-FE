@@ -7,7 +7,7 @@ import { CardProps } from "src/types/subscription";
 import { CARD_STYLES } from "../_utils/CardStyles";
 import { getBottomSpacing } from "../_utils/CardHelpers";
 import { Stamp } from "@assets/icons";
-import UseModal from "./UseModal";
+import UseCardModal from "./UseCardModal";
 
 const Card = ({
   name,
@@ -57,7 +57,7 @@ const Card = ({
             <Cups count={savedCups} />
           </div>
 
-          <UseModal
+          <UseCardModal
             isOpen={isModalOpen}
             onClose={() => setIsModalOpen(false)}
             name={name}
