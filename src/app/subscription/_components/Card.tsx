@@ -1,11 +1,15 @@
+"use client";
+
+import { useState } from "react";
 import { Setting, Coffee } from "@assets/icons";
 import Cups from "./Cups";
 import { CardProps } from "src/types/subscription";
 import { CARD_STYLES } from "../_utils/CardStyles";
 import { getBottomSpacing } from "../_utils/CardHelpers";
 import { Stamp } from "@assets/icons";
+import UseModal from "./UseModal";
 
-function Card({
+const Card = ({
   name,
   menu,
   period,
@@ -14,7 +18,8 @@ function Card({
   backgroundClass,
   showDetails,
   total,
-}: CardProps) {
+}: CardProps) => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const bottomSpacing = getBottomSpacing(total);
 
   return (
@@ -35,7 +40,13 @@ function Card({
           {isUsed ? (
             <Stamp className="absolute -top-5 -right-10 " />
           ) : (
-            <div className="absolute top-6 right-6 flex flex-col justify-center items-center py-4 px-3 rounded-xl w-fit bg-white">
+            <div
+              onClick={(e) => {
+                e.stopPropagation();
+                setIsModalOpen(true);
+              }}
+              className="absolute top-6 right-6 flex flex-col justify-center items-center py-4 px-3 rounded-xl w-fit bg-white"
+            >
               <Coffee className="w-[3.125rem]" />
               <p className="Caption_bold text-Main_Blue">구독권 사용하기</p>
             </div>
@@ -45,10 +56,16 @@ function Card({
           <div className={`absolute flex gap-2 ${bottomSpacing}`}>
             <Cups count={savedCups} />
           </div>
+
+          <UseModal
+            isOpen={isModalOpen}
+            onClose={() => setIsModalOpen(false)}
+            name={name}
+          />
         </>
       )}
     </div>
   );
-}
+};
 
 export default Card;

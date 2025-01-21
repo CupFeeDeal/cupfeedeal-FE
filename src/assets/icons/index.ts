@@ -8,6 +8,7 @@ export { default as Card1 } from "./Card1";
 export { default as Card2 } from "./Card2";
 export { default as Card3 } from "./Card3";
 export { default as CardBackground } from "./CardBackground";
+export { default as Close } from "./Close";
 export { default as Coffee } from "./Coffee";
 export { default as CoffeeBeanMarker } from "./CoffeeBeanMarker";
 export { default as Crosshair } from "./Crosshair";

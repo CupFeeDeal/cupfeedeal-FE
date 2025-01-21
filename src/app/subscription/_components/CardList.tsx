@@ -9,7 +9,7 @@ interface CardListProps {
   data: SubscriptionCardData[];
 }
 
-function CardList({ data }: CardListProps) {
+const CardList = ({ data }: CardListProps) => {
   const [selectedIdx, setSelectedIdx] = useState(0);
 
   if (data.length === 0) return null;
@@ -43,6 +43,6 @@ function CardList({ data }: CardListProps) {
         .reverse()}
     </>
   );
-}
+};
 
 export default CardList;

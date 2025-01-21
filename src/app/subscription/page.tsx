@@ -28,7 +28,7 @@ const MOCK_CARDS = [
   },
 ];
 
-function SubscriptionPage() {
+const SubscriptionPage = () => {
   return (
     <div className="flex flex-col h-full">
       <HomeTap />
@@ -55,6 +55,6 @@ function SubscriptionPage() {
       </div>
     </div>
   );
-}
+};
 
 export default SubscriptionPage;

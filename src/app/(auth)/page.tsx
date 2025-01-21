@@ -4,7 +4,7 @@ import { SpeachBubble } from "@assets/icons";
 import KakaoBtn from "./_components/KakaoBtn";
 import Link from "next/link";
 
-export default function Auth() {
+const AuthPage = () => {
   return (
     <div className="h-full flex flex-col justify-center">
       {/* 로고 */}
@@ -26,4 +26,6 @@ export default function Auth() {
       </div>
     </div>
   );
-}
+};
+
+export default AuthPage;

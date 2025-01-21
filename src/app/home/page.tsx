@@ -66,7 +66,7 @@ const MOCK_NEW_CAFES = [
   },
 ];
 
-function HomePage() {
+const HomePage = () => {
   return (
     <div className="flex flex-col h-full">
       <HomeTap />
@@ -99,6 +99,6 @@ function HomePage() {
       </div>
     </div>
   );
-}
+};
 
 export default HomePage;
