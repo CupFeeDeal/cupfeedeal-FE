@@ -22,6 +22,7 @@ export { default as FootBasic } from "./FootBasic";
 export { default as Front } from "./Front";
 export { default as FullCup } from "./FullCup";
 export { default as FullHeart } from "./FullHeart";
+export { default as HalfCat } from "./HalfCat";
 export { default as HalfCup } from "./HalfCup";
 export { default as HeartMarker } from "./HeartMarker";
 export { default as Information } from "./Information";

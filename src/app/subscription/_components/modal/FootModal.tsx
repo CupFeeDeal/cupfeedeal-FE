@@ -1,5 +1,3 @@
-"use client";
-
 import Modal from "@common/Modal";
 import { FootModalProps } from "src/types/modal";
 import { FootBasic } from "@assets/icons";

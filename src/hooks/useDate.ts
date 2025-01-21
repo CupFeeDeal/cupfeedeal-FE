@@ -1,16 +1,26 @@
-import { useMemo } from "react";
+type DateFormat = "dot" | "korean";
 
 const useDate = () => {
-  const formattedDate = useMemo(() => {
-    const today = new Date();
-    const year = today.getFullYear();
-    const month = String(today.getMonth() + 1).padStart(2, "0");
-    const date = String(today.getDate()).padStart(2, "0");
+  const formatDate = (
+    date: Date | string = new Date(),
+    format: DateFormat = "dot"
+  ) => {
+    const d = new Date(date);
+    const year = d.getFullYear();
+    const month = d.getMonth() + 1;
+    const day = d.getDate();
 
-    return `${year}. ${month}. ${date}`;
-  }, []);
+    switch (format) {
+      case "dot":
+        return `${year}. ${String(month).padStart(2, "0")}. ${String(
+          day
+        ).padStart(2, "0")}}`;
+      case "korean":
+        return `${year}년 \n${month}월 ${day}일`;
+    }
+  };
 
-  return formattedDate;
+  return { formatDate };
 };
 
 export default useDate;

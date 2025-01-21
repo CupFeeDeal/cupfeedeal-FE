@@ -1,27 +1,34 @@
 "use client";
 
 import { useState } from "react";
-import { Setting, Coffee } from "@assets/icons";
+import { Setting, Coffee, Stamp } from "@assets/icons";
 import Cups from "./Cups";
 import { CardProps } from "src/types/subscription";
 import { CARD_STYLES } from "../_utils/CardStyles";
 import { getBottomSpacing } from "../_utils/CardHelpers";
-import { Stamp } from "@assets/icons";
-import UseCardModal from "./UseCardModal";
-import FootModal from "./FootModal";
+
+import UseCardModal from "./modal/UseCardModal";
+import FootModal from "./modal/FootModal";
+import ManageModal from "./modal/ManageModal";
 
 const Card = ({
   name,
   menu,
   period,
+  price,
   savedCups,
   isUsed,
+  visit,
+  start,
+  end,
   backgroundClass,
   showDetails,
   total,
 }: CardProps) => {
   const [isUseModalOpen, setIsUseModalOpen] = useState(false);
   const [isFootModalOpen, setIsFootModalOpen] = useState(false);
+  const [isManageModalOpen, setIsManageModalOpen] = useState(false);
+  const manageModalProps = { menu, period, price, start, end, visit };
 
   // 사용 완료 -> 발자국 모달 바꾸기
   const switchModal = (showFootMoadal: boolean) => {
@@ -30,6 +37,7 @@ const Card = ({
       setIsFootModalOpen(true);
     }
   };
+
   const bottomSpacing = getBottomSpacing(total);
 
   return (
@@ -38,7 +46,11 @@ const Card = ({
     >
       <p className="Headline_3 text-white inline-flex gap-3 items-center mb-1">
         {name}
-        <Setting />
+        <Setting
+          onClick={() => {
+            setIsManageModalOpen(true);
+          }}
+        />
       </p>
 
       {/*카드 선택시에만 보여지는 정보 */}
@@ -69,6 +81,7 @@ const Card = ({
             <Cups count={savedCups} />
           </div>
 
+          {/* 구독권 사용 모달 */}
           <UseCardModal
             isOpen={isUseModalOpen}
             onClose={() => setIsUseModalOpen(false)}
@@ -76,6 +89,15 @@ const Card = ({
             onComplete={switchModal}
           />
 
+          {/* 구독권 관리리 모달 */}
+          <ManageModal
+            isOpen={isManageModalOpen}
+            onClose={() => setIsManageModalOpen(false)}
+            cafe={name}
+            {...manageModalProps}
+          />
+
+          {/* 발자국 도장 모달 */}
           <FootModal
             isOpen={isFootModalOpen}
             onClose={() => setIsFootModalOpen(false)}

@@ -4,6 +4,7 @@ export interface ModalProps {
   isOpen: boolean;
   onClose: () => void;
   children: ReactNode;
+  fullPage?: boolean;
   showCloseButton?: boolean;
   cancelText?: string;
   confirmText?: string;
@@ -22,4 +23,14 @@ export interface UseCardModalProps extends BasicModalProps {
 
 export interface FootModalProps extends BasicModalProps {
   cafe: string;
+}
+
+export interface ManageModalProps extends BasicModalProps {
+  cafe: string;
+  menu: string;
+  period: number;
+  price: number;
+  start: string;
+  end: string;
+  visit: number;
 }

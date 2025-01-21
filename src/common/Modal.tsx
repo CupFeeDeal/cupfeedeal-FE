@@ -9,6 +9,7 @@ const Modal = ({
   isOpen,
   onClose,
   children,
+  fullPage = false,
   showCloseButton = false,
   cancelText = "",
   confirmText = "",
@@ -26,7 +27,13 @@ const Modal = ({
   return createPortal(
     <div className="fixed inset-0 z-50 flex items-center justify-center mx-auto max-w-[440px]">
       <div className="fixed inset-0 bg-black bg-opacity-65" onClick={onClose} />
-      <div className="relative bg-white rounded-[0.625rem] p-4 w-[90%] overflow-visible">
+      <div
+        className={`relative bg-white overflow-visible  ${
+          fullPage
+            ? "h-[calc(var(--vh)*100)] flex flex-col w-full"
+            : "rounded-[0.625rem] p-4 w-[90%]"
+        }`}
+      >
         {/* X 버튼 */}
         {showCloseButton && (
           <Close
@@ -43,11 +50,7 @@ const Modal = ({
           <div className="flex gap-2 overflow-visible">
             {/* 취소 */}
             {cancelText && (
-              <button
-                onClick={onClose}
-                style={{ border: "1px solid #E3E8F5" }}
-                className="w-full py-4 rounded-[0.625rem] bg-Pale_Blue_2 Body_1_bold text-gray-600"
-              >
+              <button onClick={onClose} className="btn-cancel">
                 {cancelText}
               </button>
             )}
@@ -59,7 +62,7 @@ const Modal = ({
                   onConfirm?.();
                   onClose();
                 }}
-                className="w-full py-4 rounded-[0.625rem] bg-Main_Blue Body_1_bold text-white"
+                className="btn-confirm"
               >
                 {confirmText}
               </button>
