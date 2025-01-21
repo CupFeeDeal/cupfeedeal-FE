@@ -24,8 +24,8 @@ const MOCK_CARDS = [
     savedCups: 1,
     isUsed: true,
     visit: 3,
-    start: "2025-01-21T17:53:52.688Z",
-    end: "2025-02-21T17:53:52.688Z",
+    start: "2025-02-21T17:53:52.688Z",
+    end: "2025-03-21T17:53:52.688Z",
   },
   {
     name: "카페앤",
@@ -35,8 +35,8 @@ const MOCK_CARDS = [
     savedCups: 2.5,
     isUsed: false,
     visit: 11,
-    start: "2025-01-21T17:53:52.688Z",
-    end: "2025-02-21T17:53:52.688Z",
+    start: "2025-03-21T17:53:52.688Z",
+    end: "2025-04-21T17:53:52.688Z",
   },
 ];
 
