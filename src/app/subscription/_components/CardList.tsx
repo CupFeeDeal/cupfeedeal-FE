@@ -9,7 +9,7 @@ interface CardListProps {
   data: SubscriptionCardData[];
 }
 
-function CardList({ data }: CardListProps) {
+const CardList = ({ data }: CardListProps) => {
   const [selectedIdx, setSelectedIdx] = useState(0);
 
   if (data.length === 0) return null;
@@ -25,9 +25,8 @@ function CardList({ data }: CardListProps) {
             <div
               key={`card-${idx}`}
               className={`
-              absolute left-0 right-0 mx-auto
-              transition-all duration-300
-              ${positionClass}
+              absolute left-0 right-0
+              transition-all duration-300 overflow-hidden rounded-[1.25rem] ${positionClass}
             `}
               onClick={() => setSelectedIdx(idx)}
             >
@@ -44,6 +43,6 @@ function CardList({ data }: CardListProps) {
         .reverse()}
     </>
   );
-}
+};
 
 export default CardList;
