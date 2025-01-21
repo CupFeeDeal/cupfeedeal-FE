@@ -26,7 +26,7 @@ export default function Nickname() {
       onClick={closeModal}
     >
       <div
-        className="bg-white z-99 w-full mx-5 px-4 rounded-lg flex flex-col items-center"
+        className="bg-white max-w-[350px] z-99 w-full mx-5 px-4 rounded-lg flex flex-col items-center"
         onClick={(e) => e.stopPropagation()}
       >
         <h2 className=" Headline_3 text-Grey-900 mt-10 mb-5">닉네임 변경</h2>

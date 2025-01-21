@@ -9,7 +9,7 @@ const MyTab = () => {
     { id: 1, menu: "닉네임 변경", href: "/mypage/nickname" },
     { id: 2, menu: "문의하기", href: "/mypage/ask" },
     { id: 3, menu: "로그아웃", href: "/" },
-    { id: 4, menu: "회원 탈퇴", href: "/mypage/withdraw" },
+    { id: 4, menu: "회원 탈퇴", href: "/mypage/quit" },
   ];
 
   return (
