@@ -8,6 +8,7 @@ import { CARD_STYLES } from "../_utils/CardStyles";
 import { getBottomSpacing } from "../_utils/CardHelpers";
 import { Stamp } from "@assets/icons";
 import UseCardModal from "./UseCardModal";
+import FootModal from "./FootModal";
 
 const Card = ({
   name,
@@ -19,7 +20,16 @@ const Card = ({
   showDetails,
   total,
 }: CardProps) => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isUseModalOpen, setIsUseModalOpen] = useState(false);
+  const [isFootModalOpen, setIsFootModalOpen] = useState(false);
+
+  // 사용 완료 -> 발자국 모달 바꾸기
+  const switchModal = (showFootMoadal: boolean) => {
+    setIsUseModalOpen(false);
+    if (showFootMoadal) {
+      setIsFootModalOpen(true);
+    }
+  };
   const bottomSpacing = getBottomSpacing(total);
 
   return (
@@ -43,7 +53,7 @@ const Card = ({
             <div
               onClick={(e) => {
                 e.stopPropagation();
-                setIsModalOpen(true);
+                setIsUseModalOpen(true);
               }}
               className="absolute top-6 right-6 flex flex-col justify-center items-center py-4 px-3 rounded-xl w-fit bg-white"
             >
@@ -58,9 +68,16 @@ const Card = ({
           </div>
 
           <UseCardModal
-            isOpen={isModalOpen}
-            onClose={() => setIsModalOpen(false)}
-            name={name}
+            isOpen={isUseModalOpen}
+            onClose={() => setIsUseModalOpen(false)}
+            cafe={name}
+            onComplete={switchModal}
+          />
+
+          <FootModal
+            isOpen={isFootModalOpen}
+            onClose={() => setIsFootModalOpen(false)}
+            cafe={name}
           />
         </>
       )}

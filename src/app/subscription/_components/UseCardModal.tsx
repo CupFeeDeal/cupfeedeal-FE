@@ -1,17 +1,25 @@
 "use client";
 
 import Modal from "@common/Modal";
-import { UseModalProps } from "src/types/modal";
+import { UseCardModalProps } from "src/types/modal";
 import useDate from "@hooks/useDate";
 import { Coffee, Notice } from "@assets/icons";
 
-const UseCardModal = ({ isOpen, onClose, name }: UseModalProps) => {
+const UseCardModal = ({
+  isOpen,
+  onClose,
+  cafe,
+  onComplete,
+}: UseCardModalProps) => {
   const date = useDate();
 
   // 구독권 사용하기 로직
   const handleConfirm = () => {
     console.log("사용함");
-    onClose();
+
+    //임시로 랜덤 확률 부여
+    const hasFootprint = Math.random() < 0.5;
+    onComplete(hasFootprint);
   };
 
   return (
@@ -28,7 +36,7 @@ const UseCardModal = ({ isOpen, onClose, name }: UseModalProps) => {
           <p className="Caption_med text-Grey-600 border border-Grey-600 rounded-full px-3 py-1 mb-4">
             {date}
           </p>
-          <h3 className="Headline_3 mb-2">{name}</h3>
+          <h3 className="Headline_3 mb-2">{cafe}</h3>
           <Coffee className="w-20 mb-5" />
           <h5 className="Body_1_bold text-center mb-3">
             오늘 구독권을 사용하시겠어요?

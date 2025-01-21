@@ -10,8 +10,16 @@ export interface ModalProps {
   onConfirm?: () => void;
 }
 
-export interface UseModalProps {
+export interface BasicModalProps {
   isOpen: boolean;
   onClose: () => void;
-  name: string;
+}
+
+export interface UseCardModalProps extends BasicModalProps {
+  cafe: string;
+  onComplete: (showFootModal: boolean) => void;
+}
+
+export interface FootModalProps extends BasicModalProps {
+  cafe: string;
 }

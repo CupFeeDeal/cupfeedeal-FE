@@ -18,6 +18,7 @@ export { default as EmptyHeart } from "./EmptyHeart";
 export { default as Foot1 } from "./Foot1";
 export { default as Foot2 } from "./Foot2";
 export { default as Foot3 } from "./Foot3";
+export { default as FootBasic } from "./FootBasic";
 export { default as Front } from "./Front";
 export { default as FullCup } from "./FullCup";
 export { default as FullHeart } from "./FullHeart";
