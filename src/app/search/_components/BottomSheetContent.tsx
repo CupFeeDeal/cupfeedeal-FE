@@ -54,6 +54,17 @@ const BottomSheetContent = ({ cafeInfo }: BottomSheetContentProps) => {
     calculateDistance();
   }, [cafeInfo, getDistance, getCurrentLocation]);
 
+  const formatDistance = () => {
+    if (distance === null) {
+      return "";
+    }
+    if (distance >= 1000) {
+      // 1000m 이상이면 km 단위로 변환
+      return `${(distance / 1000).toFixed(2)}km`;
+    }
+    return `${distance}m`;
+  };
+
   if (!cafeInfo) {
     return <div className="w-full h-full bg-white"></div>;
   }
@@ -66,7 +77,7 @@ const BottomSheetContent = ({ cafeInfo }: BottomSheetContentProps) => {
     >
       <div className={`w-full px-5 ${isSheetOpen ? "pt-5" : ""}`}>
         {/*거리*/}
-        <div className="Caption_bold text-Grey-500">{distance}m</div>
+        <div className="Caption_bold text-Grey-500">{formatDistance()}</div>
 
         {/*이름 & 좋아요 여부*/}
         <div className="flex flex-row items-center my-1">
