@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import LayoutProvider from "@common/LayoutProvider";
+import { suit, suite } from "./font";
 
 export const metadata: Metadata = {
   title: "Cupfee Deal",
@@ -13,8 +14,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html>
-      <body className="min-h-[calc(var--vh)*100] max-w-[390px] mx-auto bg-white">
+    <html lang="ko" className={`${suite.variable} ${suit.variable}`}>
+      <body className="h-[calc(var(--vh)*100)] max-w-[440px] mx-auto bg-white">
         <LayoutProvider />
         {children}
       </body>
