@@ -39,6 +39,25 @@ const useMap = () => {
     [map]
   );
 
+  // 현재 위치 가져오기
+  const getCurrentLocation = useCallback(
+    (): Promise<Coordinates> =>
+      new Promise((resolve, reject) => {
+        if (!navigator.geolocation) {
+          reject(new Error());
+        }
+        navigator.geolocation.getCurrentPosition(
+          (position) => {
+            const { latitude, longitude } = position.coords;
+            resolve([latitude, longitude]);
+          },
+          (error) => reject(error),
+          { enableHighAccuracy: true }
+        );
+      }),
+    []
+  );
+
   // 지도 옵션 가져오기
   const getMapOptions = useCallback(() => {
     const mapCenter = map.getCenter();
@@ -145,6 +164,7 @@ const useMap = () => {
     initializeMap,
     resetMapOptions,
     setCurrentLocation,
+    getCurrentLocation,
     getMapOptions,
     addMarker,
   };

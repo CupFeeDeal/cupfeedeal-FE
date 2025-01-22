@@ -1,8 +1,11 @@
 "use client";
 
 import { FullHeart, EmptyHeart, Instagram } from "@assets/icons";
+import useDistance from "@hooks/useDistance";
 import useSelectedCafeStore from "@store/useSelectedCafeStore";
+import { useEffect, useState } from "react";
 import { CafeDetail } from "src/types/search";
+import useMap from "./useMap";
 
 interface BottomSheetContentProps {
   cafeInfo: CafeDetail | undefined;
@@ -23,22 +26,47 @@ function InfoRow({ label, value }: { label: string; value: string }) {
 
 const BottomSheetContent = ({ cafeInfo }: BottomSheetContentProps) => {
   const { isSheetOpen } = useSelectedCafeStore();
+  const { getDistance } = useDistance();
+  const { getCurrentLocation } = useMap();
+  const [distance, setDistance] = useState<number | null>(null);
+
+  useEffect(() => {
+    const calculateDistance = async () => {
+      if (cafeInfo) {
+        try {
+          // 현재 위치 가져오기
+          const [currentLat, currentLng] = await getCurrentLocation();
+
+          // 거리 계산
+          const calculatedDistance = getDistance(
+            currentLat,
+            currentLng,
+            Number(cafeInfo.address_lat),
+            Number(cafeInfo.address_lng)
+          );
+          setDistance(Math.round(calculatedDistance));
+        } catch (error) {
+          console.error("Failed to get current location:", error);
+        }
+      }
+    };
+
+    calculateDistance();
+  }, [cafeInfo, getDistance, getCurrentLocation]);
 
   if (!cafeInfo) {
-    return <div>Loading...</div>;
+    return <div className="w-full h-full bg-white"></div>;
   }
 
   return (
     <div
       className={`bg-white z-30 overflow-scroll pb-[5.5rem] ${
-        isSheetOpen ? "max-h-screen" : "max-h-full"
+        isSheetOpen ? "min-h-screen" : "max-h-full"
       } `}
     >
       <div className={`w-full px-5 ${isSheetOpen ? "pt-5" : ""}`}>
         {/*거리*/}
-        <div className="Caption_bold text-Grey-500">
-          {cafeInfo.address_map}m
-        </div>
+        <div className="Caption_bold text-Grey-500">{distance}m</div>
 
         {/*이름 & 좋아요 여부*/}
         <div className="flex flex-row items-center my-1">
@@ -58,7 +86,7 @@ const BottomSheetContent = ({ cafeInfo }: BottomSheetContentProps) => {
 
         {/*메뉴 & 구독권 종류*/}
         <div className=" Body_2_bold text-Main_Blue mb-5">
-          {cafeInfo.menu_board}
+          {cafeInfo.menu}∙2주권∙4주권
         </div>
 
         {/*대표 이미지*/}

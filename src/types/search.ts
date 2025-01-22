@@ -25,14 +25,20 @@ export type Cafe = {
 export interface CafeDetail {
   id: number;
   name: string;
-  address_map: string;
-  image_url: string[];
   address: string;
+  address_lat: string;
+  address_lng: string;
+  menu: string;
+  periods: number[];
+  images: Image[];
   operation_time: string;
   phone_num: string;
   sns_address: string;
   description: string;
-  menu_board: string;
   is_like: boolean;
   is_subscription: boolean;
+}
+
+interface Image {
+  image_url: string;
 }
