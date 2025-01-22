@@ -1,7 +1,7 @@
 "use client";
 
 import { useCallback, useRef } from "react";
-import { Coordinates, NaverMap } from "src/types/search";
+import { Coordinates, NaverMap, Cafe } from "src/types/search";
 import useSWR, { mutate } from "swr";
 
 export const INITIAL_CENTER: Coordinates = [37.5262411, 126.99289439];
@@ -39,6 +39,25 @@ const useMap = () => {
     [map]
   );
 
+  // 현재 위치 가져오기
+  const getCurrentLocation = useCallback(
+    (): Promise<Coordinates> =>
+      new Promise((resolve, reject) => {
+        if (!navigator.geolocation) {
+          reject(new Error());
+        }
+        navigator.geolocation.getCurrentPosition(
+          (position) => {
+            const { latitude, longitude } = position.coords;
+            resolve([latitude, longitude]);
+          },
+          (error) => reject(error),
+          { enableHighAccuracy: true }
+        );
+      }),
+    []
+  );
+
   // 지도 옵션 가져오기
   const getMapOptions = useCallback(() => {
     const mapCenter = map.getCenter();
@@ -57,12 +76,7 @@ const useMap = () => {
   // 마커 추가하기
   const addMarker = useCallback(
     (
-      locations: {
-        id: number;
-        name: string;
-        address_lat: number;
-        address_lng: number;
-      }[],
+      locations: Cafe[],
       selectedCafeId: number | null,
       setSelectedCafeId: (id: number | null) => void
     ) => {
@@ -74,8 +88,8 @@ const useMap = () => {
 
         const marker = new naver.maps.Marker({
           position: new naver.maps.LatLng(
-            location.address_lat,
-            location.address_lng
+            parseFloat(location.address_lat),
+            parseFloat(location.address_lng)
           ),
           map: map,
           title: location.name,
@@ -89,8 +103,14 @@ const useMap = () => {
                 justify-content: center; 
                 align-items: center;
               ">
-              <img src='/svg/PinMarker.svg' style="width: 100%; height: 100%; object-fit: contain;"/>
+                <img src='/svg/PinMarker.svg' style="width: 100%; height: 100%; object-fit: contain;"/>
               </div>`
+              : location.is_like
+              ? `
+              <div style="width: 60px; height: 60px; display: flex; justify-content: center; align-items: center;">
+                <img src='/svg/LikeMarker.png' style="width: 100%; height: 100%;"/>
+              </div>
+              `
               : `
               <div style="width: 40px; height: 46px; display: flex; justify-content: center; align-items: center;">
               <div style="
@@ -118,8 +138,8 @@ const useMap = () => {
           // 바텀시트를 고려한 정중앙 배치
           if (map) {
             const currentCenter = new naver.maps.LatLng(
-              location.address_lat,
-              location.address_lng
+              parseFloat(location.address_lat),
+              parseFloat(location.address_lng)
             );
 
             // 지도 중심에서 253px만큼 위로 이동된 좌표 계산
@@ -144,6 +164,7 @@ const useMap = () => {
     initializeMap,
     resetMapOptions,
     setCurrentLocation,
+    getCurrentLocation,
     getMapOptions,
     addMarker,
   };
