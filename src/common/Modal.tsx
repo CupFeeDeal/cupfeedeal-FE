@@ -26,7 +26,10 @@ const Modal = ({
 
   return createPortal(
     <div className="fixed inset-0 z-50 flex items-center justify-center mx-auto max-w-[440px]">
-      <div className="fixed inset-0 bg-black bg-opacity-65" onClick={onClose} />
+      <div
+        className="fixed inset-0 mx-auto max-w-[440px] bg-black bg-opacity-65"
+        onClick={onClose}
+      />
       <div
         className={`relative bg-white overflow-visible  ${
           fullPage
