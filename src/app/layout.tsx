@@ -15,7 +15,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko" className={`${suite.variable} ${suit.variable}`}>
-      <body className="h-[calc(var(--vh)*100)] max-w-[390px] mx-auto bg-white">
+      <body className="h-[calc(var(--vh)*100)] max-w-[440px] mx-auto bg-white">
         <LayoutProvider />
         {children}
       </body>

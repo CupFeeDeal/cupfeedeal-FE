@@ -7,7 +7,7 @@ interface NewCardProps {
 }
 
 const NewCard = ({ img, name, location }: NewCardProps) => (
-  <article className="space-y-3 p-3 rounded-lg shadow-card">
+  <article className="space-y-3 p-3 rounded-lg shadow-card cursor-pointer">
     {/* 카페 이미지 */}
     <div className="w-36 h-36 rounded-lg overflow-hidden">
       {img ? (
