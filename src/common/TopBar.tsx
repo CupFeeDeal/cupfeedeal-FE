@@ -5,13 +5,23 @@ import { useRouter } from "next/navigation";
 
 interface TopBarProps {
   title: string;
+  onBack?: () => void;
 }
 
-const TopBar = ({ title }: TopBarProps) => {
+const TopBar = ({ title, onBack }: TopBarProps) => {
   const router = useRouter();
+
+  const handleBack = () => {
+    if (onBack) {
+      onBack();
+    } else {
+      router.back();
+    }
+  };
+
   return (
     <header className="Body_1_bold flex justify-between items-center py-3 px-5">
-      <Back onClick={() => router.back()} cursor={"pointer"} />
+      <Back onClick={handleBack} cursor={"pointer"} />
       {title}
       <div className="w-6" />
     </header>

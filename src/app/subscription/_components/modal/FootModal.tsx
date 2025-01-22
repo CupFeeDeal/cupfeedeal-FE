@@ -1,10 +1,8 @@
-"use client";
-
 import Modal from "@common/Modal";
-import { FootModalProps } from "src/types/modal";
+import { BasicCafeModalProps } from "src/types/modal";
 import { FootBasic } from "@assets/icons";
 
-const FootModal = ({ isOpen, onClose, cafe }: FootModalProps) => (
+const FootModal = ({ isOpen, onClose, cafe }: BasicCafeModalProps) => (
   <Modal isOpen={isOpen} onClose={onClose} showCloseButton>
     <div className="flex flex-col justify-center items-center py-5">
       <h5 className="Body_1_med text-Grey-700 mb-2">

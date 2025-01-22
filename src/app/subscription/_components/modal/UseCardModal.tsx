@@ -2,7 +2,7 @@
 
 import Modal from "@common/Modal";
 import { UseCardModalProps } from "src/types/modal";
-import useDate from "@hooks/useDate";
+import { formatDate } from "@app/subscription/_utils/FormatDate";
 import { Coffee, Notice } from "@assets/icons";
 
 const UseCardModal = ({
@@ -11,7 +11,7 @@ const UseCardModal = ({
   cafe,
   onComplete,
 }: UseCardModalProps) => {
-  const date = useDate();
+  const today = formatDate();
 
   // 구독권 사용하기 로직
   const handleConfirm = () => {
@@ -34,7 +34,7 @@ const UseCardModal = ({
         {/* 모달 내용 */}
         <div className="flex flex-col justify-center items-center py-6">
           <p className="Caption_med text-Grey-600 border border-Grey-600 rounded-full px-3 py-1 mb-4">
-            {date}
+            {today}
           </p>
           <h3 className="Headline_3 mb-2">{cafe}</h3>
           <Coffee className="w-20 mb-5" />

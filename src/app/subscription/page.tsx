@@ -6,25 +6,43 @@ import CardList from "./_components/CardList";
 const MOCK_FOOTPRINTS = 3;
 const MOCK_CARDS = [
   {
+    id: 1,
     name: "지구커피",
     menu: "아이스 아메리카노",
     period: 2,
+    price: 54000,
     savedCups: 0.5,
     isUsed: false,
+    visit: 7,
+    start: "2025-01-21T17:53:52.688Z",
+    end: "2025-02-21T17:53:52.688Z",
+    remain: 11,
   },
   {
+    id: 2,
     name: "카페플레이스",
     menu: "아이스 아메리카노",
     period: 4,
+    price: 41000,
     savedCups: 1,
     isUsed: true,
+    visit: 3,
+    start: "2025-02-21T17:53:52.688Z",
+    end: "2025-03-21T17:53:52.688Z",
+    remain: 12,
   },
   {
+    id: 3,
     name: "카페앤",
     menu: "아이스 아메리카노",
     period: 4,
+    price: 38000,
     savedCups: 2.5,
     isUsed: false,
+    visit: 11,
+    start: "2025-03-21T17:53:52.688Z",
+    end: "2025-04-21T17:53:52.688Z",
+    remain: 13,
   },
 ];
 
