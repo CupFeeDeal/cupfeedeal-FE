@@ -2,7 +2,7 @@ import { publicApi } from "./client";
 import { Cafe, CafeDetail } from "src/types/search";
 
 export const searchApi = {
-  getCafes: async (query?: string, userId?: number, like?: boolean) => {
+  getCafes: async (query?: string, like?: boolean) => {
     let url = `/api/v1/cafe?`;
     // 검색어 params
     if (query && query.trim() !== "") {
@@ -13,9 +13,7 @@ export const searchApi = {
       url += `like=${like}`;
     }
 
-    const response = await publicApi.get<Cafe[]>(
-      `/api/v1/cafe?search=${query}&like=${like}`
-    );
+    const response = await publicApi.get<Cafe[]>(url);
     return response.result;
   },
 
