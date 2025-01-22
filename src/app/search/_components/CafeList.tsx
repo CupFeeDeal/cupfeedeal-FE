@@ -3,6 +3,7 @@ import useDistance from "@hooks/useDistance";
 import { useCafeListStore } from "@store/useCafeListStore";
 import useMap from "./useMap";
 import { useEffect, useState } from "react";
+import Image from "next/image";
 
 export default function CafeList() {
   const cafes = useCafeListStore((state) => state.cafes);
@@ -62,7 +63,13 @@ export default function CafeList() {
           className="flex flex-row items-center py-4 px-5 gap-3 "
         >
           <span className="w-[7.5rem] h-[7.5rem] shrink-0">
-            <img src={cafe.image_url} className="w-full h-full rounded-lg" />
+            <Image
+              src={cafe.image_url.trim()}
+              alt={cafe.image_url}
+              width={120}
+              height={120}
+              className="w-full h-full rounded-lg"
+            />
           </span>
           <span>
             <div className="Caption_bold text-Main_Blue mb-1">

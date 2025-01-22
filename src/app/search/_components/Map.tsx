@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import useMap, { INITIAL_CENTER, INITIAL_ZOOM } from "./useMap";
 
-import { MapProps, Cafe } from "src/types/search";
+import { MapProps } from "src/types/search";
 import useSelectedCafeStore from "@store/useSelectedCafeStore";
 import { searchApi } from "@api/search";
 import { useCafeListStore } from "@store/useCafeListStore";
@@ -26,7 +26,7 @@ const Map = ({
   useEffect(() => {
     const fetchCafes = async () => {
       try {
-        const cafesData = await searchApi.getCafes(query, 1, true);
+        const cafesData = await searchApi.getCafes(query, true);
         console.log("cafesData: ", cafesData);
         setCafes(cafesData);
         //console.log("cafes: ", cafes);
