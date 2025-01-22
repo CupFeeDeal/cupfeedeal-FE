@@ -1,26 +1,41 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { Coordinates } from "src/types/search";
 import useMap, { INITIAL_CENTER, INITIAL_ZOOM } from "./useMap";
-import { nearCafe } from "./mock";
 
+import { MapProps, Cafe } from "src/types/search";
 import useSelectedCafeStore from "@store/useSelectedCafeStore";
-
-type MapProps = {
-  mapId?: string;
-  initialCenter?: Coordinates;
-  initialZoom?: number;
-};
+import { searchApi } from "@api/search";
 
 const Map = ({
   mapId = "map",
   initialCenter = INITIAL_CENTER,
   initialZoom = INITIAL_ZOOM,
+  query,
 }: MapProps) => {
   const mapRef = useRef<HTMLDivElement | null>(null);
   const { initializeMap, addMarker } = useMap();
   const [isMapLoaded, setIsMapLoaded] = useState(false);
+
+  const [cafes, setCafes] = useState<Cafe[]>([]);
+
+  // 카페 목록 받아오기
+  useEffect(() => {
+    const fetchCafes = async () => {
+      try {
+        const cafesData = await searchApi.getCafes(query, 1, true);
+        console.log("cafesData: ", cafesData);
+        setCafes(cafesData);
+        console.log("cafes: ", cafes);
+      } catch (error) {
+        console.error("Failed to fetch cafes:", error);
+      }
+    };
+
+    if (isMapLoaded) {
+      fetchCafes();
+    }
+  }, [isMapLoaded, query]);
 
   // 현재 선택한 카페
   const {
@@ -84,7 +99,7 @@ const Map = ({
 
   useEffect(() => {
     if (isMapLoaded) {
-      addMarker(nearCafe, selectedCafeId, (id) => {
+      addMarker(cafes, selectedCafeId, (id) => {
         setSelectedCafeId(id);
         setShowBottomSheet(!!id);
       });
@@ -95,6 +110,7 @@ const Map = ({
     selectedCafeId,
     setSelectedCafeId,
     setShowBottomSheet,
+    cafes,
   ]);
 
   return (
