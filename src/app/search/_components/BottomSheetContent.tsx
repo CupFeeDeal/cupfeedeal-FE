@@ -100,9 +100,14 @@ const BottomSheetContent = ({ cafeInfo }: BottomSheetContentProps) => {
         </div>
 
         {/*대표 이미지*/}
-        <div className="flex flex-row w-full gap-3 mb-7">
-          <span className="w-[10.5625rem] h-[10.5625rem] bg-Grey-300 rounded-xl"></span>
-          <span className="w-[10.5625rem] h-[10.5625rem] bg-Grey-300 rounded-xl"></span>
+        <div className="flex overflow-x-scroll w-full gap-3 mb-7">
+          {cafeInfo.images.map((image, index) => (
+            <img
+              key={index}
+              src={image.image_url}
+              className="w-[10.5625rem] h-[10.5625rem] rounded-xl object-cover shrink-0"
+            />
+          ))}
         </div>
 
         {/*세부 정보*/}
