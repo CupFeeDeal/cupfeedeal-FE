@@ -23,6 +23,7 @@ export { default as FullHeart } from "./FullHeart";
 export { default as HalfCup } from "./HalfCup";
 export { default as HeartMarker } from "./HeartMarker";
 export { default as Information } from "./Information";
+export { default as Instagram } from "./Instagram";
 export { default as Kakao } from "./Kakao";
 export { default as LevelBannerBg } from "./LevelBannerBg";
 export { default as Logo } from "./Logo";

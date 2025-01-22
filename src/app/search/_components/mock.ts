@@ -79,7 +79,7 @@ export const cafeInfo = {
   id: 1,
   name: "카페플레이스",
   address_map: "310",
-  image_url: "",
+  image_url: [],
   address:
     "텍스트영역텍스트영역텍스트영역텍스트영역텍스트영역텍스트영역텍스트영역텍스트영역텍스트영역텍스트영역텍스트영역텍",
   operation_time:

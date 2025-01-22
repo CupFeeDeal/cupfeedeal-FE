@@ -1,42 +1,32 @@
 "use client";
 
-import { FullHeart, EmptyHeart } from "@assets/icons";
+import { FullHeart, EmptyHeart, Instagram } from "@assets/icons";
 import useSelectedCafeStore from "@store/useSelectedCafeStore";
+import { CafeDetail } from "src/types/search";
 
-interface BottomSheetProps {
-  id: number;
-  name: string;
-  address_map: string;
-  image_url: string;
-  address: string;
-  operation_time: string;
-  phone_num: string;
-  sns_address: string;
-  description: string;
-  menu_board: string;
-  is_like: boolean;
-  is_subscription: boolean;
+interface BottomSheetContentProps {
+  cafeInfo: CafeDetail | undefined;
 }
 
-const labelStyle = `Body_2_bold text-Dark_Blue`;
+const labelStyle = `Body_2_bold text-Dark_Blue min-w-[49px]`;
 const valueStyle = `Body_2_med text-Grey-800`;
 const heartStyle = `w-5 h-5 flex justify-center items-center rounded-[0.625rem] shadow-[0_0_5px_0_rgba(153,153,159,0.26)]`;
 
 function InfoRow({ label, value }: { label: string; value: string }) {
   return (
-    <div className="flex flex-row justify-between items-start mb-3 z-25">
+    <div className="flex flex-row justify-between items-start mb-3 z-25 gap-4">
       <span className={labelStyle}>{label}</span>
       <span className={`${valueStyle} w-[17.56rem]`}>{value}</span>
     </div>
   );
 }
 
-export default function BottomSheetContent({
-  cafeInfo,
-}: {
-  cafeInfo: BottomSheetProps;
-}) {
+const BottomSheetContent = ({ cafeInfo }: BottomSheetContentProps) => {
   const { isSheetOpen } = useSelectedCafeStore();
+
+  if (!cafeInfo) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <div
@@ -81,7 +71,16 @@ export default function BottomSheetContent({
         <InfoRow label="주소" value={cafeInfo.address} />
         <InfoRow label="영업시간" value={cafeInfo.operation_time} />
         <InfoRow label="전화번호" value={cafeInfo.phone_num} />
-        <InfoRow label="SNS" value={cafeInfo.sns_address} />
+        {/* <InfoRow label="SNS" value={cafeInfo.sns_address} /> */}
+        <div className="flex flex-row justify-between items-center mb-3 z-25">
+          <span className={labelStyle}>SNS</span>
+          <span className="w-6 h-6 ml-4 mr-2 flex shrink-0">
+            <Instagram className="w-full h-full" />
+          </span>
+          <span className={`${valueStyle} w-[17.56rem]`}>
+            {cafeInfo.sns_address}
+          </span>
+        </div>
 
         {/*카페소개*/}
         <div className={`${labelStyle} mt-6`}>카페 소개</div>
@@ -99,4 +98,6 @@ export default function BottomSheetContent({
       </div>
     </div>
   );
-}
+};
+
+export default BottomSheetContent;

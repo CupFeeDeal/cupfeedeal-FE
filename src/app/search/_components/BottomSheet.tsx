@@ -6,10 +6,12 @@ import BottomSheetContent from "./BottomSheetContent";
 import BottomSheetHeader from "./BottomSheetHeader";
 
 import { motion } from "framer-motion";
-import { cafeInfo } from "./mock";
+//import { cafeInfo } from "./mock";
 import useBottomSheet from "@hooks/useBottomSheet";
+import { searchApi } from "@api/search";
+import { CafeDetail } from "src/types/search";
+import useSelectedCafeStore from "@store/useSelectedCafeStore";
 //import { MAX_Y, MIN_Y } from "@constants/BottomSheetOption";
-// import useSelectedCafeStore from "@store/useSelectedCafeStore";
 
 const BottomSheet = () => {
   const { sheet, content } = useBottomSheet();
@@ -21,6 +23,25 @@ const BottomSheet = () => {
     }
   }, []);
 
+  const { selectedCafeId } = useSelectedCafeStore();
+
+  // 카페 상세 정보 받아오기
+  const [cafe, setCafe] = useState<CafeDetail>();
+
+  useEffect(() => {
+    const fetchCafeDetail = async () => {
+      try {
+        const cafeData = await searchApi.getCafeDetail(selectedCafeId || 1);
+        setCafe(cafeData);
+        console.log(cafeData);
+      } catch (error) {
+        console.error("Failed to fetch cafe:", error);
+      }
+    };
+
+    fetchCafeDetail();
+  }, [selectedCafeId]);
+
   return (
     <motion.div
       className={`h-${height} flex flex-col absolute top-[calc(100%-253px)] right-0 left-0 z-30 transition-transform duration-[650ms] ease-out`}
@@ -29,7 +50,7 @@ const BottomSheet = () => {
     >
       <BottomSheetHeader />
       <div ref={content} className="overflow-auto overscroll-auto">
-        <BottomSheetContent cafeInfo={cafeInfo} />
+        <BottomSheetContent cafeInfo={cafe} />
       </div>
     </motion.div>
   );

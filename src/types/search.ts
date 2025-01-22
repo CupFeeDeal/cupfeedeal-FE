@@ -21,3 +21,18 @@ export type Cafe = {
   image_url: string;
   is_like: boolean;
 };
+
+export interface CafeDetail {
+  id: number;
+  name: string;
+  address_map: string;
+  image_url: string[];
+  address: string;
+  operation_time: string;
+  phone_num: string;
+  sns_address: string;
+  description: string;
+  menu_board: string;
+  is_like: boolean;
+  is_subscription: boolean;
+}
