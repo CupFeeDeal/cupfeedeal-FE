@@ -6,6 +6,7 @@ import CardList from "./_components/CardList";
 const MOCK_FOOTPRINTS = 3;
 const MOCK_CARDS = [
   {
+    id: 1,
     name: "지구커피",
     menu: "아이스 아메리카노",
     period: 2,
@@ -15,8 +16,10 @@ const MOCK_CARDS = [
     visit: 7,
     start: "2025-01-21T17:53:52.688Z",
     end: "2025-02-21T17:53:52.688Z",
+    remain: 11,
   },
   {
+    id: 2,
     name: "카페플레이스",
     menu: "아이스 아메리카노",
     period: 4,
@@ -26,8 +29,10 @@ const MOCK_CARDS = [
     visit: 3,
     start: "2025-02-21T17:53:52.688Z",
     end: "2025-03-21T17:53:52.688Z",
+    remain: 12,
   },
   {
+    id: 3,
     name: "카페앤",
     menu: "아이스 아메리카노",
     period: 4,
@@ -37,6 +42,7 @@ const MOCK_CARDS = [
     visit: 11,
     start: "2025-03-21T17:53:52.688Z",
     end: "2025-04-21T17:53:52.688Z",
+    remain: 13,
   },
 ];
 

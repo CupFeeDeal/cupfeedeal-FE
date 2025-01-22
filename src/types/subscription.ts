@@ -1,5 +1,6 @@
 // 구독 카드
 export interface SubscriptionCardData {
+  id: number;
   name: string;
   menu: string;
   price: number;
@@ -9,6 +10,7 @@ export interface SubscriptionCardData {
   start: string;
   end: string;
   visit: number;
+  remain: number;
 }
 
 // Card에 필요한 props

@@ -1,8 +1,14 @@
+"use client";
+
+import { useState } from "react";
 import Modal from "@common/Modal";
 import { ManageModalProps } from "src/types/modal";
 import TopBar from "@common/TopBar";
 import { HalfCat } from "@assets/icons";
 import { formatDate } from "@app/subscription/_utils/FormatDate";
+import Link from "next/link";
+import CancelBfModal from "./CancelBfModal";
+import CancelAfModal from "./CancelAfModal";
 
 // 구독 시작일, 만료일 정보 box
 interface DateBoxProps {
@@ -27,6 +33,7 @@ const DateBox = ({ label, date, isExpiry = false }: DateBoxProps) => (
 const ManageModal = ({
   isOpen,
   onClose,
+  id,
   cafe,
   menu,
   period,
@@ -34,38 +41,80 @@ const ManageModal = ({
   start,
   end,
   visit,
-}: ManageModalProps) => (
-  <Modal isOpen={isOpen} onClose={onClose} fullPage>
-    <TopBar title={`${cafe} 구독권 관리`} onBack={onClose} />
+  remain,
+}: ManageModalProps) => {
+  const [showBfModal, setShowBfModal] = useState(false);
+  const [showAfModal, setShowAfModal] = useState(false);
 
-    {/* 구독 정보 */}
-    <div className="flex-1 overflow-auto p-5 space-y-4">
-      <div className="w-full py-5 px-6 bg-gradient-to-r from-[#9596FD] to-[#D2A7E1] text-white rounded-2xl space-y-1">
-        <h3 className="Headline_3">{cafe}</h3>
-        <h5 className="Body_1_bold">
-          {menu} ∙ {period}주권 ∙ ₩{price.toLocaleString()}
-        </h5>
-      </div>
+  // 추후 환불 관련 API로 수정
+  const handleUnsubscribe = () => {
+    console.log("환불함");
+    setShowBfModal(false);
+    setShowAfModal(true);
+  };
 
-      {/* 방문수 및 만료일 */}
-      <div className="flex flex-col px-4 rounded-2xl bg-Pale_Blue_2 items-center">
-        <h5 className="Body_1_bold py-6">
-          지금까지 {cafe} 카페를 {visit}번 방문했어요!
-        </h5>
-        <div className="flex justify-between gap-3 w-full mb-9">
-          <DateBox label="구독 시작일" date={start} />
-          <DateBox label="구독 만료 예정일" date={end} isExpiry />
+  const handleFinalClose = () => {
+    setShowAfModal(false);
+    onClose();
+  };
+
+  return (
+    <>
+      <Modal isOpen={isOpen} onClose={onClose} fullPage>
+        <TopBar title={`${cafe} 구독권 관리`} onBack={onClose} />
+
+        {/* 구독 정보 */}
+        <div className="flex-1 overflow-auto p-5 space-y-4">
+          <div className="w-full py-5 px-6 bg-gradient-to-r from-[#9596FD] to-[#D2A7E1] text-white rounded-2xl space-y-1">
+            <h3 className="Headline_3">{cafe}</h3>
+            <h5 className="Body_1_bold">
+              {menu} ∙ {period}주권 ∙ ₩{price.toLocaleString()}
+            </h5>
+          </div>
+
+          {/* 방문수 및 만료일 */}
+          <div className="flex flex-col px-4 rounded-2xl bg-Pale_Blue_2 items-center">
+            <h5 className="Body_1_bold py-6">
+              지금까지 <span className="text-Main_Blue">{cafe}</span> 카페를{" "}
+              {visit}번 방문했어요!
+            </h5>
+            <div className="flex justify-between gap-3 w-full mb-9">
+              <DateBox label="구독 시작일" date={start} />
+              <DateBox label="구독 만료 예정일" date={end} isExpiry />
+            </div>
+            <HalfCat />
+          </div>
+
+          {/* 버튼 */}
+          <div className="pt-8 space-y-4">
+            <Link
+              href={`/payment/extend?cafe=${id}`}
+              className="btn-confirm block text-center"
+            >
+              구독 연장하기
+            </Link>
+            <button className="btn-cancel" onClick={() => setShowBfModal(true)}>
+              구독 취소하기
+            </button>
+          </div>
         </div>
-        <HalfCat />
-      </div>
+      </Modal>
 
-      {/* 버튼 */}
-      <div className="pt-8 space-y-4">
-        <button className="btn-confirm">구독 연장하기</button>
-        <button className="btn-cancel">구독 취소하기</button>
-      </div>
-    </div>
-  </Modal>
-);
+      {/* 환불 관련 모달 */}
+      <CancelBfModal
+        isOpen={showBfModal}
+        onClose={() => setShowBfModal(false)}
+        cafe={cafe}
+        remain={remain}
+        onConfirm={handleUnsubscribe}
+      />
+      <CancelAfModal
+        isOpen={showAfModal}
+        onClose={handleFinalClose}
+        cafe={cafe}
+      />
+    </>
+  );
+};
 
 export default ManageModal;

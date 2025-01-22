@@ -16,21 +16,26 @@ export interface BasicModalProps {
   onClose: () => void;
 }
 
-export interface UseCardModalProps extends BasicModalProps {
+export interface BasicCafeModalProps extends BasicModalProps {
   cafe: string;
+}
+
+export interface UseCardModalProps extends BasicCafeModalProps {
   onComplete: (showFootModal: boolean) => void;
 }
 
-export interface FootModalProps extends BasicModalProps {
-  cafe: string;
+export interface CancelBfModalProps extends BasicCafeModalProps {
+  remain: number;
+  onConfirm: () => void;
 }
 
-export interface ManageModalProps extends BasicModalProps {
-  cafe: string;
+export interface ManageModalProps extends BasicCafeModalProps {
+  id: number;
   menu: string;
   period: number;
   price: number;
   start: string;
   end: string;
   visit: number;
+  remain: number;
 }

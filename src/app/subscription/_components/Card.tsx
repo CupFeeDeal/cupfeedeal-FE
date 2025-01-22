@@ -12,6 +12,7 @@ import FootModal from "./modal/FootModal";
 import ManageModal from "./modal/ManageModal";
 
 const Card = ({
+  id,
   name,
   menu,
   period,
@@ -21,6 +22,7 @@ const Card = ({
   visit,
   start,
   end,
+  remain,
   backgroundClass,
   showDetails,
   total,
@@ -28,7 +30,17 @@ const Card = ({
   const [isUseModalOpen, setIsUseModalOpen] = useState(false);
   const [isFootModalOpen, setIsFootModalOpen] = useState(false);
   const [isManageModalOpen, setIsManageModalOpen] = useState(false);
-  const manageModalProps = { menu, period, price, start, end, visit };
+
+  const manageModalProps = {
+    id,
+    menu,
+    period,
+    price,
+    start,
+    end,
+    visit,
+    remain,
+  };
 
   // 사용 완료 -> 발자국 모달 바꾸기
   const switchModal = (showFootMoadal: boolean) => {
@@ -89,7 +101,7 @@ const Card = ({
             onComplete={switchModal}
           />
 
-          {/* 구독권 관리리 모달 */}
+          {/* 구독권 관리 모달 */}
           <ManageModal
             isOpen={isManageModalOpen}
             onClose={() => setIsManageModalOpen(false)}
