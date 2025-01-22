@@ -6,6 +6,7 @@ import useSelectedCafeStore from "@store/useSelectedCafeStore";
 import { useEffect, useState } from "react";
 import { CafeDetail } from "src/types/search";
 import useMap from "./useMap";
+import Image from "next/image";
 
 interface BottomSheetContentProps {
   cafeInfo: CafeDetail | undefined;
@@ -102,10 +103,13 @@ const BottomSheetContent = ({ cafeInfo }: BottomSheetContentProps) => {
         {/*대표 이미지*/}
         <div className="flex overflow-x-scroll w-full gap-3 mb-7">
           {cafeInfo.images.map((image, index) => (
-            <img
+            <Image
               key={index}
-              src={image.image_url}
-              className="w-[10.5625rem] h-[10.5625rem] rounded-xl object-cover shrink-0"
+              src={image.image_url.trim()}
+              alt={image.image_url}
+              width={169}
+              height={169}
+              className=" rounded-xl object-cover shrink-0"
             />
           ))}
         </div>
