@@ -84,7 +84,7 @@ const ManageModal = ({
           {/* 버튼 */}
           <div className="pt-4 space-y-4">
             <Link
-              href={`/payment/extend?cafe=${id}`}
+              href={`/payment/extend?id=${id}`}
               className="btn-confirm block text-center"
             >
               구독 연장하기
