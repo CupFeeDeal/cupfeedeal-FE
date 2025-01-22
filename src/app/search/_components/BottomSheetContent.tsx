@@ -59,7 +59,6 @@ const BottomSheetContent = ({ cafeInfo }: BottomSheetContentProps) => {
       return "";
     }
     if (distance >= 1000) {
-      // 1000m 이상이면 km 단위로 변환
       return `${(distance / 1000).toFixed(2)}km`;
     }
     return `${distance}m`;
