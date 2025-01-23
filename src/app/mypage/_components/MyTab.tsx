@@ -13,7 +13,7 @@ const MyTab = () => {
   ];
 
   return (
-    <div className="flex flex-col relative bg-white mb-[30px] rounded rounded-t-[20px] z-10 -mt-7">
+    <div className="flex flex-col relative bg-white mb-[30px] rounded rounded-t-[20px] z-10 -mt-16">
       {/*탭 카드*/}
       <div className="flex flex-row justify-center gap-3 mt-7 mb-5">
         <span
@@ -21,14 +21,14 @@ const MyTab = () => {
           onClick={() => router.push("/mypage/history")}
         >
           <MyTabHistoryBg width={169} height={120} />
-          <div className="absolute Body_1_bold top-3 left-4">구독 내역</div>
+          {/* <div className="absolute Body_1_bold top-3 left-4">구독 내역</div> */}
         </span>
         <span
           className="relative cursor-pointer"
           onClick={() => router.push("/mypage/previous")}
         >
           <MyTabCupcatBg width={169} height={120} />
-          <div className="absolute Body_1_bold top-3 left-4">지나간 컵캣</div>
+          {/* <div className="absolute Body_1_bold top-3 left-4">지나간 컵캣</div> */}
         </span>
       </div>
 

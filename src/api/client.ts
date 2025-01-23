@@ -80,5 +80,5 @@ const createApiRequest = (client: AxiosInstance) => {
 };
 
 export const publicApi = createApiRequest(publicClient);
-export const privateAPi = createApiRequest(privateClient);
+export const privateApi = createApiRequest(privateClient);
 export { token };

@@ -9,6 +9,8 @@ import {
 
 import { myData } from "./mock";
 import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
+import { userApi } from "@api/user";
 
 interface BannerProps {
   isLevel: boolean;
@@ -17,16 +19,39 @@ interface BannerProps {
 const MyBanner = ({ isLevel }: BannerProps) => {
   const router = useRouter();
 
+  const [level, setLevel] = useState(0);
+
+  useEffect(() => {
+    const fetchMyInfo = async () => {
+      try {
+        const userInfo = await userApi.getMyInfo();
+        console.log("userInfo: ", userInfo);
+        setLevel(userInfo.user_level);
+      } catch (error) {
+        console.error("Failed to fetch userInfo:", error);
+      }
+    };
+
+    fetchMyInfo();
+  }, []);
+
   return (
     <div className="w-full overflow-hidden relative z-5">
       {isLevel ? <LevelBannerBg /> : <MyBannerBg />}
 
       {/* 내 정보 */}
-      <div className="absolute top-0 left-0 py-6 px-5 flex flex-row">
-        <div>
-          <div className="w-[72px] py-0.5 px-5 Body_1_bold text-white bg-Dark_Blue mb-3 rounded-[38px]">
-            Lv.{myData.level}
-          </div>
+      <div className="absolute top-0 left-0 py-6 px-5 flex flex-row w-full justify-between">
+        <div className="flex flex-col">
+          <span className="flex flex-row flex-grow-0 w-[84px] items-center py-0.5 pl-5 pr-3 gap-1 bg-Dark_Blue mb-3 rounded-[38px]">
+            <div className="Body_1_bold text-white">Lv.{level}</div>
+            <Information
+              width={16}
+              height={16}
+              className="cursor-pointer"
+              onClick={() => router.push("/mypage/level")}
+            />
+          </span>
+
           {isLevel ? (
             <div className="flex shrink-0 flex-col w-44">
               <div className="Headline_3">
@@ -48,30 +73,6 @@ const MyBanner = ({ isLevel }: BannerProps) => {
         </div>
         <CupcatEx width={198} height={289} className="p-2" />
       </div>
-
-      {/*원두 바*/}
-      {!isLevel && (
-        <div className="absolute top-[223px] w-full px-5 ">
-          <div className="w-full bg-white/50 px-5 py-4 rounded-xl border-[0.7px] border-solid border-white backdrop-blur">
-            <div className="flex flex-row items-center justify-between">
-              <span className="Body_2_bold">
-                다음 레벨까지 {myData.bean}원두 남았어요!
-              </span>
-              <span>
-                <Information
-                  width={20}
-                  height={20}
-                  className="cursor-pointer"
-                  onClick={() => router.push("/mypage/level")}
-                />
-              </span>
-            </div>
-            <div className="relative w-full h-[7px] rounded-[3.5px] bg-white mt-2">
-              <div className="absolute h-[7px] w-28 rounded-[3.5px] bg-Dark_Blue"></div>
-            </div>
-          </div>
-        </div>
-      )}
     </div>
   );
 };
