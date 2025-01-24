@@ -14,6 +14,7 @@ export interface ModalProps {
 export interface BasicModalProps {
   isOpen: boolean;
   onClose: () => void;
+  onConfirm?: () => void;
 }
 
 export interface BasicCafeModalProps extends BasicModalProps {
@@ -26,7 +27,6 @@ export interface UseCardModalProps extends BasicCafeModalProps {
 
 export interface CancelBfModalProps extends BasicCafeModalProps {
   remain: number;
-  onConfirm: () => void;
 }
 
 export interface ManageModalProps extends BasicCafeModalProps {

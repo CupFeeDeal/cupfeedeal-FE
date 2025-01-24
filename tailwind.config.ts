@@ -202,6 +202,18 @@ const config: Config = {
           fontSize: "1rem",
           fontWeight: "500",
         },
+        ".btn-invalid": {
+          width: "100%",
+          padding: "1rem 0",
+          borderRadius: "0.75rem",
+          backgroundColor: theme("colors.gray.200"),
+          color: theme("colors.gray.400"),
+          fontFamily: theme("fontFamily.suit"),
+          fontSize: "1rem",
+          fontWeight: "500",
+          PointerEvent: "none",
+          cursor: "not-allowed",
+        },
       });
     }),
   ],

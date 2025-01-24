@@ -1,31 +1,33 @@
 "use client";
 
 import { CafeSubscription } from "src/types/payment";
-import { usePaymentStore } from "@store/usePaymentStore";
 import { CheckBf, CheckAf } from "@assets/icons";
 
 interface OptionBtnProps {
   subscriptions: CafeSubscription[];
   currentMenu?: string;
-  isExtension?: boolean;
+  isExtension: boolean;
+  selectedSubscription: CafeSubscription | null;
+  onSelect: (sub: CafeSubscription) => void;
 }
 
 const OptionBtn = ({
   subscriptions,
   currentMenu,
   isExtension,
+  selectedSubscription,
+  onSelect,
 }: OptionBtnProps) => {
-  const { selectedSubscription, setSubscription } = usePaymentStore();
-
   // 연장: 같은 메뉴 필터링, 구매: 전체 구독 옵션
-  const filtedSubscriptions =
+  const filtedSub =
     isExtension && currentMenu
       ? subscriptions.filter((sub) => sub.menu === currentMenu)
       : subscriptions;
 
   return (
     <div className="space-y-3">
-      {filtedSubscriptions.map(({ subscription_id, menu, period, price }) => {
+      {filtedSub.map((sub) => {
+        const { subscription_id, menu, period, price } = sub;
         const isSelected =
           selectedSubscription?.subscription_id === subscription_id;
         const optionTitle = `${
@@ -36,9 +38,7 @@ const OptionBtn = ({
         return (
           <button
             key={subscription_id}
-            onClick={() =>
-              setSubscription({ subscription_id, menu, period, price })
-            }
+            onClick={() => onSelect(sub)}
             className={`w-full flex justify-between items-center rounded-lg py-3 px-5 border shadow-basic ${
               isSelected
                 ? "border-Pale_Blue_1 bg-Pale_Blue_2"

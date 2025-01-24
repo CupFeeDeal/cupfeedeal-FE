@@ -1,4 +1,4 @@
-import OnboardingContent from "./_components/OnboardingContent";
+import OnboardingContent from "./OnboardingContent";
 import { redirect } from "next/navigation";
 
 // 로티 파일 불러오기
