@@ -1,13 +1,9 @@
-"use client";
-
 // components
 import { CupcatBg } from "@assets/icons";
 import TopBar from "@common/TopBar";
-import { useState } from "react";
 
 export default function Previous() {
-  const [level, setLevel] = useState(0);
-  console.log(setLevel);
+  const level = 0;
   const levelToCount: { [key: number]: string } = {
     1: "한",
     2: "두",

@@ -1,9 +1,15 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import { levelData } from "./mock";
 
 const LevelInfo = () => {
-  const storedLevel = parseInt(window.localStorage.getItem("level") || "0", 10);
+  const [storedLevel, setStoredLevel] = useState(0);
+
+  useEffect(() => {
+    const level = parseInt(window.localStorage.getItem("level") || "0", 10);
+    setStoredLevel(level);
+  }, []);
 
   return (
     <div className="w-full p-5 bg-white relative z-10 -mt-3">
