@@ -26,7 +26,7 @@ const Map = ({
   useEffect(() => {
     const fetchCafes = async () => {
       try {
-        const cafesData = await searchApi.getCafes(query, true);
+        const cafesData = await searchApi.getCafes(query, false);
         console.log("cafesData: ", cafesData);
         setCafes(cafesData);
         //console.log("cafes: ", cafes);

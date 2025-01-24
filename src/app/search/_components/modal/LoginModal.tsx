@@ -2,7 +2,7 @@ import Modal from "@common/Modal";
 import { LoginModalProps } from "src/types/modal";
 import { LoginModalImg } from "@assets/icons";
 
-const LoginModal = ({ isOpen, onClose, onLogin }: LoginModalProps) => {
+const LoginModal = ({ isOpen, onClose, onLogin, message }: LoginModalProps) => {
   return (
     <Modal
       isOpen={isOpen}
@@ -12,8 +12,8 @@ const LoginModal = ({ isOpen, onClose, onLogin }: LoginModalProps) => {
       onConfirm={onLogin}
     >
       <div className="flex flex-col items-center">
-        <div className=" Headline_3 mt-9">
-          즐겨찾기를 보려면
+        <div className="Headline_3 mt-9 text-center">
+          {message}
           <br />
           로그인이 필요해요
         </div>

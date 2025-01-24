@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { EmptyHeart, FullHeart, Crosshair } from "@assets/icons";
 import useMap from "./useMap";
 import { useRouter } from "next/navigation";
@@ -16,7 +16,14 @@ const SearchMenu = () => {
   const [showHeart, setShowHeart] = useState(false);
   const [showLoginModal, setShowLoginModal] = useState(false);
 
-  const accessToken = token.get();
+  const [accessToken, setAccessToken] = useState<string | null | undefined>(
+    null
+  );
+
+  useEffect(() => {
+    setAccessToken(token.get());
+  }, []);
+
   const handleClickHeart = () => {
     if (!accessToken) {
       setShowLoginModal(true);
@@ -69,6 +76,7 @@ const SearchMenu = () => {
         isOpen={showLoginModal}
         onClose={() => setShowLoginModal(false)}
         onLogin={() => router.push("/")}
+        message="즐겨찾기를 보려면"
       />
     </>
   );
