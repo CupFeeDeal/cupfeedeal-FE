@@ -7,7 +7,7 @@ interface ApiResponse<T = unknown> {
 }
 
 type RequestData = Record<string, unknown>;
-type HttpMethod = "get" | "post" | "put" | "delete";
+type HttpMethod = "get" | "post" | "put" | "patch" | "delete";
 
 // 토큰 관리
 const token = {
@@ -75,10 +75,12 @@ const createApiRequest = (client: AxiosInstance) => {
     get: <T>(url: string) => request<T>("get", url),
     post: <T>(url: string, data?: RequestData) => request<T>("post", url, data),
     put: <T>(url: string, data?: RequestData) => request<T>("put", url, data),
+    patch: <T>(url: string, data?: RequestData) =>
+      request<T>("patch", url, data),
     delete: <T>(url: string) => request<T>("delete", url),
   };
 };
 
 export const publicApi = createApiRequest(publicClient);
-export const privateAPi = createApiRequest(privateClient);
+export const privateApi = createApiRequest(privateClient);
 export { token };

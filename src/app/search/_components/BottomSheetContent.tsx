@@ -97,7 +97,10 @@ const BottomSheetContent = ({ cafeInfo }: BottomSheetContentProps) => {
 
         {/*메뉴 & 구독권 종류*/}
         <div className=" Body_2_bold text-Main_Blue mb-5">
-          {cafeInfo.menu}∙2주권∙4주권
+          {[
+            ...cafeInfo.menus,
+            ...cafeInfo.periods.map((period) => `${period}주권`),
+          ].join(" ∙ ")}
         </div>
 
         {/*대표 이미지*/}

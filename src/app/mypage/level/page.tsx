@@ -1,7 +1,7 @@
 // components
 import TopBar from "@common/TopBar";
 import MyBanner from "../_components/MyBanner";
-import LevelInfo from "../_components/LevelInfo";
+import LevelInfo from "./_components/LevelInfo";
 
 export default function Level() {
   return (

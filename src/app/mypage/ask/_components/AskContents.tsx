@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Dropdown from "./Dropdown";
+import { useRouter } from "next/navigation";
 
 interface Input {
   email: string;
@@ -16,6 +17,13 @@ const AskContents = () => {
     description: "",
   });
 
+  const [isEmailValid, setIsEmailValid] = useState(false);
+  const pattern = /^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-za-z0-9\-]+/;
+
+  const handleCheckEmail = (email: string) => {
+    return pattern.test(email);
+  };
+
   const askCategory = [
     "기술적 오류",
     "디자인 오류",
@@ -25,11 +33,17 @@ const AskContents = () => {
   ];
 
   const handleInputChange = (name: string, value: string) => {
+    if (name === "email") {
+      setIsEmailValid(handleCheckEmail(value)); // 이메일 유효성 검사
+    }
+
     setInputInfo((prev) => ({
       ...prev,
       [name]: value,
     }));
   };
+
+  const router = useRouter();
 
   const handleDescription = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     const value = e.target.value;
@@ -53,6 +67,13 @@ const AskContents = () => {
             placeholder="aaaaaaaa@aaaa.com"
             className="flex w-full px-4 py-[14px] Body_2_med border rounded-[10px] rounded-Grey-300"
           />
+          {inputInfo.email && !isEmailValid ? (
+            <div className="flex w-full Body_2_bold text-Red py-2 px-1 ml-2">
+              이메일 형식이 올바르지 않습니다
+            </div>
+          ) : (
+            <></>
+          )}
         </div>
 
         <div>
@@ -67,12 +88,13 @@ const AskContents = () => {
 
         <div>
           <div className="Body_1_bold px-2 mb-3">문의 내용</div>
+
           <textarea
             name="description"
             placeholder="문의 내용을 작성해 주세요."
             value={inputInfo.description}
             onChange={handleDescription}
-            className="flex w-full h-32 resize-none p-3 Body_2_reg border rounded-[10px] rounded-Grey-300"
+            className="flex focus:outline-none w-full h-32 resize-none p-3 Body_2_reg border rounded-[10px] rounded-Grey-300"
           ></textarea>
           <div className=" Caption_med text-gray-400 mt-1 px-3 justify-self-end">
             {inputInfo.description.length} / 100
@@ -80,6 +102,7 @@ const AskContents = () => {
         </div>
       </div>
       <div
+        onClick={() => router.push("/mypage")}
         className={`flex w-full justify-center Body_1_bold rounded-xl px-6 py-[0.88rem] mt-[3.6rem] ${
           Object.values(inputInfo).every((value) => value.trim() !== "")
             ? "bg-Main_Blue text-white cursor-pointer"
