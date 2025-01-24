@@ -13,6 +13,7 @@ export { default as Coffee } from "./Coffee";
 export { default as CoffeeBeanMarker } from "./CoffeeBeanMarker";
 export { default as Crosshair } from "./Crosshair";
 export { default as Cup } from "./Cup";
+export { default as CupcatBg } from "./CupcatBg";
 export { default as CupcatEx } from "./CupcatEx";
 export { default as EmptyHeart } from "./EmptyHeart";
 export { default as Foot1 } from "./Foot1";
