@@ -4,7 +4,7 @@ import TopBar from "@common/TopBar";
 import Map from "./_components/Map";
 import SearchBar from "./_components/SearchBar";
 import SearchMenu from "./_components/SearchMenu";
-import BottomSheet from "./_components/BottomSheet";
+import BottomSheet from "./_components/(detail)/BottomSheet";
 import useSelectedCafeStore from "@store/useSelectedCafeStore";
 import { useState } from "react";
 

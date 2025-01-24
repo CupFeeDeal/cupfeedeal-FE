@@ -5,7 +5,7 @@ import useDistance from "@hooks/useDistance";
 import useSelectedCafeStore from "@store/useSelectedCafeStore";
 import { useEffect, useState } from "react";
 import { CafeDetail } from "src/types/search";
-import useMap from "./useMap";
+import useMap from "../useMap";
 import Image from "next/image";
 
 interface BottomSheetContentProps {

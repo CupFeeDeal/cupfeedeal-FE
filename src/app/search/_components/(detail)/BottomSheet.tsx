@@ -6,7 +6,6 @@ import BottomSheetContent from "./BottomSheetContent";
 import BottomSheetHeader from "./BottomSheetHeader";
 
 import { motion } from "framer-motion";
-//import { cafeInfo } from "./mock";
 import useBottomSheet from "@hooks/useBottomSheet";
 import { searchApi } from "@api/search";
 import { CafeDetail } from "src/types/search";
