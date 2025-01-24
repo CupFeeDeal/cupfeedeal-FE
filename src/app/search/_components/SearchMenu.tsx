@@ -50,14 +50,14 @@ const SearchMenu = () => {
 
   return (
     <>
-      <div className="w-full flex flex-row justify-between px-5 absolute z-10 top-[4.75rem]">
+      <div className="w-full flex flex-row justify-between px-5">
         <span
-          className={`flex h-9 px-4 py-2 justify-center items-center rounded-[1.15625rem] border-[1.2px] border-Pale_Blue_1 Body_2_bold cursor-pointer bg-white text-Main_Blue shadow-[0_0_12.7px_0_rgba(175,176,187,0.31)] hover:bg-Main_Blue hover:text-white hover:shadow-[0_0_11px_0_rgba(153,153,159,0.26)]`}
+          className={`absolute z-10 top-[4.75rem] flex h-9 px-4 py-2 justify-center items-center rounded-[1.15625rem] border-[1.2px] border-Pale_Blue_1 Body_2_bold cursor-pointer bg-white text-Main_Blue shadow-[0_0_12.7px_0_rgba(175,176,187,0.31)] hover:bg-Main_Blue hover:text-white hover:shadow-[0_0_11px_0_rgba(153,153,159,0.26)]`}
           onClick={() => router.push("/search/nearList")}
         >
           가까운 카페
         </span>
-        <span className="flex flex-col gap-4">
+        <span className="absolute z-10 top-[4.75rem] right-5 flex flex-col gap-4">
           {showHeart ? (
             <div className={clickedBtnStyle} onClick={handleClickHeart}>
               <FullHeart width={24} height={24} />
