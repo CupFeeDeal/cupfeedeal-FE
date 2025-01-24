@@ -133,7 +133,7 @@ const BottomSheetContent = ({ cafeInfo }: BottomSheetContentProps) => {
                   onClick={handleClickSave}
                   className={`${heartStyle} bg-Main_Blue`}
                 >
-                  <FullHeart width={11} height={11} />
+                  <FullHeart width={12} height={12} />
                 </span>
               ) : (
                 <span className={`${heartStyle} bg-white`}>
