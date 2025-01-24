@@ -28,7 +28,7 @@ export interface CafeDetail {
   address: string;
   address_lat: string;
   address_lng: string;
-  menu: string;
+  menus: string[];
   periods: number[];
   images: Image[];
   operation_time: string;

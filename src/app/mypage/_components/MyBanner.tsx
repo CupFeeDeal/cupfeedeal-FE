@@ -21,7 +21,7 @@ const MyBanner = ({ isLevel }: BannerProps) => {
   const [level, setLevel] = useState(0);
   const [cafeName, setCafeName] = useState("");
   const [birth, setBirth] = useState("");
-  const [cupcatImgUrl, setCupcatImgUrl] = useState("");
+  //const [cupcatImgUrl, setCupcatImgUrl] = useState("");
 
   useEffect(() => {
     const fetchMyInfo = async () => {
@@ -39,7 +39,7 @@ const MyBanner = ({ isLevel }: BannerProps) => {
     };
 
     fetchMyInfo();
-  }, []);
+  }, [level]);
 
   return (
     <div className="w-full overflow-hidden relative z-5">

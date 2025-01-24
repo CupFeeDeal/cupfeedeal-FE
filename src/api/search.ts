@@ -13,9 +13,7 @@ export const searchApi = {
       url += `like=${like}`;
     }
 
-    const response = await publicApi.get<Cafe[]>(
-      `/api/v1/cafe?search=${query}&like=${like}`
-    );
+    const response = await publicApi.get<Cafe[]>(url);
     return response.result;
   },
 
