@@ -46,7 +46,7 @@ const BottomSheetContent = ({ cafeInfo }: BottomSheetContentProps) => {
           );
           setDistance(Math.round(calculatedDistance));
         } catch (error) {
-          console.error("Failed to get current location:", error);
+          console.error(error);
         }
       }
     };

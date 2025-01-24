@@ -35,7 +35,7 @@ const BottomSheet = () => {
         setCafe(cafeData);
         console.log(cafeData);
       } catch (error) {
-        console.error("Failed to fetch cafe:", error);
+        console.error(error);
       }
     };
 

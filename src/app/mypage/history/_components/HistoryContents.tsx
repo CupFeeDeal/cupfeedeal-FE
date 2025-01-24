@@ -1,16 +1,46 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { HistoryItem } from "src/types/mypage";
 import HistoryCard from "./HistoryItem";
 import Toggle from "./Toggle";
+import { userApi } from "@api/user";
 
-interface HistoryProps {
-  historyData: HistoryItem[];
-}
-
-const HistoryContents = ({ historyData }: HistoryProps) => {
+const HistoryContents = () => {
+  const [historyData, setHistoryData] = useState<HistoryItem[]>([]);
   const [isToggleOn, setIsToggleOn] = useState(false);
+
+  const formatDate = (dateString: string) => {
+    const date = new Date(dateString);
+    return `${date.getFullYear() % 100}년 ${
+      date.getMonth() + 1
+    }월 ${date.getDate()}일`;
+  };
+
+  useEffect(() => {
+    const fetchHistoryData = async () => {
+      try {
+        const response = await userApi.getSubsList();
+        const transformedData: HistoryItem[] = response.map((item) => ({
+          id: item.user_subscription_id,
+          name: item.cafe_name,
+          menu: item.menu,
+          subscriptionName: item.cafe_subscription_name,
+          period: item.period,
+          price: item.price,
+          start: formatDate(item.start),
+          end: formatDate(item.end),
+          isAvailable: item.status === "VALID",
+        }));
+
+        setHistoryData(transformedData);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    fetchHistoryData();
+  }, []);
 
   const filteredHistoryData = isToggleOn
     ? historyData.filter((history) => history.isAvailable)

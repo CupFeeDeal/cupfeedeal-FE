@@ -6,6 +6,10 @@ interface HistoryItemProps {
 }
 
 const HistoryCard = ({ item }: HistoryItemProps) => {
+  const formatPrice = (price: number) => {
+    return new Intl.NumberFormat("ko-KR").format(price);
+  };
+
   return (
     <div
       className={`w-full flex flex-col py-5 px-[18px] mb-3 border-[1.2px] rounded-[10px] ${
@@ -26,17 +30,17 @@ const HistoryCard = ({ item }: HistoryItemProps) => {
           item.isAvailable ? "text-Main_Blue" : "text-Grey-500"
         }  `}
       >
-        아이스 아메리카노 ∙ {item.subscribe}
+        아이스 아메리카노 ∙ {item.period}주권
       </div>
 
       <div className="flex flex-row Body_2_med text-Grey-600 items-center gap-1 mb-1 mt-7">
         <Price width={24} height={24} />
-        <span>{item.price}</span>
+        <span>{formatPrice(item.price)}</span>
       </div>
       <div className="flex flex-row Body_2_med text-Grey-600 items-center gap-1 mb-[18px]">
         <Calendar width={24} height={24} />
         <span>
-          {item.startDate} 시작 - {item.endDate} 만료
+          {item.start} 시작 - {item.end} 만료
         </span>
       </div>
 

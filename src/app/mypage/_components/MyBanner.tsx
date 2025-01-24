@@ -7,7 +7,6 @@ import {
   MyBannerBg,
 } from "@assets/icons";
 
-import { myData } from "./mock";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { userApi } from "@api/user";
@@ -30,10 +29,12 @@ const MyBanner = ({ isLevel }: BannerProps) => {
         const userInfo = await userApi.getMyInfo();
         console.log("userInfo: ", userInfo);
         setLevel(userInfo.user_level);
-        // setCafeName(userInfo.cafe_name);
-        // setBirth(userInfo.birth_date);
+        setCafeName(userInfo.cafe_name);
+        setBirth(userInfo.birth_date);
+
+        window.localStorage.setItem("level", level.toString());
       } catch (error) {
-        console.error("Failed to fetch userInfo:", error);
+        console.error(error);
       }
     };
 
@@ -60,13 +61,11 @@ const MyBanner = ({ isLevel }: BannerProps) => {
           {isLevel ? (
             <div className="flex shrink-0 flex-col w-44">
               <div className="Headline_3">
-                {myData.cafe_name} 옆의
+                {cafeName} 옆의
                 <br />
                 컵캣
               </div>
-              <div className="Body_1_med text-Grey-700 mt-2">
-                {myData.date} 만남
-              </div>
+              <div className="Body_1_med text-Grey-700 mt-2">{birth} 만남</div>
             </div>
           ) : (
             <div className="Headline_3">

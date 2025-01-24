@@ -28,6 +28,13 @@ const MyTab = () => {
     };
   }, []);
 
+  const handleLogout = () => {
+    document.cookie =
+      "accessToken=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT";
+    console.log("로그아웃 성공");
+    router.push("/");
+  };
+
   return (
     <div className="flex flex-col relative bg-white pb-[30px] rounded rounded-t-[20px] z-10 -mt-16">
       {/*탭 카드*/}
@@ -61,7 +68,9 @@ const MyTab = () => {
         <div
           key={tab.id}
           className="flex flex-row w-full p-5 items-center justify-between border-b-[0.5px] border-b-Grey-200 cursor-pointer"
-          onClick={() => router.push(tab.href)}
+          onClick={() =>
+            tab.menu === "로그아웃" ? handleLogout() : router.push(tab.href)
+          }
         >
           <span className="Body_1_bold bg-white">{tab.menu}</span>
           <Back className="-scale-x-100" />

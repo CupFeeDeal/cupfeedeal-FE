@@ -1,9 +1,11 @@
 export interface HistoryItem {
   id: number;
   name: string;
-  subscribe: string;
+  menu: string;
+  subscriptionName: string;
+  period: number;
   price: number;
-  startDate: string;
-  endDate: string;
+  start: string;
+  end: string;
   isAvailable: boolean;
 }

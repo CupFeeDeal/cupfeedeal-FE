@@ -19,11 +19,10 @@ export default function Nickname() {
   const handleChangeNickname = async () => {
     try {
       await userApi.patchNickname(nickname);
-      console.log("닉네임 변경 성공");
+      router.back();
     } catch (error) {
-      console.error("Failed to post nickname:", error);
+      console.error(error);
     }
-    router.push("/mypage");
   };
 
   const router = useRouter();

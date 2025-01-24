@@ -31,7 +31,7 @@ const Map = ({
         setCafes(cafesData);
         //console.log("cafes: ", cafes);
       } catch (error) {
-        console.error("Failed to fetch cafes:", error);
+        console.error(error);
       }
     };
 

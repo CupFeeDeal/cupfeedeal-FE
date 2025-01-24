@@ -31,7 +31,7 @@ export default function CafeList() {
 
         setCafeList(updatedCafes);
       } catch (error) {
-        console.error("Failed to calculate distances:", error);
+        console.error(error);
       }
     };
 
@@ -46,7 +46,7 @@ export default function CafeList() {
     return `${distance}m`;
   };
 
-  // 가격 표기법 포맷팅팅
+  // 가격 표기법 포맷팅
   const formatPrice = (price: number) => {
     return new Intl.NumberFormat("ko-KR").format(price);
   };
