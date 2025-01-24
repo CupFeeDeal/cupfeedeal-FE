@@ -161,6 +161,7 @@ const useMap = () => {
   );
 
   return {
+    map,
     initializeMap,
     resetMapOptions,
     setCurrentLocation,

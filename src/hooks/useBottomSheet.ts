@@ -118,7 +118,7 @@ export default function useBottomSheet() {
           `translateY(${nextSheetY - MAX_Y}px)`
         );
       } else {
-        document.body.style.overflowY = "hidden"; // 컨텐츠는 스크롤 방지
+        document.body.style.overflowY = "scroll"; // 컨텐츠는 스크롤 방지
       }
     };
 

@@ -29,6 +29,11 @@ export interface CancelBfModalProps extends BasicCafeModalProps {
   onConfirm: () => void;
 }
 
+export interface LoginModalProps extends BasicModalProps {
+  onLogin: () => void;
+  message: string;
+}
+
 export interface ManageModalProps extends BasicCafeModalProps {
   id: number;
   menu: string;

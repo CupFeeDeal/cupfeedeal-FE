@@ -1,19 +1,24 @@
 "use client";
+
 import useDistance from "@hooks/useDistance";
 import { useCafeListStore } from "@store/useCafeListStore";
 import useMap from "./useMap";
 import { useEffect, useState } from "react";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
+import useSelectedCafeStore from "@store/useSelectedCafeStore";
 
 export default function CafeList() {
   const cafes = useCafeListStore((state) => state.cafes);
-  console.log(cafes);
+  const { map, getCurrentLocation, getMapOptions } = useMap();
+
   const { getDistance } = useDistance();
-  const { getCurrentLocation } = useMap();
+
   const [cafeList, setCafeList] = useState<
     ((typeof cafes)[0] & { distance: number })[]
   >([]);
 
+  // 현위치로부터의 거리 계산
   useEffect(() => {
     const calculateDistance = async () => {
       try {
@@ -47,9 +52,26 @@ export default function CafeList() {
     return `${distance}m`;
   };
 
-  // 가격 표기법 포맷팅팅
+  // 가격 표기법 포맷팅
   const formatPrice = (price: number) => {
     return new Intl.NumberFormat("ko-KR").format(price);
+  };
+
+  const router = useRouter();
+
+  // 특정 카페 클릭 시 상세 바텀시트로 이동
+  const { setSelectedCafeId, setShowBottomSheet, setOldCenter } =
+    useSelectedCafeStore();
+  const handleClickDetail = (id: number) => {
+    // const selectedCafe = cafeList.find((cafe) => cafe.id === id);
+    if (map) {
+      const { center } = getMapOptions();
+      setOldCenter(center);
+    }
+    // 바텀시트 열기
+    setSelectedCafeId(id);
+    setShowBottomSheet(true);
+    router.push("/search");
   };
 
   return (
@@ -60,7 +82,8 @@ export default function CafeList() {
       {cafeList.map((cafe, index) => (
         <div
           key={index}
-          className="flex flex-row items-center py-4 px-5 gap-3 "
+          className="flex flex-row items-center py-4 px-5 gap-3 cursor-pointer"
+          onClick={() => handleClickDetail(cafe.id)}
         >
           <span className="w-[7.5rem] h-[7.5rem] shrink-0">
             <Image

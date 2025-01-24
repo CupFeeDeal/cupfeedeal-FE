@@ -9,7 +9,7 @@ const BottomSheetHeader = () => {
   const { showBottomSheet, isSheetOpen, setIsSheetOpen } =
     useSelectedCafeStore();
   const [showBackIcon, setShowBackIcon] = useState(false);
-  const [fade, setFade] = useState(false);
+  //const [fade, setFade] = useState(false);
 
   const { sheet } = useBottomSheet();
 
@@ -17,15 +17,15 @@ const BottomSheetHeader = () => {
     if (showBottomSheet) {
       const timer = setTimeout(() => {
         setShowBackIcon(isSheetOpen);
-        setFade(true); // 페이드 효과 시작
+        //setFade(true); // 페이드 효과 시작
       }, 100);
 
       return () => {
         clearTimeout(timer); // 타이머 정리
-        setFade(false); // 상태 초기화
+        //setFade(false); // 상태 초기화
       };
     } else {
-      setFade(false);
+      //setFade(false);
     }
   }, [isSheetOpen, showBottomSheet]);
 
@@ -39,9 +39,9 @@ const BottomSheetHeader = () => {
 
   return (
     <div
-      className={`transition-opacity duration-500 ${
-        fade ? "opacity-100" : "opacity-0"
-      }`}
+    // className={`transition-opacity duration-500 ${
+    //   fade ? "opacity-100" : "opacity-0"
+    // }`}
     >
       {showBackIcon ? (
         <div className="bg-white">

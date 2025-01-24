@@ -1,4 +1,4 @@
-import { publicApi } from "./client";
+import { privateApi } from "./client";
 import { Cafe, CafeDetail } from "src/types/search";
 
 export const searchApi = {
@@ -13,12 +13,29 @@ export const searchApi = {
       url += `like=${like}`;
     }
 
-    const response = await publicApi.get<Cafe[]>(url);
+    const response = await privateApi.get<Cafe[]>(url);
     return response.result;
   },
 
   getCafeDetail: async (cafeId: number) => {
-    const response = await publicApi.get<CafeDetail>(`api/v1/cafe/${cafeId}`);
+    const response = await privateApi.get<CafeDetail>(`/api/v1/cafe/${cafeId}`);
+    return response.result;
+  },
+};
+
+export const likeApi = {
+  postLike: async (cafeId: number) => {
+    const response = await privateApi.post<{ cafeId: number }>(
+      `/api/v1/like/like`,
+      { cafeId: cafeId }
+    );
+    return response.result;
+  },
+
+  deleteLike: async (cafeId: number) => {
+    const response = await privateApi.delete(`/api/v1/like/like`, {
+      cafeId: cafeId,
+    });
     return response.result;
   },
 };

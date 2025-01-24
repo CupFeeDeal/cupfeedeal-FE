@@ -30,6 +30,7 @@ export { default as Information } from "./Information";
 export { default as Instagram } from "./Instagram";
 export { default as Kakao } from "./Kakao";
 export { default as LevelBannerBg } from "./LevelBannerBg";
+export { default as LoginModalImg } from "./LoginModalImg";
 export { default as Logo } from "./Logo";
 export { default as LogoText } from "./LogoText";
 export { default as Lv0 } from "./Lv0";

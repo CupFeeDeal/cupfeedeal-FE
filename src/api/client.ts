@@ -77,7 +77,8 @@ const createApiRequest = (client: AxiosInstance) => {
     put: <T>(url: string, data?: RequestData) => request<T>("put", url, data),
     patch: <T>(url: string, data?: RequestData) =>
       request<T>("patch", url, data),
-    delete: <T>(url: string) => request<T>("delete", url),
+    delete: <T>(url: string, data?: RequestData) =>
+      request<T>("delete", url, data),
   };
 };
 
