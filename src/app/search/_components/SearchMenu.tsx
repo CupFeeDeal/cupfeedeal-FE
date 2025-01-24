@@ -5,6 +5,8 @@ import useMap from "./useMap";
 import { useRouter } from "next/navigation";
 import { token } from "@api/client";
 import LoginModal from "./modal/LoginModal";
+import { searchApi } from "@api/search";
+import { useCafeListStore } from "@store/useCafeListStore";
 
 const defaultBtnStyle = `w-11 h-11 flex justify-center items-center bg-white rounded-[1.375rem] shadow-[0_0_11px_0_rgba(153,153,159,0.26)] cursor-pointer`;
 const clickedBtnStyle = `w-11 h-11 flex justify-center items-center bg-Main_Blue rounded-[1.375rem] shadow-[0_0_11px_0_rgba(153,153,159,0.26)] cursor-pointer`;
@@ -12,6 +14,7 @@ const clickedBtnStyle = `w-11 h-11 flex justify-center items-center bg-Main_Blue
 const SearchMenu = () => {
   const { setCurrentLocation } = useMap();
   const router = useRouter();
+  const setCafes = useCafeListStore((state) => state.setCafes);
 
   const [showHeart, setShowHeart] = useState(false);
   const [showLoginModal, setShowLoginModal] = useState(false);
@@ -24,11 +27,20 @@ const SearchMenu = () => {
     setAccessToken(token.get());
   }, []);
 
-  const handleClickHeart = () => {
+  // 좋아요 버튼 눌렀을 때
+  const handleClickHeart = async () => {
     if (!accessToken) {
       setShowLoginModal(true);
-    } else {
-      setShowHeart(!showHeart);
+      return;
+    }
+
+    try {
+      const isLikeOnly = !showHeart;
+      const cafesData = await searchApi.getCafes("", isLikeOnly);
+      setCafes(cafesData);
+      setShowHeart(isLikeOnly);
+    } catch (error) {
+      console.error(error);
     }
   };
 
