@@ -91,7 +91,7 @@ const BottomSheetContent = ({ cafeInfo }: BottomSheetContentProps) => {
           );
           setDistance(Math.round(calculatedDistance));
         } catch (error) {
-          console.error("Failed to get current location:", error);
+          console.error(error);
         }
       }
     };
@@ -164,7 +164,7 @@ const BottomSheetContent = ({ cafeInfo }: BottomSheetContentProps) => {
                 alt={image.image_url}
                 width={169}
                 height={169}
-                className=" rounded-xl object-cover shrink-0"
+                className="w-[169px] h-[169px] rounded-xl object-cover shrink-0"
               />
             ))}
           </div>
