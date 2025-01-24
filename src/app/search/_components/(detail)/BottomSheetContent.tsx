@@ -11,6 +11,7 @@ import { token } from "@api/client";
 import LoginModal from "../modal/LoginModal";
 import { useRouter } from "next/navigation";
 import { likeApi } from "@api/search";
+import { useCafeListStore } from "@store/useCafeListStore";
 
 interface BottomSheetContentProps {
   cafeInfo: CafeDetail | undefined;
@@ -35,6 +36,7 @@ const BottomSheetContent = ({ cafeInfo }: BottomSheetContentProps) => {
   const [showLoginModal, setShowLoginModal] = useState(false);
 
   const [isLike, setIsLike] = useState(cafeInfo?.is_like || false);
+  const { updateCafeLikeStatus } = useCafeListStore();
 
   useEffect(() => {
     if (cafeInfo) {
@@ -42,7 +44,7 @@ const BottomSheetContent = ({ cafeInfo }: BottomSheetContentProps) => {
     }
   }, [cafeInfo]);
 
-  const handleClickSave = () => {
+  const handleClickSave = async () => {
     if (!accessToken) {
       setShowLoginModal(true);
       return;
@@ -51,14 +53,17 @@ const BottomSheetContent = ({ cafeInfo }: BottomSheetContentProps) => {
     if (cafeInfo) {
       try {
         if (isLike) {
-          likeApi.deleteLike(cafeInfo.id);
+          await likeApi.deleteLike(cafeInfo.id);
           console.log("delete");
         } else {
-          likeApi.postLike(cafeInfo.id);
+          await likeApi.postLike(cafeInfo.id);
           console.log("post");
         }
 
-        setIsLike(!isLike);
+        const updatedIsLike = !isLike;
+        setIsLike(updatedIsLike);
+
+        updateCafeLikeStatus(cafeInfo.id, updatedIsLike);
       } catch (error) {
         console.log(error);
       }

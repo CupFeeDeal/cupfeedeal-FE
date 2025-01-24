@@ -18,7 +18,6 @@ const Map = ({
   const { initializeMap, addMarker } = useMap();
   const [isMapLoaded, setIsMapLoaded] = useState(false);
 
-  //const [cafes, setCafes] = useState<Cafe[]>([]);
   const cafes = useCafeListStore((state) => state.cafes);
   const setCafes = useCafeListStore((state) => state.setCafes);
 
@@ -29,7 +28,6 @@ const Map = ({
         const cafesData = await searchApi.getCafes(query, false);
         console.log("cafesData: ", cafesData);
         setCafes(cafesData);
-        //console.log("cafes: ", cafes);
       } catch (error) {
         console.error(error);
       }
