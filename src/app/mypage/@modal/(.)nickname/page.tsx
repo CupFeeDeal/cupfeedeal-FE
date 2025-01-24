@@ -1,5 +1,6 @@
 "use client";
 
+import { userApi } from "@api/user";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
@@ -13,6 +14,16 @@ export default function Nickname() {
       setNickname(inputValue);
       setCount(inputValue.length);
     }
+  };
+
+  const handleChangeNickname = async () => {
+    try {
+      await userApi.patchNickname(nickname);
+      console.log("닉네임 변경 성공");
+    } catch (error) {
+      console.error("Failed to post nickname:", error);
+    }
+    router.push("/mypage");
   };
 
   const router = useRouter();
@@ -53,7 +64,10 @@ export default function Nickname() {
           >
             돌아가기
           </button>
-          <button className="w-full Body_1_bold py-4 bg-Main_Blue text-white rounded-lg">
+          <button
+            onClick={handleChangeNickname}
+            className="w-full Body_1_bold py-4 bg-Main_Blue text-white rounded-lg"
+          >
             변경하기
           </button>
         </div>

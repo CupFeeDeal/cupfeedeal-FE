@@ -20,6 +20,9 @@ const MyBanner = ({ isLevel }: BannerProps) => {
   const router = useRouter();
 
   const [level, setLevel] = useState(0);
+  const [cafeName, setCafeName] = useState("");
+  const [birth, setBirth] = useState("");
+  const [cupcatImgUrl, setCupcatImgUrl] = useState("");
 
   useEffect(() => {
     const fetchMyInfo = async () => {
@@ -27,6 +30,8 @@ const MyBanner = ({ isLevel }: BannerProps) => {
         const userInfo = await userApi.getMyInfo();
         console.log("userInfo: ", userInfo);
         setLevel(userInfo.user_level);
+        // setCafeName(userInfo.cafe_name);
+        // setBirth(userInfo.birth_date);
       } catch (error) {
         console.error("Failed to fetch userInfo:", error);
       }
