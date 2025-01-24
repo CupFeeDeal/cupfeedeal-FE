@@ -2,7 +2,6 @@
 
 import { useEffect, useRef, useState } from "react";
 import useMap, { INITIAL_CENTER, INITIAL_ZOOM } from "./useMap";
-
 import { MapProps } from "src/types/search";
 import useSelectedCafeStore from "@store/useSelectedCafeStore";
 import { searchApi } from "@api/search";
@@ -18,30 +17,14 @@ const Map = ({
   const { initializeMap, addMarker } = useMap();
   const [isMapLoaded, setIsMapLoaded] = useState(false);
 
-  // 카페 목록 정보
+  // cafe 정보
   const cafes = useCafeListStore((state) => state.cafes);
   const setCafes = useCafeListStore((state) => state.setCafes);
 
-  // 카페 목록 받아오기
-  useEffect(() => {
-    const fetchCafes = async () => {
-      try {
-        const cafesData = await searchApi.getCafes(query, false);
-        console.log("cafesData: ", cafesData);
-        setCafes(cafesData);
-      } catch (error) {
-        console.error(error);
-      }
-    };
-
-    if (isMapLoaded) {
-      fetchCafes();
-    }
-  }, [isMapLoaded, query, setCafes]);
-
-  // 현재 선택한 카페 정보
+  // 선택된 카페 정보 + 이전 지도 중심
   const {
     selectedCafeId,
+    oldCenter,
     setSelectedCafeId,
     setShowBottomSheet,
     setIsSheetOpen,
@@ -59,22 +42,17 @@ const Map = ({
     checkNaverLoaded();
   }, []);
 
-  // 지도 객체 생성 및 초기 설정
+  // 지도 초기 생성
   useEffect(() => {
     if (!isMapLoaded || !mapRef.current) return;
 
-    // 선택된 카페 o -> 해당 카페 좌표로 초기 중앙 설정
-    let centerLatLng = new naver.maps.LatLng(...initialCenter);
-    const foundCafe = cafes.find((c) => c.id === selectedCafeId);
-    if (foundCafe) {
-      centerLatLng = new naver.maps.LatLng(
-        parseFloat(foundCafe.address_lat),
-        parseFloat(foundCafe.address_lng)
-      );
+    let initLatLng = new naver.maps.LatLng(...initialCenter);
+    if (oldCenter) {
+      initLatLng = new naver.maps.LatLng(oldCenter[0], oldCenter[1]);
     }
 
     const mapOptions = {
-      center: centerLatLng,
+      center: initLatLng,
       zoom: initialZoom,
       minZoom: 9,
       scaleControl: false,
@@ -86,18 +64,9 @@ const Map = ({
 
     // 지도 생성
     const map = new naver.maps.Map(mapRef.current, mapOptions);
+
+    // 전역에 저장 (useMap에 있는 initializeMap)
     initializeMap(map);
-
-    if (foundCafe) {
-      const proj = map.getProjection();
-      const point = proj.fromCoordToOffset(centerLatLng);
-      const pixelOffset = 253 / 2;
-      point.y += pixelOffset;
-      const newCenter = proj.fromOffsetToCoord(point);
-
-      // 초기 지도 위치를 오프셋 적용 좌표로 세팅
-      map.setCenter(newCenter);
-    }
 
     // 지도 클릭/드래그 시 showBottomSheet 비활성화
     naver.maps.Event.addListener(map, "click", () => {
@@ -105,7 +74,6 @@ const Map = ({
       setIsSheetOpen(false);
       setSelectedCafeId(null);
     });
-
     naver.maps.Event.addListener(map, "dragstart", () => {
       setShowBottomSheet(false);
       setIsSheetOpen(false);
@@ -116,11 +84,30 @@ const Map = ({
     initialCenter,
     initialZoom,
     isMapLoaded,
+    oldCenter,
     setIsSheetOpen,
     setSelectedCafeId,
     setShowBottomSheet,
   ]);
 
+  // 카페 목록 api 호출
+  useEffect(() => {
+    const fetchCafes = async () => {
+      try {
+        const cafesData = await searchApi.getCafes(query, false);
+        console.log("cafesData: ", cafesData);
+        setCafes(cafesData);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    if (isMapLoaded) {
+      fetchCafes();
+    }
+  }, [isMapLoaded, query, setCafes]);
+
+  // 마커 찍기
   useEffect(() => {
     if (isMapLoaded) {
       addMarker(cafes, selectedCafeId, (id) => {
@@ -136,6 +123,32 @@ const Map = ({
     setShowBottomSheet,
     cafes,
   ]);
+
+  const { map } = useMap();
+
+  useEffect(() => {
+    if (!isMapLoaded) return;
+
+    const foundCafe = cafes.find((c) => c.id === selectedCafeId);
+    if (!foundCafe) return;
+
+    if (!map) return;
+
+    // 새로 이동할 좌표(해당 카페 위치)
+    const newLatLng = new naver.maps.LatLng(
+      parseFloat(foundCafe.address_lat),
+      parseFloat(foundCafe.address_lng)
+    );
+
+    // 오프셋 적용
+    const proj = map.getProjection();
+    const point = proj.fromCoordToOffset(newLatLng);
+    const pixelOffset = 253 / 2;
+    point.y += pixelOffset;
+    const offsetCenter = proj.fromOffsetToCoord(point);
+
+    map.panTo(offsetCenter, { duration: 500 });
+  }, [isMapLoaded, cafes, selectedCafeId]);
 
   return (
     <div

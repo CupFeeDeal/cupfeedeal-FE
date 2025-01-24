@@ -1,4 +1,4 @@
-import { privateApi, publicApi } from "./client";
+import { privateApi } from "./client";
 import { Cafe, CafeDetail } from "src/types/search";
 
 export const searchApi = {
@@ -33,7 +33,7 @@ export const likeApi = {
   },
 
   deleteLike: async (cafeId: number) => {
-    const response = await privateApi.delete<{}>(`/api/v1/like/like`, {
+    const response = await privateApi.delete(`/api/v1/like/like`, {
       cafeId: cafeId,
     });
     return response.result;

@@ -10,7 +10,7 @@ import useSelectedCafeStore from "@store/useSelectedCafeStore";
 
 export default function CafeList() {
   const cafes = useCafeListStore((state) => state.cafes);
-  const { getCurrentLocation } = useMap();
+  const { map, getCurrentLocation, getMapOptions } = useMap();
 
   const { getDistance } = useDistance();
 
@@ -60,9 +60,14 @@ export default function CafeList() {
   const router = useRouter();
 
   // 특정 카페 클릭 시 상세 바텀시트로 이동
-  const { setSelectedCafeId, setShowBottomSheet } = useSelectedCafeStore();
+  const { setSelectedCafeId, setShowBottomSheet, setOldCenter } =
+    useSelectedCafeStore();
   const handleClickDetail = (id: number) => {
     // const selectedCafe = cafeList.find((cafe) => cafe.id === id);
+    if (map) {
+      const { center } = getMapOptions();
+      setOldCenter(center);
+    }
     // 바텀시트 열기
     setSelectedCafeId(id);
     setShowBottomSheet(true);
