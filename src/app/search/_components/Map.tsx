@@ -148,7 +148,7 @@ const Map = ({
     const offsetCenter = proj.fromOffsetToCoord(point);
 
     map.panTo(offsetCenter, { duration: 500 });
-  }, [isMapLoaded, cafes, selectedCafeId]);
+  }, [map, isMapLoaded, cafes, selectedCafeId]);
 
   return (
     <div

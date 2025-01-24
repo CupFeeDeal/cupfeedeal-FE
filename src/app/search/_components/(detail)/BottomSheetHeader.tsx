@@ -9,7 +9,7 @@ const BottomSheetHeader = () => {
   const { showBottomSheet, isSheetOpen, setIsSheetOpen } =
     useSelectedCafeStore();
   const [showBackIcon, setShowBackIcon] = useState(false);
-  const [fade, setFade] = useState(false);
+  //const [fade, setFade] = useState(false);
 
   const { sheet } = useBottomSheet();
 
