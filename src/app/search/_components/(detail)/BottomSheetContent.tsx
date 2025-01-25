@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 import { CafeDetail } from "src/types/search";
 import useMap from "../useMap";
 import Image from "next/image";
-import { token } from "@api/client";
+import { token } from "@api/apiHelper";
 import LoginModal from "../modal/LoginModal";
 import { useRouter } from "next/navigation";
 import { likeApi } from "@api/search";

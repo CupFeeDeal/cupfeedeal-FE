@@ -1,4 +1,5 @@
 import axios, { AxiosInstance } from "axios";
+import { token } from "./token";
 
 interface ApiResponse<T = unknown> {
   code: number;
@@ -8,25 +9,6 @@ interface ApiResponse<T = unknown> {
 
 type RequestData = Record<string, unknown>;
 type HttpMethod = "get" | "post" | "put" | "patch" | "delete";
-
-// 토큰 관리
-const token = {
-  get: () => {
-    return document.cookie
-      .split("; ")
-      .find((row) => row.startsWith("accessToken="))
-      ?.split("=")[1];
-  },
-
-  set: (value: string, name: string = "accessToken") => {
-    document.cookie = `${name}=${value}; path=/; max-age=86400`;
-  },
-
-  remove: () => {
-    document.cookie =
-      "accessToken=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT";
-  },
-};
 
 // 토큰X 요청
 const publicClient = axios.create({
@@ -58,7 +40,10 @@ privateClient.interceptors.response.use(
   async (error) => {
     if (error.response?.status === 401) {
       token.remove();
-      window.location.href = "/";
+
+      if (typeof window !== "undefined") {
+        window.location.href = "/";
+      }
     }
     return Promise.reject(error);
   }

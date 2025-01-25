@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { EmptyHeart, FullHeart, Crosshair } from "@assets/icons";
 import useMap from "./useMap";
 import { useRouter } from "next/navigation";
-import { token } from "@api/client";
+import { token } from "@api/apiHelper";
 import LoginModal from "./modal/LoginModal";
 
 const defaultBtnStyle = `w-11 h-11 flex justify-center items-center bg-white rounded-[1.375rem] shadow-[0_0_11px_0_rgba(153,153,159,0.26)] cursor-pointer`;

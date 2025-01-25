@@ -10,12 +10,12 @@ import RecommendCard from "./_components/RecommendCard";
 import NewCard from "./_components/NewCard";
 
 const HomePage = async () => {
-  // const bannerRequest = homeApi.getBannerInfo();
+  const bannerRequest = homeApi.getBannerInfo();
   const recommendRequest = homeApi.getRecommendCafes();
   const newRequest = homeApi.getNewCafes();
 
-  const [recommendCafes, newCafes] = [
-    // (await bannerRequest).result,
+  const [bannerInfo, recommendCafes, newCafes] = [
+    (await bannerRequest).result,
     (await recommendRequest).result,
     (await newRequest).result,
   ];

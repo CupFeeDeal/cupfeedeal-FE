@@ -1,4 +1,4 @@
-import { publicApi } from "./client";
+import { publicApi } from "./apiHelper";
 
 export const authApi = {
   kakaoCallback: (code: string) =>
