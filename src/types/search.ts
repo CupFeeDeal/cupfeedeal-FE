@@ -4,7 +4,8 @@ export type MapProps = {
   mapId?: string;
   initialCenter?: Coordinates;
   initialZoom?: number;
-  query?: string;
+  //query?: string;
+  cafes: Cafe[];
 };
 
 type Lat = number;

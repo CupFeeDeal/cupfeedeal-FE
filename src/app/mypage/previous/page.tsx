@@ -15,9 +15,9 @@ export default function Previous() {
   const count = levelToCount[level] || "";
 
   return (
-    <div className="flex w-full flex-col">
-      <div className="relative flex flex-col w-full h-screen bg-Blue_Grey">
-        <TopBar title="지나간 컵캣" />
+    <div className="flex w-full h-full flex-col">
+      <TopBar title="지나간 컵캣" />
+      <div className="relative flex-1 overflow-auto flex-col w-full h-screen bg-Blue_Grey">
         <CupcatBg className="w-full mt-[243px] mb-[34px] absolute" />
         <div className="flex flex-row w-full px-5 mt-6 justify-between">
           {level === 0 ? (

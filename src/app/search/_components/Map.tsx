@@ -4,22 +4,20 @@ import { useEffect, useRef, useState } from "react";
 import useMap, { INITIAL_CENTER, INITIAL_ZOOM } from "./useMap";
 import { MapProps } from "src/types/search";
 import useSelectedCafeStore from "@store/useSelectedCafeStore";
-import { searchApi } from "@api/search";
-import { useCafeListStore } from "@store/useCafeListStore";
 
 const Map = ({
   mapId = "map",
   initialCenter = INITIAL_CENTER,
   initialZoom = INITIAL_ZOOM,
-  query,
+  cafes,
 }: MapProps) => {
   const mapRef = useRef<HTMLDivElement | null>(null);
   const { initializeMap, addMarker } = useMap();
   const [isMapLoaded, setIsMapLoaded] = useState(false);
 
   // cafe 정보
-  const cafes = useCafeListStore((state) => state.cafes);
-  const setCafes = useCafeListStore((state) => state.setCafes);
+  // const cafes = useCafeListStore((state) => state.cafes);
+  // const setCafes = useCafeListStore((state) => state.setCafes);
 
   // 선택된 카페 정보 + 이전 지도 중심
   const {
@@ -90,29 +88,32 @@ const Map = ({
     setShowBottomSheet,
   ]);
 
-  // 카페 목록 api 호출
-  useEffect(() => {
-    const fetchCafes = async () => {
-      try {
-        const cafesData = await searchApi.getCafes("카페", false);
-        console.log("cafesData: ", cafesData);
-        setCafes(cafesData);
-      } catch (error) {
-        console.error(error);
-      }
-    };
+  // // 카페 목록 api 호출
+  // useEffect(() => {
+  //   const fetchCafes = async () => {
+  //     try {
+  //       const cafesData = await searchApi.getCafes(query, false);
+  //       console.log("cafesData: ", cafesData);
+  //       setCafes(cafesData);
+  //     } catch (error) {
+  //       console.error(error);
+  //     }
+  //   };
 
-    if (isMapLoaded) {
-      fetchCafes();
-    }
-  }, [isMapLoaded, query, setCafes]);
+  //   if (isMapLoaded) {
+  //     fetchCafes();
+  //   }
+  // }, [isMapLoaded, query, setCafes]);
 
   // 마커 찍기
   useEffect(() => {
     if (isMapLoaded) {
       addMarker(cafes, selectedCafeId, (id) => {
         setSelectedCafeId(id);
-        setShowBottomSheet(!!id);
+        if (id) {
+          setShowBottomSheet(true);
+          setIsSheetOpen(false);
+        }
       });
     }
   }, [
