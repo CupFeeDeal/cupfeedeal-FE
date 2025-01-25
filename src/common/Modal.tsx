@@ -63,7 +63,6 @@ const Modal = ({
               <button
                 onClick={() => {
                   onConfirm?.();
-                  onClose();
                 }}
                 className="btn-confirm"
               >

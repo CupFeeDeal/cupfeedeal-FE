@@ -27,9 +27,9 @@ const Card = ({
   showDetails,
   total,
 }: CardProps) => {
-  const [isUseModalOpen, setIsUseModalOpen] = useState(false);
-  const [isFootModalOpen, setIsFootModalOpen] = useState(false);
-  const [isManageModalOpen, setIsManageModalOpen] = useState(false);
+  const [showUseModal, setShowUseModal] = useState(false);
+  const [showFootModal, setShowFootModal] = useState(false);
+  const [showManageModal, setShowManageModal] = useState(false);
 
   const manageModalProps = {
     id,
@@ -43,10 +43,10 @@ const Card = ({
   };
 
   // 사용 완료 -> 발자국 모달 바꾸기
-  const switchModal = (showFootMoadal: boolean) => {
-    setIsUseModalOpen(false);
-    if (showFootMoadal) {
-      setIsFootModalOpen(true);
+  const switchModal = (showFootModal: boolean) => {
+    setShowUseModal(false);
+    if (showFootModal) {
+      setShowFootModal(true);
     }
   };
 
@@ -54,13 +54,13 @@ const Card = ({
 
   return (
     <div
-      className={`${CARD_STYLES.common.cardContainer} ${backgroundClass} cursor-pointer `}
+      className={`${CARD_STYLES.common.cardContainer} ${backgroundClass} cursor-pointer`}
     >
       <p className="Headline_3 text-white inline-flex gap-3 items-center mb-1">
         {name}
         <Setting
           onClick={() => {
-            setIsManageModalOpen(true);
+            setShowManageModal(true);
           }}
         />
       </p>
@@ -79,7 +79,7 @@ const Card = ({
             <div
               onClick={(e) => {
                 e.stopPropagation();
-                setIsUseModalOpen(true);
+                setShowUseModal(true);
               }}
               className="absolute top-6 right-6 flex flex-col justify-center items-center py-4 px-3 rounded-xl w-fit bg-white cursor-pointer"
             >
@@ -95,24 +95,24 @@ const Card = ({
 
           {/* 구독권 사용 모달 */}
           <UseCardModal
-            isOpen={isUseModalOpen}
-            onClose={() => setIsUseModalOpen(false)}
+            isOpen={showUseModal}
+            onClose={() => setShowUseModal(false)}
             cafe={name}
             onComplete={switchModal}
           />
 
           {/* 구독권 관리 모달 */}
           <ManageModal
-            isOpen={isManageModalOpen}
-            onClose={() => setIsManageModalOpen(false)}
+            isOpen={showManageModal}
+            onClose={() => setShowManageModal(false)}
             cafe={name}
             {...manageModalProps}
           />
 
           {/* 발자국 도장 모달 */}
           <FootModal
-            isOpen={isFootModalOpen}
-            onClose={() => setIsFootModalOpen(false)}
+            isOpen={showFootModal}
+            onClose={() => setShowFootModal(false)}
             cafe={name}
           />
         </>

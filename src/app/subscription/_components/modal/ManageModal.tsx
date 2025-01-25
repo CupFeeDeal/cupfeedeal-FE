@@ -1,12 +1,13 @@
 "use client";
 
+import Link from "next/link";
 import { useState } from "react";
 import Modal from "@common/Modal";
 import { ManageModalProps } from "src/types/modal";
 import TopBar from "@common/TopBar";
 import { HalfCat } from "@assets/icons";
 import { formatDate } from "@app/subscription/_utils/FormatDate";
-import Link from "next/link";
+import Info from "@app/payment/_components/Info";
 import CancelBfModal from "./CancelBfModal";
 import CancelAfModal from "./CancelAfModal";
 
@@ -65,12 +66,7 @@ const ManageModal = ({
 
         {/* 구독 정보 */}
         <div className="flex-1 overflow-auto p-5 space-y-4">
-          <div className="w-full py-5 px-6 bg-gradient-to-r from-[#9596FD] to-[#D2A7E1] text-white rounded-2xl space-y-1">
-            <h3 className="Headline_3">{cafe}</h3>
-            <h5 className="Body_1_bold">
-              {menu} ∙ {period}주권 ∙ ₩{price.toLocaleString()}
-            </h5>
-          </div>
+          <Info {...{ cafe_name: cafe, menu, period, price }} />
 
           {/* 방문수 및 만료일 */}
           <div className="flex flex-col px-4 rounded-2xl bg-Pale_Blue_2 items-center">
@@ -86,9 +82,9 @@ const ManageModal = ({
           </div>
 
           {/* 버튼 */}
-          <div className="pt-8 space-y-4">
+          <div className="pt-4 space-y-4">
             <Link
-              href={`/payment/extend?cafe=${id}`}
+              href={`/payment?type=extend&id=${id}`}
               className="btn-confirm block text-center"
             >
               구독 연장하기
