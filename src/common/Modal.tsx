@@ -33,7 +33,7 @@ const Modal = ({
       <div
         className={`relative bg-white overflow-visible  ${
           fullPage
-            ? "h-[calc(var(--vh)*100)] flex flex-col w-full"
+            ? "h-[100dvh] flex flex-col w-full"
             : "rounded-[0.625rem] p-4 w-[90%]"
         }`}
       >
