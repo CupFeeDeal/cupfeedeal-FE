@@ -17,32 +17,20 @@ const PaymentPage = async ({ searchParams }: PaymentPageProps) => {
 
   // MOCK_DATA로 진행
 
-  const data = MOCK_PAYMENT_DATA;
+  const data = {
+    ...MOCK_PAYMENT_DATA,
+    type,
+  };
   if (type === "extend" && !data.userSubscriptionInfo) {
     redirect("/home");
   }
 
   return (
-    <PaymentWrapper
-      type={type}
-      cafe_name={data.cafe_name}
-      userSubscriptionInfo={
-        type === "extend" ? data.userSubscriptionInfo : null
-      }
-    >
-      {type === "extend" ? (
-        <ExtendClient
-          cafe_name={data.cafe_name}
-          subscriptions={data.cafe_subscriptions}
-          userSubscriptionInfo={data.userSubscriptionInfo!}
-        />
+    <PaymentWrapper data={data} type={data.type}>
+      {data.type === "extend" ? (
+        <ExtendClient data={data} type={data.type} />
       ) : (
-        <NewClient
-          cafe_name={data.cafe_name}
-          subscriptions={data.cafe_subscriptions}
-          menus={data.menus}
-          periods={data.periods}
-        />
+        <NewClient data={data} type={data.type} />
       )}
     </PaymentWrapper>
   );

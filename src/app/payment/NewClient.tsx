@@ -3,22 +3,11 @@
 import { useContext } from "react";
 import OptionBtn from "./_components/OptionBtn";
 import Calendar from "./_components/Calendar";
-import { CafeSubscription } from "src/types/payment";
+import { PaymentProps } from "src/types/payment";
 import { PaymentContext } from "./PaymentWrapper";
 
-interface NewClientProps {
-  cafe_name: string;
-  menus: string[];
-  periods: number[];
-  subscriptions: CafeSubscription[];
-}
-
-const NewClient = ({
-  cafe_name,
-  subscriptions,
-  menus,
-  periods,
-}: NewClientProps) => {
+const NewClient = ({ data }: PaymentProps) => {
+  const { cafe_name, cafe_subscriptions, menus, periods } = data;
   const context = useContext(PaymentContext);
   if (!context) return null;
 
@@ -56,7 +45,7 @@ const NewClient = ({
       <section>
         <StepHeader step={1} title="구독권을 선택하세요." />
         <OptionBtn
-          subscriptions={subscriptions}
+          subscriptions={cafe_subscriptions}
           isExtension={false}
           selectedSubscription={selectedSubscription}
           onSelect={handleSubscriptionChange}

@@ -66,7 +66,7 @@ const ManageModal = ({
 
         {/* 구독 정보 */}
         <div className="flex-1 overflow-auto p-5 space-y-4">
-          <Info {...{ cafe, menu, period, price }} />
+          <Info {...{ cafe_name: cafe, menu, period, price }} />
 
           {/* 방문수 및 만료일 */}
           <div className="flex flex-col px-4 rounded-2xl bg-Pale_Blue_2 items-center">

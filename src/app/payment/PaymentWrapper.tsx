@@ -1,45 +1,30 @@
 "use client";
 
-import { createContext, useState, useEffect } from "react";
+import { createContext, useState, useEffect, ReactNode } from "react";
 import { useRouter } from "next/navigation";
 import TopBar from "@common/TopBar";
-import { CafeSubscription, UserSubscriptionInfo } from "src/types/payment";
+import {
+  PaymentProps,
+  CafeSubscription,
+  PaymentContextType,
+} from "src/types/payment";
 import ExtendAfModal from "./_components/modal/ExtendAfModal";
 import NewAfModal from "./_components/modal/NewAfModal";
-
-interface PaymentWrapperProps {
-  children: React.ReactNode;
-  type: "extend" | "new";
-  cafe_name: string;
-  userSubscriptionInfo?: UserSubscriptionInfo | null;
-}
-
-interface PaymentContextType {
-  selectedSubscription: CafeSubscription | null;
-  handleSubscriptionChange: (sub: CafeSubscription | null) => void;
-  startDate: Date | null;
-  endDate: Date | null;
-  handleDateChange: (date: Date | null) => void;
-}
 
 export const PaymentContext = createContext<PaymentContextType | null>(null);
 
 const PaymentWrapper = ({
-  children,
+  data,
   type,
-  cafe_name,
-  userSubscriptionInfo,
-}: PaymentWrapperProps) => {
+  children,
+}: PaymentProps & { children: ReactNode }) => {
   const router = useRouter();
+  const { userSubscriptionInfo, cafe_name } = data;
 
   // 초기 startDate 세팅: 연장일 경우 만료일 다음날로 설정
   const initialStartDate =
-    type === "extend"
-      ? (() => {
-          const end = new Date(userSubscriptionInfo!.end);
-          end.setDate(end.getDate());
-          return end;
-        })()
+    type === "extend" && userSubscriptionInfo
+      ? new Date(userSubscriptionInfo.end)
       : null;
 
   const [selectedSubscription, setSelectedSubscription] =

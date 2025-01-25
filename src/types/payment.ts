@@ -1,25 +1,56 @@
-export interface CafeSubscription {
-  subscription_id: number;
+// 공통되는 기본 타입
+export interface BasicSubscription {
+  cafe_name?: string;
   menu: string;
   period: number;
   price: number;
 }
 
-export interface UserSubscriptionInfo {
+// 카페 구독권 정보
+export interface CafeSubscription extends BasicSubscription {
+  subscription_id: number;
+}
+
+// 유저 구독권 정보
+export interface UserSubscription extends BasicSubscription {
   user_subscription_id: number;
-  menu: string;
-  period: number;
-  price: number;
   end: string;
 }
 
+// 호출 데이터
 export interface PaymentResponse {
   cafe_id: number;
   cafe_name: string;
   menus: string[];
   periods: number[];
-  userSubscriptionInfo: UserSubscriptionInfo | null;
-  cafe_subscriptions: CafeSubscription[];
+  userSubscriptionInfo: {
+    user_subscription_id: number;
+    menu: string;
+    period: number;
+    price: number;
+    end: string;
+  } | null;
+  cafe_subscriptions: Array<{
+    subscription_id: number;
+    menu: string;
+    period: number;
+    price: number;
+  }>;
+}
+
+// 실질적으로 props에서 사용용
+export type PaymentProps = {
+  data: PaymentResponse;
+  type: "extend" | "new";
+};
+
+// wrapper에서 감싸주는 context 타입
+export interface PaymentContextType {
+  selectedSubscription: CafeSubscription | null;
+  handleSubscriptionChange: (sub: CafeSubscription | null) => void;
+  startDate: Date | null;
+  endDate: Date | null;
+  handleDateChange: (date: Date | null) => void;
 }
 
 export const MOCK_PAYMENT_DATA: PaymentResponse = {
