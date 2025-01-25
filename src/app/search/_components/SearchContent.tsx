@@ -21,13 +21,14 @@ const SearchContent = () => {
   const setCafes = useCafeListStore((state) => state.setCafes);
   const { setSelectedCafeId, setShowBottomSheet } = useSelectedCafeStore();
 
+  // 쿼리에 id값이 담겨 있을 경우, 해당하는 카페 select
   useEffect(() => {
     const id = searchParams.get("id");
     if (id) {
       setSelectedCafeId(Number(id));
       setShowBottomSheet(true);
     }
-  }, [searchParams, setSelectedCafeId, setShowBottomSheet]);
+  }, [setSelectedCafeId, setShowBottomSheet, searchParams.toString()]);
 
   // 카페 리스트 api 호출
   const fetchCafes = async (query: string, like: boolean) => {

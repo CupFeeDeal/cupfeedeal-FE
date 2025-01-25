@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { homeApi } from "@api/home";
 import HomeTap from "@common/HomeTap";
 import Footer from "@common/Footer";
 import { Map } from "@assets/icons";
@@ -8,65 +9,17 @@ import HomeBanner from "./_components/HomeBanner";
 import RecommendCard from "./_components/RecommendCard";
 import NewCard from "./_components/NewCard";
 
-const MOCK_RECOMMEND_CAFES = [
-  {
-    id: 1,
-    img: "",
-    name: "카페이름카페이름카페이름카페이름",
-    location: "텍스트텍스트텍스트텍스트텍스트텍스트텍스트텍스트텍스트텍스트",
-    price: 25000,
-  },
-  {
-    id: 2,
-    img: "",
-    name: "카페이름카페이름카페이름카페이름",
-    location: "텍스트텍스트텍스트텍스트텍스트텍스트텍스트텍스트텍스트텍스트",
-    price: 25000,
-  },
-  {
-    id: 3,
-    img: "",
-    name: "카페이름카페이름카페이름카페이름",
-    location: "텍스트텍스트텍스트텍스트텍스트텍스트텍스트텍스트텍스트텍스트",
-    price: 25000,
-  },
-  {
-    id: 4,
-    img: "",
-    name: "카페이름카페이름카페이름카페이름",
-    location: "텍스트텍스트텍스트텍스트텍스트텍스트텍스트텍스트텍스트텍스트",
-    price: 25000,
-  },
-];
+const HomePage = async () => {
+  // const bannerRequest = homeApi.getBannerInfo();
+  const recommendRequest = homeApi.getRecommendCafes();
+  const newRequest = homeApi.getNewCafes();
 
-const MOCK_NEW_CAFES = [
-  {
-    id: 1,
-    img: "",
-    name: "카페이름카페이름카페이름카페이름",
-    location: "텍스트텍스트텍스트텍스트텍스트텍스트텍스트텍스트텍스트텍스트",
-  },
-  {
-    id: 2,
-    img: "",
-    name: "카페이름카페이름카페이름카페이름",
-    location: "텍스트텍스트텍스트텍스트텍스트텍스트텍스트텍스트텍스트텍스트",
-  },
-  {
-    id: 3,
-    img: "",
-    name: "카페이름카페이름카페이름카페이름",
-    location: "텍스트텍스트텍스트텍스트텍스트텍스트텍스트텍스트텍스트텍스트",
-  },
-  {
-    id: 4,
-    img: "",
-    name: "카페이름카페이름카페이름카페이름",
-    location: "텍스트텍스트텍스트텍스트텍스트텍스트텍스트텍스트텍스트텍스트",
-  },
-];
+  const [recommendCafes, newCafes] = [
+    // (await bannerRequest).result,
+    (await recommendRequest).result,
+    (await newRequest).result,
+  ];
 
-const HomePage = () => {
   return (
     <div className="flex flex-col h-full">
       <HomeTap />
@@ -82,15 +35,15 @@ const HomePage = () => {
 
         {/* 추천 카페 */}
         <Section title="이런 카페도 있어요!" scroll>
-          {MOCK_RECOMMEND_CAFES.map((cafe) => (
-            <RecommendCard key={cafe.id} {...cafe} />
+          {recommendCafes.map((cafe) => (
+            <RecommendCard key={cafe.cafe_id} {...cafe} />
           ))}
         </Section>
 
         {/* 신상 카페 */}
         <Section title="새로 오픈했어요!" scroll>
-          {MOCK_NEW_CAFES.map((cafe) => (
-            <NewCard key={cafe.id} {...cafe} />
+          {newCafes.map((cafe) => (
+            <NewCard key={cafe.cafe_id} {...cafe} />
           ))}
         </Section>
 
