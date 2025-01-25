@@ -110,7 +110,10 @@ const Map = ({
     if (isMapLoaded) {
       addMarker(cafes, selectedCafeId, (id) => {
         setSelectedCafeId(id);
-        setShowBottomSheet(!!id);
+        if (id) {
+          setShowBottomSheet(true);
+          setIsSheetOpen(false);
+        }
       });
     }
   }, [
