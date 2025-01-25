@@ -1,3 +1,4 @@
+import { Cupcat } from "src/types/mypage";
 import { privateApi } from "./client";
 
 export const userApi = {
@@ -36,6 +37,14 @@ export const userApi = {
         status: string;
       }[]
     >(`/api/v1/userSubscription/manage`);
+    return response.result;
+  },
+
+  // 마이페이지 지나간 컵캣
+  getCupcats: async () => {
+    const response = await privateApi.get<{ level: number; cupcats: Cupcat[] }>(
+      `/api/v1/users/cupcats`
+    );
     return response.result;
   },
 };

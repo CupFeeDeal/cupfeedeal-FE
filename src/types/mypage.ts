@@ -9,3 +9,8 @@ export interface HistoryItem {
   end: string;
   isAvailable: boolean;
 }
+
+export interface Cupcat {
+  cafe_name: string;
+  cupcat_img_url: string;
+}
