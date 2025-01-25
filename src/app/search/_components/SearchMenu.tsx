@@ -5,18 +5,17 @@ import useMap from "./useMap";
 import { useRouter } from "next/navigation";
 import { token } from "@api/client";
 import LoginModal from "./modal/LoginModal";
-import { searchApi } from "@api/search";
-import { useCafeListStore } from "@store/useCafeListStore";
 
 const defaultBtnStyle = `w-11 h-11 flex justify-center items-center bg-white rounded-[1.375rem] shadow-[0_0_11px_0_rgba(153,153,159,0.26)] cursor-pointer`;
 const clickedBtnStyle = `w-11 h-11 flex justify-center items-center bg-Main_Blue rounded-[1.375rem] shadow-[0_0_11px_0_rgba(153,153,159,0.26)] cursor-pointer`;
 
-const SearchMenu = () => {
+interface SearchMenuProps {
+  isLikeOnly: boolean;
+  toggleLike: () => void;
+}
+const SearchMenu: React.FC<SearchMenuProps> = ({ isLikeOnly, toggleLike }) => {
   const { setCurrentLocation } = useMap();
   const router = useRouter();
-  const setCafes = useCafeListStore((state) => state.setCafes);
-
-  const [showHeart, setShowHeart] = useState(false);
   const [showLoginModal, setShowLoginModal] = useState(false);
 
   const [accessToken, setAccessToken] = useState<string | null | undefined>(
@@ -34,14 +33,7 @@ const SearchMenu = () => {
       return;
     }
 
-    try {
-      const isLikeOnly = !showHeart;
-      setShowHeart(isLikeOnly);
-      const cafesData = await searchApi.getCafes("", isLikeOnly);
-      setCafes(cafesData);
-    } catch (error) {
-      console.error(error);
-    }
+    toggleLike();
   };
 
   const handleCurrentLocation = () => {
@@ -70,15 +62,16 @@ const SearchMenu = () => {
           가까운 카페
         </span>
         <span className="absolute z-10 top-[4.75rem] right-5 flex flex-col gap-4">
-          {showHeart ? (
-            <div className={clickedBtnStyle} onClick={handleClickHeart}>
+          <div
+            className={isLikeOnly ? clickedBtnStyle : defaultBtnStyle}
+            onClick={handleClickHeart}
+          >
+            {isLikeOnly ? (
               <FullHeart width={24} height={24} />
-            </div>
-          ) : (
-            <div className={defaultBtnStyle} onClick={handleClickHeart}>
+            ) : (
               <EmptyHeart width={24} height={24} />
-            </div>
-          )}
+            )}
+          </div>
           <div className={defaultBtnStyle} onClick={handleCurrentLocation}>
             <Crosshair width={24} height={24} />
           </div>
