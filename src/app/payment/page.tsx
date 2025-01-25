@@ -5,7 +5,7 @@ import NewClient from "./_clients/NewClient";
 import PaymentWrapper from "./PaymentWrapper";
 
 interface PaymentPageProps {
-  searchParams: { id?: string; type?: "extend" | "new" };
+  searchParams: Promise<{ id?: string; type?: "extend" | "new" }>;
 }
 
 const PaymentPage = async ({ searchParams }: PaymentPageProps) => {

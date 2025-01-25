@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { CafeSubscription, CalendarProps, Day } from "src/types/payment";
+import { CalendarProps, Day } from "src/types/payment";
 
 export const useCalendar = ({
   isExtension,
@@ -66,7 +66,7 @@ export const useCalendar = ({
     if (endDate && isExtension && month.getMonth() !== endDate.getMonth()) {
       setMonth(new Date(endDate));
     }
-  }, [endDate, isExtension]);
+  }, [endDate, isExtension, month]);
 
   // 달력 이동 2 : 헤더에서 < > 클릭
   const moveMonth = (direction: "prev" | "next") => {

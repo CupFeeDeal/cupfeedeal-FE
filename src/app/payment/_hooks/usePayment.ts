@@ -17,7 +17,7 @@ export const usePayment = (initialStartDate: Date | null) => {
     } else {
       setEndDate(null);
     }
-  }, [selectedSubscription?.period, startDate]);
+  }, [selectedSubscription, startDate]);
 
   // startDate 변경될 때마다 endDate 업데이트
   const handleDateChange = (date: Date | null) => {
