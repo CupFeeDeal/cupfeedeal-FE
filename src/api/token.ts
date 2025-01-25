@@ -1,18 +1,21 @@
 export const token = {
-  get: () => {
-    // 서버일 때
+  // 서버 컴포넌트용 비동기 버전
+  get: async () => {
     if (typeof window === "undefined") {
       const { cookies } = require("next/headers");
-      const cookieStore = cookies();
+      const cookieStore = await cookies();
       return cookieStore.get("accessToken")?.value;
-
-      // 클라이언트일 때
-    } else {
-      return document.cookie
-        .split("; ")
-        .find((row) => row.startsWith("accessToken="))
-        ?.split("=")[1];
     }
+    return token.sync();
+  },
+
+  // 인터셉터용 동기 버전
+  sync: () => {
+    if (typeof window === "undefined") return null;
+    return document.cookie
+      .split("; ")
+      .find((row) => row.startsWith("accessToken="))
+      ?.split("=")[1];
   },
 
   // 클라이언트애서만 가능

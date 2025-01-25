@@ -25,7 +25,7 @@ const privateClient = axios.create({
 // 토큰O 요청 - interceptor에 토큰 넣기
 privateClient.interceptors.request.use(
   (config) => {
-    const accessToken = token.get();
+    const accessToken = token.sync();
     if (accessToken) {
       config.headers.Authorization = `Bearer ${accessToken}`;
     }

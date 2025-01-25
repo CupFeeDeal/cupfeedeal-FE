@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { homeApi } from "@api/home";
+import { token } from "@api/token";
 import HomeTap from "@common/HomeTap";
 import Footer from "@common/Footer";
 import { Map } from "@assets/icons";
@@ -10,15 +11,14 @@ import RecommendCard from "./_components/RecommendCard";
 import NewCard from "./_components/NewCard";
 
 const HomePage = async () => {
-  const bannerRequest = homeApi.getBannerInfo();
-  const recommendRequest = homeApi.getRecommendCafes();
-  const newRequest = homeApi.getNewCafes();
+  const [recommendCafes, newCafes] = await Promise.all([
+    homeApi.getRecommendCafes(),
+    homeApi.getNewCafes(),
+  ]);
 
-  const [bannerInfo, recommendCafes, newCafes] = [
-    (await bannerRequest).result,
-    (await recommendRequest).result,
-    (await newRequest).result,
-  ];
+  if (await token.get()) {
+    const bannerInfo = (await homeApi.getBannerInfo()).result;
+  }
 
   return (
     <div className="flex flex-col h-full">
@@ -35,14 +35,14 @@ const HomePage = async () => {
 
         {/* 추천 카페 */}
         <Section title="이런 카페도 있어요!" scroll>
-          {recommendCafes.map((cafe) => (
+          {recommendCafes.result.map((cafe) => (
             <RecommendCard key={cafe.cafe_id} {...cafe} />
           ))}
         </Section>
 
         {/* 신상 카페 */}
         <Section title="새로 오픈했어요!" scroll>
-          {newCafes.map((cafe) => (
+          {newCafes.result.map((cafe) => (
             <NewCard key={cafe.cafe_id} {...cafe} />
           ))}
         </Section>
