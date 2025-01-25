@@ -4,13 +4,13 @@ import { useEffect, useState } from "react";
 import SearchBar from "./SearchBar";
 import SearchMenu from "./SearchMenu";
 import Map from "./Map";
-import useSelectedCafeStore from "@store/useSelectedCafeStore";
-import BottomSheet from "./(detail)/BottomSheet";
+// import useSelectedCafeStore from "@store/useSelectedCafeStore";
+// import BottomSheet from "./(detail)/BottomSheet";
 import { searchApi } from "@api/search";
 import { useCafeListStore } from "@store/useCafeListStore";
 
 const SearchContent = () => {
-  const { showBottomSheet } = useSelectedCafeStore();
+  // const { showBottomSheet } = useSelectedCafeStore();
   //const [searchKey, setSearchKey] = useState(""); // 검색버튼 눌렀을 때만 트리거되도록 하는 키
   const [query, setQuery] = useState("");
   const [isLikeOnly, setIsLikeOnly] = useState(false);
@@ -46,11 +46,6 @@ const SearchContent = () => {
       <SearchBar onSearch={handleSearch} />
       <SearchMenu isLikeOnly={isLikeOnly} toggleLike={toggleLike} />
       <Map cafes={cafes} />
-      {showBottomSheet && (
-        <div>
-          <BottomSheet />
-        </div>
-      )}
     </div>
   );
 };
