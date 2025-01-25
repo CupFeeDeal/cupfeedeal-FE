@@ -110,7 +110,12 @@ const Map = ({
     if (isMapLoaded) {
       addMarker(cafes, selectedCafeId, (id) => {
         setSelectedCafeId(id);
-        setShowBottomSheet(!!id);
+        // setShowBottomSheet(!!id);
+        if (id) {
+          // 마커를 클릭하면 바텀시트 "부분 펼침"으로 열기
+          setShowBottomSheet(true);
+          setIsSheetOpen(false);
+        }
       });
     }
   }, [

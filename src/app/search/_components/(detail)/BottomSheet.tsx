@@ -43,12 +43,21 @@ const BottomSheet = () => {
 
   return (
     <motion.div
-      className={`h-${height} flex flex-col absolute top-[calc(100%-253px)] right-0 left-0 z-30 transition-transform duration-[650ms] ease-out`}
+      className={`
+      fixed top-0 left-0 right-0 bottom-0
+      z-30 
+      flex flex-col
+      transition-transform duration-[450ms] ease-out
+      bg-white
+    `}
+      style={{
+        transform: "translateY(100%)",
+      }}
       ref={sheet}
       // style={{ transform: `translateY(${isSheetOpen ? MIN_Y - MAX_Y : 0}px)` }}
     >
       <BottomSheetHeader />
-      <div ref={content} className="overflow-auto overscroll-auto">
+      <div ref={content} className="flex-1 overflow-auto">
         <BottomSheetContent cafeInfo={cafe} />
       </div>
     </motion.div>

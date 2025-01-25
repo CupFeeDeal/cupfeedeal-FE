@@ -46,11 +46,12 @@ const SearchContent = () => {
       <SearchBar onSearch={handleSearch} />
       <SearchMenu isLikeOnly={isLikeOnly} toggleLike={toggleLike} />
       <Map cafes={cafes} />
-      {showBottomSheet && (
+      {/* {showBottomSheet && (
         <div className="relative w-full h-full">
           <BottomSheet />
         </div>
-      )}
+      )} */}
+      <BottomSheet />
     </div>
   );
 };
