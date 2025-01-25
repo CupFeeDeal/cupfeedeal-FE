@@ -38,7 +38,7 @@ export interface PaymentResponse {
   }>;
 }
 
-// 실질적으로 props에서 사용용
+// 실질적으로 props에서 사용
 export type PaymentProps = {
   data: PaymentResponse;
   type: "extend" | "new";
