@@ -53,6 +53,21 @@ export interface PaymentContextType {
   handleDateChange: (date: Date | null) => void;
 }
 
+// 달력에서 사용
+export interface CalendarProps {
+  isExtension: boolean;
+  startDate: Date | null;
+  endDate: Date | null;
+  selectedSubscription: CafeSubscription | null;
+  onDateSelect?: (date: Date) => void;
+}
+
+export interface Day {
+  date: Date;
+  isActive: boolean;
+  isCurrentMonth: boolean;
+}
+
 export const MOCK_PAYMENT_DATA: PaymentResponse = {
   cafe_id: 1,
   cafe_name: "지구커피",

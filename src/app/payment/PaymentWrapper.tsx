@@ -1,15 +1,12 @@
 "use client";
 
-import { createContext, useState, useEffect, ReactNode } from "react";
+import { createContext, ReactNode } from "react";
 import { useRouter } from "next/navigation";
 import TopBar from "@common/TopBar";
-import {
-  PaymentProps,
-  CafeSubscription,
-  PaymentContextType,
-} from "src/types/payment";
+import { PaymentProps, PaymentContextType } from "src/types/payment";
 import ExtendAfModal from "./_components/modal/ExtendAfModal";
 import NewAfModal from "./_components/modal/NewAfModal";
+import { usePayment } from "./_hooks/usePayment";
 
 export const PaymentContext = createContext<PaymentContextType | null>(null);
 
@@ -21,48 +18,20 @@ const PaymentWrapper = ({
   const router = useRouter();
   const { userSubscriptionInfo, cafe_name } = data;
 
-  // 초기 startDate 세팅: 연장일 경우 만료일 다음날로 설정
   const initialStartDate =
     type === "extend" && userSubscriptionInfo
       ? new Date(userSubscriptionInfo.end)
       : null;
 
-  const [selectedSubscription, setSelectedSubscription] =
-    useState<CafeSubscription | null>(null);
-  const [startDate, setStartDate] = useState<Date | null>(initialStartDate);
-  const [endDate, setEndDate] = useState<Date | null>(null);
-  const [showModal, setShowModal] = useState(false);
-
-  // subscription이 변경될 때마다 endDate 업데이트
-  useEffect(() => {
-    if (startDate && selectedSubscription) {
-      const end = new Date(startDate);
-      end.setDate(end.getDate() + selectedSubscription.period * 7);
-      setEndDate(end);
-    } else {
-      setEndDate(null);
-    }
-  }, [selectedSubscription?.period, startDate]);
-
-  const handleSubmit = async () => {
-    try {
-      // API 나중에 연결하자...
-
-      setShowModal(true);
-    } catch (error) {
-      // 구독 실패 모달..?
-      console.error("구독 실패: ", error);
-    }
-  };
-
-  const handleDateChange = (date: Date | null) => {
-    setStartDate(date);
-    if (date && selectedSubscription) {
-      const end = new Date(date);
-      end.setDate(end.getDate() + selectedSubscription.period * 7);
-      setEndDate(end);
-    }
-  };
+  const {
+    selectedSubscription,
+    setSelectedSubscription,
+    startDate,
+    endDate,
+    showModal,
+    handleSubmit,
+    handleDateChange,
+  } = usePayment(initialStartDate);
 
   return (
     <PaymentContext.Provider

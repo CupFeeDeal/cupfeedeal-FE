@@ -1,7 +1,7 @@
 import { redirect } from "next/navigation";
 import { MOCK_PAYMENT_DATA } from "src/types/payment";
-import ExtendClient from "./ExtendClient";
-import NewClient from "./NewClient";
+import ExtendClient from "./_clients/ExtendClient";
+import NewClient from "./_clients/NewClient";
 import PaymentWrapper from "./PaymentWrapper";
 
 interface PaymentPageProps {

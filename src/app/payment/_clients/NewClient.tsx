@@ -1,10 +1,10 @@
 "use client";
 
 import { useContext } from "react";
-import OptionBtn from "./_components/OptionBtn";
-import Calendar from "./_components/Calendar";
+import OptionBtn from "../_components/OptionBtn";
+import Calendar from "../_components/Calendar";
 import { PaymentProps } from "src/types/payment";
-import { PaymentContext } from "./PaymentWrapper";
+import { PaymentContext } from "../PaymentWrapper";
 
 const NewClient = ({ data }: PaymentProps) => {
   const { cafe_name, cafe_subscriptions, menus, periods } = data;

@@ -1,10 +1,10 @@
 "use client";
 
 import { useContext } from "react";
-import { PaymentContext } from "./PaymentWrapper";
-import Info from "./_components/Info";
-import OptionBtn from "./_components/OptionBtn";
-import Calendar from "./_components/Calendar";
+import { PaymentContext } from "../PaymentWrapper";
+import Info from "../_components/Info";
+import OptionBtn from "../_components/OptionBtn";
+import Calendar from "../_components/Calendar";
 import { PaymentProps } from "src/types/payment";
 
 const ExtendClient = ({ data }: PaymentProps) => {
