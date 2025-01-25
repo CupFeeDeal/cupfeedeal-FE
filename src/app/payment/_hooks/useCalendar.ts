@@ -66,7 +66,7 @@ export const useCalendar = ({
     if (endDate && isExtension && month.getMonth() !== endDate.getMonth()) {
       setMonth(new Date(endDate));
     }
-  }, [endDate, isExtension, month]);
+  }, [endDate, isExtension]);
 
   // 달력 이동 2 : 헤더에서 < > 클릭
   const moveMonth = (direction: "prev" | "next") => {
