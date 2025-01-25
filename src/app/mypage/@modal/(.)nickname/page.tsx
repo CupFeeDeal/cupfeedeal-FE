@@ -2,11 +2,30 @@
 
 import { userApi } from "@api/user";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function Nickname() {
   const [count, setCount] = useState(0);
   const [nickname, setNickname] = useState("");
+  const router = useRouter();
+
+  const [isDisabled, setIsDisabled] = useState(false);
+
+  useEffect(() => {
+    const disabledTimestamp = localStorage.getItem("nicknameDisabled");
+    if (disabledTimestamp) {
+      const remainingTime =
+        24 * 60 * 60 * 1000 - (Date.now() - Number(disabledTimestamp));
+      if (remainingTime > 0) {
+        setIsDisabled(true);
+        setTimeout(() => {
+          setIsDisabled(false);
+          localStorage.removeItem("nicknameDisabled");
+        }, remainingTime);
+      }
+    }
+  }, []);
+
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const inputValue = e.target.value;
 
@@ -19,13 +38,21 @@ export default function Nickname() {
   const handleChangeNickname = async () => {
     try {
       await userApi.patchNickname(nickname);
+
+      localStorage.setItem("nicknameDisabled", Date.now().toString());
+      setIsDisabled(true);
+
+      setTimeout(() => {
+        setIsDisabled(false);
+        localStorage.removeItem("nicknameDisabled");
+      }, 24 * 60 * 60 * 1000);
+
       router.back();
     } catch (error) {
       console.error(error);
     }
   };
 
-  const router = useRouter();
   const closeModal = () => {
     router.back();
   };
@@ -48,7 +75,6 @@ export default function Nickname() {
             value={nickname}
             onChange={handleInputChange}
           />
-          <div className="text-Dark_Blue Body_2_med">중복확인</div>
         </div>
         <div className="w-full text-Grey-400 Caption_med flex flex-col items-end px-3 mt-1">
           {count}/10
@@ -65,7 +91,12 @@ export default function Nickname() {
           </button>
           <button
             onClick={handleChangeNickname}
-            className="w-full Body_1_bold py-4 bg-Main_Blue text-white rounded-lg"
+            className={`w-full Body_1_bold py-4 rounded-lg ${
+              isDisabled
+                ? "bg-Grey-300 cursor-not-allowed text-white"
+                : "bg-Main_Blue text-white"
+            }`}
+            disabled={isDisabled}
           >
             변경하기
           </button>
