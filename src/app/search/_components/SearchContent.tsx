@@ -47,7 +47,7 @@ const SearchContent = () => {
       <SearchMenu isLikeOnly={isLikeOnly} toggleLike={toggleLike} />
       <Map cafes={cafes} />
       {showBottomSheet && (
-        <div className="relative w-full h-full">
+        <div>
           <BottomSheet />
         </div>
       )}
