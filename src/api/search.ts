@@ -9,7 +9,7 @@ export const searchApi = {
       url += `search=${encodeURIComponent(query)}&`;
     }
     // 좋아요 params
-    if (like !== undefined) {
+    if (like == true) {
       url += `like=${like}`;
     }
 
