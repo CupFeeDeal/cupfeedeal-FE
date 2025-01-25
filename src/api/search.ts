@@ -18,7 +18,7 @@ export const searchApi = {
   // },
 
   getCafes: async (query?: string, like?: boolean) => {
-    let url = `/api/v1/cafe`;
+    const url = `/api/v1/cafe`;
 
     const params: string[] = [];
 
