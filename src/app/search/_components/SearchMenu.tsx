@@ -36,9 +36,9 @@ const SearchMenu = () => {
 
     try {
       const isLikeOnly = !showHeart;
+      setShowHeart(isLikeOnly);
       const cafesData = await searchApi.getCafes("", isLikeOnly);
       setCafes(cafesData);
-      setShowHeart(isLikeOnly);
     } catch (error) {
       console.error(error);
     }
