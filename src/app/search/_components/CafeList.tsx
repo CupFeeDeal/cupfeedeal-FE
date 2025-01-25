@@ -76,7 +76,7 @@ export default function CafeList() {
 
   return (
     <div className="flex flex-col w-full h-full bg-white pb-4">
-      <div className="h-11 flex items-center pl-5 Body_2_med text-Grey-400 border-b border-b-[var(--Grey400)]">
+      <div className="h-11 py-3 flex items-center pl-5 Body_2_med text-Grey-400 border-b border-b-[#B0B8C1]">
         거리순
       </div>
       {cafeList.map((cafe, index) => (
