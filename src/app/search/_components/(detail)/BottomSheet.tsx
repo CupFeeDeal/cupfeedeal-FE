@@ -41,7 +41,7 @@ const BottomSheet = () => {
       z-30 
       flex flex-col
       transition-transform duration-[450ms] ease-out
-      bg-white
+      bg-white max-w-[440px] mx-auto 
     `}
       style={{
         transform: "translateY(100%)",
