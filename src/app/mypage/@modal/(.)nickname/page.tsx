@@ -1,34 +1,63 @@
 "use client";
-
-import { userApi } from "@api/user";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+
+// api
+import { userApi } from "@api/user";
 
 export default function Nickname() {
-  const [count, setCount] = useState(0);
+  const router = useRouter();
   const [nickname, setNickname] = useState("");
+
+  // 닉네임 입력 핸들러
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const inputValue = e.target.value;
 
     if (inputValue.length <= 10) {
       setNickname(inputValue);
-      setCount(inputValue.length);
     }
   };
 
+  // 닉네임 변경하기
   const handleChangeNickname = async () => {
     try {
       await userApi.patchNickname(nickname);
+
+      localStorage.setItem("nicknameDisabled", Date.now().toString());
+      setIsDisabled(true);
+
+      setTimeout(() => {
+        setIsDisabled(false);
+        localStorage.removeItem("nicknameDisabled");
+      }, 24 * 60 * 60 * 1000);
+
       router.back();
     } catch (error) {
       console.error(error);
     }
   };
 
-  const router = useRouter();
   const closeModal = () => {
     router.back();
   };
+
+  // 24시간 후 변경 가능 제한
+  const [isDisabled, setIsDisabled] = useState(false);
+
+  useEffect(() => {
+    const disabledTimestamp = localStorage.getItem("nicknameDisabled");
+    if (disabledTimestamp) {
+      const remainingTime =
+        24 * 60 * 60 * 1000 - (Date.now() - Number(disabledTimestamp));
+      if (remainingTime > 0) {
+        setIsDisabled(true);
+        setTimeout(() => {
+          setIsDisabled(false);
+          localStorage.removeItem("nicknameDisabled");
+        }, remainingTime);
+      }
+    }
+  }, []);
 
   return (
     <div
@@ -48,10 +77,9 @@ export default function Nickname() {
             value={nickname}
             onChange={handleInputChange}
           />
-          <div className="text-Dark_Blue Body_2_med">중복확인</div>
         </div>
         <div className="w-full text-Grey-400 Caption_med flex flex-col items-end px-3 mt-1">
-          {count}/10
+          {nickname.length}/10
         </div>
         <div className="mt-2 Body_2_med text-Grey-600 mb-8">
           변경 후 24시간 뒤 재변경이 가능해요.
@@ -65,7 +93,12 @@ export default function Nickname() {
           </button>
           <button
             onClick={handleChangeNickname}
-            className="w-full Body_1_bold py-4 bg-Main_Blue text-white rounded-lg"
+            className={`w-full Body_1_bold py-4 rounded-lg ${
+              isDisabled
+                ? "bg-Grey-200 cursor-not-allowed text-Grey-400"
+                : "bg-Main_Blue text-white"
+            }`}
+            disabled={isDisabled}
           >
             변경하기
           </button>

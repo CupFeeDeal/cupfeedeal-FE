@@ -1,14 +1,11 @@
 "use client";
 
 import { useState } from "react";
-import { Back } from "src/assets/icons";
 
-type SelectProps = {
-  options: string[];
-  value: string;
-  placeholder: string;
-  onChange: (value: string) => void;
-};
+// icons
+import { Back } from "src/assets/icons";
+// types
+import { SelectProps } from "src/types/mypage";
 
 export default function Dropdown({
   options,
@@ -19,7 +16,7 @@ export default function Dropdown({
   const [isOpen, setIsOpen] = useState(false);
 
   const handleOptionClick = (option: string) => {
-    onChange(option); // 바로 값 전달
+    onChange(option);
     setIsOpen(false); // 드롭다운 닫기
   };
 

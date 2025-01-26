@@ -1,5 +1,7 @@
 "use client";
-import { ChangeEvent, useState } from "react";
+
+import { useState, ChangeEvent } from "react";
+// icons
 import { Search } from "@assets/icons";
 
 interface SearchBarProps {
@@ -25,7 +27,7 @@ const SearchBar = ({ onSearch }: SearchBarProps) => {
           value={query}
           onChange={handleInputChange}
           className="flex flex-1 Body_2_med"
-          placeholder="마포구 공덕동"
+          placeholder="카페명 또는 주소 검색"
         />
         <Search
           onClick={handleClickSearch}

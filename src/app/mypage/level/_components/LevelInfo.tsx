@@ -16,7 +16,7 @@ const LevelInfo = () => {
       {/*레벨 안내*/}
       <div className="mb-8">
         <div className="Subhead_2_bold mb-2">레벨 안내</div>
-        {levelData.info.map((data) => (
+        {levelData.map((data) => (
           <div
             key={data.lv}
             className={`flex flex-row p-2 gap-7 items-center mb-2 ${

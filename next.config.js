@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    domains: ["search.pstatic.net", "buly.kr"],
+    domains: ["search.pstatic.net", "buly.kr", "i.ibb.co"],
   },
 
   webpack(config) {

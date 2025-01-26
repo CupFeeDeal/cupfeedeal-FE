@@ -1,11 +1,14 @@
 "use client";
-import { Back, MyTabCupcatBg, MyTabHistoryBg } from "@assets/icons";
-import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
+
+// icons
+import { Back, MyTabCupcatBg, MyTabHistoryBg } from "@assets/icons";
 
 const MyTab = () => {
   const router = useRouter();
 
+  // 탭 메뉴
   const menuList = [
     { id: 1, menu: "닉네임 변경", href: "/mypage/nickname" },
     { id: 2, menu: "문의하기", href: "/mypage/ask" },
@@ -13,6 +16,7 @@ const MyTab = () => {
     { id: 4, menu: "회원 탈퇴", href: "/mypage/quit" },
   ];
 
+  // 탭 카드 배경이미지 사이즈 동적 변경
   const [bgWidth, setBgWidth] = useState(169);
 
   useEffect(() => {
@@ -28,10 +32,10 @@ const MyTab = () => {
     };
   }, []);
 
+  // 로그아웃
   const handleLogout = () => {
     document.cookie =
       "accessToken=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT";
-    console.log("로그아웃 성공");
     router.push("/");
   };
 

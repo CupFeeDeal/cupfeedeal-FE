@@ -1,9 +1,8 @@
-"use client";
-
 interface ToggleProps {
   isToggleOn: boolean;
   setIsToggleOn: React.Dispatch<React.SetStateAction<boolean>>;
 }
+
 const Toggle = ({ isToggleOn, setIsToggleOn }: ToggleProps) => {
   return (
     <div

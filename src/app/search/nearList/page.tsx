@@ -1,3 +1,4 @@
+// components
 import TopBar from "@common/TopBar";
 import CafeList from "../_components/CafeList";
 

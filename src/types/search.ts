@@ -1,10 +1,10 @@
 export type NaverMap = naver.maps.Map;
 
+// 지도 props
 export type MapProps = {
   mapId?: string;
   initialCenter?: Coordinates;
   initialZoom?: number;
-  //query?: string;
   cafes: Cafe[];
 };
 
@@ -12,6 +12,7 @@ type Lat = number;
 type Lng = number;
 export type Coordinates = [Lat, Lng];
 
+// 카페 리스트의 개별 카페
 export type Cafe = {
   id: number;
   name: string;
@@ -23,6 +24,7 @@ export type Cafe = {
   is_like: boolean;
 };
 
+// 카페 상세
 export interface CafeDetail {
   id: number;
   name: string;

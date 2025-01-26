@@ -1,17 +1,23 @@
 "use client";
 
-import { FullHeart, EmptyHeart, Instagram } from "@assets/icons";
-import useDistance from "@hooks/useDistance";
-import useSelectedCafeStore from "@store/useSelectedCafeStore";
 import { useEffect, useState } from "react";
-import { CafeDetail } from "src/types/search";
-import useMap from "../useMap";
-import Image from "next/image";
-import { token } from "@api/client";
-import LoginModal from "../modal/LoginModal";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
+
+// components
+import LoginModal from "../modal/LoginModal";
+import useMap from "../useMap";
+// api
 import { likeApi } from "@api/search";
+import { token } from "@api/client";
+// icons
+import { FullHeart, EmptyHeart, Instagram } from "@assets/icons";
+// store & hooks
+import useSelectedCafeStore from "@store/useSelectedCafeStore";
+import useDistance from "@hooks/useDistance";
 import { useCafeListStore } from "@store/useCafeListStore";
+// types
+import { CafeDetail } from "src/types/search";
 
 interface BottomSheetContentProps {
   cafeInfo: CafeDetail | undefined;
@@ -33,10 +39,19 @@ function InfoRow({ label, value }: { label: string; value: string }) {
 const BottomSheetContent = ({ cafeInfo }: BottomSheetContentProps) => {
   const router = useRouter();
   const accessToken = token.get();
-  const [showLoginModal, setShowLoginModal] = useState(false);
+  // 비로그인 시 모달
+  const [showModalforSave, setShowModalforSave] = useState(false);
+  const [showModalforSubs, setShowModalforSubs] = useState(false);
 
   const [isLike, setIsLike] = useState(cafeInfo?.is_like || false);
+
+  // 현위치-카페 거리 관련
+  const [distance, setDistance] = useState<number | null>(null);
+  const { getDistance, formatDistance } = useDistance();
+  const { getCurrentLocation } = useMap();
+
   const { updateCafeLikeStatus } = useCafeListStore();
+  const { isSheetOpen } = useSelectedCafeStore();
 
   useEffect(() => {
     if (cafeInfo) {
@@ -44,9 +59,10 @@ const BottomSheetContent = ({ cafeInfo }: BottomSheetContentProps) => {
     }
   }, [cafeInfo]);
 
+  // 좋아요로 카페 저장
   const handleClickSave = async () => {
     if (!accessToken) {
-      setShowLoginModal(true);
+      setShowModalforSave(true);
       return;
     }
 
@@ -70,11 +86,7 @@ const BottomSheetContent = ({ cafeInfo }: BottomSheetContentProps) => {
     }
   };
 
-  const { isSheetOpen } = useSelectedCafeStore();
-  const { getDistance } = useDistance();
-  const { getCurrentLocation } = useMap();
-  const [distance, setDistance] = useState<number | null>(null);
-
+  // 거리 계산
   useEffect(() => {
     const calculateDistance = async () => {
       if (cafeInfo) {
@@ -82,7 +94,6 @@ const BottomSheetContent = ({ cafeInfo }: BottomSheetContentProps) => {
           // 현재 위치 가져오기
           const [currentLat, currentLng] = await getCurrentLocation();
 
-          // 거리 계산
           const calculatedDistance = getDistance(
             currentLat,
             currentLng,
@@ -99,19 +110,18 @@ const BottomSheetContent = ({ cafeInfo }: BottomSheetContentProps) => {
     calculateDistance();
   }, [cafeInfo, getDistance, getCurrentLocation]);
 
-  const formatDistance = () => {
-    if (distance === null) {
-      return "";
-    }
-    if (distance >= 1000) {
-      return `${(distance / 1000).toFixed(2)}km`;
-    }
-    return `${distance}m`;
-  };
-
   if (!cafeInfo) {
     return <div className="w-full h-full bg-white"></div>;
   }
+
+  // 구독하기
+  const handleSubscription = (id: number) => {
+    if (!accessToken) {
+      setShowModalforSubs(true);
+    } else {
+      router.push(`/payment?type=new&id=${id}`);
+    }
+  };
 
   return (
     <>
@@ -122,7 +132,9 @@ const BottomSheetContent = ({ cafeInfo }: BottomSheetContentProps) => {
       >
         <div className={`w-full px-5 ${isSheetOpen ? "pt-5" : ""}`}>
           {/*거리*/}
-          <div className="Caption_bold text-Grey-500">{formatDistance()}</div>
+          <div className="Caption_bold text-Grey-500 h-4">
+            {formatDistance(distance)}
+          </div>
 
           {/*이름 & 좋아요 여부*/}
           <div className="flex flex-row items-center my-1">
@@ -189,21 +201,31 @@ const BottomSheetContent = ({ cafeInfo }: BottomSheetContentProps) => {
           <div className={`${valueStyle} mt-2`}>{cafeInfo.description}</div>
 
           <div
+            onClick={() => handleSubscription(cafeInfo.id)}
             className={`flex w-full justify-center Body_1_bold rounded-xl px-6 py-[0.88rem] mt-[3.6rem] ${
               cafeInfo.is_subscription
-                ? "bg-Main_Blue text-white cursor-pointer"
-                : "bg-Grey-200 text-Grey-400"
+                ? "bg-Grey-200 text-Grey-400 cursor-not-allowed"
+                : "bg-Main_Blue text-white cursor-pointer"
             }`}
           >
             구독하기
           </div>
         </div>
       </div>
+
+      {/*비로그인 시 모달 */}
       <LoginModal
-        isOpen={showLoginModal}
-        onClose={() => setShowLoginModal(false)}
+        isOpen={showModalforSave}
+        onClose={() => setShowModalforSave(false)}
         onLogin={() => router.push("/")}
         message="즐겨찾기를 등록하려면"
+      />
+
+      <LoginModal
+        isOpen={showModalforSubs}
+        onClose={() => setShowModalforSubs(false)}
+        onLogin={() => router.push("/")}
+        message="구독권 구매는"
       />
     </>
   );
