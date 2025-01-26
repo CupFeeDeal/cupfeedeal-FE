@@ -23,19 +23,19 @@ export default function Quit() {
         <div className="flex justify-center w-full Body_1_bold mb-2">
           모든 구독 기록과 결제 내역이 삭제됩니다.
         </div>
-        <div className="mt-2 Body_1_med text-Grey-700 mb-9 text-center">
+        <div className="mt-1 Body_1_med text-Grey-700 mb-8 text-center">
           현재 구독 중인 구독권이 있다면
           <br />
           환불 규정에 따라 자동 환불 처리됩니다.
         </div>
-        <div className="flex mt-1 w-full px-[6px] mb-[18px] gap-2">
+        <div className="flex mt-1 w-full mb-[18px] gap-2">
           <button
             onClick={closeModal}
-            className="w-full Body_1_bold text-Grey-600 py-4 border border-solid border-Blue_Grey bg-Pale_Blue_2 rounded-lg"
+            className="w-full Body_1_bold text-Grey-600 py-[14px] border border-solid border-Blue_Grey bg-Pale_Blue_2 rounded-lg"
           >
             돌아가기
           </button>
-          <button className="w-full Body_1_bold py-4 bg-Main_Blue text-white rounded-lg">
+          <button className="w-full Body_1_bold py-[14px] bg-Main_Blue text-white rounded-lg">
             탈퇴하기
           </button>
         </div>
