@@ -1,16 +1,16 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
 
 // components
 import LoginModal from "./modal/LoginModal";
 // api
-import { token } from "@api/client";
+import { token } from "@api/token";
 // icons
 import { EmptyHeart, FullHeart, Crosshair } from "@assets/icons";
 // hook
 import useMap from "./useMap";
+import { useRouter } from "next/navigation";
 
 const defaultBtnStyle = `w-11 h-11 flex justify-center items-center bg-white rounded-[1.375rem] shadow-[0_0_11px_0_rgba(153,153,159,0.26)] cursor-pointer`;
 const clickedBtnStyle = `w-11 h-11 flex justify-center items-center bg-Main_Blue rounded-[1.375rem] shadow-[0_0_11px_0_rgba(153,153,159,0.26)] cursor-pointer`;
@@ -29,7 +29,7 @@ const SearchMenu: React.FC<SearchMenuProps> = ({ isLikeOnly, toggleLike }) => {
   );
 
   useEffect(() => {
-    setAccessToken(token.get());
+    setAccessToken(token.sync());
   }, []);
 
   // 좋아요 버튼 눌렀을 때

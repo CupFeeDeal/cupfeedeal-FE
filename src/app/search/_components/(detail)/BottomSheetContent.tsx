@@ -9,7 +9,7 @@ import LoginModal from "../modal/LoginModal";
 import useMap from "../useMap";
 // api
 import { likeApi } from "@api/search";
-import { token } from "@api/client";
+import { token } from "@api/token";
 // icons
 import { FullHeart, EmptyHeart, Instagram } from "@assets/icons";
 // store & hooks

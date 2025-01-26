@@ -10,13 +10,28 @@ import Map from "./Map";
 import { searchApi } from "@api/search";
 // store
 import { useCafeListStore } from "@store/useCafeListStore";
+import useSelectedCafeStore from "@store/useSelectedCafeStore";
+import { useSearchParams } from "next/navigation";
 
 const SearchContent = () => {
+  // const { showBottomSheet } = useSelectedCafeStore();
+  //const [searchKey, setSearchKey] = useState(""); // 검색버튼 눌렀을 때만 트리거되도록 하는 키
+  const searchParams = useSearchParams();
   const [query, setQuery] = useState("");
   const [isLikeOnly, setIsLikeOnly] = useState(false);
 
   const cafes = useCafeListStore((state) => state.cafes);
   const setCafes = useCafeListStore((state) => state.setCafes);
+  const { setSelectedCafeId, setShowBottomSheet } = useSelectedCafeStore();
+
+  // 쿼리에 id값이 담겨 있을 경우, 해당하는 카페 select
+  const id = searchParams.get("id");
+
+  useEffect(() => {
+    if (!id) return;
+    setSelectedCafeId(Number(id));
+    setShowBottomSheet(true);
+  }, [id, setSelectedCafeId, setShowBottomSheet]);
 
   // 카페 리스트 가져오기
   const fetchCafes = async (query: string, like: boolean) => {
