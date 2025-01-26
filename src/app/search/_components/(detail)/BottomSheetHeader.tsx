@@ -12,8 +12,7 @@ interface HeaderProps {
 
 const BottomSheetHeader = ({ handleBackClick }: HeaderProps) => {
   const [showBackIcon, setShowBackIcon] = useState(false);
-  const { showBottomSheet, isSheetOpen, setIsSheetOpen } =
-    useSelectedCafeStore();
+  const { showBottomSheet, isSheetOpen } = useSelectedCafeStore();
 
   // 헤더 아이콘 변경
   useEffect(() => {
