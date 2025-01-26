@@ -1,5 +1,5 @@
 export const token = {
-  // 서버 컴포넌트용 비동기 버전
+  // 비동기
   get: async () => {
     if (typeof window === "undefined") {
       const { cookies } = require("next/headers");
@@ -9,9 +9,8 @@ export const token = {
     return token.sync();
   },
 
-  // 인터셉터용 동기 버전
+  // 동기(클라이언트)
   sync: () => {
-    if (typeof window === "undefined") return null;
     return document.cookie
       .split("; ")
       .find((row) => row.startsWith("accessToken="))

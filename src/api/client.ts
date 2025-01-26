@@ -49,7 +49,7 @@ privateClient.interceptors.response.use(
   }
 );
 
-// 헬퍼 함수
+// 클라이언트 헬퍼 함수
 const createApiRequest = (client: AxiosInstance) => {
   const request = <T>(method: HttpMethod, url: string, data?: RequestData) =>
     client

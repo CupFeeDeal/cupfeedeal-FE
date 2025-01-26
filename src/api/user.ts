@@ -1,4 +1,4 @@
-import { privateApi } from "./apiHelper";
+import { privateApi } from "./client";
 
 export const userApi = {
   // 마이페이지 메인 정보

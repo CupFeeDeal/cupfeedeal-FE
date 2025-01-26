@@ -1,11 +1,11 @@
-import { privateApi, publicApi } from "./apiHelper";
+import { serverApi } from "./server";
 import { RecommendCafe, NewCafe, BannerInfo } from "src/types/home";
 
 export const homeApi = {
-  getBannerInfo: () => privateApi.get<BannerInfo>("/api/v1/users/main"),
+  getBannerInfo: () => serverApi.get<BannerInfo>("/api/v1/users/main"),
 
   getRecommendCafes: () =>
-    publicApi.get<RecommendCafe[]>("/api/v1/cafe/recommendation"),
+    serverApi.get<RecommendCafe[]>("/api/v1/cafe/recommendation"),
 
-  getNewCafes: () => publicApi.get<NewCafe[]>("/api/v1/cafe/new"),
+  getNewCafes: () => serverApi.get<NewCafe[]>("/api/v1/cafe/new"),
 };

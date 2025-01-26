@@ -1,4 +1,4 @@
-import { privateApi } from "./apiHelper";
+import { privateApi } from "./client";
 import { Cafe, CafeDetail } from "src/types/search";
 
 export const searchApi = {

@@ -1,7 +1,7 @@
 export interface BannerInfo {
   userId: number;
   subscription_count: number;
-  cupcapImgUrl: string;
+  cupcatImgUrl: string;
 }
 
 export interface RecommendCafe {

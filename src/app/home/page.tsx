@@ -11,20 +11,25 @@ import RecommendCard from "./_components/RecommendCard";
 import NewCard from "./_components/NewCard";
 
 const HomePage = async () => {
-  const [recommendCafes, newCafes] = await Promise.all([
+  const [bannerInfo, recommendCafes, newCafes] = await Promise.all([
+    homeApi.getBannerInfo(),
     homeApi.getRecommendCafes(),
     homeApi.getNewCafes(),
   ]);
-
-  if (await token.get()) {
-    const bannerInfo = (await homeApi.getBannerInfo()).result;
-  }
 
   return (
     <div className="flex flex-col h-full">
       <HomeTap />
       <div className="flex-1 overflow-auto">
-        <HomeBanner />
+        {bannerInfo ? (
+          <HomeBanner {...bannerInfo.result} />
+        ) : (
+          <HomeBanner
+            subscription_count={-1} // -1로 두면 Init 배너 노출 로직
+            userId={0}
+            cupcatImgUrl="" // 혹은 필요 없는 경우 빈 문자열
+          />
+        )}
 
         {/* 지도 */}
         <Section title="커피딜 지도에서 카페를 찾아봐요!">
