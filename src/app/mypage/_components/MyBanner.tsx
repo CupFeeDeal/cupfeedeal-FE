@@ -10,6 +10,7 @@ import {
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { userApi } from "@api/user";
+import Image from "next/image";
 
 interface BannerProps {
   isLevel: boolean;
@@ -21,7 +22,8 @@ const MyBanner = ({ isLevel }: BannerProps) => {
   const [level, setLevel] = useState(0);
   const [cafeName, setCafeName] = useState("");
   const [birth, setBirth] = useState("");
-  //const [cupcatImgUrl, setCupcatImgUrl] = useState("");
+  const [cupcatImgUrl, setCupcatImgUrl] = useState("");
+  console.log(cupcatImgUrl);
 
   useEffect(() => {
     const fetchMyInfo = async () => {
@@ -31,6 +33,7 @@ const MyBanner = ({ isLevel }: BannerProps) => {
         setLevel(userInfo.user_level);
         setCafeName(userInfo.cafe_name);
         setBirth(userInfo.birth_date);
+        setCupcatImgUrl(userInfo.cupcatImgUrl);
 
         window.localStorage.setItem("level", level.toString());
       } catch (error) {
@@ -75,6 +78,13 @@ const MyBanner = ({ isLevel }: BannerProps) => {
             </div>
           )}
         </div>
+        {/* <Image
+          alt={cupcatImgUrl}
+          src={cupcatImgUrl}
+          width={198}
+          height={289}
+          className="p-2"
+        /> */}
         <CupcatEx width={198} height={289} className="p-2" />
       </div>
     </div>

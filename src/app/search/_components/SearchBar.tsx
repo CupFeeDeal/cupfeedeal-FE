@@ -25,7 +25,7 @@ const SearchBar = ({ onSearch }: SearchBarProps) => {
           value={query}
           onChange={handleInputChange}
           className="flex flex-1 Body_2_med"
-          placeholder="마포구 공덕동"
+          placeholder="카페명 또는 주소 검색"
         />
         <Search
           onClick={handleClickSearch}
