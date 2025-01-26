@@ -98,21 +98,21 @@ export default function useBottomSheet() {
   }, [showBottomSheet, isSheetOpen]);
 
   // 터치 이벤트 로직
-  // const canUserMoveBottomSheet = useCallback(() => {
-  //   const { isContentAreaTouched, touchMove } = metrics.current;
+  const canUserMoveBottomSheet = useCallback(() => {
+    const { isContentAreaTouched, touchMove } = metrics.current;
 
-  //   // 1) 헤더 쪽을 터치한 경우 시트 이동 가능
-  //   if (!isContentAreaTouched) return true;
+    // 1) 헤더 쪽을 터치한 경우 시트 이동 가능
+    if (!isContentAreaTouched) return true;
 
-  //   // 2) 이미 완전 펼침 상태에서 더 위로 드래그 시 내부 스크롤만
-  //   const currentSheetY = getCurrentSheetY();
-  //   if (currentSheetY === OPEN_Y && touchMove.movingDirection === "up") {
-  //     return false;
-  //   }
+    // 2) 이미 완전 펼침 상태에서 더 위로 드래그 시 내부 스크롤만
+    const currentSheetY = getCurrentSheetY();
+    if (currentSheetY === OPEN_Y) {
+      return false;
+    }
 
-  //   // 3) 부분 펼침 이하일 시 시트 이동 가능
-  //   return true;
-  // }, []);
+    // 3) 부분 펼침 이하일 시 시트 이동 가능
+    return true;
+  }, []);
 
   const handleTouchStart = useCallback((e: TouchEvent) => {
     const { touchStart, touchMove } = metrics.current;
@@ -122,40 +122,33 @@ export default function useBottomSheet() {
     touchMove.movingDirection = "none";
   }, []);
 
-  const handleTouchMove = useCallback((e: TouchEvent) => {
-    const { touchStart, touchMove } = metrics.current;
-    const currentTouchY = e.touches[0].clientY;
+  const handleTouchMove = useCallback(
+    (e: TouchEvent) => {
+      const { touchStart, touchMove } = metrics.current;
+      const currentTouchY = e.touches[0].clientY;
 
-    // 이동 방향 판별
-    if (touchMove.prevTouchY < currentTouchY) {
-      touchMove.movingDirection = "down";
-    } else if (touchMove.prevTouchY > currentTouchY) {
-      touchMove.movingDirection = "up";
-    }
-    touchMove.prevTouchY = currentTouchY;
-
-    const currentSheetY = getCurrentSheetY();
-
-    if (currentSheetY === OPEN_Y && touchMove.movingDirection === "down") {
-      if (content.current) {
-        const { scrollTop } = content.current;
-        if (scrollTop > 0) {
-          return;
-        }
+      // 이동 방향 판별
+      if (touchMove.prevTouchY < currentTouchY) {
+        touchMove.movingDirection = "down";
+      } else if (touchMove.prevTouchY > currentTouchY) {
+        touchMove.movingDirection = "up";
       }
-      e.preventDefault();
-    } else {
-      e.preventDefault();
-    }
-    const touchOffset = currentTouchY - touchStart.touchY;
-    let nextY = touchStart.sheetY + touchOffset;
+      touchMove.prevTouchY = currentTouchY;
 
-    // 범위 제한
-    if (nextY < OPEN_Y) nextY = OPEN_Y;
-    if (nextY > CLOSED_Y) nextY = CLOSED_Y;
+      if (canUserMoveBottomSheet()) {
+        e.preventDefault(); // 바텀시트 드래그 시 body 스크롤 방지
+        const touchOffset = currentTouchY - touchStart.touchY;
+        let nextY = touchStart.sheetY + touchOffset;
 
-    setSheetPosition(nextY);
-  }, []);
+        // 범위 제한
+        if (nextY < OPEN_Y) nextY = OPEN_Y;
+        if (nextY > CLOSED_Y) nextY = CLOSED_Y;
+
+        setSheetPosition(nextY);
+      }
+    },
+    [canUserMoveBottomSheet]
+  );
 
   const handleTouchEnd = useCallback(() => {
     const currentY = getCurrentSheetY();

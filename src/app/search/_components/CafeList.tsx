@@ -70,13 +70,13 @@ export default function CafeList() {
 
   return (
     <div className="flex flex-col w-full h-full bg-white pb-4">
-      <div className="h-11 py-3 flex items-center pl-5 Body_2_med text-Grey-400 border-b border-b-[#B0B8C1]">
+      <div className="w-full h-11 py-3 flex items-center px-5 Body_2_med text-Grey-400 border-b border-b-[#B0B8C1]">
         거리순
       </div>
       {cafeList.map((cafe, index) => (
         <div
           key={index}
-          className="flex flex-row items-center py-4 px-5 gap-3 cursor-pointer"
+          className="flex flex-row w-full items-center py-4 px-5 gap-3 cursor-pointer"
           onClick={() => handleClickDetail(cafe.id)}
         >
           <span className="w-[7.5rem] h-[7.5rem] shrink-0">
@@ -88,14 +88,14 @@ export default function CafeList() {
               className="w-full h-full rounded-lg"
             />
           </span>
-          <span>
+          <span className="flex flex-col flex-grow-0 overflow-hidden">
             <div className="Caption_bold text-Main_Blue mb-1">
               {formatDistance(cafe.distance)}
             </div>
             <div className="Subhead_1_bold text-Grey-900 mb-2">{cafe.name}</div>
             <div className="flex flex-row gap-3 mb-1">
               <span className="Body_2_bold text-Grey-900 shrink-0">주소</span>
-              <span className="Body_2_med text-Grey-600 truncate">
+              <span className="Body_2_med text-Grey-600 whitespace-nowrap overflow-hidden text-ellipsis">
                 {cafe.address}
               </span>
             </div>

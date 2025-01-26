@@ -100,7 +100,7 @@ const AskContents = () => {
       </div>
       <div
         onClick={() => isFormValid && router.push("/mypage")}
-        className={`flex w-full justify-center Body_1_bold rounded-xl px-6 py-[0.88rem] mt-[3.6rem] ${
+        className={`flex w-full justify-center Body_1_bold rounded-xl px-6 py-[0.88rem] mt-[3.6rem] mb-[5.5rem] ${
           isFormValid
             ? "bg-Main_Blue text-white cursor-pointer"
             : "bg-Grey-200 text-Grey-400"
