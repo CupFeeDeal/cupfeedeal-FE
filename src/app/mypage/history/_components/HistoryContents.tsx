@@ -1,20 +1,22 @@
 "use client";
 import { useEffect, useState } from "react";
-import { Search } from "@assets/icons";
 
 // components
 import HistoryCard from "./HistoryItem";
 import Toggle from "./Toggle";
-
+// icons
+import { Search } from "@assets/icons";
 // api
-import { HistoryItem } from "src/types/mypage";
 import { userApi } from "@api/user";
+// types
+import { HistoryItem } from "src/types/mypage";
 
 const HistoryContents = () => {
   const [historyData, setHistoryData] = useState<HistoryItem[]>([]);
+  const [filteredData, setFilteredData] = useState<HistoryItem[]>([]);
+
   const [isToggleOn, setIsToggleOn] = useState(false);
   const [query, setQuery] = useState("");
-  const [filteredData, setFilteredData] = useState<HistoryItem[]>([]);
 
   // 날짜 포맷팅
   const formatDate = (dateString: string) => {
@@ -39,7 +41,7 @@ const HistoryContents = () => {
           end: formatDate(item.end),
           isAvailable: item.status === "VALID",
         }));
-        console.log(transformedData);
+
         setHistoryData(transformedData);
         setFilteredData(transformedData);
       } catch (error) {

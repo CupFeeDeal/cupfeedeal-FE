@@ -1,35 +1,48 @@
 "use client";
+
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+
+// components
 import CancelAfModal from "@app/subscription/_components/modal/CancelAfModal";
 import CancelBfModal from "@app/subscription/_components/modal/CancelBfModal";
+// icons
 import { Calendar, Price } from "@assets/icons";
-import { useRouter } from "next/navigation";
-import { useState } from "react";
+// types
 import { HistoryItem } from "src/types/mypage";
 
 interface HistoryItemProps {
   item: HistoryItem;
 }
 
-const HistoryCard = ({ item }: HistoryItemProps) => {
-  const [showBfModal, setShowBfModal] = useState(false);
-  const [showAfModal, setShowAfModal] = useState(false);
+// 버튼 스타일
+const baseBtnStyle =
+  "cursor-pointer flex w-full rounded-[10px] py-[10px] justify-center Body_2_bold";
+const cancelBtnStyle = `${baseBtnStyle} bg-Pale_Blue_1`;
+const buyBtnStyle = `${baseBtnStyle} bg-Main_Blue text-white`;
 
+const HistoryCard = ({ item }: HistoryItemProps) => {
+  const router = useRouter();
   const formatPrice = (price: number) => {
     return new Intl.NumberFormat("ko-KR").format(price);
   };
 
-  const router = useRouter();
+  // 구독 연장하기
   const handleGoExtend = (id: number) => {
     router.push(`/payment?type=extend&id=${id}`);
   };
 
+  // 다시 구독하기
   const handleGoNew = (id: number) => {
     router.push(`/payment?type=new&id=${id}`);
   };
 
-  // 추후 환불 관련 API로 수정
+  // 구독 취소하기
+  const [showBfModal, setShowBfModal] = useState(false);
+  const [showAfModal, setShowAfModal] = useState(false);
+
   const handleUnsubscribe = () => {
-    console.log("환불함");
+    console.log("환불함"); // 추후 환불 관련 API로 수정
     setShowBfModal(false);
     setShowAfModal(true);
   };
@@ -58,7 +71,7 @@ const HistoryCard = ({ item }: HistoryItemProps) => {
             item.isAvailable ? "text-Main_Blue" : "text-Grey-500"
           }  `}
         >
-          아이스 아메리카노 ∙ {item.period}주권
+          {item.menu} ∙ {item.period}주권
         </div>
 
         <div className="flex flex-row Body_2_med text-Grey-600 items-center gap-1 mb-1 mt-7">
@@ -76,22 +89,19 @@ const HistoryCard = ({ item }: HistoryItemProps) => {
           <div className="flex flex-row w-full justify-between gap-[7px]">
             <span
               onClick={() => setShowBfModal(true)}
-              className="cursor-pointer flex w-full bg-Pale_Blue_1 rounded-[10px] py-[10px] justify-center mx-auto Body_2_bold "
+              className={cancelBtnStyle}
             >
               구독 취소하기
             </span>
             <span
               onClick={() => handleGoExtend(item.id)}
-              className="cursor-pointer flex w-full bg-Main_Blue rounded-[10px] py-[10px] justify-center mx-auto Body_2_bold text-white"
+              className={buyBtnStyle}
             >
               구독 연장하기
             </span>
           </div>
         ) : (
-          <div
-            onClick={() => handleGoNew(item.id)}
-            className="cursor-pointer flex w-full bg-Main_Blue rounded-[10px] py-[10px] justify-center items-center Body_2_bold text-white"
-          >
+          <div onClick={() => handleGoNew(item.id)} className={buyBtnStyle}>
             다시 구독하기
           </div>
         )}

@@ -1,5 +1,9 @@
 "use client";
+import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
+//import Image from "next/image";
 
+// icons
 import {
   CupcatEx,
   Information,
@@ -7,10 +11,8 @@ import {
   MyBannerBg,
 } from "@assets/icons";
 
-import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+// api
 import { userApi } from "@api/user";
-//import Image from "next/image";
 
 interface BannerProps {
   isLevel: boolean;
@@ -19,30 +21,36 @@ interface BannerProps {
 const MyBanner = ({ isLevel }: BannerProps) => {
   const router = useRouter();
 
-  const [level, setLevel] = useState(0);
-  const [cafeName, setCafeName] = useState("");
-  const [birth, setBirth] = useState("");
-  const [cupcatImgUrl, setCupcatImgUrl] = useState("");
-  console.log(cupcatImgUrl);
+  const [userInfo, setUserInfo] = useState({
+    level: 0,
+    cafeName: "",
+    birth: "",
+    cupcatImgUrl: "",
+  });
 
   useEffect(() => {
     const fetchMyInfo = async () => {
       try {
-        const userInfo = await userApi.getMyInfo();
-        console.log("userInfo: ", userInfo);
-        setLevel(userInfo.user_level);
-        setCafeName(userInfo.cafe_name);
-        setBirth(userInfo.birth_date);
-        setCupcatImgUrl(userInfo.cupcatImgUrl);
+        const response = await userApi.getMyInfo();
 
-        window.localStorage.setItem("level", level.toString());
+        setUserInfo({
+          level: response.user_level,
+          cafeName: response.cafe_name,
+          birth: response.birth_date,
+          cupcatImgUrl: response.cupcatImgUrl,
+        });
+
+        window.localStorage.setItem("level", response.user_level.toString());
       } catch (error) {
         console.error(error);
       }
     };
 
     fetchMyInfo();
-  }, [level]);
+  }, []);
+
+  const { level, cafeName, birth, cupcatImgUrl } = userInfo;
+  console.log(cupcatImgUrl); // api 에러 해결 후 지울 미사용 변수 임시 처리
 
   return (
     <div className="w-full overflow-hidden relative z-5">

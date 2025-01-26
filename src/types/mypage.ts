@@ -6,6 +6,7 @@ export interface MyInfo {
   birth_date: string;
 }
 
+// 구독 내역
 export interface Subscription {
   user_subscription_id: number;
   cafe_name: string;
@@ -30,6 +31,7 @@ export interface HistoryItem {
   isAvailable: boolean;
 }
 
+// 지나간 컵캣
 export interface Cupcat {
   cafe_name: string;
   cupcat_img_url: string;
@@ -38,4 +40,18 @@ export interface Cupcat {
 export interface CupcatList {
   level: number;
   cupcats: Cupcat[];
+}
+
+// 문의하기
+export interface Input {
+  email: string;
+  category: string;
+  description: string;
+}
+
+export interface SelectProps {
+  options: string[];
+  value: string;
+  placeholder: string;
+  onChange: (value: string) => void;
 }

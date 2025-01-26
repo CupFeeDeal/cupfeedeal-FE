@@ -1,40 +1,24 @@
 "use client";
-
-import { userApi } from "@api/user";
-import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
+
+// api
+import { userApi } from "@api/user";
 
 export default function Nickname() {
-  const [count, setCount] = useState(0);
-  const [nickname, setNickname] = useState("");
   const router = useRouter();
+  const [nickname, setNickname] = useState("");
 
-  const [isDisabled, setIsDisabled] = useState(false);
-
-  useEffect(() => {
-    const disabledTimestamp = localStorage.getItem("nicknameDisabled");
-    if (disabledTimestamp) {
-      const remainingTime =
-        24 * 60 * 60 * 1000 - (Date.now() - Number(disabledTimestamp));
-      if (remainingTime > 0) {
-        setIsDisabled(true);
-        setTimeout(() => {
-          setIsDisabled(false);
-          localStorage.removeItem("nicknameDisabled");
-        }, remainingTime);
-      }
-    }
-  }, []);
-
+  // 닉네임 입력 핸들러
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const inputValue = e.target.value;
 
     if (inputValue.length <= 10) {
       setNickname(inputValue);
-      setCount(inputValue.length);
     }
   };
 
+  // 닉네임 변경하기
   const handleChangeNickname = async () => {
     try {
       await userApi.patchNickname(nickname);
@@ -57,6 +41,24 @@ export default function Nickname() {
     router.back();
   };
 
+  // 24시간 후 변경 가능 제한
+  const [isDisabled, setIsDisabled] = useState(false);
+
+  useEffect(() => {
+    const disabledTimestamp = localStorage.getItem("nicknameDisabled");
+    if (disabledTimestamp) {
+      const remainingTime =
+        24 * 60 * 60 * 1000 - (Date.now() - Number(disabledTimestamp));
+      if (remainingTime > 0) {
+        setIsDisabled(true);
+        setTimeout(() => {
+          setIsDisabled(false);
+          localStorage.removeItem("nicknameDisabled");
+        }, remainingTime);
+      }
+    }
+  }, []);
+
   return (
     <div
       className="fixed inset-0 z-[100] bg-[rgba(34,34,34,0.7)] flex justify-center items-center"
@@ -77,7 +79,7 @@ export default function Nickname() {
           />
         </div>
         <div className="w-full text-Grey-400 Caption_med flex flex-col items-end px-3 mt-1">
-          {count}/10
+          {nickname.length}/10
         </div>
         <div className="mt-2 Body_2_med text-Grey-600 mb-8">
           변경 후 24시간 뒤 재변경이 가능해요.
