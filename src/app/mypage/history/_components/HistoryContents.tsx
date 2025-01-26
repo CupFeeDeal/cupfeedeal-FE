@@ -39,7 +39,7 @@ const HistoryContents = () => {
           end: formatDate(item.end),
           isAvailable: item.status === "VALID",
         }));
-
+        console.log(transformedData);
         setHistoryData(transformedData);
         setFilteredData(transformedData);
       } catch (error) {
