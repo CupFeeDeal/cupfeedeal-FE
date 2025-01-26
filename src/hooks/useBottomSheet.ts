@@ -99,7 +99,7 @@ export default function useBottomSheet() {
 
   // 터치 이벤트 로직
   const canUserMoveBottomSheet = useCallback(() => {
-    const { isContentAreaTouched, touchMove } = metrics.current;
+    const { isContentAreaTouched } = metrics.current;
 
     // 1) 헤더 쪽을 터치한 경우 시트 이동 가능
     if (!isContentAreaTouched) return true;
