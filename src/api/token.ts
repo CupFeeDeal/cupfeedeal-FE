@@ -2,7 +2,7 @@ export const token = {
   // 비동기
   get: async () => {
     if (typeof window === "undefined") {
-      const { cookies } = require("next/headers");
+      const { cookies } = await import("next/headers");
       const cookieStore = await cookies();
       return cookieStore.get("accessToken")?.value;
     }

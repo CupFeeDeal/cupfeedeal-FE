@@ -1,4 +1,4 @@
-import axios, { AxiosInstance } from "axios";
+import axios, { AxiosInstance, AxiosRequestConfig } from "axios";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 
@@ -29,7 +29,7 @@ function createApiRequest(client: AxiosInstance) {
     const accessToken = cookieStore.get("accessToken")?.value;
 
     // 요청 config 세팅
-    const config = { method, url, data } as any;
+    const config: AxiosRequestConfig = { method, url, data };
     if (accessToken) {
       config.headers = {
         ...config.headers,
