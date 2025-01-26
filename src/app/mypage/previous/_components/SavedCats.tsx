@@ -1,9 +1,9 @@
 "use client";
 
-import { userApi } from "@api/user";
+//import { userApi } from "@api/user";
 import { CupcatBg } from "@assets/icons";
-import { useEffect, useState } from "react";
-import { Cupcat } from "src/types/mypage";
+import { useState } from "react";
+//import { Cupcat } from "src/types/mypage";
 import CatItem from "./CatItem";
 import { cupcatData } from "./mock";
 
@@ -31,6 +31,7 @@ const catPositions = [
 
 const SavedCats = () => {
   const [level, setLevel] = useState(0);
+  console.log(setLevel); // 미사용 변수로 임시 콘솔
   //const [cupcats, setCupcats] = useState<Cupcat[]>([]);
 
   const levelToCount: { [key: number]: string } = {

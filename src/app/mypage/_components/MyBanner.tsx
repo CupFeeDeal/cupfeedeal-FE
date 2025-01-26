@@ -10,7 +10,7 @@ import {
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { userApi } from "@api/user";
-import Image from "next/image";
+//import Image from "next/image";
 
 interface BannerProps {
   isLevel: boolean;
