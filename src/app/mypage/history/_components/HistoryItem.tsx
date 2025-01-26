@@ -9,7 +9,7 @@ import CancelBfModal from "@app/subscription/_components/modal/CancelBfModal";
 // icons
 import { Calendar, Price } from "@assets/icons";
 // types
-import { HistoryItem, Subscription } from "src/types/mypage";
+import { Subscription } from "src/types/mypage";
 
 interface HistoryItemProps {
   item: Subscription;

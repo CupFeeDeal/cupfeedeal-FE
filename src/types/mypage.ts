@@ -22,19 +22,6 @@ export interface Subscription {
   remain: number;
 }
 
-export interface HistoryItem {
-  id: number;
-  name: string;
-  menu: string;
-  subscriptionName: string;
-  period: number;
-  price: number;
-  start: string;
-  end: string;
-  status: string;
-  remain: number;
-}
-
 // 지나간 컵캣
 export interface Cupcat {
   cafe_name: string;

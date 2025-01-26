@@ -9,7 +9,7 @@ import { Search } from "@assets/icons";
 // api
 import { userApi } from "@api/user";
 // types
-import { HistoryItem, Subscription } from "src/types/mypage";
+import { Subscription } from "src/types/mypage";
 
 const HistoryContents = () => {
   const [historyData, setHistoryData] = useState<Subscription[]>([]);
