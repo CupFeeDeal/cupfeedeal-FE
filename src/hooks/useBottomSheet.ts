@@ -106,7 +106,7 @@ export default function useBottomSheet() {
 
     // 2) 이미 완전 펼침 상태에서 더 위로 드래그 시 내부 스크롤만
     const currentSheetY = getCurrentSheetY();
-    if (currentSheetY === OPEN_Y && touchMove.movingDirection === "up") {
+    if (currentSheetY === OPEN_Y) {
       return false;
     }
 
