@@ -34,6 +34,7 @@ const BottomSheetContent = ({ cafeInfo }: BottomSheetContentProps) => {
   const router = useRouter();
   const accessToken = token.get();
   const [showLoginModal, setShowLoginModal] = useState(false);
+  const [showModalforSubs, setShowModalforSubs] = useState(false);
 
   const [isLike, setIsLike] = useState(cafeInfo?.is_like || false);
   const { updateCafeLikeStatus } = useCafeListStore();
@@ -113,6 +114,14 @@ const BottomSheetContent = ({ cafeInfo }: BottomSheetContentProps) => {
     return <div className="w-full h-full bg-white"></div>;
   }
 
+  const handleSubscription = (id: number) => {
+    if (!accessToken) {
+      setShowModalforSubs(true);
+    } else {
+      router.push(`/payment?type=new&id=${id}`);
+    }
+  };
+
   return (
     <>
       <div
@@ -189,21 +198,30 @@ const BottomSheetContent = ({ cafeInfo }: BottomSheetContentProps) => {
           <div className={`${valueStyle} mt-2`}>{cafeInfo.description}</div>
 
           <div
+            onClick={() => handleSubscription(cafeInfo.id)}
             className={`flex w-full justify-center Body_1_bold rounded-xl px-6 py-[0.88rem] mt-[3.6rem] ${
               cafeInfo.is_subscription
-                ? "bg-Main_Blue text-white cursor-pointer"
-                : "bg-Grey-200 text-Grey-400"
+                ? "bg-Grey-200 text-Grey-400 cursor-not-allowed"
+                : "bg-Main_Blue text-white cursor-pointer"
             }`}
           >
             구독하기
           </div>
         </div>
       </div>
+
       <LoginModal
         isOpen={showLoginModal}
         onClose={() => setShowLoginModal(false)}
         onLogin={() => router.push("/")}
         message="즐겨찾기를 등록하려면"
+      />
+
+      <LoginModal
+        isOpen={showModalforSubs}
+        onClose={() => setShowModalforSubs(false)}
+        onLogin={() => router.push("/")}
+        message="구독권 구매는"
       />
     </>
   );

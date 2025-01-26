@@ -93,7 +93,7 @@ export default function Nickname() {
             onClick={handleChangeNickname}
             className={`w-full Body_1_bold py-4 rounded-lg ${
               isDisabled
-                ? "bg-Grey-300 cursor-not-allowed text-white"
+                ? "bg-Grey-200 cursor-not-allowed text-Grey-400"
                 : "bg-Main_Blue text-white"
             }`}
             disabled={isDisabled}
