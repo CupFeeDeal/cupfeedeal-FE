@@ -33,7 +33,7 @@ function InfoRow({ label, value }: { label: string; value: string }) {
 const BottomSheetContent = ({ cafeInfo }: BottomSheetContentProps) => {
   const router = useRouter();
   const accessToken = token.get();
-  const [showLoginModal, setShowLoginModal] = useState(false);
+  const [showModalforSave, setShowModalforSave] = useState(false);
   const [showModalforSubs, setShowModalforSubs] = useState(false);
 
   const [isLike, setIsLike] = useState(cafeInfo?.is_like || false);
@@ -47,7 +47,7 @@ const BottomSheetContent = ({ cafeInfo }: BottomSheetContentProps) => {
 
   const handleClickSave = async () => {
     if (!accessToken) {
-      setShowLoginModal(true);
+      setShowModalforSave(true);
       return;
     }
 
@@ -211,8 +211,8 @@ const BottomSheetContent = ({ cafeInfo }: BottomSheetContentProps) => {
       </div>
 
       <LoginModal
-        isOpen={showLoginModal}
-        onClose={() => setShowLoginModal(false)}
+        isOpen={showModalforSave}
+        onClose={() => setShowModalforSave(false)}
         onLogin={() => router.push("/")}
         message="즐겨찾기를 등록하려면"
       />
