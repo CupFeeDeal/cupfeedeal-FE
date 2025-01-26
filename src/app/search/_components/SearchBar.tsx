@@ -1,5 +1,7 @@
 "use client";
-import { ChangeEvent, useState } from "react";
+
+import { useState, ChangeEvent } from "react";
+// icons
 import { Search } from "@assets/icons";
 
 interface SearchBarProps {

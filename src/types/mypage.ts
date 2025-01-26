@@ -1,3 +1,4 @@
+// 마이페이지 메인
 export interface MyInfo {
   username: string;
   user_level: number;
