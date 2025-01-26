@@ -5,11 +5,13 @@ import { useEffect, useState } from "react";
 import { BottomLine, Back } from "@assets/icons";
 // store & hooks
 import useSelectedCafeStore from "@store/useSelectedCafeStore";
-import useBottomSheet from "@hooks/useBottomSheet";
 
-const BottomSheetHeader = () => {
+interface HeaderProps {
+  handleBackClick: () => void;
+}
+
+const BottomSheetHeader = ({ handleBackClick }: HeaderProps) => {
   const [showBackIcon, setShowBackIcon] = useState(false);
-  const { sheet } = useBottomSheet();
   const { showBottomSheet, isSheetOpen, setIsSheetOpen } =
     useSelectedCafeStore();
 
@@ -25,15 +27,6 @@ const BottomSheetHeader = () => {
       };
     }
   }, [isSheetOpen, showBottomSheet]);
-
-  // 임시
-  const handleBackClick = () => {
-    if (sheet.current) {
-      sheet.current!.style.setProperty("transform", "translateY(0)");
-      setIsSheetOpen(false);
-    }
-    console.log("click");
-  };
 
   return (
     <div>

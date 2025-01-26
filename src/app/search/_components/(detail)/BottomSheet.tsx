@@ -18,6 +18,7 @@ import useBottomSheet from "@hooks/useBottomSheet";
 const BottomSheet = () => {
   const { sheet, content } = useBottomSheet();
   const { selectedCafeId } = useSelectedCafeStore();
+  const { setIsSheetOpen } = useSelectedCafeStore();
 
   const [cafe, setCafe] = useState<CafeDetail>();
 
@@ -36,6 +37,24 @@ const BottomSheet = () => {
     fetchCafeDetail();
   }, [selectedCafeId]);
 
+  // 바텀시트 내리기
+  let PARTIAL_Y = 0;
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const windowHeight = window.innerHeight;
+      PARTIAL_Y = windowHeight - 253;
+    }
+  }, []);
+
+  const handleBackClick = () => {
+    if (sheet.current) {
+      sheet.current.style.transform = `translateY(${PARTIAL_Y}px)`;
+      console.log("translateY");
+      setIsSheetOpen(false);
+    }
+    console.log("click");
+  };
+
   return (
     <motion.div
       className={`
@@ -50,7 +69,7 @@ const BottomSheet = () => {
       }}
       ref={sheet}
     >
-      <BottomSheetHeader />
+      <BottomSheetHeader handleBackClick={handleBackClick} />
       <div ref={content} className="flex-1 overflow-auto">
         <BottomSheetContent cafeInfo={cafe} />
       </div>
