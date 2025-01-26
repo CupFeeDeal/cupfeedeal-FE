@@ -1,25 +1,27 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { motion } from "framer-motion";
 
+// components
 import BottomSheetContent from "./BottomSheetContent";
 import BottomSheetHeader from "./BottomSheetHeader";
 
-import { motion } from "framer-motion";
-import useBottomSheet from "@hooks/useBottomSheet";
+// api
 import { searchApi } from "@api/search";
+// types
 import { CafeDetail } from "src/types/search";
+// store & hooks
 import useSelectedCafeStore from "@store/useSelectedCafeStore";
-//import { MAX_Y, MIN_Y } from "@constants/BottomSheetOption";
+import useBottomSheet from "@hooks/useBottomSheet";
 
 const BottomSheet = () => {
   const { sheet, content } = useBottomSheet();
-  //const { isSheetOpen } = useSelectedCafeStore();
   const { selectedCafeId } = useSelectedCafeStore();
 
-  // 카페 상세 정보 받아오기
   const [cafe, setCafe] = useState<CafeDetail>();
 
+  // 카페 상세 정보 받아오기
   useEffect(() => {
     const fetchCafeDetail = async () => {
       try {
@@ -47,7 +49,6 @@ const BottomSheet = () => {
         transform: "translateY(100%)",
       }}
       ref={sheet}
-      // style={{ transform: `translateY(${isSheetOpen ? MIN_Y - MAX_Y : 0}px)` }}
     >
       <BottomSheetHeader />
       <div ref={content} className="flex-1 overflow-auto">

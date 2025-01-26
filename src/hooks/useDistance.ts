@@ -30,9 +30,20 @@ const calculateDistance = (
   return R * c;
 };
 
+// 거리 m->km 포맷팅
+const formatDistance = (distance: number | null) => {
+  if (distance === null) {
+    return "";
+  }
+  if (distance >= 1000) {
+    return `${(distance / 1000).toFixed(2)}km`;
+  }
+  return `${distance}m`;
+};
+
 const useDistance = () => {
   const getDistance = useCallback(calculateDistance, []);
-  return { getDistance };
+  return { getDistance, formatDistance };
 };
 
 export default useDistance;

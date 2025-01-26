@@ -1,17 +1,23 @@
 "use client";
 
-import { FullHeart, EmptyHeart, Instagram } from "@assets/icons";
-import useDistance from "@hooks/useDistance";
-import useSelectedCafeStore from "@store/useSelectedCafeStore";
 import { useEffect, useState } from "react";
-import { CafeDetail } from "src/types/search";
-import useMap from "../useMap";
-import Image from "next/image";
-import { token } from "@api/client";
-import LoginModal from "../modal/LoginModal";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
+
+// components
+import LoginModal from "../modal/LoginModal";
+import useMap from "../useMap";
+// api
 import { likeApi } from "@api/search";
+import { token } from "@api/client";
+// icons
+import { FullHeart, EmptyHeart, Instagram } from "@assets/icons";
+// store & hooks
+import useSelectedCafeStore from "@store/useSelectedCafeStore";
+import useDistance from "@hooks/useDistance";
 import { useCafeListStore } from "@store/useCafeListStore";
+// types
+import { CafeDetail } from "src/types/search";
 
 interface BottomSheetContentProps {
   cafeInfo: CafeDetail | undefined;
@@ -33,11 +39,19 @@ function InfoRow({ label, value }: { label: string; value: string }) {
 const BottomSheetContent = ({ cafeInfo }: BottomSheetContentProps) => {
   const router = useRouter();
   const accessToken = token.get();
+  // 비로그인 시 모달
   const [showModalforSave, setShowModalforSave] = useState(false);
   const [showModalforSubs, setShowModalforSubs] = useState(false);
 
   const [isLike, setIsLike] = useState(cafeInfo?.is_like || false);
+
+  // 현위치-카페 거리 관련
+  const [distance, setDistance] = useState<number | null>(null);
+  const { getDistance, formatDistance } = useDistance();
+  const { getCurrentLocation } = useMap();
+
   const { updateCafeLikeStatus } = useCafeListStore();
+  const { isSheetOpen } = useSelectedCafeStore();
 
   useEffect(() => {
     if (cafeInfo) {
@@ -45,6 +59,7 @@ const BottomSheetContent = ({ cafeInfo }: BottomSheetContentProps) => {
     }
   }, [cafeInfo]);
 
+  // 좋아요로 카페 저장
   const handleClickSave = async () => {
     if (!accessToken) {
       setShowModalforSave(true);
@@ -71,11 +86,7 @@ const BottomSheetContent = ({ cafeInfo }: BottomSheetContentProps) => {
     }
   };
 
-  const { isSheetOpen } = useSelectedCafeStore();
-  const { getDistance } = useDistance();
-  const { getCurrentLocation } = useMap();
-  const [distance, setDistance] = useState<number | null>(null);
-
+  // 거리 계산
   useEffect(() => {
     const calculateDistance = async () => {
       if (cafeInfo) {
@@ -83,7 +94,6 @@ const BottomSheetContent = ({ cafeInfo }: BottomSheetContentProps) => {
           // 현재 위치 가져오기
           const [currentLat, currentLng] = await getCurrentLocation();
 
-          // 거리 계산
           const calculatedDistance = getDistance(
             currentLat,
             currentLng,
@@ -100,20 +110,11 @@ const BottomSheetContent = ({ cafeInfo }: BottomSheetContentProps) => {
     calculateDistance();
   }, [cafeInfo, getDistance, getCurrentLocation]);
 
-  const formatDistance = () => {
-    if (distance === null) {
-      return "";
-    }
-    if (distance >= 1000) {
-      return `${(distance / 1000).toFixed(2)}km`;
-    }
-    return `${distance}m`;
-  };
-
   if (!cafeInfo) {
     return <div className="w-full h-full bg-white"></div>;
   }
 
+  // 구독하기
   const handleSubscription = (id: number) => {
     if (!accessToken) {
       setShowModalforSubs(true);
@@ -131,7 +132,9 @@ const BottomSheetContent = ({ cafeInfo }: BottomSheetContentProps) => {
       >
         <div className={`w-full px-5 ${isSheetOpen ? "pt-5" : ""}`}>
           {/*거리*/}
-          <div className="Caption_bold text-Grey-500">{formatDistance()}</div>
+          <div className="Caption_bold text-Grey-500 h-4">
+            {formatDistance(distance)}
+          </div>
 
           {/*이름 & 좋아요 여부*/}
           <div className="flex flex-row items-center my-1">
@@ -210,6 +213,7 @@ const BottomSheetContent = ({ cafeInfo }: BottomSheetContentProps) => {
         </div>
       </div>
 
+      {/*비로그인 시 모달 */}
       <LoginModal
         isOpen={showModalforSave}
         onClose={() => setShowModalforSave(false)}

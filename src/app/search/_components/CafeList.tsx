@@ -1,18 +1,21 @@
 "use client";
 
-import useDistance from "@hooks/useDistance";
-import { useCafeListStore } from "@store/useCafeListStore";
-import useMap from "./useMap";
 import { useEffect, useState } from "react";
-import Image from "next/image";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
+
+// components
+import useMap from "./useMap";
+// store & hooks
+import { useCafeListStore } from "@store/useCafeListStore";
 import useSelectedCafeStore from "@store/useSelectedCafeStore";
+import useDistance from "@hooks/useDistance";
 
 export default function CafeList() {
   const cafes = useCafeListStore((state) => state.cafes);
   const { map, getCurrentLocation, getMapOptions } = useMap();
 
-  const { getDistance } = useDistance();
+  const { getDistance, formatDistance } = useDistance();
 
   const [cafeList, setCafeList] = useState<
     ((typeof cafes)[0] & { distance: number })[]
@@ -37,20 +40,12 @@ export default function CafeList() {
 
         setCafeList(updatedCafes);
       } catch (error) {
-        console.error("Failed to calculate distances:", error);
+        console.error(error);
       }
     };
 
     calculateDistance();
   }, [cafes, getDistance, getCurrentLocation]);
-
-  // 거리 m->km 포맷팅
-  const formatDistance = (distance: number) => {
-    if (distance >= 1000) {
-      return `${(distance / 1000).toFixed(2)}km`;
-    }
-    return `${distance}m`;
-  };
 
   // 가격 표기법 포맷팅
   const formatPrice = (price: number) => {
@@ -63,7 +58,6 @@ export default function CafeList() {
   const { setSelectedCafeId, setShowBottomSheet, setOldCenter } =
     useSelectedCafeStore();
   const handleClickDetail = (id: number) => {
-    // const selectedCafe = cafeList.find((cafe) => cafe.id === id);
     if (map) {
       const { center } = getMapOptions();
       setOldCenter(center);
