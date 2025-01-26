@@ -9,11 +9,11 @@ import { Search } from "@assets/icons";
 // api
 import { userApi } from "@api/user";
 // types
-import { HistoryItem } from "src/types/mypage";
+import { HistoryItem, Subscription } from "src/types/mypage";
 
 const HistoryContents = () => {
-  const [historyData, setHistoryData] = useState<HistoryItem[]>([]);
-  const [filteredData, setFilteredData] = useState<HistoryItem[]>([]);
+  const [historyData, setHistoryData] = useState<Subscription[]>([]);
+  const [filteredData, setFilteredData] = useState<Subscription[]>([]);
 
   const [isToggleOn, setIsToggleOn] = useState(false);
   const [query, setQuery] = useState("");
@@ -30,16 +30,18 @@ const HistoryContents = () => {
     const fetchHistoryData = async () => {
       try {
         const response = await userApi.getSubsList();
-        const transformedData: HistoryItem[] = response.map((item) => ({
-          id: item.user_subscription_id,
-          name: item.cafe_name,
+        const transformedData: Subscription[] = response.map((item) => ({
+          user_subscription_id: item.user_subscription_id,
+          cafe_id: item.cafe_id,
+          cafe_name: item.cafe_name,
           menu: item.menu,
-          subscriptionName: item.cafe_subscription_name,
+          cafe_subscription_name: item.cafe_subscription_name,
           period: item.period,
           price: item.price,
           start: formatDate(item.start),
           end: formatDate(item.end),
-          isAvailable: item.status === "VALID",
+          status: item.status,
+          remain: item.remain,
         }));
 
         setHistoryData(transformedData);
@@ -57,9 +59,13 @@ const HistoryContents = () => {
     const lowerCaseQuery = query.toLowerCase();
     const filtered = historyData
       .filter((history) =>
-        history.name.toLocaleLowerCase().includes(lowerCaseQuery)
+        history.cafe_name.toLocaleLowerCase().includes(lowerCaseQuery)
       )
-      .filter((history) => (isToggleOn ? history.isAvailable : true));
+      .filter((history) =>
+        isToggleOn
+          ? history.status === "VALID" || history.status === "NOTYET"
+          : true
+      );
 
     setFilteredData(filtered);
   };
@@ -68,9 +74,13 @@ const HistoryContents = () => {
   useEffect(() => {
     const filtered = historyData
       .filter((history) =>
-        history.name.toLowerCase().includes(query.toLowerCase())
+        history.cafe_name.toLowerCase().includes(query.toLowerCase())
       )
-      .filter((history) => (isToggleOn ? history.isAvailable : true));
+      .filter((history) =>
+        isToggleOn
+          ? history.status === "VALID" || history.status === "NOTYET"
+          : true
+      );
 
     setFilteredData(filtered);
   }, [isToggleOn, historyData, query]);
@@ -103,7 +113,7 @@ const HistoryContents = () => {
 
       <div className="flex flex-col pb-[38px]">
         {filteredData.map((history) => (
-          <HistoryCard key={history.id} item={history} />
+          <HistoryCard key={history.user_subscription_id} item={history} />
         ))}
       </div>
     </div>

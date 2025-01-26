@@ -9,10 +9,10 @@ import CancelBfModal from "@app/subscription/_components/modal/CancelBfModal";
 // icons
 import { Calendar, Price } from "@assets/icons";
 // types
-import { HistoryItem } from "src/types/mypage";
+import { HistoryItem, Subscription } from "src/types/mypage";
 
 interface HistoryItemProps {
-  item: HistoryItem;
+  item: Subscription;
 }
 
 // 버튼 스타일
@@ -50,25 +50,27 @@ const HistoryCard = ({ item }: HistoryItemProps) => {
     setShowAfModal(false);
   };
 
+  const isAvailable = item.status == "VALID" || item.status === "NOTYET";
+
   return (
     <>
       <div
         className={`w-full flex flex-col py-5 px-[18px] mb-3 border-[1.2px] rounded-[10px] ${
-          item.isAvailable
+          isAvailable
             ? "border-Pale_Blue_1 bg-white"
             : "border-Grey-300 bg-Grey-200"
         } shadow-[0_0_12.7px_0_rgba(175,176,187,0.31)]`}
       >
         <div
           className={`Headline_3 mb-[2px] ${
-            item.isAvailable ? "text-black" : "text-Grey-700"
+            isAvailable ? "text-black" : "text-Grey-700"
           }`}
         >
-          {item.name}
+          {item.cafe_name}
         </div>
         <div
           className={`Body_2_med ${
-            item.isAvailable ? "text-Main_Blue" : "text-Grey-500"
+            isAvailable ? "text-Main_Blue" : "text-Grey-500"
           }  `}
         >
           {item.menu} ∙ {item.period}주권
@@ -85,7 +87,7 @@ const HistoryCard = ({ item }: HistoryItemProps) => {
           </span>
         </div>
 
-        {item.isAvailable ? (
+        {isAvailable ? (
           <div className="flex flex-row w-full justify-between gap-[7px]">
             <span
               onClick={() => setShowBfModal(true)}
@@ -94,14 +96,17 @@ const HistoryCard = ({ item }: HistoryItemProps) => {
               구독 취소하기
             </span>
             <span
-              onClick={() => handleGoExtend(item.id)}
+              onClick={() => handleGoExtend(item.cafe_id)}
               className={buyBtnStyle}
             >
               구독 연장하기
             </span>
           </div>
         ) : (
-          <div onClick={() => handleGoNew(item.id)} className={buyBtnStyle}>
+          <div
+            onClick={() => handleGoNew(item.cafe_id)}
+            className={buyBtnStyle}
+          >
             다시 구독하기
           </div>
         )}
@@ -111,14 +116,14 @@ const HistoryCard = ({ item }: HistoryItemProps) => {
       <CancelBfModal
         isOpen={showBfModal}
         onClose={() => setShowBfModal(false)}
-        cafe={item.name}
-        remain={1} // 추후 item.remain 으로 수정
+        cafe={item.cafe_name}
+        remain={item.remain} // 추후 item.remain 으로 수정
         onConfirm={handleUnsubscribe}
       />
       <CancelAfModal
         isOpen={showAfModal}
         onClose={handleFinalClose}
-        cafe={item.name}
+        cafe={item.cafe_name}
       />
     </>
   );
