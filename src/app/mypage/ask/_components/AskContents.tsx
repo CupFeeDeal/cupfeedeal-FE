@@ -1,28 +1,25 @@
 "use client";
 
 import { useState } from "react";
-import Dropdown from "./Dropdown";
 import { useRouter } from "next/navigation";
 
-interface Input {
-  email: string;
-  category: string;
-  description: string;
-}
+// components
+import Dropdown from "./Dropdown";
+
+// types
+import { Input } from "src/types/mypage";
 
 const AskContents = () => {
+  const router = useRouter();
+
   const [inputInfo, setInputInfo] = useState<Input>({
     email: "",
     category: "",
     description: "",
   });
 
-  const [isEmailValid, setIsEmailValid] = useState(false);
   const pattern = /^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-za-z0-9\-]+/;
-
-  const handleCheckEmail = (email: string) => {
-    return pattern.test(email);
-  };
+  const isEmailValid = pattern.test(inputInfo.email);
 
   const askCategory = [
     "기술적 오류",
@@ -32,19 +29,15 @@ const AskContents = () => {
     "구독 관련 기타",
   ];
 
+  // 입력값 관리 핸들러
   const handleInputChange = (name: string, value: string) => {
-    if (name === "email") {
-      setIsEmailValid(handleCheckEmail(value)); // 이메일 유효성 검사
-    }
-
     setInputInfo((prev) => ({
       ...prev,
       [name]: value,
     }));
   };
 
-  const router = useRouter();
-
+  // 문의 내용 입력 핸들러
   const handleDescription = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     const value = e.target.value;
     if (value.length <= 100) {
@@ -54,6 +47,10 @@ const AskContents = () => {
       }));
     }
   };
+
+  // 문의하기 버튼 활성화
+  const isFormValid =
+    Object.values(inputInfo).every((v) => v.trim() !== "") && isEmailValid;
 
   return (
     <div className="w-full flex flex-col px-5 pt-12">
@@ -102,9 +99,9 @@ const AskContents = () => {
         </div>
       </div>
       <div
-        onClick={() => router.push("/mypage")}
-        className={`flex w-full justify-center Body_1_bold rounded-xl px-6 py-[0.88rem] mt-[3.6rem] ${
-          Object.values(inputInfo).every((value) => value.trim() !== "")
+        onClick={() => isFormValid && router.push("/mypage")}
+        className={`flex w-full justify-center Body_1_bold rounded-xl px-6 py-[0.88rem] mt-[3.6rem] mb-[5.5rem] ${
+          isFormValid
             ? "bg-Main_Blue text-white cursor-pointer"
             : "bg-Grey-200 text-Grey-400"
         }`}

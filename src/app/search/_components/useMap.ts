@@ -1,8 +1,10 @@
 "use client";
 
 import { useCallback, useRef } from "react";
-import { Coordinates, NaverMap, Cafe } from "src/types/search";
 import useSWR, { mutate } from "swr";
+
+// types
+import { Coordinates, NaverMap, Cafe } from "src/types/search";
 
 export const INITIAL_CENTER: Coordinates = [37.5262411, 126.99289439];
 export const INITIAL_ZOOM = 15;

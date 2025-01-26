@@ -1,25 +1,28 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { motion } from "framer-motion";
 
+// components
 import BottomSheetContent from "./BottomSheetContent";
 import BottomSheetHeader from "./BottomSheetHeader";
 
-import { motion } from "framer-motion";
-import useBottomSheet from "@hooks/useBottomSheet";
+// api
 import { searchApi } from "@api/search";
+// types
 import { CafeDetail } from "src/types/search";
+// store & hooks
 import useSelectedCafeStore from "@store/useSelectedCafeStore";
-//import { MAX_Y, MIN_Y } from "@constants/BottomSheetOption";
+import useBottomSheet from "@hooks/useBottomSheet";
 
 const BottomSheet = () => {
   const { sheet, content } = useBottomSheet();
-  //const { isSheetOpen } = useSelectedCafeStore();
   const { selectedCafeId } = useSelectedCafeStore();
+  const { setIsSheetOpen } = useSelectedCafeStore();
 
-  // 카페 상세 정보 받아오기
   const [cafe, setCafe] = useState<CafeDetail>();
 
+  // 카페 상세 정보 받아오기
   useEffect(() => {
     const fetchCafeDetail = async () => {
       try {
@@ -34,6 +37,24 @@ const BottomSheet = () => {
     fetchCafeDetail();
   }, [selectedCafeId]);
 
+  // 바텀시트 내리기
+  let PARTIAL_Y = 0;
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const windowHeight = window.innerHeight;
+      PARTIAL_Y = windowHeight - 253;
+    }
+  }, []);
+
+  const handleBackClick = () => {
+    if (sheet.current) {
+      sheet.current.style.transform = `translateY(${PARTIAL_Y}px)`;
+      console.log("translateY");
+      setIsSheetOpen(false);
+    }
+    console.log("click");
+  };
+
   return (
     <motion.div
       className={`
@@ -47,9 +68,8 @@ const BottomSheet = () => {
         transform: "translateY(100%)",
       }}
       ref={sheet}
-      // style={{ transform: `translateY(${isSheetOpen ? MIN_Y - MAX_Y : 0}px)` }}
     >
-      <BottomSheetHeader />
+      <BottomSheetHeader handleBackClick={handleBackClick} />
       <div ref={content} className="flex-1 overflow-auto">
         <BottomSheetContent cafeInfo={cafe} />
       </div>

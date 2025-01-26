@@ -1,48 +1,34 @@
 "use client";
 
 import { useEffect, useState } from "react";
+// icons
 import { BottomLine, Back } from "@assets/icons";
+// store & hooks
 import useSelectedCafeStore from "@store/useSelectedCafeStore";
-import useBottomSheet from "@hooks/useBottomSheet";
 
-const BottomSheetHeader = () => {
-  const { showBottomSheet, isSheetOpen, setIsSheetOpen } =
-    useSelectedCafeStore();
+interface HeaderProps {
+  handleBackClick: () => void;
+}
+
+const BottomSheetHeader = ({ handleBackClick }: HeaderProps) => {
   const [showBackIcon, setShowBackIcon] = useState(false);
-  //const [fade, setFade] = useState(false);
+  const { showBottomSheet, isSheetOpen } = useSelectedCafeStore();
 
-  const { sheet } = useBottomSheet();
-
+  // 헤더 아이콘 변경
   useEffect(() => {
     if (showBottomSheet) {
       const timer = setTimeout(() => {
         setShowBackIcon(isSheetOpen);
-        //setFade(true); // 페이드 효과 시작
       }, 100);
 
       return () => {
         clearTimeout(timer); // 타이머 정리
-        //setFade(false); // 상태 초기화
       };
-    } else {
-      //setFade(false);
     }
   }, [isSheetOpen, showBottomSheet]);
 
-  const handleBackClick = () => {
-    if (sheet.current) {
-      sheet.current!.style.setProperty("transform", "translateY(0)");
-      setIsSheetOpen(false);
-    }
-    console.log("click");
-  };
-
   return (
-    <div
-    // className={`transition-opacity duration-500 ${
-    //   fade ? "opacity-100" : "opacity-0"
-    // }`}
-    >
+    <div>
       {showBackIcon ? (
         <div className="bg-white">
           <Back className="-rotate-90 mt-3 ml-5" onClick={handleBackClick} />

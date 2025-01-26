@@ -1,21 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    remotePatterns: [
-      {
-        protocol: "https",
-        hostname: "search.pstatic.net",
-      },
-      {
-        protocol: "https",
-        hostname: "buly.kr",
-      },
-      {
-        protocol: "https",
-        hostname: "i.ibb.co",
-      },
-    ],
-    minimumCacheTTL: 60,
+    domains: ["search.pstatic.net", "buly.kr", "i.ibb.co"],
   },
 
   webpack(config) {

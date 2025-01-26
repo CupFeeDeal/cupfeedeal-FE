@@ -1,5 +1,7 @@
 import Modal from "@common/Modal";
+// types
 import { LoginModalProps } from "src/types/modal";
+// icons
 import { LoginModalImg } from "@assets/icons";
 
 const LoginModal = ({ isOpen, onClose, onLogin, message }: LoginModalProps) => {

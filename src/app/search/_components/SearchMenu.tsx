@@ -1,10 +1,16 @@
 "use client";
+
 import { useEffect, useState } from "react";
+
+// components
+import LoginModal from "./modal/LoginModal";
+// api
+import { token } from "@api/token";
+// icons
 import { EmptyHeart, FullHeart, Crosshair } from "@assets/icons";
+// hook
 import useMap from "./useMap";
 import { useRouter } from "next/navigation";
-import { token } from "@api/token";
-import LoginModal from "./modal/LoginModal";
 
 const defaultBtnStyle = `w-11 h-11 flex justify-center items-center bg-white rounded-[1.375rem] shadow-[0_0_11px_0_rgba(153,153,159,0.26)] cursor-pointer`;
 const clickedBtnStyle = `w-11 h-11 flex justify-center items-center bg-Main_Blue rounded-[1.375rem] shadow-[0_0_11px_0_rgba(153,153,159,0.26)] cursor-pointer`;
@@ -14,8 +20,8 @@ interface SearchMenuProps {
   toggleLike: () => void;
 }
 const SearchMenu: React.FC<SearchMenuProps> = ({ isLikeOnly, toggleLike }) => {
-  const { setCurrentLocation } = useMap();
   const router = useRouter();
+  const { setCurrentLocation } = useMap();
   const [showLoginModal, setShowLoginModal] = useState(false);
 
   const [accessToken, setAccessToken] = useState<string | null | undefined>(
@@ -32,10 +38,10 @@ const SearchMenu: React.FC<SearchMenuProps> = ({ isLikeOnly, toggleLike }) => {
       setShowLoginModal(true);
       return;
     }
-
     toggleLike();
   };
 
+  // 현위치 핸들러
   const handleCurrentLocation = () => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
@@ -44,7 +50,7 @@ const SearchMenu: React.FC<SearchMenuProps> = ({ isLikeOnly, toggleLike }) => {
           setCurrentLocation(latitude, longitude);
         },
         (error) => {
-          console.error("Geolocation error ", error);
+          console.error(error);
         }
       );
     } else {
