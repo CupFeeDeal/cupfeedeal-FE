@@ -37,7 +37,8 @@ const HomeBanner = ({ subscription_count, cupcatImgUrl }: BannerInfo) => {
           alt="컵캣 이미지"
           width={130}
           height={200}
-          className="object-contain absolute -bottom-6 right-8"
+          className="object-contain absolute -bottom-7 right-8 w-[40%]"
+          priority
           unoptimized
         />
       )}

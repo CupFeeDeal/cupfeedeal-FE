@@ -1,9 +1,9 @@
 import Link from "next/link";
+
 import { homeApi } from "@api/home";
-import { token } from "@api/token";
+import { Map } from "@assets/icons";
 import HomeTap from "@common/HomeTap";
 import Footer from "@common/Footer";
-import { Map } from "@assets/icons";
 
 import Section from "./_components/Section";
 import HomeBanner from "./_components/HomeBanner";
@@ -21,14 +21,11 @@ const HomePage = async () => {
     <div className="flex flex-col h-full">
       <HomeTap />
       <div className="flex-1 overflow-auto">
+        {/* 배너 */}
         {bannerInfo ? (
           <HomeBanner {...bannerInfo.result} />
         ) : (
-          <HomeBanner
-            subscription_count={-1} // -1로 두면 Init 배너 노출 로직
-            userId={0}
-            cupcatImgUrl="" // 혹은 필요 없는 경우 빈 문자열
-          />
+          <HomeBanner subscription_count={-1} userId={0} cupcatImgUrl="" />
         )}
 
         {/* 지도 */}
