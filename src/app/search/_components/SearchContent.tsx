@@ -25,13 +25,13 @@ const SearchContent = () => {
   const { setSelectedCafeId, setShowBottomSheet } = useSelectedCafeStore();
 
   // 쿼리에 id값이 담겨 있을 경우, 해당하는 카페 select
+  const id = searchParams.get("id");
+
   useEffect(() => {
-    const id = searchParams.get("id");
-    if (id) {
-      setSelectedCafeId(Number(id));
-      setShowBottomSheet(true);
-    }
-  }, [setSelectedCafeId, setShowBottomSheet, searchParams.toString()]);
+    if (!id) return;
+    setSelectedCafeId(Number(id));
+    setShowBottomSheet(true);
+  }, [id, setSelectedCafeId, setShowBottomSheet]);
 
   // 카페 리스트 가져오기
   const fetchCafes = async (query: string, like: boolean) => {

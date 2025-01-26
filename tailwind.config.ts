@@ -211,7 +211,7 @@ const config: Config = {
           fontFamily: theme("fontFamily.suit"),
           fontSize: "1rem",
           fontWeight: "500",
-          PointerEvent: "none",
+          PointerEvents: "none",
           cursor: "not-allowed",
         },
       });

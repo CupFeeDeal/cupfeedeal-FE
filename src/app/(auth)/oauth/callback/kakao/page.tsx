@@ -3,7 +3,7 @@
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { authApi } from "@api/auth";
-import { token } from "@api/client";
+import { token } from "@api/token";
 
 export default function KakaoCallback() {
   const router = useRouter();
