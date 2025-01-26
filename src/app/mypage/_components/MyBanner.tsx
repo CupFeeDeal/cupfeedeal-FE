@@ -93,7 +93,7 @@ const MyBanner = ({ isLevel }: BannerProps) => {
           height={289}
           className="p-2"
         /> */}
-        <CupcatEx width={198} height={289} className="p-2" />
+        <CupcatEx width={"54%"} height={289} className="p-2" />
       </div>
     </div>
   );

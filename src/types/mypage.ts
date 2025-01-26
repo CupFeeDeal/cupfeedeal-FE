@@ -10,6 +10,7 @@ export interface MyInfo {
 // 구독 내역
 export interface Subscription {
   user_subscription_id: number;
+  cafe_id: number;
   cafe_name: string;
   menu: string;
   cafe_subscription_name: string;
@@ -18,18 +19,7 @@ export interface Subscription {
   start: string;
   end: string;
   status: string;
-}
-
-export interface HistoryItem {
-  id: number;
-  name: string;
-  menu: string;
-  subscriptionName: string;
-  period: number;
-  price: number;
-  start: string;
-  end: string;
-  isAvailable: boolean;
+  remain: number;
 }
 
 // 지나간 컵캣
