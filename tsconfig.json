@@ -26,7 +26,7 @@
       "@assets/*": ["src/assets/*"],
       "@common/*": ["src/common/*"],
       "@constants/*": ["src/constants/*"],
-      "@hooks/*": ["src/hooks/*"],
+      "@hooks/*": ["src/app/search/_hooks/*"],
       "@store/*": ["src/store/*"]
     }
   },

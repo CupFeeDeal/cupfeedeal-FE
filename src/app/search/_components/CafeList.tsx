@@ -9,7 +9,7 @@ import useMap from "./useMap";
 // store & hooks
 import { useCafeListStore } from "@store/useCafeListStore";
 import useSelectedCafeStore from "@store/useSelectedCafeStore";
-import useDistance from "@hooks/useDistance";
+import useDistance from "@app/search/_hooks/useDistance";
 
 export default function CafeList() {
   const router = useRouter();

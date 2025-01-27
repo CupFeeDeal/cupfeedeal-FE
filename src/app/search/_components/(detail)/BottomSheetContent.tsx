@@ -14,7 +14,7 @@ import { token } from "@api/token";
 import { FullHeart, EmptyHeart, Instagram } from "@assets/icons";
 // store & hooks
 import useSelectedCafeStore from "@store/useSelectedCafeStore";
-import useDistance from "@hooks/useDistance";
+import useDistance from "@app/search/_hooks/useDistance";
 import { useCafeListStore } from "@store/useCafeListStore";
 // types
 import { CafeDetail } from "src/types/search";

@@ -10,7 +10,7 @@ import BottomSheetHeader from "./BottomSheetHeader";
 import { CafeDetail } from "src/types/search";
 // store & hooks
 import useSelectedCafeStore from "@store/useSelectedCafeStore";
-import useBottomSheet from "@hooks/useBottomSheet";
+import useBottomSheet from "@app/search/_hooks/useBottomSheet";
 
 interface BottomSheetProps {
   detailId?: number;
