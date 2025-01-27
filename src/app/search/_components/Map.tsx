@@ -2,11 +2,14 @@
 
 import { useEffect, useRef, useState } from "react";
 import { useSearchParams } from "next/navigation";
+
 // types
 import { MapProps } from "src/types/search";
 // store & hooks
 import useSelectedCafeStore from "@store/useSelectedCafeStore";
-import useMap, { INITIAL_CENTER, INITIAL_ZOOM } from "./useMap";
+import useMap from "./useMap";
+// constants
+import { INITIAL_CENTER, INITIAL_ZOOM } from "../_constants/constants";
 
 const Map = ({
   mapId = "map",

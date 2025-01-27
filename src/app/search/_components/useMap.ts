@@ -6,10 +6,8 @@ import useSWR, { mutate } from "swr";
 // types
 import { Coordinates, NaverMap, Cafe } from "src/types/search";
 import { useRouter } from "next/navigation";
-
-export const INITIAL_CENTER: Coordinates = [37.56717167, 126.931102];
-export const INITIAL_ZOOM = 17;
-export const MAP_KEY = "/serach";
+// constants
+import { INITIAL_CENTER, INITIAL_ZOOM, MAP_KEY } from "../_constants/constants";
 
 const useMap = () => {
   const router = useRouter();

@@ -11,6 +11,8 @@ import { EmptyHeart, FullHeart, Crosshair } from "@assets/icons";
 import { token } from "@api/token";
 // hook
 import useMap from "./useMap";
+// constant
+import { CLICKED_BTN_STYLE, DEFAULT_BTN_STYLE } from "../_constants/constants";
 
 interface SearchMenuProps {
   isLikeOnly: boolean;
@@ -49,9 +51,6 @@ const SearchMenu: React.FC<SearchMenuProps> = ({ isLikeOnly, toggleLike }) => {
     }
   };
 
-  const defaultBtnStyle = `w-11 h-11 flex justify-center items-center bg-white rounded-[1.375rem] shadow-[0_0_11px_0_rgba(153,153,159,0.26)] cursor-pointer`;
-  const clickedBtnStyle = `w-11 h-11 flex justify-center items-center bg-Main_Blue rounded-[1.375rem] shadow-[0_0_11px_0_rgba(153,153,159,0.26)] cursor-pointer`;
-
   return (
     <>
       <div className="w-full flex flex-row justify-between px-5">
@@ -63,7 +62,7 @@ const SearchMenu: React.FC<SearchMenuProps> = ({ isLikeOnly, toggleLike }) => {
         </span>
         <span className="absolute z-10 top-[4.75rem] right-5 flex flex-col gap-4">
           <div
-            className={isLikeOnly ? clickedBtnStyle : defaultBtnStyle}
+            className={isLikeOnly ? CLICKED_BTN_STYLE : DEFAULT_BTN_STYLE}
             onClick={handleClickHeart}
           >
             {isLikeOnly ? (
@@ -72,7 +71,7 @@ const SearchMenu: React.FC<SearchMenuProps> = ({ isLikeOnly, toggleLike }) => {
               <EmptyHeart width={24} height={24} />
             )}
           </div>
-          <div className={defaultBtnStyle} onClick={handleCurrentLocation}>
+          <div className={DEFAULT_BTN_STYLE} onClick={handleCurrentLocation}>
             <Crosshair width={24} height={24} />
           </div>
         </span>
