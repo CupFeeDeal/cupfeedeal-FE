@@ -5,10 +5,10 @@ interface LevelInfoProps {
 }
 const LevelInfo = ({ level }: LevelInfoProps) => {
   return (
-    <div className="w-full p-5 bg-white relative z-10 -mt-3">
+    <div className="w-full px-3 py-5 bg-white relative z-10 -mt-3">
       {/*레벨 안내*/}
       <div className="mb-8">
-        <div className="Subhead_2_bold mb-2">레벨 안내</div>
+        <div className="Subhead_2_bold mb-2 px-2">레벨 안내</div>
         {levelData.map((data) => (
           <div
             key={data.lv}
@@ -16,7 +16,7 @@ const LevelInfo = ({ level }: LevelInfoProps) => {
               data.lv === level ? "bg-Pale_Blue_2 rounded-lg" : "bg-white"
             }`}
           >
-            <span className="w-[72px] h-[72px] flex shrink-0">
+            <span className="w-[72px] h-[72px] flex shrink-0 px-3">
               <data.svg className="w-full h-full" />
             </span>
             <span className="flex flex-col gap-1">
