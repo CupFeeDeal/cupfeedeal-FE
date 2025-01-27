@@ -6,10 +6,11 @@ import { Search } from "@assets/icons";
 
 interface SearchBarProps {
   onSearch: (value: string) => void;
+  currQuery?: string;
 }
 
-const SearchBar = ({ onSearch }: SearchBarProps) => {
-  const [query, setQuery] = useState(""); // 입력된 검색어
+const SearchBar = ({ onSearch, currQuery = "" }: SearchBarProps) => {
+  const [query, setQuery] = useState(currQuery); // 입력된 검색어
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     setQuery(e.target.value);
@@ -17,7 +18,6 @@ const SearchBar = ({ onSearch }: SearchBarProps) => {
 
   const handleClickSearch = () => {
     onSearch(query);
-    console.log("click");
   };
 
   return (

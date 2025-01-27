@@ -6,6 +6,7 @@ import { MapProps } from "src/types/search";
 // store & hooks
 import useSelectedCafeStore from "@store/useSelectedCafeStore";
 import useMap, { INITIAL_CENTER, INITIAL_ZOOM } from "./useMap";
+import { useSearchParams } from "next/navigation";
 
 const Map = ({
   mapId = "map",
@@ -16,6 +17,8 @@ const Map = ({
   const mapRef = useRef<HTMLDivElement | null>(null);
   const { initializeMap, addMarker } = useMap();
   const [isMapLoaded, setIsMapLoaded] = useState(false);
+  const searchParams = useSearchParams();
+  const selectedId = Number(searchParams.get("id"));
 
   // 선택된 카페 정보 + 이전 지도 중심
   const {
@@ -69,11 +72,18 @@ const Map = ({
       setShowBottomSheet(false);
       setIsSheetOpen(false);
       setSelectedCafeId(null);
+      const params = new URLSearchParams(window.location.search);
+      params.delete("id");
+      window.history.pushState(null, "", `/search?${params.toString()}`);
     });
+
     naver.maps.Event.addListener(map, "dragstart", () => {
       setShowBottomSheet(false);
       setIsSheetOpen(false);
       setSelectedCafeId(null);
+      const params = new URLSearchParams(window.location.search);
+      params.delete("id");
+      window.history.pushState(null, "", `/search?${params.toString()}`);
     });
   }, [
     initializeMap,
@@ -89,7 +99,7 @@ const Map = ({
   // 마커 찍기
   useEffect(() => {
     if (isMapLoaded) {
-      addMarker(cafes, selectedCafeId, (id) => {
+      addMarker(cafes, selectedId, (id) => {
         setSelectedCafeId(id);
         if (id) {
           setShowBottomSheet(true);
@@ -100,7 +110,7 @@ const Map = ({
   }, [
     addMarker,
     isMapLoaded,
-    selectedCafeId,
+    selectedId,
     setSelectedCafeId,
     setShowBottomSheet,
     cafes,
@@ -111,7 +121,7 @@ const Map = ({
   useEffect(() => {
     if (!isMapLoaded) return;
 
-    const foundCafe = cafes.find((c) => c.id === selectedCafeId);
+    const foundCafe = cafes.find((c) => c.id === selectedId);
     if (!foundCafe) return;
 
     if (!map) return;
@@ -130,7 +140,7 @@ const Map = ({
     const offsetCenter = proj.fromOffsetToCoord(point);
 
     map.panTo(offsetCenter, { duration: 500 });
-  }, [map, isMapLoaded, cafes, selectedCafeId]);
+  }, [map, isMapLoaded, cafes, selectedId]);
 
   return (
     <div

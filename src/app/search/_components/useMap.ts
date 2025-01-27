@@ -5,12 +5,15 @@ import useSWR, { mutate } from "swr";
 
 // types
 import { Coordinates, NaverMap, Cafe } from "src/types/search";
+import { useRouter } from "next/navigation";
 
-export const INITIAL_CENTER: Coordinates = [37.5262411, 126.99289439];
-export const INITIAL_ZOOM = 15;
+export const INITIAL_CENTER: Coordinates = [37.56717167, 126.931102];
+export const INITIAL_ZOOM = 17;
 export const MAP_KEY = "/serach";
 
 const useMap = () => {
+  const router = useRouter();
+
   const { data: map } = useSWR(MAP_KEY); // 지도 상태 관리
   const markersRef = useRef<naver.maps.Marker[]>([]); // 마커 배열 관리
 
@@ -135,7 +138,10 @@ const useMap = () => {
 
         // 마커 클릭 이벤트리스너
         naver.maps.Event.addListener(marker, "click", () => {
-          setSelectedCafeId(isSelected ? null : location.id);
+          //setSelectedCafeId(isSelected ? null : location.id);
+          const currentParams = new URLSearchParams(window.location.search);
+          currentParams.set("id", String(location.id));
+          router.push(`/search?${currentParams.toString()}`);
 
           // 바텀시트를 고려한 정중앙 배치
           if (map) {

@@ -6,14 +6,17 @@ import { useRouter } from "next/navigation";
 interface TopBarProps {
   title: string;
   onBack?: () => void;
+  backLink?: string;
 }
 
-const TopBar = ({ title, onBack }: TopBarProps) => {
+const TopBar = ({ title, onBack, backLink }: TopBarProps) => {
   const router = useRouter();
 
   const handleBack = () => {
     if (onBack) {
       onBack();
+    } else if (backLink) {
+      router.push(`${backLink}`);
     } else {
       router.back();
     }

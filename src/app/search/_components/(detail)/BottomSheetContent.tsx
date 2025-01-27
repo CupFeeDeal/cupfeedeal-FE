@@ -20,7 +20,8 @@ import { useCafeListStore } from "@store/useCafeListStore";
 import { CafeDetail } from "src/types/search";
 
 interface BottomSheetContentProps {
-  cafeInfo: CafeDetail | undefined;
+  cafeInfo: CafeDetail | undefined | null;
+  // updateCafeLikeStatus: (id: number, newLike: boolean) => void;
 }
 
 const labelStyle = `Body_2_bold text-Dark_Blue min-w-[49px]`;
@@ -36,7 +37,10 @@ function InfoRow({ label, value }: { label: string; value: string }) {
   );
 }
 
-const BottomSheetContent = ({ cafeInfo }: BottomSheetContentProps) => {
+const BottomSheetContent = ({
+  cafeInfo,
+}: // updateCafeLikeStatus,
+BottomSheetContentProps) => {
   const router = useRouter();
   const accessToken = token.get();
   // 비로그인 시 모달

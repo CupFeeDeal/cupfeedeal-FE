@@ -63,9 +63,9 @@ export default function CafeList() {
       setOldCenter(center);
     }
     // 바텀시트 열기
-    setSelectedCafeId(id);
-    setShowBottomSheet(true);
-    router.push("/search");
+    // setSelectedCafeId(id);
+    //setShowBottomSheet(true);
+    router.push(`/search?id=${id}`);
   };
 
   return (
