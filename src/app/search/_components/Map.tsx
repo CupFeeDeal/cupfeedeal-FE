@@ -64,31 +64,17 @@ const Map = ({
 
     // 지도 클릭/드래그 시 showBottomSheet 비활성화
     naver.maps.Event.addListener(map, "click", () => {
-      // setShowBottomSheet(false);
-      // setIsSheetOpen(false);
-
       const params = new URLSearchParams(window.location.search);
       params.delete("id");
       window.history.pushState(null, "", `/search?${params.toString()}`);
     });
 
     naver.maps.Event.addListener(map, "dragstart", () => {
-      // setShowBottomSheet(false);
-      // setIsSheetOpen(false);
-
       const params = new URLSearchParams(window.location.search);
       params.delete("id");
       window.history.pushState(null, "", `/search?${params.toString()}`);
     });
-  }, [
-    initializeMap,
-    initialCenter,
-    initialZoom,
-    isMapLoaded,
-    oldCenter,
-    // setIsSheetOpen,
-    // setShowBottomSheet,
-  ]);
+  }, [initializeMap, initialCenter, initialZoom, isMapLoaded, oldCenter]);
 
   // 마커 찍기
   useEffect(() => {
