@@ -51,7 +51,7 @@ const ManageModal = ({
   const [showBfModal, setShowBfModal] = useState(false);
   const [showAfModal, setShowAfModal] = useState(false);
 
-  // 구독 취소 기능
+  // 구독권 취소하기 로직
   const handleUnsubscribe = async () => {
     try {
       await subscriptionApi.cancelSubscription(user_subscription_id);

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+
 import { Setting, Coffee, Stamp } from "@assets/icons";
 import Cups from "./Cups";
 import { CardProps } from "src/types/subscription";
@@ -98,6 +99,7 @@ const Card = ({
             isOpen={showUseModal}
             onClose={() => setShowUseModal(false)}
             cafe_name={cafe_name}
+            user_subscription_id={user_subscription_id}
             onComplete={switchModal}
           />
 
