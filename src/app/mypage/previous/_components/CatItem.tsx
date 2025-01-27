@@ -10,7 +10,13 @@ const CatItem = ({ cafeName, imageUrl }: CatItemProps) => {
       <span className="px-2.5 py-1 items-center justify-center text-center bg-white rounded-[27px] text-Main_Blue Caption_bold">
         {cafeName}의 컵캣
       </span>
-      <Image src={imageUrl} height={129} width={88} alt={cafeName} />
+      <Image
+        src={imageUrl}
+        height={129}
+        width={88}
+        alt={cafeName}
+        unoptimized
+      />
     </div>
   );
 };
