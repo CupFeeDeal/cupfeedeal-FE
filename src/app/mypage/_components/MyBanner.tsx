@@ -1,13 +1,8 @@
 import Link from "next/link";
-//import Image from "next/image";
+import Image from "next/image";
 
 // icons
-import {
-  CupcatEx,
-  Information,
-  LevelBannerBg,
-  MyBannerBg,
-} from "@assets/icons";
+import { Information, LevelBannerBg, MyBannerBg } from "@assets/icons";
 // types
 import { MyInfo } from "src/types/mypage";
 
@@ -17,9 +12,7 @@ interface BannerProps {
 }
 
 const MyBanner = ({ isLevel, userInfo }: BannerProps) => {
-  const { username, user_level, cupcatImgUrl, cafe_name, birth_date } =
-    userInfo;
-  console.log(cupcatImgUrl); // api 에러 해결 후 지울 미사용 변수 임시 처리
+  const { user_level, cupcatImgUrl, cafe_name, birth_date } = userInfo;
 
   return (
     <div className="w-full overflow-hidden relative z-5">
@@ -64,14 +57,16 @@ const MyBanner = ({ isLevel, userInfo }: BannerProps) => {
             </div>
           )}
         </div>
-        {/* <Image
-          alt={cupcatImgUrl}
-          src={cupcatImgUrl}
-          width={198}
-          height={289}
-          className="p-2"
-        /> */}
-        <CupcatEx width={"54%"} height={289} className="p-2" />
+        <div className="relative w-[54%] aspect-[198/289]">
+          <Image
+            alt={cupcatImgUrl}
+            src={cupcatImgUrl}
+            fill
+            style={{ objectFit: "contain" }}
+            className="p-2"
+            unoptimized
+          />
+        </div>
       </div>
     </div>
   );

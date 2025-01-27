@@ -51,7 +51,7 @@ const SearchContent = ({
       return;
     }
     setShowBottomSheet(true);
-  }, [selectedId]);
+  }, [selectedId, setShowBottomSheet]);
 
   // 검색어 입력 핸들링
   const handleSearch = (newQuery: string) => {
