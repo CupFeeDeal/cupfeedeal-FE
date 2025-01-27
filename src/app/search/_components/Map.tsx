@@ -1,12 +1,12 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { useSearchParams } from "next/navigation";
 // types
 import { MapProps } from "src/types/search";
 // store & hooks
 import useSelectedCafeStore from "@store/useSelectedCafeStore";
 import useMap, { INITIAL_CENTER, INITIAL_ZOOM } from "./useMap";
-import { useSearchParams } from "next/navigation";
 
 const Map = ({
   mapId = "map",
@@ -15,19 +15,14 @@ const Map = ({
   cafes,
 }: MapProps) => {
   const mapRef = useRef<HTMLDivElement | null>(null);
-  const { initializeMap, addMarker } = useMap();
   const [isMapLoaded, setIsMapLoaded] = useState(false);
+  const { map, initializeMap, addMarker } = useMap();
+
   const searchParams = useSearchParams();
-  const selectedId = Number(searchParams.get("id"));
+  const selectedId = Number(searchParams.get("id")); // 바텀시트에 들어갈 상세 카페 id
 
   // 선택된 카페 정보 + 이전 지도 중심
-  const {
-    selectedCafeId,
-    oldCenter,
-    setSelectedCafeId,
-    setShowBottomSheet,
-    setIsSheetOpen,
-  } = useSelectedCafeStore();
+  const { oldCenter } = useSelectedCafeStore();
 
   // naver 스크립트 로드 확인
   useEffect(() => {
@@ -64,23 +59,23 @@ const Map = ({
     // 지도 생성
     const map = new naver.maps.Map(mapRef.current, mapOptions);
 
-    // 전역에 저장 (useMap에 있는 initializeMap)
+    // 전역에 저장
     initializeMap(map);
 
     // 지도 클릭/드래그 시 showBottomSheet 비활성화
     naver.maps.Event.addListener(map, "click", () => {
-      setShowBottomSheet(false);
-      setIsSheetOpen(false);
-      setSelectedCafeId(null);
+      // setShowBottomSheet(false);
+      // setIsSheetOpen(false);
+
       const params = new URLSearchParams(window.location.search);
       params.delete("id");
       window.history.pushState(null, "", `/search?${params.toString()}`);
     });
 
     naver.maps.Event.addListener(map, "dragstart", () => {
-      setShowBottomSheet(false);
-      setIsSheetOpen(false);
-      setSelectedCafeId(null);
+      // setShowBottomSheet(false);
+      // setIsSheetOpen(false);
+
       const params = new URLSearchParams(window.location.search);
       params.delete("id");
       window.history.pushState(null, "", `/search?${params.toString()}`);
@@ -91,32 +86,16 @@ const Map = ({
     initialZoom,
     isMapLoaded,
     oldCenter,
-    setIsSheetOpen,
-    setSelectedCafeId,
-    setShowBottomSheet,
+    // setIsSheetOpen,
+    // setShowBottomSheet,
   ]);
 
   // 마커 찍기
   useEffect(() => {
     if (isMapLoaded) {
-      addMarker(cafes, selectedId, (id) => {
-        setSelectedCafeId(id);
-        if (id) {
-          setShowBottomSheet(true);
-          setIsSheetOpen(false);
-        }
-      });
+      addMarker(cafes, selectedId);
     }
-  }, [
-    addMarker,
-    isMapLoaded,
-    selectedId,
-    setSelectedCafeId,
-    setShowBottomSheet,
-    cafes,
-  ]);
-
-  const { map } = useMap();
+  }, [addMarker, isMapLoaded, selectedId, cafes]);
 
   useEffect(() => {
     if (!isMapLoaded) return;

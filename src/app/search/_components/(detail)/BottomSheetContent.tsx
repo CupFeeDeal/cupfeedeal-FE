@@ -37,12 +37,10 @@ function InfoRow({ label, value }: { label: string; value: string }) {
   );
 }
 
-const BottomSheetContent = ({
-  cafeInfo,
-}: // updateCafeLikeStatus,
-BottomSheetContentProps) => {
+const BottomSheetContent = ({ cafeInfo }: BottomSheetContentProps) => {
   const router = useRouter();
   const accessToken = token.get();
+
   // 비로그인 시 모달
   const [showModalforSave, setShowModalforSave] = useState(false);
   const [showModalforSubs, setShowModalforSubs] = useState(false);
@@ -74,10 +72,8 @@ BottomSheetContentProps) => {
       try {
         if (isLike) {
           await likeApi.deleteLike(cafeInfo.id);
-          console.log("delete");
         } else {
           await likeApi.postLike(cafeInfo.id);
-          console.log("post");
         }
 
         const updatedIsLike = !isLike;

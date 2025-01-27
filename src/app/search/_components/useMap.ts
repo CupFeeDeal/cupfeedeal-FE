@@ -33,12 +33,6 @@ const useMap = () => {
       if (!map) return;
 
       const currentLocation = new naver.maps.LatLng(latitude, longitude);
-      // new naver.maps.Marker({
-      //   position: currentLocation,
-      //   map,
-      //   title: "Current location",
-      // });
-
       map.setCenter(currentLocation);
     },
     [map]
@@ -80,16 +74,12 @@ const useMap = () => {
 
   // 마커 추가하기
   const addMarker = useCallback(
-    (
-      locations: Cafe[],
-      selectedCafeId: number | null,
-      setSelectedCafeId: (id: number | null) => void
-    ) => {
+    (locations: Cafe[], selectedId: number | null) => {
       if (!map) return;
       clearMarkers();
 
       locations.forEach((location) => {
-        const isSelected = selectedCafeId === location.id;
+        const isSelected = selectedId === location.id;
 
         const marker = new naver.maps.Marker({
           position: new naver.maps.LatLng(
@@ -101,13 +91,7 @@ const useMap = () => {
           icon: {
             content: isSelected
               ? `
-              <div style="
-                width: 40px; 
-                height: 46px; 
-                display: flex; 
-                justify-content: center; 
-                align-items: center;
-              ">
+              <div style="width: 40px; height: 46px; display: flex; justify-content: center; align-items: center;">
                 <img src='/svg/PinMarker.svg' style="width: 100%; height: 100%; object-fit: contain;"/>
               </div>`
               : location.is_like
@@ -118,19 +102,10 @@ const useMap = () => {
               `
               : `
               <div style="width: 40px; height: 46px; display: flex; justify-content: center; align-items: center;">
-              <div style="
-                width: 30px;
-                height: 30px;
-                background-color: #1b7be8;
-                border-radius: 15px;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                box-shadow: 0px 0px 12.7px 0px rgba(175, 176, 187, 0.31);
-              ">
-              <img src="/svg/CoffeeBeanMarker.svg" style="width: 18px; height: 18px;" />
-              </div>
-            </div>`,
+                <div style="width: 30px; height: 30px; background-color: #1b7be8; border-radius: 15px; display: flex; align-items: center; justify-content: center; box-shadow: 0px 0px 12.7px 0px rgba(175, 176, 187, 0.31);">
+                  <img src="/svg/CoffeeBeanMarker.svg" style="width: 18px; height: 18px;" />
+                </div>
+              </div>`,
             anchor: new naver.maps.Point(20, 23),
           },
           zIndex: isSelected ? 40 : 35,
@@ -138,9 +113,8 @@ const useMap = () => {
 
         // 마커 클릭 이벤트리스너
         naver.maps.Event.addListener(marker, "click", () => {
-          //setSelectedCafeId(isSelected ? null : location.id);
           const currentParams = new URLSearchParams(window.location.search);
-          currentParams.set("id", String(location.id));
+          currentParams.set("id", String(location.id)); // 카페 id params에 추가
           router.push(`/search?${currentParams.toString()}`);
 
           // 바텀시트를 고려한 정중앙 배치
