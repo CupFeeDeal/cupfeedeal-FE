@@ -2,11 +2,15 @@
 
 import Link from "next/link";
 import { useState } from "react";
-import Modal from "@common/Modal";
-import { ManageModalProps } from "src/types/modal";
+
+import { subscriptionApi } from "@api/subscription";
+
 import TopBar from "@common/TopBar";
 import { HalfCat } from "@assets/icons";
 import { formatDate } from "@app/subscription/_utils/FormatDate";
+
+import Modal from "@common/Modal";
+import { ManageModalProps } from "src/types/modal";
 import Info from "@app/payment/_components/Info";
 import CancelBfModal from "./CancelBfModal";
 import CancelAfModal from "./CancelAfModal";
@@ -47,11 +51,17 @@ const ManageModal = ({
   const [showBfModal, setShowBfModal] = useState(false);
   const [showAfModal, setShowAfModal] = useState(false);
 
-  // 추후 환불 관련 API로 수정
-  const handleUnsubscribe = () => {
-    console.log("환불함");
-    setShowBfModal(false);
-    setShowAfModal(true);
+  // 구독 취소 기능
+  const handleUnsubscribe = async () => {
+    try {
+      await subscriptionApi.cancelSubscription(user_subscription_id);
+
+      console.log("환불함");
+      setShowBfModal(false);
+      setShowAfModal(true);
+    } catch (error) {
+      console.error("구독 취소 실패: ", error);
+    }
   };
 
   const handleFinalClose = () => {

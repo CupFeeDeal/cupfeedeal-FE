@@ -1,7 +1,9 @@
-import { serverApi } from "./server";
+import { privateApi } from "./client";
 import { SubscriptionResponse } from "src/types/subscription";
 
 export const subscriptionApi = {
-  getSubscriptionData: () =>
-    serverApi.get<SubscriptionResponse>("/api/v1/userSubscription"),
+  cancelSubscription: (user_subscription_id: number) =>
+    privateApi.patch<null>(
+      `/api/v1/userSubscription/cancel/${user_subscription_id}`
+    ),
 };
