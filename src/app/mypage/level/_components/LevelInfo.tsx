@@ -28,7 +28,7 @@ const LevelInfo = ({ level }: LevelInfoProps) => {
                 Lv.{data.lv}
               </div>
               <div
-                className={`line-clamp-2 Body_2_reg ${
+                className={`line-clamp-3 Body_2_reg ${
                   data.lv === level ? "text-black" : "text-Grey-600"
                 }`}
               >
