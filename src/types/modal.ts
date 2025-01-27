@@ -18,15 +18,16 @@ export interface BasicModalProps {
 }
 
 export interface BasicCafeModalProps extends BasicModalProps {
-  cafe: string;
+  cafe_name: string;
 }
 
 export interface UseCardModalProps extends BasicCafeModalProps {
   onComplete: (showFootModal: boolean) => void;
+  user_subscription_id: number;
 }
 
 export interface CancelBfModalProps extends BasicCafeModalProps {
-  remain: number;
+  remaining_days: number;
 }
 
 export interface LoginModalProps extends BasicModalProps {
@@ -35,12 +36,12 @@ export interface LoginModalProps extends BasicModalProps {
 }
 
 export interface ManageModalProps extends BasicCafeModalProps {
-  id: number;
+  user_subscription_id: number;
   menu: string;
   period: number;
   price: number;
   start: string;
   end: string;
   visit: number;
-  remain: number;
+  remaining_days: number;
 }

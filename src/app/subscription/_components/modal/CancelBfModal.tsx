@@ -4,8 +4,8 @@ import { CancelBfModalProps } from "src/types/modal";
 const CancelBfModal = ({
   isOpen,
   onClose,
-  cafe,
-  remain,
+  cafe_name,
+  remaining_days,
   onConfirm,
 }: CancelBfModalProps) => (
   <Modal
@@ -17,9 +17,9 @@ const CancelBfModal = ({
   >
     {/* 모달 내용 */}
     <div className="flex flex-col justify-center items-center py-5">
-      <h3 className="Headline_3">{cafe}</h3>
+      <h3 className="Headline_3">{cafe_name}</h3>
       <p className="Caption_med text-Grey-500 px-2 py-1 border border-Grey-300 rounded-3xl mt-3 mb-10">
-        만료까지 {remain}일 남았어요
+        만료까지 {remaining_days}일 남았어요
       </p>
       <h5 className="Body_1_bold text-center mb-7">
         취소 시 남은 일수의

@@ -2,11 +2,11 @@
 
 import { useState } from "react";
 import Card from "./Card";
-import { SubscriptionCardData } from "src/types/subscription";
+import { SubscriptionCard } from "src/types/subscription";
 import { getCardPosition, getCardBackground } from "../_utils/CardHelpers";
 
 interface CardListProps {
-  data: SubscriptionCardData[];
+  data: SubscriptionCard[];
 }
 
 const CardList = ({ data }: CardListProps) => {

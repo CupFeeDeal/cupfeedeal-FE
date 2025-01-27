@@ -2,11 +2,15 @@
 
 import Link from "next/link";
 import { useState } from "react";
-import Modal from "@common/Modal";
-import { ManageModalProps } from "src/types/modal";
+
+import { subscriptionApi } from "@api/subscription";
+
 import TopBar from "@common/TopBar";
 import { HalfCat } from "@assets/icons";
 import { formatDate } from "@app/subscription/_utils/FormatDate";
+
+import Modal from "@common/Modal";
+import { ManageModalProps } from "src/types/modal";
 import Info from "@app/payment/_components/Info";
 import CancelBfModal from "./CancelBfModal";
 import CancelAfModal from "./CancelAfModal";
@@ -34,24 +38,30 @@ const DateBox = ({ label, date, isExpiry = false }: DateBoxProps) => (
 const ManageModal = ({
   isOpen,
   onClose,
-  id,
-  cafe,
+  user_subscription_id,
+  cafe_name,
   menu,
   period,
   price,
   start,
   end,
   visit,
-  remain,
+  remaining_days,
 }: ManageModalProps) => {
   const [showBfModal, setShowBfModal] = useState(false);
   const [showAfModal, setShowAfModal] = useState(false);
 
-  // 추후 환불 관련 API로 수정
-  const handleUnsubscribe = () => {
-    console.log("환불함");
-    setShowBfModal(false);
-    setShowAfModal(true);
+  // 구독권 취소하기 로직
+  const handleUnsubscribe = async () => {
+    try {
+      await subscriptionApi.cancelSubscription(user_subscription_id);
+
+      console.log("환불함");
+      setShowBfModal(false);
+      setShowAfModal(true);
+    } catch (error) {
+      console.error("구독 취소 실패: ", error);
+    }
   };
 
   const handleFinalClose = () => {
@@ -62,17 +72,17 @@ const ManageModal = ({
   return (
     <>
       <Modal isOpen={isOpen} onClose={onClose} fullPage>
-        <TopBar title={`${cafe} 구독권 관리`} onBack={onClose} />
+        <TopBar title={`${cafe_name} 구독권 관리`} onBack={onClose} />
 
         {/* 구독 정보 */}
         <div className="flex-1 overflow-auto p-5 space-y-4">
-          <Info {...{ cafe_name: cafe, menu, period, price }} />
+          {/* <Info {...{ cafe_name: cafe_name, menu, period, price }} /> */}
 
           {/* 방문수 및 만료일 */}
           <div className="flex flex-col px-4 rounded-2xl bg-Pale_Blue_2 items-center">
             <h5 className="Body_1_bold py-6">
-              지금까지 <span className="text-Main_Blue">{cafe}</span> 카페를{" "}
-              {visit}번 방문했어요!
+              지금까지 <span className="text-Main_Blue">{cafe_name}</span>{" "}
+              카페를 {visit}번 방문했어요!
             </h5>
             <div className="flex justify-between gap-3 w-full mb-9">
               <DateBox label="구독 시작일" date={start} />
@@ -84,7 +94,7 @@ const ManageModal = ({
           {/* 버튼 */}
           <div className="pt-4 space-y-4">
             <Link
-              href={`/payment?type=extend&id=${id}`}
+              href={`/payment?type=extend&id=${user_subscription_id}`}
               className="btn-confirm block text-center"
             >
               구독 연장하기
@@ -100,14 +110,14 @@ const ManageModal = ({
       <CancelBfModal
         isOpen={showBfModal}
         onClose={() => setShowBfModal(false)}
-        cafe={cafe}
-        remain={remain}
+        cafe_name={cafe_name}
+        remaining_days={remaining_days}
         onConfirm={handleUnsubscribe}
       />
       <CancelAfModal
         isOpen={showAfModal}
         onClose={handleFinalClose}
-        cafe={cafe}
+        cafe_name={cafe_name}
       />
     </>
   );
