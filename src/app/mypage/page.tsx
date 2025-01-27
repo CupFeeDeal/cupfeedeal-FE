@@ -2,13 +2,16 @@
 import TopBar from "@common/TopBar";
 import MyBanner from "./_components/MyBanner";
 import MyTab from "./_components/MyTab";
+import { userServerApi } from "@api/userServer";
 
-export default function Mypage() {
+export default async function Mypage() {
+  const userInfo = await userServerApi.getMyInfo();
+
   return (
     <div className="flex w-full h-full flex-col">
       <TopBar title="마이페이지" />
       <div className="flex-1 overflow-auto w-full relative">
-        <MyBanner isLevel={false} />
+        <MyBanner userInfo={userInfo} isLevel={false} />
         <MyTab />
       </div>
     </div>

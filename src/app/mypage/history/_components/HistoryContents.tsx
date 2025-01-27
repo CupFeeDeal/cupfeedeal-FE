@@ -6,53 +6,17 @@ import HistoryCard from "./HistoryItem";
 import Toggle from "./Toggle";
 // icons
 import { Search } from "@assets/icons";
-// api
-import { userApi } from "@api/user";
 // types
 import { Subscription } from "src/types/mypage";
 
-const HistoryContents = () => {
-  const [historyData, setHistoryData] = useState<Subscription[]>([]);
-  const [filteredData, setFilteredData] = useState<Subscription[]>([]);
+interface HistoryContentsProps {
+  historyData: Subscription[];
+}
 
+const HistoryContents = ({ historyData }: HistoryContentsProps) => {
   const [isToggleOn, setIsToggleOn] = useState(false);
   const [query, setQuery] = useState("");
-
-  // 날짜 포맷팅
-  const formatDate = (dateString: string) => {
-    const date = new Date(dateString);
-    return `${date.getFullYear() % 100}년 ${
-      date.getMonth() + 1
-    }월 ${date.getDate()}일`;
-  };
-
-  useEffect(() => {
-    const fetchHistoryData = async () => {
-      try {
-        const response = await userApi.getSubsList();
-        const transformedData: Subscription[] = response.map((item) => ({
-          user_subscription_id: item.user_subscription_id,
-          cafe_id: item.cafe_id,
-          cafe_name: item.cafe_name,
-          menu: item.menu,
-          cafe_subscription_name: item.cafe_subscription_name,
-          period: item.period,
-          price: item.price,
-          start: formatDate(item.start),
-          end: formatDate(item.end),
-          status: item.status,
-          remain: item.remain,
-        }));
-
-        setHistoryData(transformedData);
-        setFilteredData(transformedData);
-      } catch (error) {
-        console.error(error);
-      }
-    };
-
-    fetchHistoryData();
-  }, []);
+  const [filteredData, setFilteredData] = useState<Subscription[]>([]);
 
   // 검색 기능
   const handleSearch = () => {
@@ -68,6 +32,11 @@ const HistoryContents = () => {
       );
 
     setFilteredData(filtered);
+  };
+
+  // 토글 기능
+  const handleToggle = () => {
+    setIsToggleOn(!isToggleOn);
   };
 
   // 토글과 검색 필터링된 데이터
@@ -108,7 +77,7 @@ const HistoryContents = () => {
         <span className="Caption_med text-Grey-500">
           사용 가능 구독권만 보기
         </span>
-        <Toggle isToggleOn={isToggleOn} setIsToggleOn={setIsToggleOn} />
+        <Toggle isToggleOn={isToggleOn} handleToggle={handleToggle} />
       </div>
 
       <div className="flex flex-col pb-[38px]">

@@ -1,6 +1,4 @@
-"use client";
-import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
+import Link from "next/link";
 //import Image from "next/image";
 
 // icons
@@ -10,46 +8,17 @@ import {
   LevelBannerBg,
   MyBannerBg,
 } from "@assets/icons";
-
-// api
-import { userApi } from "@api/user";
+// types
+import { MyInfo } from "src/types/mypage";
 
 interface BannerProps {
+  userInfo: MyInfo;
   isLevel: boolean;
 }
 
-const MyBanner = ({ isLevel }: BannerProps) => {
-  const router = useRouter();
-
-  const [userInfo, setUserInfo] = useState({
-    level: 0,
-    cafeName: "",
-    birth: "",
-    cupcatImgUrl: "",
-  });
-
-  useEffect(() => {
-    const fetchMyInfo = async () => {
-      try {
-        const response = await userApi.getMyInfo();
-
-        setUserInfo({
-          level: response.user_level,
-          cafeName: response.cafe_name,
-          birth: response.birth_date,
-          cupcatImgUrl: response.cupcatImgUrl,
-        });
-
-        window.localStorage.setItem("level", response.user_level.toString());
-      } catch (error) {
-        console.error(error);
-      }
-    };
-
-    fetchMyInfo();
-  }, []);
-
-  const { level, cafeName, birth, cupcatImgUrl } = userInfo;
+const MyBanner = ({ isLevel, userInfo }: BannerProps) => {
+  const { username, user_level, cupcatImgUrl, cafe_name, birth_date } =
+    userInfo;
   console.log(cupcatImgUrl); // api 에러 해결 후 지울 미사용 변수 임시 처리
 
   return (
@@ -59,24 +28,33 @@ const MyBanner = ({ isLevel }: BannerProps) => {
       {/* 내 정보 */}
       <div className="absolute top-0 left-0 py-6 px-5 flex flex-row w-full justify-between">
         <div className="flex flex-col">
-          <span className="flex flex-row flex-grow-0 w-[84px] items-center py-0.5 pl-5 pr-3 gap-1 bg-Dark_Blue mb-3 rounded-[38px]">
-            <div className="Body_1_bold text-white">Lv.{level}</div>
-            <Information
-              width={16}
-              height={16}
-              className="cursor-pointer"
-              onClick={() => router.push("/mypage/level")}
-            />
+          <span
+            className={`flex flex-row flex-grow-0  items-center justify-center py-0.5 ${
+              isLevel ? "w-[72px]" : "w-[84px] pl-5 pr-3"
+            } gap-1 bg-Dark_Blue mb-3 rounded-[38px]`}
+          >
+            <div className="Body_1_bold text-white">Lv.{user_level}</div>
+            {!isLevel && (
+              <Link href={"/mypage/level"}>
+                <Information
+                  width={16}
+                  height={16}
+                  className="cursor-pointer"
+                />
+              </Link>
+            )}
           </span>
 
           {isLevel ? (
             <div className="flex shrink-0 flex-col w-44">
               <div className="Headline_3">
-                {cafeName} 옆의
+                {cafe_name} 옆의
                 <br />
                 컵캣
               </div>
-              <div className="Body_1_med text-Grey-700 mt-2">{birth} 만남</div>
+              <div className="Body_1_med text-Grey-700 mt-2">
+                {birth_date} 만남
+              </div>
             </div>
           ) : (
             <div className="Headline_3">
