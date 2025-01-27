@@ -12,17 +12,17 @@ import FootModal from "./modal/FootModal";
 import ManageModal from "./modal/ManageModal";
 
 const Card = ({
-  id,
-  name,
+  user_subscription_id,
+  cafe_name,
   menu,
   period,
   price,
-  savedCups,
-  isUsed,
+  saved_cups,
+  is_used,
   visit,
   start,
   end,
-  remain,
+  remaining_days,
   backgroundClass,
   showDetails,
   total,
@@ -32,14 +32,14 @@ const Card = ({
   const [showManageModal, setShowManageModal] = useState(false);
 
   const manageModalProps = {
-    id,
+    user_subscription_id,
     menu,
     period,
     price,
     start,
     end,
     visit,
-    remain,
+    remaining_days,
   };
 
   // 사용 완료 -> 발자국 모달 바꾸기
@@ -57,7 +57,7 @@ const Card = ({
       className={`${CARD_STYLES.common.cardContainer} ${backgroundClass} cursor-pointer`}
     >
       <p className="Headline_3 text-white inline-flex gap-3 items-center mb-1">
-        {name}
+        {cafe_name}
         <Setting
           onClick={() => {
             setShowManageModal(true);
@@ -73,7 +73,7 @@ const Card = ({
           </p>
 
           {/* 구독권 사용 버튼 or 스탬프 */}
-          {isUsed ? (
+          {is_used ? (
             <Stamp className="absolute -top-5 -right-10 " />
           ) : (
             <div
@@ -90,14 +90,14 @@ const Card = ({
 
           {/* 이득 정보 */}
           <div className={`absolute flex gap-2 ${bottomSpacing}`}>
-            <Cups count={savedCups} />
+            <Cups count={saved_cups} />
           </div>
 
           {/* 구독권 사용 모달 */}
           <UseCardModal
             isOpen={showUseModal}
             onClose={() => setShowUseModal(false)}
-            cafe={name}
+            cafe_name={cafe_name}
             onComplete={switchModal}
           />
 
@@ -105,7 +105,7 @@ const Card = ({
           <ManageModal
             isOpen={showManageModal}
             onClose={() => setShowManageModal(false)}
-            cafe={name}
+            cafe_name={cafe_name}
             {...manageModalProps}
           />
 
@@ -113,7 +113,7 @@ const Card = ({
           <FootModal
             isOpen={showFootModal}
             onClose={() => setShowFootModal(false)}
-            cafe={name}
+            cafe_name={cafe_name}
           />
         </>
       )}

@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { subscriptionApi } from "@api/subscription";
 import HomeTap from "@common/HomeTap";
 import { CardBackground } from "@assets/icons";
 import CardList from "./_components/CardList";
@@ -46,13 +47,17 @@ const MOCK_CARDS = [
   },
 ];
 
-const SubscriptionPage = () => {
+const SubscriptionPage = async () => {
+  const {
+    result: { paw_count, userSubscriptionListResponseDtos },
+  } = await subscriptionApi.getSubscriptionData();
+
   return (
     <div className="flex flex-col h-full">
       <HomeTap />
       <div
         className={`flex-1 relative overflow-auto bg-Pale_Blue_2 px-5 bg-no-repeat bg-[position:right_top] ${
-          MOCK_FOOTPRINTS > 0 ? `bg-foot${MOCK_FOOTPRINTS}` : ""
+          paw_count > 0 ? `bg-foot${paw_count}` : ""
         }`}
       >
         <p className="Headline_3 py-6 whitespace-pre-line">
@@ -68,7 +73,7 @@ const SubscriptionPage = () => {
           >
             구독권 둘러보기
           </Link>
-          <CardList data={MOCK_CARDS} />
+          <CardList data={userSubscriptionListResponseDtos} />
         </div>
       </div>
     </div>
