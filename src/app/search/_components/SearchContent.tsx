@@ -1,67 +1,81 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
 
 // components
 import SearchBar from "./SearchBar";
 import SearchMenu from "./SearchMenu";
 import Map from "./Map";
-// api
-import { searchApi } from "@api/search";
+import BottomSheet from "./(detail)/BottomSheet";
 // store
 import { useCafeListStore } from "@store/useCafeListStore";
 import useSelectedCafeStore from "@store/useSelectedCafeStore";
-import { useSearchParams } from "next/navigation";
+// types
+import { Cafe, CafeDetail } from "src/types/search";
 
-const SearchContent = () => {
-  // const { showBottomSheet } = useSelectedCafeStore();
-  //const [searchKey, setSearchKey] = useState(""); // 검색버튼 눌렀을 때만 트리거되도록 하는 키
+interface SearchContentProps {
+  initialCafes: Cafe[];
+  initialQuery: string;
+  initialLike: boolean;
+  detailId?: number;
+  detailCafe?: CafeDetail | null;
+}
+
+const SearchContent = ({
+  initialCafes,
+  initialQuery,
+  initialLike,
+  detailId,
+  detailCafe,
+}: SearchContentProps) => {
+  const router = useRouter();
   const searchParams = useSearchParams();
-  const [query, setQuery] = useState("");
-  const [isLikeOnly, setIsLikeOnly] = useState(false);
 
-  const cafes = useCafeListStore((state) => state.cafes);
-  const setCafes = useCafeListStore((state) => state.setCafes);
-  const { setSelectedCafeId, setShowBottomSheet } = useSelectedCafeStore();
+  const { cafes, setCafes } = useCafeListStore();
+  const [query, setQuery] = useState(initialQuery);
+  const [isLikeOnly, setIsLikeOnly] = useState(initialLike);
 
-  // 쿼리에 id값이 담겨 있을 경우, 해당하는 카페 select
-  const id = searchParams.get("id");
+  const { showBottomSheet, setShowBottomSheet } = useSelectedCafeStore();
 
+  // SSR로 받아온 카페리스트 스토어에 저장
   useEffect(() => {
-    if (!id) return;
-    setSelectedCafeId(Number(id));
-    setShowBottomSheet(true);
-  }, [id, setSelectedCafeId, setShowBottomSheet]);
+    setCafes(initialCafes);
+  }, [initialCafes, setCafes]);
 
-  // 카페 리스트 가져오기
-  const fetchCafes = async (query: string, like: boolean) => {
-    try {
-      const cafesData = await searchApi.getCafes(query, like);
-      setCafes(cafesData);
-    } catch (error) {
-      console.log(error);
+  // params에서 카페 id 추출하여 바텀시트 렌더링
+  const selectedId = Number(searchParams.get("id"));
+  useEffect(() => {
+    if (!selectedId) {
+      setShowBottomSheet(false);
+      return;
     }
-  };
-  // 검색어 or 좋아요 필터링
-  useEffect(() => {
-    fetchCafes(query, isLikeOnly);
-  }, [query, isLikeOnly]);
+    setShowBottomSheet(true);
+  }, [selectedId, setShowBottomSheet]);
 
   // 검색어 입력 핸들링
   const handleSearch = (newQuery: string) => {
     setQuery(newQuery);
+    router.push(`/search?q=${encodeURIComponent(newQuery)}&like=${isLikeOnly}`);
   };
 
   // 좋아요 필터 핸들링
   const toggleLike = () => {
-    setIsLikeOnly((prev) => !prev);
+    const isLike = !isLikeOnly;
+    setIsLikeOnly(isLike);
+    router.push(`/search?q=${encodeURIComponent(query)}&like=${isLike}`);
   };
 
   return (
     <div className="w-full flex-1 relative">
-      <SearchBar onSearch={handleSearch} />
+      <SearchBar onSearch={handleSearch} currQuery={query} />
       <SearchMenu isLikeOnly={isLikeOnly} toggleLike={toggleLike} />
       <Map cafes={cafes} />
+      {showBottomSheet && (
+        <div>
+          <BottomSheet detailId={detailId} detailCafe={detailCafe} />
+        </div>
+      )}
     </div>
   );
 };

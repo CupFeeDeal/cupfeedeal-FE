@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 
@@ -9,12 +9,13 @@ import useMap from "./useMap";
 // store & hooks
 import { useCafeListStore } from "@store/useCafeListStore";
 import useSelectedCafeStore from "@store/useSelectedCafeStore";
-import useDistance from "@hooks/useDistance";
+import useDistance from "@app/search/_hooks/useDistance";
 
 export default function CafeList() {
+  const router = useRouter();
   const cafes = useCafeListStore((state) => state.cafes);
-  const { map, getCurrentLocation, getMapOptions } = useMap();
 
+  const { map, getCurrentLocation, getMapOptions } = useMap();
   const { getDistance, formatDistance } = useDistance();
 
   const [cafeList, setCafeList] = useState<
@@ -52,20 +53,15 @@ export default function CafeList() {
     return new Intl.NumberFormat("ko-KR").format(price);
   };
 
-  const router = useRouter();
-
   // 특정 카페 클릭 시 상세 바텀시트로 이동
-  const { setSelectedCafeId, setShowBottomSheet, setOldCenter } =
-    useSelectedCafeStore();
+  const { setOldCenter } = useSelectedCafeStore();
   const handleClickDetail = (id: number) => {
     if (map) {
       const { center } = getMapOptions();
       setOldCenter(center);
     }
     // 바텀시트 열기
-    setSelectedCafeId(id);
-    setShowBottomSheet(true);
-    router.push("/search");
+    router.push(`/search?id=${id}`);
   };
 
   return (

@@ -2,9 +2,6 @@ import { Coordinates } from "src/types/search";
 import { create } from "zustand";
 
 type SelectedCafeState = {
-  selectedCafeId: number | null;
-  setSelectedCafeId: (id: number | null) => void;
-
   oldCenter: Coordinates | null;
   setOldCenter: (coord: Coordinates) => void;
 
@@ -16,9 +13,6 @@ type SelectedCafeState = {
 };
 
 const useSelectedCafeStore = create<SelectedCafeState>((set) => ({
-  selectedCafeId: null,
-  setSelectedCafeId: (id) => set({ selectedCafeId: id }),
-
   oldCenter: null,
   setOldCenter: (coord) => set(() => ({ oldCenter: coord })),
 

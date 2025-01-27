@@ -117,7 +117,7 @@ const HistoryCard = ({ item }: HistoryItemProps) => {
         isOpen={showBfModal}
         onClose={() => setShowBfModal(false)}
         cafe={item.cafe_name}
-        remain={item.remain} // 추후 item.remain 으로 수정
+        remain={item.remain}
         onConfirm={handleUnsubscribe}
       />
       <CancelAfModal

@@ -1,41 +1,25 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { motion } from "framer-motion";
 
 // components
 import BottomSheetContent from "./BottomSheetContent";
 import BottomSheetHeader from "./BottomSheetHeader";
-
-// api
-import { searchApi } from "@api/search";
 // types
 import { CafeDetail } from "src/types/search";
 // store & hooks
 import useSelectedCafeStore from "@store/useSelectedCafeStore";
-import useBottomSheet from "@hooks/useBottomSheet";
+import useBottomSheet from "@app/search/_hooks/useBottomSheet";
 
-const BottomSheet = () => {
+interface BottomSheetProps {
+  detailId?: number;
+  detailCafe?: CafeDetail | null;
+}
+
+const BottomSheet = ({ detailCafe }: BottomSheetProps) => {
   const { sheet, content } = useBottomSheet();
-  const { selectedCafeId } = useSelectedCafeStore();
   const { setIsSheetOpen } = useSelectedCafeStore();
-
-  const [cafe, setCafe] = useState<CafeDetail>();
-
-  // 카페 상세 정보 받아오기
-  useEffect(() => {
-    const fetchCafeDetail = async () => {
-      try {
-        const cafeData = await searchApi.getCafeDetail(selectedCafeId || 1);
-        setCafe(cafeData);
-        console.log(cafeData);
-      } catch (error) {
-        console.error(error);
-      }
-    };
-
-    fetchCafeDetail();
-  }, [selectedCafeId]);
 
   // 바텀시트 내리기
   let PARTIAL_Y = 0;
@@ -49,10 +33,8 @@ const BottomSheet = () => {
   const handleBackClick = () => {
     if (sheet.current) {
       sheet.current.style.transform = `translateY(${PARTIAL_Y}px)`;
-      console.log("translateY");
       setIsSheetOpen(false);
     }
-    console.log("click");
   };
 
   return (
@@ -71,7 +53,7 @@ const BottomSheet = () => {
     >
       <BottomSheetHeader handleBackClick={handleBackClick} />
       <div ref={content} className="flex-1 overflow-auto">
-        <BottomSheetContent cafeInfo={cafe} />
+        <BottomSheetContent cafeInfo={detailCafe} />
       </div>
     </motion.div>
   );

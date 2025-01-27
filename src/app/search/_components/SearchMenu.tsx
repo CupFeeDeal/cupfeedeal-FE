@@ -1,19 +1,18 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 // components
 import LoginModal from "./modal/LoginModal";
-// api
-import { token } from "@api/token";
 // icons
 import { EmptyHeart, FullHeart, Crosshair } from "@assets/icons";
+// api
+import { token } from "@api/token";
 // hook
 import useMap from "./useMap";
-import { useRouter } from "next/navigation";
-
-const defaultBtnStyle = `w-11 h-11 flex justify-center items-center bg-white rounded-[1.375rem] shadow-[0_0_11px_0_rgba(153,153,159,0.26)] cursor-pointer`;
-const clickedBtnStyle = `w-11 h-11 flex justify-center items-center bg-Main_Blue rounded-[1.375rem] shadow-[0_0_11px_0_rgba(153,153,159,0.26)] cursor-pointer`;
+// constant
+import { CLICKED_BTN_STYLE, DEFAULT_BTN_STYLE } from "../_constants/constants";
 
 interface SearchMenuProps {
   isLikeOnly: boolean;
@@ -24,16 +23,10 @@ const SearchMenu: React.FC<SearchMenuProps> = ({ isLikeOnly, toggleLike }) => {
   const { setCurrentLocation } = useMap();
   const [showLoginModal, setShowLoginModal] = useState(false);
 
-  const [accessToken, setAccessToken] = useState<string | null | undefined>(
-    null
-  );
-
-  useEffect(() => {
-    setAccessToken(token.sync());
-  }, []);
-
-  // 좋아요 버튼 눌렀을 때
+  // 좋아요 보기 버튼 눌렀을 때
   const handleClickHeart = async () => {
+    const accessToken = await token.get();
+
     if (!accessToken) {
       setShowLoginModal(true);
       return;
@@ -41,7 +34,7 @@ const SearchMenu: React.FC<SearchMenuProps> = ({ isLikeOnly, toggleLike }) => {
     toggleLike();
   };
 
-  // 현위치 핸들러
+  // 현위치로 이동 핸들러
   const handleCurrentLocation = () => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
@@ -69,7 +62,7 @@ const SearchMenu: React.FC<SearchMenuProps> = ({ isLikeOnly, toggleLike }) => {
         </span>
         <span className="absolute z-10 top-[4.75rem] right-5 flex flex-col gap-4">
           <div
-            className={isLikeOnly ? clickedBtnStyle : defaultBtnStyle}
+            className={isLikeOnly ? CLICKED_BTN_STYLE : DEFAULT_BTN_STYLE}
             onClick={handleClickHeart}
           >
             {isLikeOnly ? (
@@ -78,7 +71,7 @@ const SearchMenu: React.FC<SearchMenuProps> = ({ isLikeOnly, toggleLike }) => {
               <EmptyHeart width={24} height={24} />
             )}
           </div>
-          <div className={defaultBtnStyle} onClick={handleCurrentLocation}>
+          <div className={DEFAULT_BTN_STYLE} onClick={handleCurrentLocation}>
             <Crosshair width={24} height={24} />
           </div>
         </span>

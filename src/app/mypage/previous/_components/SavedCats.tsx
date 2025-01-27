@@ -1,39 +1,17 @@
-"use client";
-
-//import { userApi } from "@api/user";
-import { CupcatBg } from "@assets/icons";
-import { useState } from "react";
-//import { Cupcat } from "src/types/mypage";
+// components
 import CatItem from "./CatItem";
-import { cupcatData } from "./mock";
+// icons
+import { CupcatBg } from "@assets/icons";
+// types
+import { CupcatList } from "src/types/mypage";
+// hooks
+import { catPositions, chunk } from "../_hooks/useCupcats";
 
-function chunk<T>(array: T[], size: number) {
-  const result = [];
-  for (let i = 0; i < array.length; i += size) {
-    result.push(array.slice(i, i + size));
-  }
-  return result;
+interface SavedCatsProps {
+  cupcatData: CupcatList;
 }
 
-const catPositions = [
-  { top: "20.5%", left: "5%" },
-  { top: "20.5%", right: "30%" },
-  { top: "20.5%", right: "5%" },
-
-  { top: "48%", left: "3%" },
-  { top: "48%", left: "27%" },
-  { top: "48%", left: "52%" },
-
-  { top: "75%", left: "20%" },
-  { top: "75%", right: "30%" },
-  { top: "75%", right: "5%" },
-];
-
-const SavedCats = () => {
-  const [level, setLevel] = useState(0);
-  console.log(setLevel); // 미사용 변수로 임시 콘솔
-  //const [cupcats, setCupcats] = useState<Cupcat[]>([]);
-
+const SavedCats = ({ cupcatData }: SavedCatsProps) => {
   const levelToCount: { [key: number]: string } = {
     1: "한",
     2: "두",
@@ -47,30 +25,15 @@ const SavedCats = () => {
     10: "열",
   };
 
-  const count = levelToCount[level] || "";
-
-  // useEffect(() => {
-  //   const fetchSavedCupcats = async () => {
-  //     try {
-  //       const response = await userApi.getCupcats();
-  //       setLevel(response.level);
-  //       setCupcats(response.cupcats);
-  //     } catch (error) {
-  //       console.error(error);
-  //     }
-  //   };
-
-  //   fetchSavedCupcats();
-  // }, []);
-
-  const cupcats = cupcatData.result.cupcats;
+  const count = levelToCount[cupcatData.level] || "";
+  const cupcats = cupcatData.cupcats;
 
   const catChunks = chunk(cupcats, 9);
 
   return (
     <div className="relative flex flex-col w-full h-screen bg-Blue_Grey">
       <div className="absolute flex flex-row w-full px-5 mt-6 justify-between">
-        {level === 0 ? (
+        {cupcatData.level === 0 ? (
           <span className="flex Headline_3">
             아직 만난
             <br />
@@ -84,7 +47,7 @@ const SavedCats = () => {
           </span>
         )}
         <span className="flex flex-row w-auto h-[26px] items-center Body_1_bold text-white py-0.5 px-5 gap-1 bg-Dark_Blue mb-3 rounded-[38px]">
-          Lv.{level}
+          Lv.{cupcatData.level}
         </span>
       </div>
 

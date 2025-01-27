@@ -1,13 +1,13 @@
 interface ToggleProps {
   isToggleOn: boolean;
-  setIsToggleOn: React.Dispatch<React.SetStateAction<boolean>>;
+  handleToggle: () => void;
 }
 
-const Toggle = ({ isToggleOn, setIsToggleOn }: ToggleProps) => {
+const Toggle = ({ isToggleOn, handleToggle }: ToggleProps) => {
   return (
     <div
       className="flex flex-row items-center cursor-pointer"
-      onClick={() => setIsToggleOn(!isToggleOn)}
+      onClick={handleToggle}
     >
       <div
         className={`transition-all duration-300 border-solid border-[1px] border-Grey-300 relative w-[49px] h-[28px] rounded-[14px] shadow-[0_0_12.7px_0_rgba(175,176,187,0.31)] ${

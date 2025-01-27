@@ -14,24 +14,26 @@ import { token } from "@api/token";
 import { FullHeart, EmptyHeart, Instagram } from "@assets/icons";
 // store & hooks
 import useSelectedCafeStore from "@store/useSelectedCafeStore";
-import useDistance from "@hooks/useDistance";
+import useDistance from "@app/search/_hooks/useDistance";
 import { useCafeListStore } from "@store/useCafeListStore";
 // types
 import { CafeDetail } from "src/types/search";
+// constants
+import {
+  HEART_STYLE,
+  LABEL_STYLE,
+  VALUE_STYLE,
+} from "@app/search/_constants/constants";
 
 interface BottomSheetContentProps {
-  cafeInfo: CafeDetail | undefined;
+  cafeInfo: CafeDetail | undefined | null;
 }
-
-const labelStyle = `Body_2_bold text-Dark_Blue min-w-[49px]`;
-const valueStyle = `Body_2_med text-Grey-800`;
-const heartStyle = `w-5 h-5 flex justify-center items-center cursor-pointer rounded-[0.625rem] shadow-[0_0_5px_0_rgba(153,153,159,0.26)]`;
 
 function InfoRow({ label, value }: { label: string; value: string }) {
   return (
     <div className="flex flex-row justify-between items-start mb-3 z-25 gap-4">
-      <span className={labelStyle}>{label}</span>
-      <span className={`${valueStyle} w-[17.56rem]`}>{value}</span>
+      <span className={LABEL_STYLE}>{label}</span>
+      <span className={`${VALUE_STYLE} w-[17.56rem]`}>{value}</span>
     </div>
   );
 }
@@ -39,6 +41,7 @@ function InfoRow({ label, value }: { label: string; value: string }) {
 const BottomSheetContent = ({ cafeInfo }: BottomSheetContentProps) => {
   const router = useRouter();
   const accessToken = token.get();
+
   // 비로그인 시 모달
   const [showModalforSave, setShowModalforSave] = useState(false);
   const [showModalforSubs, setShowModalforSubs] = useState(false);
@@ -70,10 +73,8 @@ const BottomSheetContent = ({ cafeInfo }: BottomSheetContentProps) => {
       try {
         if (isLike) {
           await likeApi.deleteLike(cafeInfo.id);
-          console.log("delete");
         } else {
           await likeApi.postLike(cafeInfo.id);
-          console.log("post");
         }
 
         const updatedIsLike = !isLike;
@@ -143,12 +144,12 @@ const BottomSheetContent = ({ cafeInfo }: BottomSheetContentProps) => {
               {isLike ? (
                 <span
                   onClick={handleClickSave}
-                  className={`${heartStyle} bg-Main_Blue`}
+                  className={`${HEART_STYLE} bg-Main_Blue`}
                 >
                   <FullHeart width={12} height={12} />
                 </span>
               ) : (
-                <span className={`${heartStyle} bg-white`}>
+                <span className={`${HEART_STYLE} bg-white`}>
                   <EmptyHeart
                     onClick={handleClickSave}
                     width={11}
@@ -187,18 +188,18 @@ const BottomSheetContent = ({ cafeInfo }: BottomSheetContentProps) => {
           <InfoRow label="전화번호" value={cafeInfo.phone_num} />
           {/* <InfoRow label="SNS" value={cafeInfo.sns_address} /> */}
           <div className="flex flex-row justify-between items-center mb-3 z-25">
-            <span className={labelStyle}>SNS</span>
+            <span className={LABEL_STYLE}>SNS</span>
             <span className="w-6 h-6 ml-4 mr-2 flex shrink-0">
               <Instagram className="w-full h-full" />
             </span>
-            <span className={`${valueStyle} w-[17.56rem]`}>
+            <span className={`${VALUE_STYLE} w-[17.56rem]`}>
               {cafeInfo.sns_address}
             </span>
           </div>
 
           {/*카페소개*/}
-          <div className={`${labelStyle} mt-6`}>카페 소개</div>
-          <div className={`${valueStyle} mt-2`}>{cafeInfo.description}</div>
+          <div className={`${LABEL_STYLE} mt-6`}>카페 소개</div>
+          <div className={`${VALUE_STYLE} mt-2`}>{cafeInfo.description}</div>
 
           <div
             onClick={() => handleSubscription(cafeInfo.id)}
