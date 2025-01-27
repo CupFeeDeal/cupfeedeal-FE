@@ -1,5 +1,6 @@
 import { redirect } from "next/navigation";
-import { MOCK_PAYMENT_DATA } from "src/types/payment";
+import { paymentApi } from "@api/payment";
+
 import ExtendClient from "./_clients/ExtendClient";
 import NewClient from "./_clients/NewClient";
 import PaymentWrapper from "./PaymentWrapper";
@@ -15,22 +16,18 @@ const PaymentPage = async ({ searchParams }: PaymentPageProps) => {
   // or.. 울보캣으로 잘못된 접근 페이지 하나 만들기..?
   // if (!id) return <p>잘못된 접근입니다.</p>;
 
-  // MOCK_DATA로 진행
+  const data = await paymentApi.getPaymentData(parseInt(id), type === "extend");
 
-  const data = {
-    ...MOCK_PAYMENT_DATA,
-    type,
-  };
-  if (type === "extend" && !data.userSubscriptionInfo) {
+  if (type === "extend" && !data.result.userSubscriptionInfo) {
     redirect("/home");
   }
 
   return (
-    <PaymentWrapper data={data} type={data.type}>
-      {data.type === "extend" ? (
-        <ExtendClient data={data} type={data.type} />
+    <PaymentWrapper data={data.result} type={type}>
+      {type === "extend" ? (
+        <ExtendClient data={data.result} type={type} />
       ) : (
-        <NewClient data={data} type={data.type} />
+        <NewClient data={data.result} type={type} />
       )}
     </PaymentWrapper>
   );

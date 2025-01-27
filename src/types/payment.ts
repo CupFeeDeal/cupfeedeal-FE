@@ -1,23 +1,3 @@
-// 공통되는 기본 타입
-export interface BasicSubscription {
-  cafe_name?: string;
-  menu: string;
-  period: number;
-  price: number;
-}
-
-// 카페 구독권 정보
-export interface CafeSubscription extends BasicSubscription {
-  subscription_id: number;
-}
-
-// 유저 구독권 정보
-export interface UserSubscription extends BasicSubscription {
-  user_subscription_id: number;
-  end: string;
-}
-
-// 호출 데이터
 export interface PaymentResponse {
   cafe_id: number;
   cafe_name: string;
@@ -36,6 +16,25 @@ export interface PaymentResponse {
     period: number;
     price: number;
   }>;
+}
+
+// 공통되는 기본 타입
+export interface BasicSubscription {
+  cafe_name?: string;
+  menu: string;
+  period: number;
+  price: number;
+}
+
+// 카페 구독권 정보
+export interface CafeSubscription extends BasicSubscription {
+  subscription_id: number;
+}
+
+// 유저 구독권 정보
+export interface UserSubscription extends BasicSubscription {
+  user_subscription_id: number;
+  end: string;
 }
 
 // 실질적으로 props에서 사용

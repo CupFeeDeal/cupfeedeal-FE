@@ -63,13 +63,13 @@ const PaymentWrapper = ({
           <ExtendAfModal
             isOpen={showModal}
             onClose={() => router.back()}
-            cafe={cafe_name}
+            cafe_name={cafe_name}
           />
         ) : (
           <NewAfModal
             isOpen={showModal}
             onClose={() => router.back()}
-            cafe={cafe_name}
+            cafe_name={cafe_name}
             onConfirm={() => router.push("/subscription")}
           />
         )}
