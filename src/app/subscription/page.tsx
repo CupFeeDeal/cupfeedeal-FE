@@ -1,19 +1,15 @@
 import Link from "next/link";
 
-import { serverApi } from "@api/server";
-import { SubscriptionResponse } from "src/types/subscription";
+import { subscriptionServerApi } from "@api/subscriptionServer";
 
 import HomeTap from "@common/HomeTap";
 import { CardBackground } from "@assets/icons";
 import CardList from "./_components/CardList";
 
-export const getSubscriptionData = () =>
-  serverApi.get<SubscriptionResponse>("/api/v1/userSubscription");
-
 const SubscriptionPage = async () => {
   const {
     result: { paw_count, userSubscriptionListResponseDtos },
-  } = await getSubscriptionData();
+  } = await subscriptionServerApi.getSubscriptionData();
 
   return (
     <div className="flex flex-col h-full">

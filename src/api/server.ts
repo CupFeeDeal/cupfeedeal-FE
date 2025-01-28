@@ -37,7 +37,7 @@ function createApiRequest(client: AxiosInstance) {
       };
     }
 
-    // 요청 후 401 처리
+    // 요청 후 401, 404 처리
     try {
       const response = await client.request<ApiResponse<T>>(config);
       return response.data;

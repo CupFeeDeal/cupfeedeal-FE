@@ -1,5 +1,5 @@
 import { redirect } from "next/navigation";
-import { paymentApi } from "@api/payment";
+import { subscriptionServerApi } from "@api/subscriptionServer";
 
 import ExtendClient from "./_clients/ExtendClient";
 import NewClient from "./_clients/NewClient";
@@ -16,14 +16,17 @@ const PaymentPage = async ({ searchParams }: PaymentPageProps) => {
   // or.. 울보캣으로 잘못된 접근 페이지 하나 만들기..?
   // if (!id) return <p>잘못된 접근입니다.</p>;
 
-  const data = await paymentApi.getPaymentData(parseInt(id), type === "extend");
+  const data = await subscriptionServerApi.getPaymentData(
+    parseInt(id),
+    type === "extend"
+  );
 
   if (type === "extend" && !data.result.userSubscriptionInfo) {
     redirect("/home");
   }
 
   return (
-    <PaymentWrapper id={parseInt(id)} data={data.result} type={type}>
+    <PaymentWrapper data={data.result} type={type}>
       {type === "extend" ? (
         <ExtendClient data={data.result} type={type} />
       ) : (

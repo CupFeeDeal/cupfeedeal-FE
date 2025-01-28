@@ -11,11 +11,10 @@ import { usePayment } from "./_hooks/usePayment";
 export const PaymentContext = createContext<PaymentContextType | null>(null);
 
 const PaymentWrapper = ({
-  id,
   data,
   type,
   children,
-}: PaymentProps & { id: number; children: ReactNode }) => {
+}: PaymentProps & { children: ReactNode }) => {
   const router = useRouter();
   const { userSubscriptionInfo, cafe_name } = data;
 
@@ -32,7 +31,7 @@ const PaymentWrapper = ({
     showModal,
     handleSubmit,
     handleDateChange,
-  } = usePayment(id, initialStartDate);
+  } = usePayment(initialStartDate);
 
   return (
     <PaymentContext.Provider

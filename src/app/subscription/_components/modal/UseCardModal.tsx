@@ -1,6 +1,6 @@
 "use client";
 
-import { subscriptionApi } from "@api/subscription";
+import { subscriptionClientApi } from "@api/subscriptionClient";
 import Modal from "@common/Modal";
 import { UseCardModalProps } from "src/types/modal";
 import { formatDate } from "@app/subscription/_utils/FormatDate";
@@ -20,7 +20,7 @@ const UseCardModal = ({
     try {
       const {
         result: { is_getting_paw },
-      } = await subscriptionApi.useSubscription(user_subscription_id);
+      } = await subscriptionClientApi.useSubscription(user_subscription_id);
       console.log("사용함");
       onClose();
 

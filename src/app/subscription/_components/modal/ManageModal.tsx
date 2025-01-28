@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useState } from "react";
 
-import { subscriptionApi } from "@api/subscription";
+import { subscriptionClientApi } from "@api/subscriptionClient";
 
 import TopBar from "@common/TopBar";
 import { HalfCat } from "@assets/icons";
@@ -54,7 +54,7 @@ const ManageModal = ({
   // 구독권 취소하기 로직
   const handleUnsubscribe = async () => {
     try {
-      await subscriptionApi.cancelSubscription(user_subscription_id);
+      await subscriptionClientApi.cancelSubscription(user_subscription_id);
 
       console.log("환불함");
       setShowBfModal(false);

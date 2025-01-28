@@ -1,9 +1,8 @@
 import { useState, useEffect } from "react";
 import { CafeSubscription } from "src/types/payment";
-import { paymentApi } from "@api/payment";
-import { subscriptionApi } from "@api/subscription";
+import { subscriptionClientApi } from "@api/subscriptionClient";
 
-export const usePayment = (id: number, initialStartDate: Date | null) => {
+export const usePayment = (initialStartDate: Date | null) => {
   const [selectedSubscription, setSelectedSubscription] =
     useState<CafeSubscription | null>(null);
   const [startDate, setStartDate] = useState<Date | null>(initialStartDate);
@@ -31,12 +30,13 @@ export const usePayment = (id: number, initialStartDate: Date | null) => {
     }
   };
 
+  // 구독권 연장/구매
   const handleSubmit = async () => {
-    if (!id || !selectedSubscription || !startDate) return;
+    if (!selectedSubscription || !startDate) return;
 
     try {
-      await paymentApi.postPaymentData({
-        cafeSubscriptionTypeId: id,
+      await subscriptionClientApi.postSubscription({
+        cafeSubscriptionTypeId: selectedSubscription.subscription_id,
         subscriptionStart: startDate.toISOString().split("T")[0],
       });
 
