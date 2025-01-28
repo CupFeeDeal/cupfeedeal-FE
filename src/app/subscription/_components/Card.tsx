@@ -57,19 +57,33 @@ const Card = ({
     <div
       className={`${CARD_STYLES.common.cardContainer} ${backgroundClass} cursor-pointer`}
     >
-      <p className="Headline_3 text-white inline-flex gap-3 items-center mb-1">
+      {/* 카페 이름 */}
+      <p
+        className={`Headline_3 text-white mb-1 truncate ${
+          showDetails && !is_used ? "w-[60%]" : ""
+        }`}
+      >
         {cafe_name}
+      </p>
+
+      {/* 구독권 관리 버튼 */}
+      {(!showDetails || is_used) && (
         <Setting
+          className="absolute top-6 right-6 z-10"
           onClick={() => {
             setShowManageModal(true);
           }}
         />
-      </p>
+      )}
 
       {/*카드 선택시에만 보여지는 정보 */}
       {showDetails && (
         <>
-          <p className="Body_1_bold text-white">
+          <p
+            className={`Body_1_bold text-white ${
+              is_used ? "" : "truncate w-[60%]"
+            }`}
+          >
             {menu}∙{period}주권
           </p>
 
@@ -82,7 +96,7 @@ const Card = ({
                 e.stopPropagation();
                 setShowUseModal(true);
               }}
-              className="absolute top-6 right-6 flex flex-col justify-center items-center py-4 px-3 rounded-xl w-fit bg-white cursor-pointer"
+              className="absolute top-6 right-6 flex flex-col justify-center items-center py-4 px-3 rounded-xl w-fit bg-white cursor-pointer "
             >
               <Coffee className="w-[3.125rem]" />
               <p className="Caption_bold text-Main_Blue">구독권 사용하기</p>

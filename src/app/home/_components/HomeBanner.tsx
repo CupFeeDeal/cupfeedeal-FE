@@ -15,8 +15,8 @@ const HomeBanner = ({ subscription_count, cupcatImgUrl }: BannerInfo) => {
       : subscription_count === 0
       ? {
           bgImg: BannerCup,
-          title: "구독권을 구매하면\n컵캣이 찾아와요!",
-          subtitle: "아직 카페를 구독하지 않았어요.",
+          title: "구독권을 구매하면\n컵캣이 함께해요!",
+          subtitle: "현재 카페를 구독하고 있지 않아요.",
         }
       : { bgImg: BannerInit };
 
@@ -37,7 +37,7 @@ const HomeBanner = ({ subscription_count, cupcatImgUrl }: BannerInfo) => {
           alt="컵캣 이미지"
           width={130}
           height={200}
-          className="object-contain absolute -bottom-7 right-8 w-[35%]"
+          className="object-contain absolute -bottom-7 right-6 w-[35%]"
           priority
           unoptimized
         />

@@ -1,6 +1,5 @@
 export { default as Back } from "./Back";
 export { default as BannerBasic } from "./BannerBasic";
-export { default as BannerCat } from "./BannerCat";
 export { default as BannerCup } from "./BannerCup";
 export { default as BannerInit } from "./BannerInit";
 export { default as BottomLine } from "./BottomLine";
@@ -49,6 +48,7 @@ export { default as MyTabCupcatBg } from "./MyTabCupcatBg";
 export { default as MyTabHistoryBg } from "./MyTabHistoryBg";
 export { default as Notice } from "./Notice";
 export { default as PinMarker } from "./PinMarker";
+export { default as Placeholder } from "./Placeholder";
 export { default as Price } from "./Price";
 export { default as SadCat } from "./SadCat";
 export { default as Search } from "./Search";

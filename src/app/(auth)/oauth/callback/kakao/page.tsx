@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { authApi } from "@api/client/auth";
 import { token } from "@api/token";
 
-// lottie
+// 로티 파일 불러오기
 import loadingUI from "@assets/json/loading_UI.json";
 import Lottie from "react-lottie-player";
 

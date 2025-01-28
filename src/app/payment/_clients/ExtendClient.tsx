@@ -26,21 +26,21 @@ const ExtendClient = ({ data }: PaymentProps) => {
       />
 
       <p className="Body_2_bold mt-6 mb-3">연장하고 싶은 기간을 알려주세요</p>
-      <Calendar
-        isExtension
-        startDate={startDate}
-        endDate={endDate}
-        selectedSubscription={selectedSubscription}
-      />
-      <div className="h-9" />
-
-      {/* 연장 기간 선택 */}
       <OptionBtn
         subscriptions={cafe_subscriptions}
         currentMenu={userSubscriptionInfo!.menu}
         isExtension
         selectedSubscription={selectedSubscription}
         onSelect={handleSubscriptionChange}
+      />
+      <div className="h-9" />
+
+      {/* 연장 기간 선택 */}
+      <Calendar
+        isExtension
+        startDate={startDate}
+        endDate={endDate}
+        selectedSubscription={selectedSubscription}
       />
       <div className="h-28" />
     </div>

@@ -47,7 +47,9 @@ const OnboardingContent = ({
       }`}
     >
       <div className="w-[20.875rem] h-36  shrink-0 space-y-3 ">
-        <h1 className="Headline_3 whitespace-pre-line">{title}</h1>
+        <h1 className="Headline_3 whitespace-pre-line text-Grey-900">
+          {title}
+        </h1>
         <p className="Body_2_med text-Grey-600 whitespace-pre-line">
           {description}
         </p>

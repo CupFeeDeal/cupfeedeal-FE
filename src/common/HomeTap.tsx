@@ -3,9 +3,11 @@
 import { Logo } from "@assets/icons";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { token } from "@api/token";
 
 const HomeTap = () => {
   const pathname = usePathname();
+  const accessToken = token.sync();
 
   const tapClass = (isActive: boolean) =>
     `w-1/2 flex justify-center items-center pb-3 border-b-[0.125rem] ${
@@ -17,10 +19,10 @@ const HomeTap = () => {
       <div className="flex justify-between items-center py-3 px-5">
         <Logo className="w-11" />
         <Link
-          href={"/mypage"}
+          href={accessToken ? "/mypage" : "/"}
           className="Caption_bold py-[0.31rem] px-[0.88rem] border border-solid border-black rounded-3xl"
         >
-          마이페이지
+          {accessToken ? "마이페이지" : "로그인"}
         </Link>
       </div>
       <header className="Body_1_bold flex mt-2">
