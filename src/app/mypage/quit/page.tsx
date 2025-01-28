@@ -1,7 +1,6 @@
+import { redirect } from "next/navigation";
+
 export default function Quit() {
-  return (
-    <div>
-      <div>quit</div>
-    </div>
-  );
+  redirect("/mypage");
+  return null;
 }

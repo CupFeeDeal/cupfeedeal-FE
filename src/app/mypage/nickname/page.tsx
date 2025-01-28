@@ -1,7 +1,6 @@
+import { redirect } from "next/navigation";
+
 export default function Nickname() {
-  return (
-    <div>
-      <div></div>
-    </div>
-  );
+  redirect("/mypage");
+  return null;
 }
