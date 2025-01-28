@@ -1,5 +1,5 @@
+import { serverApi } from "@api/server";
 import { MyInfo, Subscription, CupcatList } from "src/types/mypage";
-import { serverApi } from "./server";
 
 export const userServerApi = {
   // 마이페이지 메인 정보

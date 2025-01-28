@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useState } from "react";
 
-import { subscriptionClientApi } from "@api/subscriptionClient";
+import { subscriptionClientApi } from "@api/client/subscriptionClient";
 
 import TopBar from "@common/TopBar";
 import { HalfCat } from "@assets/icons";

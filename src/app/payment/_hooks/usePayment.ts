@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import { CafeSubscription } from "src/types/payment";
-import { subscriptionClientApi } from "@api/subscriptionClient";
+
+import { tossPaymentApi } from "@api/client/tossPayment";
+import { subscriptionClientApi } from "@api/client/subscriptionClient";
 
 export const usePayment = (initialStartDate: Date | null) => {
   const [selectedSubscription, setSelectedSubscription] =
@@ -35,6 +37,13 @@ export const usePayment = (initialStartDate: Date | null) => {
     if (!selectedSubscription || !startDate) return;
 
     try {
+      const orderId = `ORDER_${Date.now()}`;
+      await tossPaymentApi.requestPayment({
+        amount: selectedSubscription.price,
+        orderId,
+        orderName: `${selectedSubscription.menu} ${selectedSubscription.period}주 구독권`,
+      });
+
       await subscriptionClientApi.postSubscription({
         cafeSubscriptionTypeId: selectedSubscription.subscription_id,
         subscriptionStart: startDate.toISOString().split("T")[0],
@@ -42,7 +51,7 @@ export const usePayment = (initialStartDate: Date | null) => {
 
       setShowModal(true);
     } catch (error) {
-      console.error("구독 실패: ", error);
+      console.error("결제 실패: ", error);
     }
   };
 

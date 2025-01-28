@@ -1,4 +1,4 @@
-import { privateApi } from "./client";
+import { privateApi } from "@api/client";
 
 export const subscriptionClientApi = {
   useSubscription: (user_subscription_id: number) =>

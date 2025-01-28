@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-import { subscriptionServerApi } from "@api/subscriptionServer";
+import { subscriptionServerApi } from "@api/server/subscriptionServer";
 
 import HomeTap from "@common/HomeTap";
 import { CardBackground } from "@assets/icons";

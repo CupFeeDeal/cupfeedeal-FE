@@ -1,4 +1,4 @@
-import { privateApi } from "./client";
+import { privateApi } from "@api/client";
 
 export const userApi = {
   // 마이페이지 닉네임 수정

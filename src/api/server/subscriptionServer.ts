@@ -1,4 +1,4 @@
-import { serverApi } from "./server";
+import { serverApi } from "@api/server";
 import { SubscriptionResponse } from "src/types/subscription";
 import { PaymentResponse } from "src/types/payment";
 

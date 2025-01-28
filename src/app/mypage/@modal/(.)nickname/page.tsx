@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 
 // api
-import { userApi } from "@api/user";
+import { userApi } from "@api/client/userClient";
 
 export default function Nickname() {
   const router = useRouter();

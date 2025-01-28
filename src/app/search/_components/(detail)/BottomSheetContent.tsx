@@ -8,7 +8,7 @@ import Image from "next/image";
 import LoginModal from "../modal/LoginModal";
 import useMap from "../useMap";
 // api
-import { likeApi } from "@api/search";
+import { likeApi } from "@api/client/searchClient";
 import { token } from "@api/token";
 // icons
 import { FullHeart, EmptyHeart, Instagram } from "@assets/icons";

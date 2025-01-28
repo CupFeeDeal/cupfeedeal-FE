@@ -1,6 +1,6 @@
 "use client";
 
-import { subscriptionClientApi } from "@api/subscriptionClient";
+import { subscriptionClientApi } from "@api/client/subscriptionClient";
 import Modal from "@common/Modal";
 import { UseCardModalProps } from "src/types/modal";
 import { formatDate } from "@app/subscription/_utils/FormatDate";

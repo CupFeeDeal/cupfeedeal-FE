@@ -1,5 +1,5 @@
 import { redirect } from "next/navigation";
-import { subscriptionServerApi } from "@api/subscriptionServer";
+import { subscriptionServerApi } from "@api/server/subscriptionServer";
 
 import ExtendClient from "./_clients/ExtendClient";
 import NewClient from "./_clients/NewClient";

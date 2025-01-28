@@ -2,7 +2,7 @@
 
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { authApi } from "@api/auth";
+import { authApi } from "@api/client/auth";
 import { token } from "@api/token";
 
 export default function KakaoCallback() {
