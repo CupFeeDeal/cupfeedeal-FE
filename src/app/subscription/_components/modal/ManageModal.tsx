@@ -72,7 +72,12 @@ const ManageModal = ({
   return (
     <>
       <Modal isOpen={isOpen} onClose={onClose} fullPage>
-        <TopBar title={`${cafe_name} 구독권 관리`} onBack={onClose} />
+        <TopBar
+          title={`${
+            cafe_name.length > 10 ? cafe_name.slice(0, 10) + "..." : cafe_name
+          } 구독권 관리`}
+          onBack={onClose}
+        />
 
         {/* 구독 정보 */}
         <div className="flex-1 overflow-auto p-5 space-y-4">
