@@ -1,7 +1,7 @@
 // components
 import TopBar from "@common/TopBar";
 import SavedCats from "./_components/SavedCats";
-import { userServerApi } from "@api/userServer";
+import { userServerApi } from "@api/server/userServer";
 
 export default async function Previous() {
   const cupcatData = await userServerApi.getCupcats();

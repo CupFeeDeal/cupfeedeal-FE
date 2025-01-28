@@ -2,7 +2,7 @@
 import TopBar from "@common/TopBar";
 import HistoryContents from "./_components/HistoryContents";
 // api
-import { userServerApi } from "@api/userServer";
+import { userServerApi } from "@api/server/userServer";
 // types
 import { Subscription } from "src/types/mypage";
 

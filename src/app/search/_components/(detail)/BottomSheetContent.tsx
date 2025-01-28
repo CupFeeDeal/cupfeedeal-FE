@@ -8,7 +8,7 @@ import Image from "next/image";
 import LoginModal from "../modal/LoginModal";
 import useMap from "../useMap";
 // api
-import { likeApi } from "@api/search";
+import { searchClientApi } from "@api/client/searchClient";
 import { token } from "@api/token";
 // icons
 import { FullHeart, EmptyHeart, Instagram } from "@assets/icons";
@@ -72,9 +72,9 @@ const BottomSheetContent = ({ cafeInfo }: BottomSheetContentProps) => {
     if (cafeInfo) {
       try {
         if (isLike) {
-          await likeApi.deleteLike(cafeInfo.id);
+          await searchClientApi.deleteLike(cafeInfo.id);
         } else {
-          await likeApi.postLike(cafeInfo.id);
+          await searchClientApi.postLike(cafeInfo.id);
         }
 
         const updatedIsLike = !isLike;

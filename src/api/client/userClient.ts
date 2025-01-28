@@ -1,6 +1,6 @@
-import { privateApi } from "./client";
+import { privateApi } from "@api/client";
 
-export const userApi = {
+export const userClientApi = {
   // 마이페이지 닉네임 수정
   patchNickname: async (username: string): Promise<{ username: string }> => {
     const response = await privateApi.patch<{

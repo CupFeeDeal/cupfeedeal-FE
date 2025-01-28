@@ -2,7 +2,7 @@
 import { Suspense } from "react";
 import TopBar from "@common/TopBar";
 import SearchContent from "./_components/SearchContent";
-import { searchServerApi } from "@api/searchServer";
+import { searchServerApi } from "@api/server/searchServer";
 
 interface SearchProps {
   searchParams: Promise<{
