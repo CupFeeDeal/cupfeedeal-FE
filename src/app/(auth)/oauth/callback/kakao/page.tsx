@@ -44,7 +44,7 @@ export default function KakaoCallback() {
 
   return (
     <div className="h-full flex justify-center items-center">
-      <Lottie animationData={loadingUI} loop play style={{ width: "18rem" }} />
+      <Lottie animationData={loadingUI} loop play style={{ width: "12rem" }} />
     </div>
   );
 }
