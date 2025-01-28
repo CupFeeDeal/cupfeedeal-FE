@@ -1,13 +1,14 @@
 "use client";
 
+import dynamic from "next/dynamic";
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { authApi } from "@api/client/auth";
 import { token } from "@api/token";
 
 // 로티 파일 불러오기
+const Lottie = dynamic(() => import("react-lottie-player"), { ssr: false });
 import loading_ui from "@assets/json/loading_ui.json";
-import Lottie from "react-lottie-player";
 
 export default function KakaoCallback() {
   const router = useRouter();
