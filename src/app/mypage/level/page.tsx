@@ -3,7 +3,7 @@ import TopBar from "@common/TopBar";
 import MyBanner from "../_components/MyBanner";
 import LevelInfo from "./_components/LevelInfo";
 // api
-import { userServerApi } from "@api/userServer";
+import { userServerApi } from "@api/server/userServer";
 
 export default async function Level() {
   const userInfo = await userServerApi.getMyInfo();

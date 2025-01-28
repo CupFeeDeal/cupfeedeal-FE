@@ -2,7 +2,7 @@
 import TopBar from "@common/TopBar";
 import MyBanner from "./_components/MyBanner";
 import MyTab from "./_components/MyTab";
-import { userServerApi } from "@api/userServer";
+import { userServerApi } from "@api/server/userServer";
 
 export default async function Mypage() {
   const userInfo = await userServerApi.getMyInfo();
