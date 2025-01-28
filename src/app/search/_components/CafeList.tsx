@@ -77,8 +77,10 @@ export default function CafeList() {
         >
           <span className="w-[7.5rem] h-[7.5rem] shrink-0">
             <Image
-              src={cafe.image_url.trim()}
-              alt={cafe.image_url}
+              src={
+                cafe.image_url ? cafe.image_url.trim() : "/svg/placeholder.png"
+              }
+              alt={cafe.image_url ? cafe.image_url : "img"}
               width={120}
               height={120}
               className="w-full h-full rounded-lg"
