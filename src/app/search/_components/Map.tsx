@@ -113,6 +113,7 @@ const Map = ({
   return (
     <div
       id={mapId}
+      className="naver-map-container"
       ref={mapRef}
       style={{ width: "100%", height: "calc(100vh - 48px)" }}
     />
