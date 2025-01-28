@@ -46,7 +46,12 @@ const PaymentWrapper = ({
       }}
     >
       <div className="flex flex-col h-full relative max-w-[440px]">
-        <TopBar title={type === "extend" ? "구독 연장하기" : "구독권 구매"} />
+        <TopBar
+          title={type === "extend" ? "구독 연장하기" : "구독권 구매"}
+          backLink={
+            type === "extend" ? "/subscription" : `/search?id=${data.cafe_id}`
+          }
+        />
         {children}
 
         {/* 연장∙구매 버튼 */}
