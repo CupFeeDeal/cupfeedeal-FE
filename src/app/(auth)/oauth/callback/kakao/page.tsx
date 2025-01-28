@@ -6,7 +6,7 @@ import { authApi } from "@api/client/auth";
 import { token } from "@api/token";
 
 // 로티 파일 불러오기
-import loadingUI from "@assets/json/loading_UI.json";
+import loading_ui from "@assets/json/loading_ui.json";
 import Lottie from "react-lottie-player";
 
 export default function KakaoCallback() {
@@ -44,7 +44,7 @@ export default function KakaoCallback() {
 
   return (
     <div className="h-full flex justify-center items-center">
-      <Lottie animationData={loadingUI} loop play style={{ width: "18rem" }} />
+      <Lottie animationData={loading_ui} loop play style={{ width: "18rem" }} />
     </div>
   );
 }
