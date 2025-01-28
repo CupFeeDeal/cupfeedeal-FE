@@ -42,7 +42,11 @@ function createApiRequest(client: AxiosInstance) {
       const response = await client.request<ApiResponse<T>>(config);
       return response.data;
     } catch (error) {
-      if (axios.isAxiosError(error) && error.response?.status === 401) {
+      if (
+        axios.isAxiosError(error) &&
+        error.response?.status &&
+        [401, 404].includes(error.response.status)
+      ) {
         redirect("/");
       }
       throw error;

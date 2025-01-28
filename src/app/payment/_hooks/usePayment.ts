@@ -1,7 +1,9 @@
 import { useState, useEffect } from "react";
 import { CafeSubscription } from "src/types/payment";
+import { paymentApi } from "@api/payment";
+import { subscriptionApi } from "@api/subscription";
 
-export const usePayment = (initialStartDate: Date | null) => {
+export const usePayment = (id: number, initialStartDate: Date | null) => {
   const [selectedSubscription, setSelectedSubscription] =
     useState<CafeSubscription | null>(null);
   const [startDate, setStartDate] = useState<Date | null>(initialStartDate);
@@ -30,11 +32,16 @@ export const usePayment = (initialStartDate: Date | null) => {
   };
 
   const handleSubmit = async () => {
+    if (!id || !selectedSubscription || !startDate) return;
+
     try {
-      // API 나중에 연결하자...
+      await paymentApi.postPaymentData({
+        cafeSubscriptionTypeId: id,
+        subscriptionStart: startDate.toISOString().split("T")[0],
+      });
+
       setShowModal(true);
     } catch (error) {
-      // 구독 실패 모달..?
       console.error("구독 실패: ", error);
     }
   };

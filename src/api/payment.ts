@@ -1,3 +1,4 @@
+import { privateApi } from "./client";
 import { serverApi } from "./server";
 import { PaymentResponse } from "src/types/payment";
 
@@ -10,5 +11,5 @@ export const paymentApi = {
   postPaymentData: (data: {
     cafeSubscriptionTypeId: number;
     subscriptionStart: string;
-  }) => serverApi.post<null>("/api/v1/userSubscription", data),
+  }) => privateApi.post<null>("/api/v1/userSubscription", data),
 };

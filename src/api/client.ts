@@ -38,7 +38,7 @@ privateClient.interceptors.request.use(
 privateClient.interceptors.response.use(
   (response) => response,
   async (error) => {
-    if (error.response?.status === 401) {
+    if ([401, 404].includes(error.response?.status)) {
       token.remove();
 
       if (typeof window !== "undefined") {

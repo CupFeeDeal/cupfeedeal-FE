@@ -23,7 +23,7 @@ const PaymentPage = async ({ searchParams }: PaymentPageProps) => {
   }
 
   return (
-    <PaymentWrapper data={data.result} type={type}>
+    <PaymentWrapper id={parseInt(id)} data={data.result} type={type}>
       {type === "extend" ? (
         <ExtendClient data={data.result} type={type} />
       ) : (
