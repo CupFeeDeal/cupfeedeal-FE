@@ -5,6 +5,10 @@ import { useRouter } from "next/navigation";
 import { authApi } from "@api/client/auth";
 import { token } from "@api/token";
 
+// lottie
+import loadingUI from "@assets/json/loading_UI.json";
+import Lottie from "react-lottie-player";
+
 export default function KakaoCallback() {
   const router = useRouter();
 
@@ -39,7 +43,8 @@ export default function KakaoCallback() {
   }, [router]);
 
   return (
-    // 나중에 로딩 화면 디자인 추가되면 교체
-    <div className="h-full flex justify-center items-center">로그인 중...</div>
+    <div className="h-full flex justify-center items-center">
+      <Lottie animationData={loadingUI} loop play style={{ width: "18rem" }} />
+    </div>
   );
 }

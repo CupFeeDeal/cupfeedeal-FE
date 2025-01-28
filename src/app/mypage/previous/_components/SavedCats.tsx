@@ -1,30 +1,18 @@
 // components
 import CatItem from "./CatItem";
+import styles from "../_components/catPositions.module.css";
 // icons
 import { CupcatBg } from "@assets/icons";
 // types
 import { CupcatList } from "src/types/mypage";
 // hooks
-import { catPositions, chunk } from "../_hooks/useCupcats";
+import { chunk, levelToCount, getColumnStyle } from "../_hooks/useCupcats";
 
 interface SavedCatsProps {
   cupcatData: CupcatList;
 }
 
 const SavedCats = ({ cupcatData }: SavedCatsProps) => {
-  const levelToCount: { [key: number]: string } = {
-    1: "한",
-    2: "두",
-    3: "세",
-    4: "네",
-    5: "다섯",
-    6: "여섯",
-    7: "일곱",
-    8: "여덟",
-    9: "아홉",
-    10: "열",
-  };
-
   const count = levelToCount[cupcatData.level] || "";
   const cupcats = cupcatData.cupcats;
 
@@ -55,17 +43,17 @@ const SavedCats = ({ cupcatData }: SavedCatsProps) => {
         <div key={gIndex} className="relative w-full">
           <CupcatBg className="w-full mt-[243px] mb-[34px]" />
           {group.map((cat, i) => {
-            // const { top, left } = catPositions[i];
-            const position = catPositions[i] || {};
+            const rowIndex = Math.floor(i / 3); // 0,1,2
+            const colIndex = i % 3; // 0,1,2
+
+            // row클래스 : row-1, row-2, row-3
+            const rowClass = `row-${rowIndex + 1}`;
+
             return (
               <div
                 key={i}
-                style={{
-                  position: "absolute",
-                  top: position.top,
-                  left: position.left,
-                  right: position.right,
-                }}
+                className={`${styles.catContainer} ${styles[rowClass]}`}
+                style={getColumnStyle(rowIndex, colIndex)}
               >
                 <CatItem
                   cafeName={cat.cafe_name}

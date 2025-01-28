@@ -20,6 +20,11 @@
   input:focus {
     outline: none;
   }
+
+  .naver-map-container a[href="https://ssl.pstatic.net/static/maps/mantle/notice/legal.html"]
+  {
+    display: none !important;
+  }
 }
 
 ::-webkit-scrollbar {
