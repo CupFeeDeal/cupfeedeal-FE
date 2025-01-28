@@ -23,7 +23,7 @@ export default function Quit() {
         <div className="flex justify-center w-full Body_1_bold mb-2">
           모든 구독 기록과 결제 내역이 삭제됩니다.
         </div>
-        <div className="mt-1 Body_1_med text-Grey-700 mb-8 text-center">
+        <div className="Body_1_med text-Grey-700 mb-8 text-center">
           현재 구독 중인 구독권이 있다면
           <br />
           환불 규정에 따라 자동 환불 처리됩니다.

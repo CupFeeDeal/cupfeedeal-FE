@@ -1,6 +1,6 @@
-import { privateApi } from "./client";
+import { privateApi } from "@api/client";
 
-export const likeApi = {
+export const searchClientApi = {
   // 카페 좋아요 등록
   postLike: async (cafeId: number) => {
     const response = await privateApi.post<{ cafeId: number }>(

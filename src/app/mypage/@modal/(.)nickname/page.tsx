@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 
 // api
-import { userApi } from "@api/user";
+import { userClientApi } from "@api/client/userClient";
 
 export default function Nickname() {
   const router = useRouter();
@@ -21,7 +21,7 @@ export default function Nickname() {
   // 닉네임 변경하기
   const handleChangeNickname = async () => {
     try {
-      await userApi.patchNickname(nickname);
+      await userClientApi.patchNickname(nickname);
 
       localStorage.setItem("nicknameDisabled", Date.now().toString());
       setIsDisabled(true);

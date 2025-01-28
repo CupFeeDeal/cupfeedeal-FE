@@ -1,4 +1,4 @@
-import { serverApi } from "./server";
+import { serverApi } from "@api/server";
 import { Cafe, CafeDetail } from "src/types/search";
 
 export const searchServerApi = {
