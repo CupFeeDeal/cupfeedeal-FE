@@ -20,7 +20,7 @@ const HomePage = async () => {
   return (
     <div className="flex flex-col h-full">
       <HomeTap />
-      <div className="flex-1 overflow-auto">
+      <div className="flex-1 overflow-y-auto">
         {/* 배너 */}
         {bannerInfo ? (
           <HomeBanner {...bannerInfo.result} />
