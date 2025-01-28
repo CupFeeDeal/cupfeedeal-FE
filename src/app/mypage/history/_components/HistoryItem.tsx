@@ -116,14 +116,14 @@ const HistoryCard = ({ item }: HistoryItemProps) => {
       <CancelBfModal
         isOpen={showBfModal}
         onClose={() => setShowBfModal(false)}
-        cafe={item.cafe_name}
-        remain={item.remain}
+        cafe_name={item.cafe_name}
+        remaining_days={item.remain}
         onConfirm={handleUnsubscribe}
       />
       <CancelAfModal
         isOpen={showAfModal}
         onClose={handleFinalClose}
-        cafe={item.cafe_name}
+        cafe_name={item.cafe_name}
       />
     </>
   );

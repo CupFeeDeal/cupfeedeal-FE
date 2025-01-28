@@ -1,4 +1,4 @@
-import { serverApi } from "./server";
+import { serverApi } from "@api/server";
 import { RecommendCafe, NewCafe, BannerInfo } from "src/types/home";
 
 export const homeApi = {

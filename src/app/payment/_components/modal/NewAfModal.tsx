@@ -5,7 +5,7 @@ import { HappyCat } from "@assets/icons";
 const NewAfModal = ({
   isOpen,
   onClose,
-  cafe,
+  cafe_name,
   onConfirm,
 }: BasicCafeModalProps) => (
   <Modal
@@ -17,7 +17,7 @@ const NewAfModal = ({
   >
     <div className="flex flex-col justify-center items-center pt-5">
       <h3 className="Headline_3 text-center">
-        {cafe}
+        {cafe_name}
         <br />
         구독권을 구매했어요!
       </h3>

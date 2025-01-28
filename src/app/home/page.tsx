@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-import { homeApi } from "@api/home";
+import { homeApi } from "@api/server/home";
 import { Map } from "@assets/icons";
 import HomeTap from "@common/HomeTap";
 import Footer from "@common/Footer";

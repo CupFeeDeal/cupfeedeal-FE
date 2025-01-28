@@ -20,7 +20,9 @@ const PaymentWrapper = ({
 
   const initialStartDate =
     type === "extend" && userSubscriptionInfo
-      ? new Date(userSubscriptionInfo.end)
+      ? new Date(
+          new Date(userSubscriptionInfo.end).getTime() + 24 * 60 * 60 * 1000
+        )
       : null;
 
   const {
@@ -62,14 +64,14 @@ const PaymentWrapper = ({
         {type === "extend" ? (
           <ExtendAfModal
             isOpen={showModal}
-            onClose={() => router.back()}
-            cafe={cafe_name}
+            onClose={() => router.push("/subscription")}
+            cafe_name={cafe_name}
           />
         ) : (
           <NewAfModal
             isOpen={showModal}
-            onClose={() => router.back()}
-            cafe={cafe_name}
+            onClose={() => router.push(`/search?id=${data.cafe_id}`)}
+            cafe_name={cafe_name}
             onConfirm={() => router.push("/subscription")}
           />
         )}

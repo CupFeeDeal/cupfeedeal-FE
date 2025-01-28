@@ -10,6 +10,7 @@
     "svgr": "npx @svgr/cli -d src/assets/icons --ignore-existing --typescript --no-dimensions public/svg"
   },
   "dependencies": {
+    "@tosspayments/payment-sdk": "^1.9.1",
     "axios": "^1.7.9",
     "framer-motion": "^11.18.0",
     "lucide-react": "^0.471.1",
