@@ -32,7 +32,7 @@ export const usePayment = (initialStartDate: Date | null) => {
     }
   };
 
-  // 구독권 연장/구매
+  // 구독권 연장/구매 토스 결제
   const handleSubmit = async () => {
     if (!selectedSubscription || !startDate) return;
 
@@ -42,18 +42,36 @@ export const usePayment = (initialStartDate: Date | null) => {
         amount: selectedSubscription.price,
         orderId,
         orderName: `${selectedSubscription.menu} ${selectedSubscription.period}주 구독권`,
+        subscription_id: selectedSubscription.subscription_id,
+        startDate: startDate.toISOString().split("T")[0],
       });
-
-      await subscriptionClientApi.postSubscription({
-        cafeSubscriptionTypeId: selectedSubscription.subscription_id,
-        subscriptionStart: startDate.toISOString().split("T")[0],
-      });
-
-      setShowModal(true);
     } catch (error) {
       console.error("결제 실패: ", error);
     }
   };
+
+  // 서버에 요청 + 모달
+  useEffect(() => {
+    const searchParams = new URLSearchParams(window.location.search);
+    const orderId = searchParams.get("orderId");
+    const success = searchParams.get("success") === "true";
+    const subId = searchParams.get("subId");
+    const subStart = searchParams.get("subStart");
+
+    if (success && orderId && subId && subStart) {
+      (async () => {
+        try {
+          await subscriptionClientApi.postSubscription({
+            cafeSubscriptionTypeId: Number(subId),
+            subscriptionStart: subStart,
+          });
+          setShowModal(true);
+        } catch (error) {
+          console.error("구독 신청 실패:", error);
+        }
+      })();
+    }
+  }, []);
 
   return {
     selectedSubscription,
