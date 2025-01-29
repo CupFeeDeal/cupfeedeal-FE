@@ -19,7 +19,7 @@ interface SearchContentProps {
   initialQuery: string;
   initialLike: boolean;
   detailId?: number;
-  detailCafe?: CafeDetail | null;
+  // detailCafe?: CafeDetail | null;
 }
 
 const SearchContent = ({
@@ -27,8 +27,8 @@ const SearchContent = ({
   initialQuery,
   initialLike,
   detailId,
-  detailCafe,
-}: SearchContentProps) => {
+}: // detailCafe,
+SearchContentProps) => {
   const router = useRouter();
   const searchParams = useSearchParams();
 
@@ -73,7 +73,7 @@ const SearchContent = ({
       <Map cafes={cafes} />
       {showBottomSheet && (
         <div>
-          <BottomSheet detailId={detailId} detailCafe={detailCafe} />
+          <BottomSheet detailId={detailId} />
         </div>
       )}
     </div>

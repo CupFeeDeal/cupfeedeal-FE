@@ -22,8 +22,8 @@ export const searchServerApi = {
   },
 
   // 탐색페이지 카페 상세
-  getCafeDetail: async (cafeId: number): Promise<CafeDetail> => {
-    const response = await serverApi.get<CafeDetail>(`/api/v1/cafe/${cafeId}`);
-    return response.result;
-  },
+  // getCafeDetail: async (cafeId: number): Promise<CafeDetail> => {
+  //   const response = await serverApi.get<CafeDetail>(`/api/v1/cafe/${cafeId}`);
+  //   return response.result;
+  // },
 };

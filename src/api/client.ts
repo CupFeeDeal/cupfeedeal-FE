@@ -38,13 +38,6 @@ privateClient.interceptors.request.use(
 privateClient.interceptors.response.use(
   (response) => response,
   async (error) => {
-    // if ([401, 404].includes(error.response?.status)) {
-    //   token.remove();
-
-    //   if (typeof window !== "undefined") {
-    //     window.location.href = "/";
-    //   }
-    // }
     if ([401, 404].includes(error.response?.status)) {
       token.remove();
 

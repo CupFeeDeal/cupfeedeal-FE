@@ -21,10 +21,10 @@ export default async function Search({ searchParams }: SearchProps) {
 
   const cafes = await searchServerApi.getCafes(query, like);
 
-  let cafeDetail = null;
-  if (detailId) {
-    cafeDetail = await searchServerApi.getCafeDetail(detailId);
-  }
+  // let cafeDetail = null;
+  // if (detailId) {
+  //   cafeDetail = await searchServerApi.getCafeDetail(detailId);
+  // }
 
   return (
     <div className="flex w-full h-full flex-col">
@@ -37,7 +37,7 @@ export default async function Search({ searchParams }: SearchProps) {
             initialQuery={query}
             initialLike={like}
             detailId={detailId}
-            detailCafe={cafeDetail}
+            // detailCafe={cafeDetail}
           />
         </Suspense>
       </div>

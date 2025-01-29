@@ -7,17 +7,17 @@ import { motion } from "framer-motion";
 import BottomSheetContent from "./BottomSheetContent";
 import BottomSheetHeader from "./BottomSheetHeader";
 // types
-import { CafeDetail } from "src/types/search";
+// import { CafeDetail } from "src/types/search";
 // store & hooks
 import useSelectedCafeStore from "@store/useSelectedCafeStore";
 import useBottomSheet from "@app/search/_hooks/useBottomSheet";
 
 interface BottomSheetProps {
   detailId?: number;
-  detailCafe?: CafeDetail | null;
+  // detailCafe?: CafeDetail | null;
 }
 
-const BottomSheet = ({ detailCafe }: BottomSheetProps) => {
+const BottomSheet = ({ detailId }: BottomSheetProps) => {
   const { sheet, content } = useBottomSheet();
   const { setIsSheetOpen } = useSelectedCafeStore();
 
@@ -53,7 +53,7 @@ const BottomSheet = ({ detailCafe }: BottomSheetProps) => {
     >
       <BottomSheetHeader handleBackClick={handleBackClick} />
       <div ref={content} className="flex-1 overflow-auto">
-        <BottomSheetContent cafeInfo={detailCafe} />
+        {detailId ? <BottomSheetContent cafeId={detailId} /> : null}
       </div>
     </motion.div>
   );

@@ -24,9 +24,11 @@ import {
   LABEL_STYLE,
   VALUE_STYLE,
 } from "@app/search/_constants/constants";
+import BottomSheetSkeleton from "./BottomSheetSkeleton";
 
 interface BottomSheetContentProps {
-  cafeInfo: CafeDetail | undefined | null;
+  //cafeInfo: CafeDetail | undefined | null;
+  cafeId: number;
 }
 
 function InfoRow({ label, value }: { label: string; value: string }) {
@@ -38,20 +40,37 @@ function InfoRow({ label, value }: { label: string; value: string }) {
   );
 }
 
-const BottomSheetContent = ({ cafeInfo }: BottomSheetContentProps) => {
+const BottomSheetContent = ({ cafeId }: BottomSheetContentProps) => {
   const router = useRouter();
   const accessToken = token.get();
+
+  const [cafeInfo, setCafeInfo] = useState<CafeDetail | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
 
   // 비로그인 시 모달
   const [showModalforSave, setShowModalforSave] = useState(false);
   const [showModalforSubs, setShowModalforSubs] = useState(false);
 
   const [isLike, setIsLike] = useState(cafeInfo?.is_like || false);
-
-  // 현위치-카페 거리 관련
   const [distance, setDistance] = useState<number | null>(null);
-  const { getDistance, formatDistance } = useDistance();
-  const { getCurrentLocation } = useMap();
+
+  useEffect(() => {
+    setIsLoading(true);
+    setCafeInfo(null);
+
+    searchClientApi
+      .getCafeDetail(cafeId)
+      .then((detail) => {
+        setCafeInfo(detail);
+        setIsLike(detail.is_like);
+      })
+      .catch((error) => {
+        console.error(error);
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
+  }, [cafeId]);
 
   const { updateCafeLikeStatus } = useCafeListStore();
   const { isSheetOpen } = useSelectedCafeStore();
@@ -87,6 +106,10 @@ const BottomSheetContent = ({ cafeInfo }: BottomSheetContentProps) => {
     }
   };
 
+  // 현위치-카페 거리 관련
+  const { getDistance, formatDistance } = useDistance();
+  const { getCurrentLocation } = useMap();
+
   // 거리 계산
   useEffect(() => {
     const calculateDistance = async () => {
@@ -111,8 +134,8 @@ const BottomSheetContent = ({ cafeInfo }: BottomSheetContentProps) => {
     calculateDistance();
   }, [cafeInfo, getDistance, getCurrentLocation]);
 
-  if (!cafeInfo) {
-    return <div className="w-full h-full bg-white"></div>;
+  if (isLoading || !cafeInfo) {
+    return <BottomSheetSkeleton />;
   }
 
   // 구독하기
