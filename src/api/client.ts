@@ -38,11 +38,25 @@ privateClient.interceptors.request.use(
 privateClient.interceptors.response.use(
   (response) => response,
   async (error) => {
+    // if ([401, 404].includes(error.response?.status)) {
+    //   token.remove();
+
+    //   if (typeof window !== "undefined") {
+    //     window.location.href = "/";
+    //   }
+    // }
     if ([401, 404].includes(error.response?.status)) {
       token.remove();
 
-      if (typeof window !== "undefined") {
-        window.location.href = "/";
+      const status = error.response.status;
+      if ([404].includes(status)) {
+        if (typeof window !== "undefined") {
+          window.location.href = "/404";
+        }
+      } else {
+        if (typeof window !== "undefined") {
+          window.location.href = "/error";
+        }
       }
     }
     return Promise.reject(error);

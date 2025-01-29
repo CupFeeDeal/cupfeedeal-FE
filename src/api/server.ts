@@ -1,6 +1,6 @@
 import axios, { AxiosInstance, AxiosRequestConfig } from "axios";
 import { cookies } from "next/headers";
-import { redirect } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 
 interface ApiResponse<T = unknown> {
   code: number;
@@ -42,12 +42,22 @@ function createApiRequest(client: AxiosInstance) {
       const response = await client.request<ApiResponse<T>>(config);
       return response.data;
     } catch (error) {
-      if (
-        axios.isAxiosError(error) &&
-        error.response?.status &&
-        [401, 404].includes(error.response.status)
-      ) {
-        redirect("/");
+      // if (
+      //   axios.isAxiosError(error) &&
+      //   error.response?.status &&
+      //   [401, 404].includes(error.response.status)
+      // ) {
+      //   redirect("/");
+      // }
+      if (axios.isAxiosError(error) && error.response) {
+        const status = error.response.status;
+        if ([401].includes(status)) {
+          redirect("/");
+        } else if ([404].includes(status)) {
+          notFound();
+        } else {
+          throw new Error("Server error: " + status);
+        }
       }
       throw error;
     }
