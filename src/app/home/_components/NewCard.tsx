@@ -25,7 +25,12 @@ const NewCard = ({ cafe_id, image_url, name, address }: NewCafe) => (
     {/* 카페 정보 */}
     <div className="space-y-1.5 text-center">
       <div className="Body_1_bold line-clamp-1 px-2">{name}</div>
-      <div className="Body_2_med line-clamp-2">{address}</div>
+      <div
+        className="Body_2_med 
+      line-clamp-2 break-keep"
+      >
+        {address}
+      </div>
     </div>
   </Link>
 );

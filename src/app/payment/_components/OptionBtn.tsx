@@ -39,9 +39,9 @@ const OptionBtn = ({
           <button
             key={subscription_id}
             onClick={() => onSelect(sub)}
-            className={`w-full flex justify-between items-center rounded-lg py-3 px-5 border shadow-basic ${
+            className={`w-full flex justify-between items-center rounded-lg py-3 px-5 border ${
               isSelected
-                ? "border-Pale_Blue_1 bg-Pale_Blue_2"
+                ? "border-Pale_Blue_1 bg-Pale_Blue_2 shadow-basic"
                 : "border-Grey-200"
             }`}
           >

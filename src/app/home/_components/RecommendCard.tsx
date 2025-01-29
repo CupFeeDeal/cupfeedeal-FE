@@ -32,7 +32,7 @@ const RecommendCard = ({
     {/* 카페 정보 */}
     <div className="flex gap-3">
       <p className="Body_2_bold w-7 shrink-0">주소</p>
-      <p className="Body_2_med line-clamp-2">{address}</p>
+      <p className="Body_2_med line-clamp-2 break-keep">{address}</p>
     </div>
     <div className="flex gap-3">
       <p className="Body_2_bold w-7 shrink-0">가격</p>

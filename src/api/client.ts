@@ -34,11 +34,11 @@ privateClient.interceptors.request.use(
   (error) => Promise.reject(error)
 );
 
-// 토큰O 요청 - 401 인증 에러나면 다시 로그인 시키기
+// 토큰O 요청 - 401, 404 인증 에러나면 다시 로그인 시키기
 privateClient.interceptors.response.use(
   (response) => response,
   async (error) => {
-    if (error.response?.status === 401) {
+    if ([401, 404].includes(error.response?.status)) {
       token.remove();
 
       if (typeof window !== "undefined") {

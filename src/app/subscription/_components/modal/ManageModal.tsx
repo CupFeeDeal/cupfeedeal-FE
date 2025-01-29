@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useState } from "react";
 
-import { subscriptionApi } from "@api/subscription";
+import { subscriptionClientApi } from "@api/client/subscriptionClient";
 
 import TopBar from "@common/TopBar";
 import { HalfCat } from "@assets/icons";
@@ -54,7 +54,7 @@ const ManageModal = ({
   // 구독권 취소하기 로직
   const handleUnsubscribe = async () => {
     try {
-      await subscriptionApi.cancelSubscription(user_subscription_id);
+      await subscriptionClientApi.cancelSubscription(user_subscription_id);
 
       console.log("환불함");
       setShowBfModal(false);
@@ -72,11 +72,16 @@ const ManageModal = ({
   return (
     <>
       <Modal isOpen={isOpen} onClose={onClose} fullPage>
-        <TopBar title={`${cafe_name} 구독권 관리`} onBack={onClose} />
+        <TopBar
+          title={`${
+            cafe_name.length > 10 ? cafe_name.slice(0, 10) + "..." : cafe_name
+          } 구독권 관리`}
+          onBack={onClose}
+        />
 
         {/* 구독 정보 */}
         <div className="flex-1 overflow-auto p-5 space-y-4">
-          {/* <Info {...{ cafe_name: cafe_name, menu, period, price }} /> */}
+          <Info {...{ cafe_name: cafe_name, menu, period, price }} />
 
           {/* 방문수 및 만료일 */}
           <div className="flex flex-col px-4 rounded-2xl bg-Pale_Blue_2 items-center">

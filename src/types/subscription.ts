@@ -25,18 +25,3 @@ export interface CardProps extends SubscriptionCard {
   idx: number;
   total: number;
 }
-
-// 구독 카드
-export interface SubscriptionCardData {
-  id: number;
-  name: string;
-  menu: string;
-  price: number;
-  period: number;
-  savedCups: number;
-  isUsed: boolean;
-  start: string;
-  end: string;
-  visit: number;
-  remain: number;
-}

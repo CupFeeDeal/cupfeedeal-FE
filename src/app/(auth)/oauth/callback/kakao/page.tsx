@@ -1,13 +1,14 @@
 "use client";
 
+import dynamic from "next/dynamic";
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { authApi } from "@api/auth";
+import { authApi } from "@api/client/auth";
 import { token } from "@api/token";
 
-// lottie
-import loadingUI from "@assets/json/loading_UI.json";
-import Lottie from "react-lottie-player";
+// 로티 파일 불러오기
+const Lottie = dynamic(() => import("react-lottie-player"), { ssr: false });
+import loading_ui from "@assets/json/loading_ui.json";
 
 export default function KakaoCallback() {
   const router = useRouter();
@@ -44,7 +45,7 @@ export default function KakaoCallback() {
 
   return (
     <div className="h-full flex justify-center items-center">
-      <Lottie animationData={loadingUI} loop play style={{ width: "12rem" }} />
+      <Lottie animationData={loading_ui} loop play style={{ width: "18rem" }} />
     </div>
   );
 }

@@ -20,7 +20,9 @@ const PaymentWrapper = ({
 
   const initialStartDate =
     type === "extend" && userSubscriptionInfo
-      ? new Date(userSubscriptionInfo.end)
+      ? new Date(
+          new Date(userSubscriptionInfo.end).getTime() + 24 * 60 * 60 * 1000
+        )
       : null;
 
   const {
@@ -44,7 +46,12 @@ const PaymentWrapper = ({
       }}
     >
       <div className="flex flex-col h-full relative max-w-[440px]">
-        <TopBar title={type === "extend" ? "구독 연장하기" : "구독권 구매"} />
+        <TopBar
+          title={type === "extend" ? "구독 연장하기" : "구독권 구매"}
+          backLink={
+            type === "extend" ? "/subscription" : `/search?id=${data.cafe_id}`
+          }
+        />
         {children}
 
         {/* 연장∙구매 버튼 */}
@@ -62,14 +69,14 @@ const PaymentWrapper = ({
         {type === "extend" ? (
           <ExtendAfModal
             isOpen={showModal}
-            onClose={() => router.back()}
-            cafe={cafe_name}
+            onClose={() => router.push("/subscription")}
+            cafe_name={cafe_name}
           />
         ) : (
           <NewAfModal
             isOpen={showModal}
-            onClose={() => router.back()}
-            cafe={cafe_name}
+            onClose={() => router.push(`/search?id=${data.cafe_id}`)}
+            cafe_name={cafe_name}
             onConfirm={() => router.push("/subscription")}
           />
         )}
