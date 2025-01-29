@@ -9,12 +9,14 @@ const NotFound = () => {
         <b>404</b> : Page Not Found
       </div>
       <Cryingcat width={102} height={102} className="my-4" />
-      <div className="Body_1_bold text-Grey-700">
+      <div className="Body_1_bold text-Grey-700 text-center">
         요청하신 페이지를 찾을 수 없어요.
+        <br />
+        다시 로그인해주세요.
       </div>
-      <Link href={"/home"}>
-        <button className="mt-2 Caption_med text-Grey-500 underline">
-          홈으로 돌아가기
+      <Link href={"/"}>
+        <button className="mt-4 Caption_med text-Grey-500 underline">
+          로그인하러 가기
         </button>
       </Link>
     </div>
