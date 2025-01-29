@@ -6,15 +6,12 @@ import { motion } from "framer-motion";
 // components
 import BottomSheetContent from "./BottomSheetContent";
 import BottomSheetHeader from "./BottomSheetHeader";
-// types
-// import { CafeDetail } from "src/types/search";
 // store & hooks
 import useSelectedCafeStore from "@store/useSelectedCafeStore";
 import useBottomSheet from "@app/search/_hooks/useBottomSheet";
 
 interface BottomSheetProps {
   detailId?: number;
-  // detailCafe?: CafeDetail | null;
 }
 
 const BottomSheet = ({ detailId }: BottomSheetProps) => {

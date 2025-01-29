@@ -6,13 +6,13 @@ import Image from "next/image";
 
 // components
 import LoginModal from "../modal/LoginModal";
-import useMap from "../useMap";
 // api
 import { searchClientApi } from "@api/client/searchClient";
 import { token } from "@api/token";
 // icons
 import { FullHeart, EmptyHeart, Instagram } from "@assets/icons";
 // store & hooks
+import useMap from "../useMap";
 import useSelectedCafeStore from "@store/useSelectedCafeStore";
 import useDistance from "@app/search/_hooks/useDistance";
 import { useCafeListStore } from "@store/useCafeListStore";
@@ -27,7 +27,6 @@ import {
 import BottomSheetSkeleton from "./BottomSheetSkeleton";
 
 interface BottomSheetContentProps {
-  //cafeInfo: CafeDetail | undefined | null;
   cafeId: number;
 }
 
@@ -44,19 +43,33 @@ const BottomSheetContent = ({ cafeId }: BottomSheetContentProps) => {
   const router = useRouter();
   const accessToken = token.get();
 
-  const [cafeInfo, setCafeInfo] = useState<CafeDetail | null>(null);
-  const [isLoading, setIsLoading] = useState(true);
+  // 스토어
+  const { updateCafeLikeStatus } = useCafeListStore();
+  const { isSheetOpen } = useSelectedCafeStore();
+
+  const [cafeInfo, setCafeInfo] = useState<CafeDetail | null>(null); // 실제 카페 정보
+  const [fetchDone, setFetchDone] = useState(false); // fetch 완료 여부
+  const [minTime, setMinTime] = useState(false); // 스켈레톤 최소 시간
+
+  const [isLike, setIsLike] = useState(cafeInfo?.is_like || false);
+  const [distance, setDistance] = useState<number | null>(null);
 
   // 비로그인 시 모달
   const [showModalforSave, setShowModalforSave] = useState(false);
   const [showModalforSubs, setShowModalforSubs] = useState(false);
 
-  const [isLike, setIsLike] = useState(cafeInfo?.is_like || false);
-  const [distance, setDistance] = useState<number | null>(null);
-
+  // 스켈레톤 렌더링
   useEffect(() => {
-    setIsLoading(true);
+    // 초기화
     setCafeInfo(null);
+    setFetchDone(false);
+    setMinTime(false);
+    setIsLike(false);
+    setDistance(null);
+
+    const timer = setTimeout(() => {
+      setMinTime(true);
+    }, 1000);
 
     searchClientApi
       .getCafeDetail(cafeId)
@@ -64,16 +77,17 @@ const BottomSheetContent = ({ cafeId }: BottomSheetContentProps) => {
         setCafeInfo(detail);
         setIsLike(detail.is_like);
       })
-      .catch((error) => {
-        console.error(error);
-      })
+      .catch((err) => console.error(err))
       .finally(() => {
-        setIsLoading(false);
+        setFetchDone(true);
       });
+
+    return () => {
+      clearTimeout(timer); // 언마운트 시 타이머 정리
+    };
   }, [cafeId]);
 
-  const { updateCafeLikeStatus } = useCafeListStore();
-  const { isSheetOpen } = useSelectedCafeStore();
+  const showContent = fetchDone && minTime && cafeInfo;
 
   useEffect(() => {
     if (cafeInfo) {
@@ -134,10 +148,6 @@ const BottomSheetContent = ({ cafeId }: BottomSheetContentProps) => {
     calculateDistance();
   }, [cafeInfo, getDistance, getCurrentLocation]);
 
-  if (isLoading || !cafeInfo) {
-    return <BottomSheetSkeleton />;
-  }
-
   // 구독하기
   const handleSubscription = (id: number) => {
     if (!accessToken) {
@@ -146,6 +156,10 @@ const BottomSheetContent = ({ cafeId }: BottomSheetContentProps) => {
       router.push(`/payment?type=new&id=${id}`);
     }
   };
+
+  if (!showContent) {
+    return <BottomSheetSkeleton />;
+  }
 
   return (
     <>

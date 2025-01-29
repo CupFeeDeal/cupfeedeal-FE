@@ -12,14 +12,13 @@ import BottomSheet from "./(detail)/BottomSheet";
 import { useCafeListStore } from "@store/useCafeListStore";
 import useSelectedCafeStore from "@store/useSelectedCafeStore";
 // types
-import { Cafe, CafeDetail } from "src/types/search";
+import { Cafe } from "src/types/search";
 
 interface SearchContentProps {
   initialCafes: Cafe[];
   initialQuery: string;
   initialLike: boolean;
   detailId?: number;
-  // detailCafe?: CafeDetail | null;
 }
 
 const SearchContent = ({
