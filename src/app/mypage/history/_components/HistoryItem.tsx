@@ -10,6 +10,7 @@ import CancelBfModal from "@app/subscription/_components/modal/CancelBfModal";
 import { Calendar, Price } from "@assets/icons";
 // types
 import { Subscription } from "src/types/mypage";
+import { subscriptionClientApi } from "@api/client/subscriptionClient";
 
 interface HistoryItemProps {
   item: Subscription;
@@ -41,10 +42,15 @@ const HistoryCard = ({ item }: HistoryItemProps) => {
   const [showBfModal, setShowBfModal] = useState(false);
   const [showAfModal, setShowAfModal] = useState(false);
 
-  const handleUnsubscribe = () => {
-    console.log("환불함"); // 추후 환불 관련 API로 수정
-    setShowBfModal(false);
-    setShowAfModal(true);
+  const handleUnsubscribe = async () => {
+    try {
+      await subscriptionClientApi.cancelSubscription(item.user_subscription_id);
+
+      setShowBfModal(false);
+      setShowAfModal(true);
+    } catch (error) {
+      console.error("구독 취소 실패: ", error);
+    }
   };
   const handleFinalClose = () => {
     setShowAfModal(false);

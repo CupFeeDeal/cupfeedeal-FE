@@ -34,8 +34,8 @@ export const getColumnStyle = (
   } else if (rowIndex === 1) {
     // 두 번째 줄 (4~6번)
     if (colIndex === 0) return { left: "3%" };
-    if (colIndex === 1) return { left: "29.5%" };
-    if (colIndex === 2) return { right: "22%" };
+    if (colIndex === 1) return { right: "22%" };
+    if (colIndex === 2) return { left: "29.5%" };
   } else if (rowIndex === 2) {
     // 세 번째 줄 (7~9번째)
     if (colIndex === 0) return { left: "20%" };

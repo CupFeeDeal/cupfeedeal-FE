@@ -115,7 +115,7 @@ const BottomSheetContent = ({ cafeId }: BottomSheetContentProps) => {
 
         updateCafeLikeStatus(cafeInfo.id, updatedIsLike);
       } catch (error) {
-        console.log(error);
+        console.error(error);
       }
     }
   };

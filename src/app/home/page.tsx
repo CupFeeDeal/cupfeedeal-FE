@@ -25,7 +25,7 @@ const HomePage = async () => {
         {bannerInfo ? (
           <HomeBanner {...bannerInfo.result} />
         ) : (
-          <HomeBanner subscription_count={-1} userId={0} cupcatImgUrl="" />
+          <HomeBanner subscription_count={-1} userId={0} cupcat_id={0} />
         )}
 
         {/* 지도 */}

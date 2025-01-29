@@ -2,7 +2,7 @@
 export interface MyInfo {
   username: string;
   user_level: number;
-  cupcatImgUrl: string;
+  cupcat_id: number;
   cafe_name: string;
   birth_date: string;
 }
@@ -25,7 +25,7 @@ export interface Subscription {
 // 지나간 컵캣
 export interface Cupcat {
   cafe_name: string;
-  cupcat_img_url: string;
+  cupcat_id: number;
 }
 
 export interface CupcatList {

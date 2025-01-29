@@ -1,6 +1,6 @@
 "use client";
 
-import { LogoText, Front } from "@assets/icons";
+import { LogoText, Front, LogoContact } from "@assets/icons";
 import Link from "next/link";
 
 const FOOTER_LINKS = [
@@ -53,12 +53,15 @@ const Footer = () => {
       <section className="flex justify-between">
         <div className="space-y-3 self-end Caption_bold ">
           <p>Contact</p>
-          <button
-            className="text-white w-12 h-12 rounded-full bg-Grey-500 grid place-items-center"
-            onClick={openKakaoChat}
-          >
-            카카오
-          </button>
+          <div className="flex flex-col justify-center items-center">
+            <button
+              className="mb-[2px] w-12 h-12 rounded-full grid place-items-center"
+              onClick={openKakaoChat}
+            >
+              <LogoContact />
+            </button>
+            <div className=" Caption_med text-Main_Blue">kakao</div>
+          </div>
         </div>
 
         <ul className="space-y-2 Caption_med mr-3">
