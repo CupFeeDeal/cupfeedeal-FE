@@ -1,5 +1,5 @@
 import { BannerInfo } from "src/types/home";
-import { BannerInit, BannerCup, BannerBasic } from "@assets/icons";
+import { BannerInit, BannerBasic } from "@assets/icons";
 import { useCupcatImg } from "src/hooks/useCupcatImg";
 
 // 로그인 여부, 구독권 개수에 따라 다르게 렌더링
