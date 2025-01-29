@@ -4,7 +4,7 @@ import { CafeDetail } from "src/types/search";
 export const searchClientApi = {
   // 탐색페이지 카페 상세
   getCafeDetail: async (cafeId: number): Promise<CafeDetail> => {
-    const response = await publicApi.get<CafeDetail>(`/api/v1/cafe/${cafeId}`);
+    const response = await privateApi.get<CafeDetail>(`/api/v1/cafe/${cafeId}`);
     return response.result;
   },
 
