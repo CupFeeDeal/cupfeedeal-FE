@@ -14,6 +14,7 @@ export { default as Close } from "./Close";
 export { default as Coffee } from "./Coffee";
 export { default as CoffeeBeanMarker } from "./CoffeeBeanMarker";
 export { default as Crosshair } from "./Crosshair";
+export { default as Cryingcat } from "./Cryingcat";
 export { default as Cup } from "./Cup";
 export { default as CupcatBg } from "./CupcatBg";
 export { default as CupcatEx } from "./CupcatEx";

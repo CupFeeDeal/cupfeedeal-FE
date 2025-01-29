@@ -8,4 +8,10 @@ export const userClientApi = {
     }>(`/api/v1/users`, { username: username });
     return response.result;
   },
+
+  // 마이페이지 탈퇴하기
+  deleteUser: async () => {
+    const response = await privateApi.delete(`/api/v1/auth/withdraw`);
+    return response;
+  },
 };

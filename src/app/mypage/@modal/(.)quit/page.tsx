@@ -1,11 +1,24 @@
 "use client";
 
+import { userClientApi } from "@api/client/userClient";
+import { token } from "@api/token";
 import { useRouter } from "next/navigation";
 
 export default function Quit() {
   const router = useRouter();
   const closeModal = () => {
     router.back();
+  };
+
+  // 탈퇴하기
+  const handleWithdraw = async () => {
+    try {
+      await userClientApi.deleteUser();
+      token.remove();
+      router.push("/");
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (
@@ -35,7 +48,10 @@ export default function Quit() {
           >
             돌아가기
           </button>
-          <button className="w-full Body_1_bold py-[14px] bg-Main_Blue text-white rounded-lg">
+          <button
+            onClick={handleWithdraw}
+            className="w-full Body_1_bold py-[14px] bg-Main_Blue text-white rounded-lg"
+          >
             탈퇴하기
           </button>
         </div>

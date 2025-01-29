@@ -12,14 +12,13 @@ import BottomSheet from "./(detail)/BottomSheet";
 import { useCafeListStore } from "@store/useCafeListStore";
 import useSelectedCafeStore from "@store/useSelectedCafeStore";
 // types
-import { Cafe, CafeDetail } from "src/types/search";
+import { Cafe } from "src/types/search";
 
 interface SearchContentProps {
   initialCafes: Cafe[];
   initialQuery: string;
   initialLike: boolean;
   detailId?: number;
-  detailCafe?: CafeDetail | null;
 }
 
 const SearchContent = ({
@@ -27,8 +26,8 @@ const SearchContent = ({
   initialQuery,
   initialLike,
   detailId,
-  detailCafe,
-}: SearchContentProps) => {
+}: // detailCafe,
+SearchContentProps) => {
   const router = useRouter();
   const searchParams = useSearchParams();
 
@@ -73,7 +72,7 @@ const SearchContent = ({
       <Map cafes={cafes} />
       {showBottomSheet && (
         <div>
-          <BottomSheet detailId={detailId} detailCafe={detailCafe} />
+          <BottomSheet detailId={detailId} />
         </div>
       )}
     </div>

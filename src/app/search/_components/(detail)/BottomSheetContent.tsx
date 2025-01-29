@@ -6,13 +6,13 @@ import Image from "next/image";
 
 // components
 import LoginModal from "../modal/LoginModal";
-import useMap from "../useMap";
 // api
 import { searchClientApi } from "@api/client/searchClient";
 import { token } from "@api/token";
 // icons
 import { FullHeart, EmptyHeart, Instagram } from "@assets/icons";
 // store & hooks
+import useMap from "../useMap";
 import useSelectedCafeStore from "@store/useSelectedCafeStore";
 import useDistance from "@app/search/_hooks/useDistance";
 import { useCafeListStore } from "@store/useCafeListStore";
@@ -24,9 +24,10 @@ import {
   LABEL_STYLE,
   VALUE_STYLE,
 } from "@app/search/_constants/constants";
+import BottomSheetSkeleton from "./BottomSheetSkeleton";
 
 interface BottomSheetContentProps {
-  cafeInfo: CafeDetail | undefined | null;
+  cafeId: number;
 }
 
 function InfoRow({ label, value }: { label: string; value: string }) {
@@ -38,23 +39,55 @@ function InfoRow({ label, value }: { label: string; value: string }) {
   );
 }
 
-const BottomSheetContent = ({ cafeInfo }: BottomSheetContentProps) => {
+const BottomSheetContent = ({ cafeId }: BottomSheetContentProps) => {
   const router = useRouter();
   const accessToken = token.get();
+
+  // 스토어
+  const { updateCafeLikeStatus } = useCafeListStore();
+  const { isSheetOpen } = useSelectedCafeStore();
+
+  const [cafeInfo, setCafeInfo] = useState<CafeDetail | null>(null); // 실제 카페 정보
+  const [fetchDone, setFetchDone] = useState(false); // fetch 완료 여부
+  const [minTime, setMinTime] = useState(false); // 스켈레톤 최소 시간
+
+  const [isLike, setIsLike] = useState(cafeInfo?.is_like || false);
+  const [distance, setDistance] = useState<number | null>(null);
 
   // 비로그인 시 모달
   const [showModalforSave, setShowModalforSave] = useState(false);
   const [showModalforSubs, setShowModalforSubs] = useState(false);
 
-  const [isLike, setIsLike] = useState(cafeInfo?.is_like || false);
+  // 스켈레톤 렌더링
+  useEffect(() => {
+    // 초기화
+    setCafeInfo(null);
+    setFetchDone(false);
+    setMinTime(false);
+    setIsLike(false);
+    setDistance(null);
 
-  // 현위치-카페 거리 관련
-  const [distance, setDistance] = useState<number | null>(null);
-  const { getDistance, formatDistance } = useDistance();
-  const { getCurrentLocation } = useMap();
+    const timer = setTimeout(() => {
+      setMinTime(true);
+    }, 1000);
 
-  const { updateCafeLikeStatus } = useCafeListStore();
-  const { isSheetOpen } = useSelectedCafeStore();
+    searchClientApi
+      .getCafeDetail(cafeId)
+      .then((detail) => {
+        setCafeInfo(detail);
+        setIsLike(detail.is_like);
+      })
+      .catch((err) => console.error(err))
+      .finally(() => {
+        setFetchDone(true);
+      });
+
+    return () => {
+      clearTimeout(timer); // 언마운트 시 타이머 정리
+    };
+  }, [cafeId]);
+
+  const showContent = fetchDone && minTime && cafeInfo;
 
   useEffect(() => {
     if (cafeInfo) {
@@ -87,6 +120,10 @@ const BottomSheetContent = ({ cafeInfo }: BottomSheetContentProps) => {
     }
   };
 
+  // 현위치-카페 거리 관련
+  const { getDistance, formatDistance } = useDistance();
+  const { getCurrentLocation } = useMap();
+
   // 거리 계산
   useEffect(() => {
     const calculateDistance = async () => {
@@ -111,10 +148,6 @@ const BottomSheetContent = ({ cafeInfo }: BottomSheetContentProps) => {
     calculateDistance();
   }, [cafeInfo, getDistance, getCurrentLocation]);
 
-  if (!cafeInfo) {
-    return <div className="w-full h-full bg-white"></div>;
-  }
-
   // 구독하기
   const handleSubscription = (id: number) => {
     if (!accessToken) {
@@ -123,6 +156,10 @@ const BottomSheetContent = ({ cafeInfo }: BottomSheetContentProps) => {
       router.push(`/payment?type=new&id=${id}`);
     }
   };
+
+  if (!showContent) {
+    return <BottomSheetSkeleton />;
+  }
 
   return (
     <>

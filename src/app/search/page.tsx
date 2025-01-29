@@ -21,11 +21,6 @@ export default async function Search({ searchParams }: SearchProps) {
 
   const cafes = await searchServerApi.getCafes(query, like);
 
-  let cafeDetail = null;
-  if (detailId) {
-    cafeDetail = await searchServerApi.getCafeDetail(detailId);
-  }
-
   return (
     <div className="flex w-full h-full flex-col">
       <TopBar title="커피딜 지도" backLink="/home" />
@@ -37,7 +32,6 @@ export default async function Search({ searchParams }: SearchProps) {
             initialQuery={query}
             initialLike={like}
             detailId={detailId}
-            detailCafe={cafeDetail}
           />
         </Suspense>
       </div>
