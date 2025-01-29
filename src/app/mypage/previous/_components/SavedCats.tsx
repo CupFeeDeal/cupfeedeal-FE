@@ -55,10 +55,7 @@ const SavedCats = ({ cupcatData }: SavedCatsProps) => {
                 className={`${styles.catContainer} ${styles[rowClass]}`}
                 style={getColumnStyle(rowIndex, colIndex)}
               >
-                <CatItem
-                  cafeName={cat.cafe_name}
-                  imageUrl={cat.cupcat_img_url}
-                />
+                <CatItem cafeName={cat.cafe_name} cupcatId={cat.cupcat_id} />
               </div>
             );
           })}

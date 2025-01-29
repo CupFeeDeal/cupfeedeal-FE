@@ -1,10 +1,11 @@
 import Link from "next/link";
-import Image from "next/image";
 
 // icons
 import { Information, LevelBannerBg, MyBannerBg } from "@assets/icons";
 // types
 import { MyInfo } from "src/types/mypage";
+// hooks
+import { useCupcatImg } from "src/hooks/useCupcatImg";
 
 interface BannerProps {
   userInfo: MyInfo;
@@ -12,7 +13,8 @@ interface BannerProps {
 }
 
 const MyBanner = ({ isLevel, userInfo }: BannerProps) => {
-  const { user_level, cupcatImgUrl, cafe_name, birth_date } = userInfo;
+  const { user_level, cupcat_id, cafe_name, birth_date } = userInfo;
+  const CupcatSvg = useCupcatImg(cupcat_id);
 
   return (
     <div className="w-full overflow-hidden relative z-5">
@@ -58,14 +60,7 @@ const MyBanner = ({ isLevel, userInfo }: BannerProps) => {
           )}
         </div>
         <div className="relative w-[54%] aspect-[198/289]">
-          <Image
-            alt={cupcatImgUrl}
-            src={cupcatImgUrl}
-            fill
-            style={{ objectFit: "contain" }}
-            className="p-2"
-            unoptimized
-          />
+          <CupcatSvg className="w-full h-full p-2" />
         </div>
       </div>
     </div>
