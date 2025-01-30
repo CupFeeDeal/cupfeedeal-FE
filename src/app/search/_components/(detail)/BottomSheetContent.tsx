@@ -6,6 +6,7 @@ import Image from "next/image";
 
 // components
 import LoginModal from "@common/LoginModal";
+import FullSubsModal from "./FullSubsModal";
 // api
 import { searchClientApi } from "@api/client/searchClient";
 import { token } from "@api/token";
@@ -56,6 +57,7 @@ const BottomSheetContent = ({ cafeId }: BottomSheetContentProps) => {
   // 비로그인 시 모달
   const [showModalforSave, setShowModalforSave] = useState(false);
   const [showModalforSubs, setShowModalforSubs] = useState(false);
+  const [showModalforFull, setShowModalforFull] = useState(false);
 
   // 스켈레톤 렌더링
   useEffect(() => {
@@ -149,10 +151,12 @@ const BottomSheetContent = ({ cafeId }: BottomSheetContentProps) => {
   }, [cafeInfo, getDistance, getCurrentLocation]);
 
   // 구독하기
-  const handleSubscription = async (id: number) => {
+  const handleSubscription = async (id: number, is_full: boolean) => {
     const accessToken = await token.get();
     if (!accessToken) {
       setShowModalforSubs(true);
+    } else if (is_full) {
+      setShowModalforFull(true);
     } else {
       router.push(`/payment?type=new&id=${id}`);
     }
@@ -240,18 +244,25 @@ const BottomSheetContent = ({ cafeId }: BottomSheetContentProps) => {
           <div className={`${VALUE_STYLE} mt-2`}>{cafeInfo.description}</div>
 
           <div
-            onClick={() => handleSubscription(cafeInfo.id)}
+            onClick={() =>
+              handleSubscription(cafeInfo.id, cafeInfo.is_full_subscriptions)
+            }
             className={`flex w-full justify-center Body_1_bold rounded-xl px-6 py-[0.88rem] mt-[3.6rem] ${
               cafeInfo.is_subscription
                 ? "bg-Grey-200 text-Grey-400 cursor-not-allowed"
                 : "bg-Main_Blue text-white cursor-pointer"
             }`}
           >
-            구독하기
+            {cafeInfo.is_subscription ? "이미 구독중이에요" : "구독하기"}
           </div>
         </div>
       </div>
 
+      {/*구독권 3개 이용중일 시 모달*/}
+      <FullSubsModal
+        isOpen={showModalforFull}
+        onClose={() => setShowModalforFull(false)}
+      />
       {/*비로그인 시 모달 */}
       <LoginModal
         isOpen={showModalforSave}
