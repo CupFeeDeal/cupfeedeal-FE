@@ -1,9 +1,18 @@
+"use client";
+
+import { useEffect } from "react";
 import { BannerInfo } from "src/types/home";
+import { useAuthStore } from "@store/useAuthStore";
 import { BannerInit, BannerBasic } from "@assets/icons";
 import { useCupcatImg } from "src/hooks/useCupcatImg";
 
 // 로그인 여부, 구독권 개수에 따라 다르게 렌더링
 const HomeBanner = ({ subscription_count, cupcat_id }: BannerInfo) => {
+  const { setIsAuthenticated } = useAuthStore();
+  useEffect(() => {
+    setIsAuthenticated(subscription_count >= 0);
+  }, [subscription_count, setIsAuthenticated]);
+
   const variant =
     subscription_count > 0
       ? {
