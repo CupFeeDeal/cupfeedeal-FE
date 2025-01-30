@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import Image from "next/image";
 
 // components
-import LoginModal from "../../../../common/LoginModal";
+import LoginModal from "@common/LoginModal";
 // api
 import { searchClientApi } from "@api/client/searchClient";
 import { token } from "@api/token";
@@ -41,7 +41,6 @@ function InfoRow({ label, value }: { label: string; value: string }) {
 
 const BottomSheetContent = ({ cafeId }: BottomSheetContentProps) => {
   const router = useRouter();
-  const accessToken = token.get();
 
   // 스토어
   const { updateCafeLikeStatus } = useCafeListStore();
@@ -97,6 +96,7 @@ const BottomSheetContent = ({ cafeId }: BottomSheetContentProps) => {
 
   // 좋아요로 카페 저장
   const handleClickSave = async () => {
+    const accessToken = await token.get();
     if (!accessToken) {
       setShowModalforSave(true);
       return;
@@ -149,7 +149,8 @@ const BottomSheetContent = ({ cafeId }: BottomSheetContentProps) => {
   }, [cafeInfo, getDistance, getCurrentLocation]);
 
   // 구독하기
-  const handleSubscription = (id: number) => {
+  const handleSubscription = async (id: number) => {
+    const accessToken = await token.get();
     if (!accessToken) {
       setShowModalforSubs(true);
     } else {
