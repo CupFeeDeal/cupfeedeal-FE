@@ -63,6 +63,7 @@ export { default as Lv3 } from "./Lv3";
 export { default as Lv4 } from "./Lv4";
 export { default as Lv5 } from "./Lv5";
 export { default as Map } from "./Map";
+export { default as MapPin } from "./MapPin";
 export { default as MyBannerBg } from "./MyBannerBg";
 export { default as MyTabCupcatBg } from "./MyTabCupcatBg";
 export { default as MyTabHistoryBg } from "./MyTabHistoryBg";

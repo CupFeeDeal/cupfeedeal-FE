@@ -61,17 +61,18 @@ const config: Config = {
           "100%": { opacity: "1" },
         },
         shimmer: {
-          "0%": {
-            transform: "translateX(-100%)",
-          },
-          "100%": {
-            transform: "translateX(100%)",
-          },
+          "0%": { transform: "translateX(-100%)" },
+          "100%": { transform: "translateX(100%)" },
+        },
+        floating: {
+          "0%, 100%": { transform: "translateY(0)" },
+          "50%": { transform: "translateY(-10px)" },
         },
       },
       animation: {
         "fade-in": "fadeIn 0.5s ease-in-out",
         shimmer: "shimmer 1.5s infinite",
+        floating: "floating 1.5s ease-in-out infinite",
       },
     },
   },

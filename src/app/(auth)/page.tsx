@@ -16,12 +16,12 @@ const AuthPage = () => {
       </div>
 
       {/* 로그인 버튼 */}
-      <div className="flex flex-col items-center px-5 gap-4">
-        <SpeachBubble className="relative drop-shadow-basic" />
+      <div className="flex flex-col items-center px-5 gap-3">
+        <SpeachBubble className="relative drop-shadow-basic animate-bounce" />
         <KakaoBtn />
         <Link
           href={"/home"}
-          className="Body_2_reg text-Grey-500 underline w-fit "
+          className="Body_2_reg text-Grey-500 underline w-fit mt-1"
         >
           먼저 둘러보고 싶어요
         </Link>
