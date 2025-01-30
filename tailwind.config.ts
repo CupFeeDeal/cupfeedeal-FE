@@ -60,9 +60,18 @@ const config: Config = {
           "0%": { opacity: "0" },
           "100%": { opacity: "1" },
         },
+        shimmer: {
+          "0%": {
+            transform: "translateX(-100%)",
+          },
+          "100%": {
+            transform: "translateX(100%)",
+          },
+        },
       },
       animation: {
         "fade-in": "fadeIn 0.5s ease-in-out",
+        shimmer: "shimmer 1.5s infinite",
       },
     },
   },

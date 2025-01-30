@@ -59,7 +59,7 @@ const Card = ({
       {/* 구독권 관리 버튼 */}
       {(!showDetails || is_used) && (
         <Setting
-          className="absolute top-6 right-6 z-10"
+          className="absolute top-7 right-6 z-10"
           onClick={() => {
             setShowManageModal(true);
           }}

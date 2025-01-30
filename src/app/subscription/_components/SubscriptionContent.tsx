@@ -23,12 +23,20 @@ const SubscriptionContent = ({
   const [selectedIdx, setSelectedIdx] = useState(0);
   const { setSubscription, subscriptions, paw_count } = useSubscriptionStore();
 
+  // 초기 데이터 세팅
   useEffect(() => {
     setSubscription({
       paw_count: initialPawCount,
       userSubscriptionListResponseDtos: initialSubscriptions,
     });
   }, [initialPawCount, initialSubscriptions, setSubscription]);
+
+  // 취소 등으로 인해 배열 기링 변하면 selectedIdx 조정
+  useEffect(() => {
+    if (selectedIdx >= subscriptions.length && subscriptions.length > 0) {
+      setSelectedIdx(subscriptions.length - 1);
+    }
+  }, [subscriptions.length, selectedIdx]);
 
   return (
     <div className="flex flex-col h-full">
@@ -42,14 +50,21 @@ const SubscriptionContent = ({
           {"오늘의 커피 한 잔 마시고\n발자국을 모아봐요!"}
         </p>
 
-        <div className="relative my-8 overflow-hidden rounded-[1.25rem]">
+        <div className="relative my-8 overflow-hidden rounded-[1.25rem] animate-fade-in">
           <CardBackground />
-          <Link
-            href="/search"
-            className="absolute top-[33%] left-1/2 -translate-x-1/2 Body_2_bold text-white bg-Grey-800 px-8 py-3 rounded-lg hover:bg-Grey-700 transition-colors"
-          >
-            구독권 둘러보기
-          </Link>
+          {subscriptions.length === 0 ? (
+            <>
+              <h3 className="Headline_3 text-white absolute top-[19%] left-1/2 -translate-x-1/2 whitespace-nowrap">
+                현재 구독권이 없어요
+              </h3>
+              <Link
+                href="/search"
+                className="absolute top-[33%] left-1/2 -translate-x-1/2 Body_2_bold text-white bg-Grey-800 px-8 py-3 rounded-lg hover:bg-Grey-700 transition-colors"
+              >
+                구독권 둘러보기
+              </Link>
+            </>
+          ) : null}
 
           {subscriptions.length > 0 && (
             <>
