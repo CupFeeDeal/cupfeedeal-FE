@@ -1,39 +1,39 @@
 "use client";
 
-import { useRouter } from "next/navigation";
+import { Dispatch, SetStateAction } from "react";
 import { Profile1, Profile2, Profile3, Profile4 } from "@assets/icons";
-import { authApi } from "@api/client/auth";
-import { token } from "@api/token";
 
-const ProfileBtn = () => {
-  const router = useRouter();
+interface ProfileBtnProps {
+  selectedId: number | null;
+  setSelectedId: Dispatch<SetStateAction<number | null>>;
+}
 
-  const handleDemoLogin = async (userId: number) => {
-    try {
-      const response = await authApi.demoLogin(userId);
-      token.set(response.result.token);
-      router.replace("/home");
-    } catch (error) {
-      console.error("데모 로그인 실패:", error);
-    }
-  };
-
+const ProfileBtn = ({ selectedId, setSelectedId }: ProfileBtnProps) => {
   const profiles = [
-    { Component: Profile1, id: 11 },
-    { Component: Profile2, id: 12 },
-    { Component: Profile3, id: 13 },
-    { Component: Profile4, id: 14 },
+    { Component: Profile1, id: 11, name: "매일세잔" },
+    { Component: Profile2, id: 12, name: "블랙카우" },
+    { Component: Profile3, id: 13, name: "습관성탈출" },
+    { Component: Profile4, id: 14, name: "응애뉴비" },
   ];
 
   return (
-    <div className="absolute top-5 right-6 flex flex-col gap-4">
-      {profiles.map(({ Component, id }) => (
+    <div className="grid grid-cols-2 grid-rows-2 gap-6 w-[60%] mx-auto">
+      {profiles.map(({ Component, id, name }) => (
         <div
           key={id}
-          onClick={() => handleDemoLogin(id)}
-          className="cursor-pointer hover:opacity-80 transition-opacity"
+          onClick={() => setSelectedId(id)}
+          className="cursor-pointer space-y-2 transition-all duration-300"
         >
-          <Component />
+          <Component
+            className={`${
+              selectedId === id
+                ? "drop-shadow-basic"
+                : selectedId !== null
+                ? "opacity-30"
+                : ""
+            }`}
+          />
+          <p className="Subhead_2_bold font-medium text-center">{name}</p>
         </div>
       ))}
     </div>

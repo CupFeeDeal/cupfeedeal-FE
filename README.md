@@ -134,74 +134,26 @@ CEOS 20th<br/><br/>
 📦src
  ┣ 📂api
  ┃ ┣ 📂client
- ┃ ┃ ┣ 📜auth.ts
- ┃ ┃ ┣ 📜searchClient.ts
- ┃ ┃ ┣ 📜subscriptionClient.ts
- ┃ ┃ ┣ 📜tossPayment.ts
- ┃ ┃ ┗ 📜userClient.ts
  ┃ ┣ 📂server
- ┃ ┃ ┣ 📜home.ts
- ┃ ┃ ┣ 📜searchServer.ts
- ┃ ┃ ┣ 📜subscriptionServer.ts
- ┃ ┃ ┗ 📜userServer.ts
  ┃ ┣ 📜client.ts
  ┃ ┣ 📜server.ts
  ┃ ┗ 📜token.ts
  ┣ 📂app
  ┃ ┣ 🔐(auth)
- ┃ ┃ ┣ 📂oauth
- ┃ ┃ ┃ ┗ 📂callback
- ┃ ┃ ┃ ┃ ┗ 📂kakao
- ┃ ┃ ┃ ┃ ┃ ┗ 📜page.tsx
+ ┃ ┃ ┣ 📂oauth/callback/kakao
  ┃ ┃ ┣ 📂_components
- ┃ ┃ ┃ ┣ 📜KakaoBtn.tsx
- ┃ ┃ ┃ ┗ 📜ProfileBtn.tsx
  ┃ ┃ ┗ 📜page.tsx
  ┃ ┣ 🏠home
  ┃ ┃ ┣ 📂_components
- ┃ ┃ ┃ ┣ 📜HomeBanner.tsx
- ┃ ┃ ┃ ┣ 📜NewCard.tsx
- ┃ ┃ ┃ ┣ 📜RecommendCard.tsx
- ┃ ┃ ┃ ┗ 📜Section.tsx
  ┃ ┃ ┗ 📜page.tsx
  ┃ ┣ 👩🏻‍💻mypage
  ┃ ┃ ┣ 📂@modal
- ┃ ┃ ┃ ┣ 📂(.)nickname
- ┃ ┃ ┃ ┃ ┗ 📜page.tsx
- ┃ ┃ ┃ ┣ 📂(.)quit
- ┃ ┃ ┃ ┃ ┗ 📜page.tsx
- ┃ ┃ ┃ ┗ 📜default.tsx
  ┃ ┃ ┣ 📂ask
- ┃ ┃ ┃ ┣ 📂_components
- ┃ ┃ ┃ ┃ ┣ 📜AskContents.tsx
- ┃ ┃ ┃ ┃ ┗ 📜Dropdown.tsx
- ┃ ┃ ┃ ┗ 📜page.tsx
  ┃ ┃ ┣ 📂history
- ┃ ┃ ┃ ┣ 📂_components
- ┃ ┃ ┃ ┃ ┣ 📜HistoryContents.tsx
- ┃ ┃ ┃ ┃ ┣ 📜HistoryItem.tsx
- ┃ ┃ ┃ ┃ ┗ 📜Toggle.tsx
- ┃ ┃ ┃ ┗ 📜page.tsx
  ┃ ┃ ┣ 📂level
- ┃ ┃ ┃ ┣ 📂_components
- ┃ ┃ ┃ ┃ ┣ 📜LevelInfo.tsx
- ┃ ┃ ┃ ┃ ┗ 📜mock.ts
- ┃ ┃ ┃ ┗ 📜page.tsx
  ┃ ┃ ┣ 📂nickname
- ┃ ┃ ┃ ┗ 📜page.tsx
- ┃ ┃ ┣ 📂previous
- ┃ ┃ ┃ ┣ 📂_components
- ┃ ┃ ┃ ┃ ┣ 📜CatItem.tsx
- ┃ ┃ ┃ ┃ ┣ 📜catPositions.module.css
- ┃ ┃ ┃ ┃ ┗ 📜SavedCats.tsx
- ┃ ┃ ┃ ┣ 📂_hooks
- ┃ ┃ ┃ ┃ ┗ 📜useCupcats.ts
- ┃ ┃ ┃ ┗ 📜page.tsx
  ┃ ┃ ┣ 📂quit
- ┃ ┃ ┃ ┗ 📜page.tsx
  ┃ ┃ ┣ 📂_components
- ┃ ┃ ┃ ┣ 📜MyBanner.tsx
- ┃ ┃ ┃ ┗ 📜MyTab.tsx
  ┃ ┃ ┣ 📜layout.tsx
  ┃ ┃ ┗ 📜page.tsx
  ┃ ┣ ☕onboarding
@@ -209,58 +161,20 @@ CEOS 20th<br/><br/>
  ┃ ┃ ┗ 📜page.tsx
  ┃ ┣ 💸payment
  ┃ ┃ ┣ 📂_clients
- ┃ ┃ ┃ ┣ 📜ExtendClient.tsx
- ┃ ┃ ┃ ┗ 📜NewClient.tsx
  ┃ ┃ ┣ 📂_components
- ┃ ┃ ┃ ┣ 📂modal
- ┃ ┃ ┃ ┃ ┣ 📜ExtendAfModal.tsx
- ┃ ┃ ┃ ┃ ┗ 📜NewAfModal.tsx
- ┃ ┃ ┃ ┣ 📜Calendar.tsx
- ┃ ┃ ┃ ┣ 📜Info.tsx
- ┃ ┃ ┃ ┗ 📜OptionBtn.tsx
- ┃ ┃ ┣ 📂_hooks
- ┃ ┃ ┃ ┣ 📜useCalendar.ts
- ┃ ┃ ┃ ┣ 📜useHighlight.ts
- ┃ ┃ ┃ ┗ 📜usePayment.ts
+ ┃ ┃ ┣ 📂_hook
  ┃ ┃ ┣ 📜page.tsx
  ┃ ┃ ┗ 📜PaymentWrapper.tsx
  ┃ ┣ 🔍search
  ┃ ┃ ┣ 📂nearList
- ┃ ┃ ┃ ┗ 📜page.tsx
  ┃ ┃ ┣ 📂_components
- ┃ ┃ ┃ ┣ 📂(detail)
- ┃ ┃ ┃ ┃ ┣ 📜BottomSheet.tsx
- ┃ ┃ ┃ ┃ ┣ 📜BottomSheetContent.tsx
- ┃ ┃ ┃ ┃ ┣ 📜BottomSheetHeader.tsx
- ┃ ┃ ┃ ┃ ┗ 📜BottomSheetSkeleton.tsx
- ┃ ┃ ┃ ┣ 📜CafeList.tsx
- ┃ ┃ ┃ ┣ 📜Map.tsx
- ┃ ┃ ┃ ┣ 📜SearchBar.tsx
- ┃ ┃ ┃ ┣ 📜SearchContent.tsx
- ┃ ┃ ┃ ┣ 📜SearchMenu.tsx
- ┃ ┃ ┃ ┗ 📜useMap.ts
  ┃ ┃ ┣ 📂_constants
- ┃ ┃ ┃ ┗ 📜constants.ts
  ┃ ┃ ┣ 📂_hooks
- ┃ ┃ ┃ ┣ 📜useBottomSheet.ts
- ┃ ┃ ┃ ┗ 📜useDistance.ts
  ┃ ┃ ┣ 📜layout.tsx
  ┃ ┃ ┗ 📜page.tsx
  ┃ ┣ 💳subscription
  ┃ ┃ ┣ 📂_components
- ┃ ┃ ┃ ┣ 📂modal
- ┃ ┃ ┃ ┃ ┣ 📜CancelAfModal.tsx
- ┃ ┃ ┃ ┃ ┣ 📜CancelBfModal.tsx
- ┃ ┃ ┃ ┃ ┣ 📜FootModal.tsx
- ┃ ┃ ┃ ┃ ┣ 📜ManageModal.tsx
- ┃ ┃ ┃ ┃ ┗ 📜UseCardModal.tsx
- ┃ ┃ ┃ ┣ 📜Card.tsx
- ┃ ┃ ┃ ┣ 📜Cups.tsx
- ┃ ┃ ┃ ┗ 📜SubscriptionContent.tsx
  ┃ ┃ ┣ 📂_utils
- ┃ ┃ ┃ ┣ 📜CardHelpers.ts
- ┃ ┃ ┃ ┣ 📜CardStyles.ts
- ┃ ┃ ┃ ┗ 📜FormatDate.ts
  ┃ ┃ ┗ 📜page.tsx
  ┃ ┣ 📜error.tsx
  ┃ ┣ 📜font.ts
@@ -271,34 +185,11 @@ CEOS 20th<br/><br/>
  ┃ ┣ 📂icons
  ┃ ┃ ┣ (tsx로 변환된 svg들)
  ┃ ┗ 📂json
- ┃ ┃ ┣ 📜loading_ui.json
- ┃ ┃ ┣ 📜onboarding_1.json
- ┃ ┃ ┣ 📜onboarding_2.json
- ┃ ┃ ┣ 📜onboarding_3.json
- ┃ ┃ ┗ 📜onboarding_4.json
+ ┃ ┃ ┣ (Lottie 파일들)
  ┣ 📂common
- ┃ ┣ 📜Footer.tsx
- ┃ ┣ 📜HomeTap.tsx
- ┃ ┣ 📜ImgWithSkeleton.tsx
- ┃ ┣ 📜LoginModal.tsx
- ┃ ┣ 📜Modal.tsx
- ┃ ┗ 📜TopBar.tsx
  ┣ 📂hooks
- ┃ ┗ 📜useCupcatImg.ts
  ┣ 📂store
- ┃ ┣ 📜useAuthStore.ts
- ┃ ┣ 📜useCafeListStore.ts
- ┃ ┣ 📜useMypageModalStore.ts
- ┃ ┣ 📜useSelectedCafeStore.ts
- ┃ ┗ 📜useSubscriptionStore.ts
  ┗ 📂types
- ┃ ┣ 📜home.ts
- ┃ ┣ 📜modal.ts
- ┃ ┣ 📜mypage.ts
- ┃ ┣ 📜payment.ts
- ┃ ┣ 📜search.ts
- ┃ ┣ 📜subscription.ts
- ┃ ┗ 📜svg.d.ts
-
-<br/>
 ```
+
+<br>
