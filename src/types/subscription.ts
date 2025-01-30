@@ -13,9 +13,20 @@ export interface SubscriptionCard {
   remaining_days: number;
 }
 
+// Api - Store에 필요한 값들
 export interface SubscriptionResponse {
   paw_count: number;
   userSubscriptionListResponseDtos: SubscriptionCard[];
+}
+
+export interface UseSubscriptionResult {
+  is_getting_paw: boolean;
+  saved_cups: number;
+  paw_count: number;
+}
+
+export interface CancelSubscriptionResult {
+  paw_count: number;
 }
 
 // Card에 필요한 props

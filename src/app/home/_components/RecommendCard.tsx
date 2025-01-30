@@ -1,6 +1,8 @@
-import Image from "next/image";
+"use client";
+
 import Link from "next/link";
 import { RecommendCafe } from "src/types/home";
+import ImgWithSkeleton from "@common/ImgWithSkeleton";
 
 const RecommendCard = ({
   cafe_id,
@@ -13,7 +15,7 @@ const RecommendCard = ({
     {/* 카페 이미지 */}
     <section className="w-48 h-32 relative rounded-lg shrink-0 overflow-hidden">
       {image_url ? (
-        <Image
+        <ImgWithSkeleton
           src={image_url}
           alt={`${name} 카페 사진`}
           fill

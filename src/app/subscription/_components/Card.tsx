@@ -5,6 +5,7 @@ import { useState } from "react";
 import { Setting, Coffee, Stamp } from "@assets/icons";
 import Cups from "./Cups";
 import { CardProps } from "src/types/subscription";
+
 import { CARD_STYLES } from "../_utils/CardStyles";
 import { getBottomSpacing } from "../_utils/CardHelpers";
 
@@ -32,17 +33,6 @@ const Card = ({
   const [showFootModal, setShowFootModal] = useState(false);
   const [showManageModal, setShowManageModal] = useState(false);
 
-  const manageModalProps = {
-    user_subscription_id,
-    menu,
-    period,
-    price,
-    start,
-    end,
-    visit,
-    remaining_days,
-  };
-
   // 사용 완료 -> 발자국 모달 바꾸기
   const switchModal = (showFootModal: boolean) => {
     setShowUseModal(false);
@@ -69,7 +59,7 @@ const Card = ({
       {/* 구독권 관리 버튼 */}
       {(!showDetails || is_used) && (
         <Setting
-          className="absolute top-6 right-6 z-10"
+          className="absolute top-7 right-6 z-10"
           onClick={() => {
             setShowManageModal(true);
           }}
@@ -89,7 +79,7 @@ const Card = ({
 
           {/* 구독권 사용 버튼 or 스탬프 */}
           {is_used ? (
-            <Stamp className="absolute -top-5 -right-10 " />
+            <Stamp className="absolute -top-5 -right-10 animate-fade-in" />
           ) : (
             <div
               onClick={(e) => {
@@ -121,8 +111,17 @@ const Card = ({
           <ManageModal
             isOpen={showManageModal}
             onClose={() => setShowManageModal(false)}
-            cafe_name={cafe_name}
-            {...manageModalProps}
+            {...{
+              user_subscription_id,
+              cafe_name,
+              menu,
+              period,
+              price,
+              start,
+              end,
+              visit,
+              remaining_days,
+            }}
           />
 
           {/* 발자국 도장 모달 */}

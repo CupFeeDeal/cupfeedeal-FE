@@ -5,4 +5,7 @@ export const authApi = {
     publicApi.get<{ token: string; is_first: boolean; username: string }>(
       `/api/v1/auth/callback?code=${code}&redirect_uri=${process.env.NEXT_PUBLIC_KAKAO_REDIRECT_URI}`
     ),
+
+  demoLogin: (userId: number) =>
+    publicApi.get<{ token: string }>(`/api/v1/auth/login/demo/${userId}`),
 };

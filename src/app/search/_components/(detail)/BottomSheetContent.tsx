@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import Image from "next/image";
 
 // components
-import LoginModal from "../modal/LoginModal";
+import LoginModal from "../../../../common/LoginModal";
 // api
 import { searchClientApi } from "@api/client/searchClient";
 import { token } from "@api/token";

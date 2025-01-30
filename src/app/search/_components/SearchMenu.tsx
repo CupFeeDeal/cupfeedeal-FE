@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 
 // components
-import LoginModal from "./modal/LoginModal";
+import LoginModal from "@common/LoginModal";
 // icons
 import { EmptyHeart, FullHeart, Crosshair } from "@assets/icons";
 // api

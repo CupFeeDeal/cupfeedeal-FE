@@ -1,7 +1,7 @@
 import Link from "next/link";
 
 import { homeApi } from "@api/server/home";
-import { Map } from "@assets/icons";
+import { Map, MapPin } from "@assets/icons";
 import HomeTap from "@common/HomeTap";
 import Footer from "@common/Footer";
 
@@ -31,7 +31,12 @@ const HomePage = async () => {
         {/* 지도 */}
         <Section title="커피딜 지도에서 카페를 찾아봐요!">
           <Link href={"/search"}>
-            <Map />
+            <div className="relative">
+              <Map />
+              <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
+                <MapPin className="w-20 animate-floating drop-shadow-lg" />
+              </div>
+            </div>
           </Link>
         </Section>
 

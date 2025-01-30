@@ -1,6 +1,8 @@
-import Image from "next/image";
+"use client";
+
 import Link from "next/link";
 import { NewCafe } from "src/types/home";
+import ImgWithSkeleton from "@common/ImgWithSkeleton";
 
 const NewCard = ({ cafe_id, image_url, name, address }: NewCafe) => (
   <Link
@@ -10,7 +12,7 @@ const NewCard = ({ cafe_id, image_url, name, address }: NewCafe) => (
     {/* 카페 이미지 */}
     <div className="w-36 h-36 relative rounded-lg overflow-hidden">
       {image_url ? (
-        <Image
+        <ImgWithSkeleton
           src={image_url}
           alt={`${name} 카페 사진`}
           fill

@@ -1,6 +1,7 @@
 "use client";
 
 import { subscriptionClientApi } from "@api/client/subscriptionClient";
+import { useSubscriptionStore } from "@store/useSubscriptionStore";
 import Modal from "@common/Modal";
 import { UseCardModalProps } from "src/types/modal";
 import { formatDate } from "@app/subscription/_utils/FormatDate";
@@ -14,19 +15,23 @@ const UseCardModal = ({
   user_subscription_id,
 }: UseCardModalProps) => {
   const today = formatDate();
+  const { updateSubscription } = useSubscriptionStore();
 
   // 구독권 사용하기 로직
   const handleConfirm = async () => {
     try {
-      const {
-        result: { is_getting_paw },
-      } = await subscriptionClientApi.useSubscription(user_subscription_id);
-      console.log("사용함");
-      onClose();
+      const { result } = await subscriptionClientApi.useSubscription(
+        user_subscription_id
+      );
 
-      if (is_getting_paw) {
-        onComplete(true);
-      }
+      updateSubscription(
+        user_subscription_id,
+        { is_used: true, saved_cups: result.saved_cups },
+        result.paw_count
+      );
+
+      onClose();
+      onComplete(result.is_getting_paw);
     } catch (error) {
       console.error("구독권 사용 실패: ", error);
     }

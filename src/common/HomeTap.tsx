@@ -1,16 +1,28 @@
 "use client";
 
+import { useState } from "react";
 import { Logo } from "@assets/icons";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { token } from "@api/token";
+import LoginModal from "./LoginModal";
 
 const HomeTap = () => {
   const pathname = usePathname();
+  const router = useRouter();
   const accessToken = token.sync();
+  const [showLoginModal, setShowLoginModal] = useState(false);
+
+  const handleSubClick = () => {
+    if (!accessToken) {
+      setShowLoginModal(true);
+      return;
+    }
+    router.push("/subscription");
+  };
 
   const tapClass = (isActive: boolean) =>
-    `w-1/2 flex justify-center items-center pb-3 border-b-[0.125rem] ${
+    `w-1/2 flex justify-center items-center pb-3 border-b-[0.125rem] cursor-pointer ${
       isActive ? "border-black" : "border-Grey-300 text-Grey-300"
     }`;
 
@@ -29,13 +41,20 @@ const HomeTap = () => {
         <Link href={"/home"} className={tapClass(pathname === "/home")}>
           HOME
         </Link>
-        <Link
-          href={"/subscription"}
+        <div
+          onClick={handleSubClick}
           className={tapClass(pathname === "/subscription")}
         >
           구독권
-        </Link>
+        </div>
       </header>
+
+      <LoginModal
+        isOpen={showLoginModal}
+        onClose={() => setShowLoginModal(false)}
+        onLogin={() => router.push("/")}
+        message="구독권 탭은"
+      />
     </>
   );
 };
