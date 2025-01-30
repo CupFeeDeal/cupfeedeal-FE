@@ -38,10 +38,10 @@ const SavedCats = ({ cupcatData }: SavedCatsProps) => {
           Lv.{cupcatData.level}
         </span>
       </div>
+      <CupcatBg className="w-full mt-[243px] mb-[34px]" />
 
       {catChunks.map((group, gIndex) => (
         <div key={gIndex} className="relative w-full">
-          <CupcatBg className="w-full mt-[243px] mb-[34px]" />
           {group.map((cat, i) => {
             const rowIndex = Math.floor(i / 3); // 0,1,2
             const colIndex = i % 3; // 0,1,2

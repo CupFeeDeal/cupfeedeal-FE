@@ -40,6 +40,7 @@ export interface CafeDetail {
   description: string;
   is_like: boolean;
   is_subscription: boolean;
+  is_full_subscriptions: boolean;
 }
 
 interface Image {
