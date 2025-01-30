@@ -1,5 +1,9 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  images: {
+    domains: ["search.pstatic.net", "buly.kr", "i.ibb.co"],
+  },
+
   webpack(config) {
     config.module.rules.push({
       test: /\.svg$/,

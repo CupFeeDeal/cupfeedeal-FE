@@ -1,0 +1,32 @@
+.catContainer {
+  position: absolute;
+}
+
+.row-1 {
+  top: 19%;
+}
+
+.row-2 {
+  top: 45.5%;
+}
+
+.row-3 {
+  top: 72%;
+}
+
+@media (min-width: 405px) {
+  .row-1 {
+    top: 18.5%;
+  }
+}
+
+@media (min-width: 400px) {
+  .row-2 {
+    top: 46%;
+  }
+}
+@media (min-width: 390px) {
+  .row-3 {
+    top: 73%;
+  }
+}
