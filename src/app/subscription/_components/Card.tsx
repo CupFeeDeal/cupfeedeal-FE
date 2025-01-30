@@ -2,9 +2,12 @@
 
 import { useState } from "react";
 
+import { useSubscriptionStore } from "@store/useSubscriptionStore";
+
 import { Setting, Coffee, Stamp } from "@assets/icons";
 import Cups from "./Cups";
 import { CardProps } from "src/types/subscription";
+
 import { CARD_STYLES } from "../_utils/CardStyles";
 import { getBottomSpacing } from "../_utils/CardHelpers";
 
@@ -31,17 +34,6 @@ const Card = ({
   const [showUseModal, setShowUseModal] = useState(false);
   const [showFootModal, setShowFootModal] = useState(false);
   const [showManageModal, setShowManageModal] = useState(false);
-
-  const manageModalProps = {
-    user_subscription_id,
-    menu,
-    period,
-    price,
-    start,
-    end,
-    visit,
-    remaining_days,
-  };
 
   // 사용 완료 -> 발자국 모달 바꾸기
   const switchModal = (showFootModal: boolean) => {
@@ -121,8 +113,17 @@ const Card = ({
           <ManageModal
             isOpen={showManageModal}
             onClose={() => setShowManageModal(false)}
-            cafe_name={cafe_name}
-            {...manageModalProps}
+            {...{
+              user_subscription_id,
+              cafe_name,
+              menu,
+              period,
+              price,
+              start,
+              end,
+              visit,
+              remaining_days,
+            }}
           />
 
           {/* 발자국 도장 모달 */}

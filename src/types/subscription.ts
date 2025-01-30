@@ -18,6 +18,16 @@ export interface SubscriptionResponse {
   userSubscriptionListResponseDtos: SubscriptionCard[];
 }
 
+export interface UseSubscriptionResult {
+  is_getting_paw: boolean;
+  saved_cups: number;
+  paw_count: number;
+}
+
+export interface CancelSubscriptionResult {
+  paw_count: number;
+}
+
 // Card에 필요한 props
 export interface CardProps extends SubscriptionCard {
   backgroundClass: string;

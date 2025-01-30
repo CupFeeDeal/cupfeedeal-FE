@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { CafeSubscription } from "src/types/payment";
-
+import { useSubscriptionStore } from "@store/useSubscriptionStore";
 import { tossPaymentApi } from "@api/client/tossPayment";
 import { subscriptionClientApi } from "@api/client/subscriptionClient";
 
@@ -10,6 +10,7 @@ export const usePayment = (initialStartDate: Date | null) => {
   const [startDate, setStartDate] = useState<Date | null>(initialStartDate);
   const [endDate, setEndDate] = useState<Date | null>(null);
   const [showModal, setShowModal] = useState(false);
+  const { setSubscription } = useSubscriptionStore();
 
   // subscription이 변경될 때마다 endDate 업데이트
   useEffect(() => {
@@ -65,13 +66,16 @@ export const usePayment = (initialStartDate: Date | null) => {
             cafeSubscriptionTypeId: Number(subId),
             subscriptionStart: subStart,
           });
+
+          const response = await subscriptionClientApi.getSubscription();
+          setSubscription(response.result); // response.result가 SubscriptionResponse 타입
           setShowModal(true);
         } catch (error) {
           console.error("구독 신청 실패:", error);
         }
       })();
     }
-  }, []);
+  }, [setSubscription]);
 
   return {
     selectedSubscription,

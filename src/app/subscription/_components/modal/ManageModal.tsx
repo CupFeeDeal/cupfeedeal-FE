@@ -5,6 +5,8 @@ import { useState } from "react";
 
 import { subscriptionClientApi } from "@api/client/subscriptionClient";
 
+import { useSubscriptionStore } from "@store/useSubscriptionStore";
+
 import TopBar from "@common/TopBar";
 import { HalfCat } from "@assets/icons";
 import { formatDate } from "@app/subscription/_utils/FormatDate";
@@ -16,13 +18,15 @@ import CancelBfModal from "./CancelBfModal";
 import CancelAfModal from "./CancelAfModal";
 
 // 구독 시작일, 만료일 정보 box
-interface DateBoxProps {
+const DateBox = ({
+  label,
+  date,
+  isExpiry = false,
+}: {
   label: string;
   date: string;
   isExpiry?: boolean;
-}
-
-const DateBox = ({ label, date, isExpiry = false }: DateBoxProps) => (
+}) => (
   <div className="flex flex-col gap-4 py-4 items-center text-center bg-white rounded-2xl w-full">
     <p className="Body_2_med">{label}</p>
     <h4
@@ -50,13 +54,17 @@ const ManageModal = ({
 }: ManageModalProps) => {
   const [showBfModal, setShowBfModal] = useState(false);
   const [showAfModal, setShowAfModal] = useState(false);
+  const { removeSubscription } = useSubscriptionStore();
 
   // 구독권 취소하기 로직
   const handleUnsubscribe = async () => {
     try {
-      await subscriptionClientApi.cancelSubscription(user_subscription_id);
+      const { result } = await subscriptionClientApi.cancelSubscription(
+        user_subscription_id
+      );
 
-      console.log("환불함");
+      removeSubscription(user_subscription_id, result.paw_count);
+
       setShowBfModal(false);
       setShowAfModal(true);
     } catch (error) {
