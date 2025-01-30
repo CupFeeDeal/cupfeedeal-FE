@@ -61,6 +61,7 @@ CEOS 20th<br/><br/>
   - 시작일과 만료일이 설정되면 달력에서 해당 기간 사이의 배경을 표시
 - 결제는 토스페이먼츠로 진행 (현재는 공개 클라이언트 키)
 - 결제 성공 여부, 구독/연장 여부에 따라 적절한 안내 모달 렌더링
+- /payment?type=new&id={현재 구독 중인 카페 id}, 혹은 /payment?type=extend&id={현재 구독 중이지 않은 카페 id}로 접근할 경우 에러 페이지 렌더링
 
 <br/><br/>
 
@@ -140,8 +141,9 @@ CEOS 20th<br/><br/>
  ┃ ┗ 📜token.ts
  ┣ 📂app
  ┃ ┣ 🔐(auth)
- ┃ ┃ ┣ 📂oauth/callback/kakao
  ┃ ┃ ┣ 📂_components
+ ┃ ┃ ┣ 📂oauth/callback/kakao
+ ┃ ┃ ┣ 📂profile
  ┃ ┃ ┗ 📜page.tsx
  ┃ ┣ 🏠home
  ┃ ┃ ┣ 📂_components
