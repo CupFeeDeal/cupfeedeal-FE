@@ -68,7 +68,7 @@ export const usePayment = (initialStartDate: Date | null) => {
           });
 
           const response = await subscriptionClientApi.getSubscription();
-          setSubscription(response.result); // response.result가 SubscriptionResponse 타입
+          setSubscription(response.result);
           setShowModal(true);
         } catch (error) {
           console.error("구독 신청 실패:", error);

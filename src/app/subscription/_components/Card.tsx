@@ -2,8 +2,6 @@
 
 import { useState } from "react";
 
-import { useSubscriptionStore } from "@store/useSubscriptionStore";
-
 import { Setting, Coffee, Stamp } from "@assets/icons";
 import Cups from "./Cups";
 import { CardProps } from "src/types/subscription";

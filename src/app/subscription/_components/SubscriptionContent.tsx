@@ -2,8 +2,10 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+
 import { useSubscriptionStore } from "@store/useSubscriptionStore";
 import { SubscriptionCard } from "src/types/subscription";
+
 import { CardBackground } from "@assets/icons";
 import HomeTap from "@common/HomeTap";
 import Card from "./Card";

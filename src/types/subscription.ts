@@ -13,6 +13,7 @@ export interface SubscriptionCard {
   remaining_days: number;
 }
 
+// Api - Store에 필요한 값들
 export interface SubscriptionResponse {
   paw_count: number;
   userSubscriptionListResponseDtos: SubscriptionCard[];

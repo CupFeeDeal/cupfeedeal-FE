@@ -23,12 +23,14 @@ export const useSubscriptionStore = create<SubscriptionState>((set) => ({
   subscriptions: [],
   paw_count: 0,
 
+  // 구독 정보 저장
   setSubscription: (data) =>
     set({
       subscriptions: data.userSubscriptionListResponseDtos,
       paw_count: data.paw_count,
     }),
 
+  // 구독 정보 업데이트
   updateSubscription: (id, updates, newPawCount) =>
     set((state) => ({
       subscriptions: state.subscriptions.map((sub) =>
@@ -37,6 +39,7 @@ export const useSubscriptionStore = create<SubscriptionState>((set) => ({
       paw_count: newPawCount,
     })),
 
+  // 구독 정보 삭제
   removeSubscription: (id, newPawCount) =>
     set((state) => ({
       subscriptions: state.subscriptions.filter(
