@@ -66,6 +66,7 @@ const SubscriptionContent = ({
             </>
           ) : null}
 
+          {/* 카드 리스트 */}
           {subscriptions.length > 0 && (
             <>
               {subscriptions

@@ -13,6 +13,7 @@ const UseCardModal = ({
   cafe_name,
   onComplete,
   user_subscription_id,
+  visit,
 }: UseCardModalProps) => {
   const today = formatDate();
   const { updateSubscription } = useSubscriptionStore();
@@ -26,7 +27,7 @@ const UseCardModal = ({
 
       updateSubscription(
         user_subscription_id,
-        { is_used: true, saved_cups: result.saved_cups },
+        { is_used: true, saved_cups: result.saved_cups, visit: visit + 1 },
         result.paw_count
       );
 

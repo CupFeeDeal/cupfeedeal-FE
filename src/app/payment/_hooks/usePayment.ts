@@ -4,7 +4,10 @@ import { useSubscriptionStore } from "@store/useSubscriptionStore";
 import { tossPaymentApi } from "@api/client/tossPayment";
 import { subscriptionClientApi } from "@api/client/subscriptionClient";
 
-export const usePayment = (initialStartDate: Date | null) => {
+export const usePayment = (
+  initialStartDate: Date | null,
+  cafe_name: string
+) => {
   const [selectedSubscription, setSelectedSubscription] =
     useState<CafeSubscription | null>(null);
   const [startDate, setStartDate] = useState<Date | null>(initialStartDate);
@@ -42,7 +45,7 @@ export const usePayment = (initialStartDate: Date | null) => {
       await tossPaymentApi.requestPayment({
         amount: selectedSubscription.price,
         orderId,
-        orderName: `${selectedSubscription.menu} ${selectedSubscription.period}주 구독권`,
+        orderName: `<${cafe_name}> ${selectedSubscription.menu} ${selectedSubscription.period}주 구독권`,
         subscription_id: selectedSubscription.subscription_id,
         startDate: startDate.toISOString().split("T")[0],
       });
