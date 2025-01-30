@@ -4,17 +4,17 @@ import { useState } from "react";
 import { Logo } from "@assets/icons";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { token } from "@api/token";
+import { useAuthStore } from "@store/useAuthStore";
 import LoginModal from "./LoginModal";
 
 const HomeTap = () => {
   const pathname = usePathname();
   const router = useRouter();
-  const accessToken = token.sync();
+  const { isAuthenticated } = useAuthStore();
   const [showLoginModal, setShowLoginModal] = useState(false);
 
   const handleSubClick = () => {
-    if (!accessToken) {
+    if (!isAuthenticated) {
       setShowLoginModal(true);
       return;
     }
@@ -31,10 +31,10 @@ const HomeTap = () => {
       <div className="flex justify-between items-center py-3 px-5">
         <Logo className="w-11" />
         <Link
-          href={accessToken ? "/mypage" : "/"}
+          href={isAuthenticated ? "/mypage" : "/"}
           className="Caption_bold py-[0.31rem] px-[0.88rem] border border-solid border-black rounded-3xl"
         >
-          {accessToken ? "마이페이지" : "로그인"}
+          {isAuthenticated ? "마이페이지" : "로그인"}
         </Link>
       </div>
       <header className="Body_1_bold flex mt-2">
