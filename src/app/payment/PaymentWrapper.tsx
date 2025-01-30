@@ -1,11 +1,12 @@
 "use client";
 
-import { createContext, ReactNode } from "react";
+import { createContext, ReactNode, useState } from "react";
 import { useRouter } from "next/navigation";
 import TopBar from "@common/TopBar";
 import { PaymentProps, PaymentContextType } from "src/types/payment";
 import ExtendAfModal from "./_components/modal/ExtendAfModal";
 import NewAfModal from "./_components/modal/NewAfModal";
+import FailModal from "@common/FailModal";
 import { usePayment } from "./_hooks/usePayment";
 
 export const PaymentContext = createContext<PaymentContextType | null>(null);
@@ -17,6 +18,7 @@ const PaymentWrapper = ({
 }: PaymentProps & { children: ReactNode }) => {
   const router = useRouter();
   const { userSubscriptionInfo, cafe_name } = data;
+  const [showFailModal, setShowFailModal] = useState(false);
 
   const initialStartDate =
     type === "extend" && userSubscriptionInfo
@@ -31,9 +33,18 @@ const PaymentWrapper = ({
     startDate,
     endDate,
     showModal,
-    handleSubmit,
+    handleSubmit: originalHandleSubmit,
     handleDateChange,
   } = usePayment(initialStartDate, cafe_name);
+
+  const handleSubmit = async () => {
+    try {
+      await originalHandleSubmit();
+    } catch (error) {
+      console.error("결제 실패: ", error);
+      setShowFailModal(true);
+    }
+  };
 
   return (
     <PaymentContext.Provider
@@ -81,6 +92,13 @@ const PaymentWrapper = ({
           />
         )}
       </div>
+
+      {/* 실패 모달 */}
+      <FailModal
+        isOpen={showFailModal}
+        onClose={() => setShowFailModal(false)}
+        message="구독권 결제"
+      />
     </PaymentContext.Provider>
   );
 };

@@ -52,7 +52,7 @@ const SubscriptionContent = ({
 
         <div className="relative my-8 overflow-hidden rounded-[1.25rem] animate-fade-in">
           <CardBackground />
-          {subscriptions.length === 0 ? (
+          {subscriptions.length === 0 && (
             <>
               <h3 className="Headline_3 text-white absolute top-[19%] left-1/2 -translate-x-1/2 whitespace-nowrap">
                 현재 구독권이 없어요
@@ -64,7 +64,7 @@ const SubscriptionContent = ({
                 구독권 둘러보기
               </Link>
             </>
-          ) : null}
+          )}
 
           {/* 카드 리스트 */}
           {subscriptions.length > 0 && (

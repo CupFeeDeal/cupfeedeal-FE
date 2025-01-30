@@ -17,6 +17,8 @@ export interface BasicModalProps {
   onConfirm?: () => void;
 }
 
+// ***
+
 export interface BasicCafeModalProps extends BasicModalProps {
   cafe_name: string;
 }

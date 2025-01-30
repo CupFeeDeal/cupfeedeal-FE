@@ -6,6 +6,7 @@ import Calendar from "../_components/Calendar";
 import { PaymentProps } from "src/types/payment";
 import { PaymentContext } from "../PaymentWrapper";
 
+// 구매 클라이언트
 const NewClient = ({ data }: PaymentProps) => {
   const { cafe_name, cafe_subscriptions, menus, periods } = data;
   const context = useContext(PaymentContext);

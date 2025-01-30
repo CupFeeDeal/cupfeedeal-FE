@@ -15,6 +15,7 @@ import { ManageModalProps } from "src/types/modal";
 import Info from "@app/payment/_components/Info";
 import CancelBfModal from "./CancelBfModal";
 import CancelAfModal from "./CancelAfModal";
+import FailModal from "@common/FailModal";
 
 // 구독 시작일, 만료일 정보 box
 const DateBox = ({
@@ -53,6 +54,7 @@ const ManageModal = ({
 }: ManageModalProps) => {
   const [showBfModal, setShowBfModal] = useState(false);
   const [showAfModal, setShowAfModal] = useState(false);
+  const [showFailModal, setShowFailModal] = useState(false);
   const { removeSubscription } = useSubscriptionStore();
 
   // 구독권 취소하기 로직
@@ -130,6 +132,13 @@ const ManageModal = ({
         isOpen={showAfModal}
         onClose={handleFinalClose}
         cafe_name={cafe_name}
+      />
+
+      {/* 실패 모달 */}
+      <FailModal
+        isOpen={showFailModal}
+        onClose={() => setShowFailModal(false)}
+        message="구독권 취소"
       />
     </>
   );

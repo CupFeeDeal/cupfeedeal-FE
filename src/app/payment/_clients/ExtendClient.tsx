@@ -7,6 +7,7 @@ import OptionBtn from "../_components/OptionBtn";
 import Calendar from "../_components/Calendar";
 import { PaymentProps } from "src/types/payment";
 
+// 연장 클라이언트
 const ExtendClient = ({ data }: PaymentProps) => {
   const { cafe_name, cafe_subscriptions, userSubscriptionInfo } = data;
   const context = useContext(PaymentContext);

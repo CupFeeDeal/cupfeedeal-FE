@@ -13,9 +13,6 @@ const PaymentPage = async ({ searchParams }: PaymentPageProps) => {
   const { id, type } = await searchParams;
   if (!id || !type) redirect("/home");
 
-  // or.. 울보캣으로 잘못된 접근 페이지 하나 만들기..?
-  // if (!id) return <p>잘못된 접근입니다.</p>;
-
   const data = await subscriptionServerApi.getPaymentData(
     parseInt(id),
     type === "extend"

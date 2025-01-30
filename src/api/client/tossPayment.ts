@@ -8,6 +8,7 @@ interface TossPaymentParams {
   startDate: string;
 }
 
+// 토스 결제 (간이 연결이라 프론트단에서 해결)
 export const tossPaymentApi = {
   requestPayment: async ({
     amount,

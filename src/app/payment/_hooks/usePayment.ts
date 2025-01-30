@@ -13,6 +13,7 @@ export const usePayment = (
   const [startDate, setStartDate] = useState<Date | null>(initialStartDate);
   const [endDate, setEndDate] = useState<Date | null>(null);
   const [showModal, setShowModal] = useState(false);
+  const [showFailModal, setShowFailModal] = useState(false);
   const { setSubscription } = useSubscriptionStore();
 
   // subscription이 변경될 때마다 endDate 업데이트
@@ -51,6 +52,7 @@ export const usePayment = (
       });
     } catch (error) {
       console.error("결제 실패: ", error);
+      setShowFailModal(true);
     }
   };
 
@@ -87,6 +89,8 @@ export const usePayment = (
     endDate,
     showModal,
     setShowModal,
+    showFailModal,
+    setShowFailModal,
     handleSubmit,
     handleDateChange,
   };
