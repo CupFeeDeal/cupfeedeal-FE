@@ -25,8 +25,7 @@ export default async function Search({ searchParams }: SearchProps) {
     <div className="flex w-full h-full flex-col">
       <TopBar title="커피딜 지도" backLink="/home" />
       <div className="flex-1 overflow-auto">
-        {/* useSearchParams쓴 거라.. suspense 안 쓰면 빌드 오류남. 나중에 로딩 화면으로 교체 */}
-        <Suspense fallback={<div>로딩 중</div>}>
+        <Suspense fallback={<></>}>
           <SearchContent
             initialCafes={cafes}
             initialQuery={query}

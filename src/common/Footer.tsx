@@ -64,7 +64,7 @@ const Footer = () => {
           </div>
         </div>
 
-        <ul className="space-y-2 Caption_med mr-3">
+        <ul className="space-y-2 Caption_med">
           {FOOTER_LINKS.map(({ text, href }) => (
             <li key={text}>
               <Link

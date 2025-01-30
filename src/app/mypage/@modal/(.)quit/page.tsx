@@ -33,8 +33,10 @@ export default function Quit() {
         <h2 className=" Headline_3 text-Grey-900 mt-10 mb-8">
           정말 탈퇴하시겠어요?
         </h2>
-        <div className="flex justify-center w-full Body_1_bold mb-2">
-          모든 구독 기록과 결제 내역이 삭제됩니다.
+        <div className="flex justify-center text-center w-full Body_1_bold mb-2">
+          모든 구독 기록과 결제 내역이
+          <br />
+          30일 후 삭제됩니다.
         </div>
         <div className="Body_1_med text-Grey-700 mb-8 text-center">
           현재 구독 중인 구독권이 있다면
