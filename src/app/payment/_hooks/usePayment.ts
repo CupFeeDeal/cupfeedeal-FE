@@ -3,6 +3,7 @@ import { CafeSubscription } from "src/types/payment";
 import { useSubscriptionStore } from "@store/useSubscriptionStore";
 import { tossPaymentApi } from "@api/client/tossPayment";
 import { subscriptionClientApi } from "@api/client/subscriptionClient";
+import FailModal from "@common/FailModal";
 
 export const usePayment = (
   initialStartDate: Date | null,
@@ -13,6 +14,7 @@ export const usePayment = (
   const [startDate, setStartDate] = useState<Date | null>(initialStartDate);
   const [endDate, setEndDate] = useState<Date | null>(null);
   const [showModal, setShowModal] = useState(false);
+  const [showFailModal, setShowFailModal] = useState(false);
   const { setSubscription } = useSubscriptionStore();
 
   // subscription이 변경될 때마다 endDate 업데이트
@@ -51,6 +53,7 @@ export const usePayment = (
       });
     } catch (error) {
       console.error("결제 실패: ", error);
+      setShowFailModal(true);
     }
   };
 

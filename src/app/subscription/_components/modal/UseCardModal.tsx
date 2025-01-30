@@ -1,8 +1,10 @@
 "use client";
 
+import { useState } from "react";
 import { subscriptionClientApi } from "@api/client/subscriptionClient";
 import { useSubscriptionStore } from "@store/useSubscriptionStore";
 import Modal from "@common/Modal";
+import FailModal from "@common/FailModal";
 import { UseCardModalProps } from "src/types/modal";
 import { formatDate } from "@app/subscription/_utils/FormatDate";
 import { Coffee, Notice } from "@assets/icons";
@@ -17,6 +19,7 @@ const UseCardModal = ({
 }: UseCardModalProps) => {
   const today = formatDate();
   const { updateSubscription } = useSubscriptionStore();
+  const [showFailModal, setShowFailModal] = useState(false);
 
   // 구독권 사용하기 로직
   const handleConfirm = async () => {
@@ -67,6 +70,13 @@ const UseCardModal = ({
           </div>
         </div>
       </Modal>
+
+      {/* 실패 모달 */}
+      <FailModal
+        isOpen={showFailModal}
+        onClose={() => setShowFailModal(false)}
+        message="구독권 사용"
+      />
     </>
   );
 };
