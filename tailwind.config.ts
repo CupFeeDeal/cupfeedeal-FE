@@ -70,7 +70,7 @@ const config: Config = {
         },
       },
       animation: {
-        "fade-in": "fadeIn 0.5s ease-in-out",
+        "fade-in": "fadeIn 1.5s ease-in-out",
         shimmer: "shimmer 1.5s infinite",
         floating: "floating 1.5s ease-in-out infinite",
       },
