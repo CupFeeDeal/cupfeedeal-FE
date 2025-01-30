@@ -55,6 +55,15 @@ const config: Config = {
         foot2: "url('/svg/Foot2.svg')",
         foot3: "url('/svg/Foot3.svg')",
       },
+      keyframes: {
+        fadeIn: {
+          "0%": { opacity: "0" },
+          "100%": { opacity: "1" },
+        },
+      },
+      animation: {
+        "fade-in": "fadeIn 0.5s ease-in-out",
+      },
     },
   },
 

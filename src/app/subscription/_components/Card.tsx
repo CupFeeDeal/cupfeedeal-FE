@@ -79,7 +79,7 @@ const Card = ({
 
           {/* 구독권 사용 버튼 or 스탬프 */}
           {is_used ? (
-            <Stamp className="absolute -top-5 -right-10 " />
+            <Stamp className="absolute -top-5 -right-10 animate-fade-in" />
           ) : (
             <div
               onClick={(e) => {
