@@ -8,6 +8,7 @@ interface ProfileBtnProps {
   setSelectedId: Dispatch<SetStateAction<number | null>>;
 }
 
+// 데모 프로필들
 const ProfileBtn = ({ selectedId, setSelectedId }: ProfileBtnProps) => {
   const profiles = [
     { Component: Profile1, id: 11, name: "매일세잔" },

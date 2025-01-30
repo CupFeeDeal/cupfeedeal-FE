@@ -37,6 +37,8 @@ const HomeTap = () => {
           {isAuthenticated ? "마이페이지" : "로그인"}
         </Link>
       </div>
+
+      {/* HOME <=> 구독권 탭 */}
       <header className="Body_1_bold flex mt-2">
         <Link href={"/home"} className={tapClass(pathname === "/home")}>
           HOME
