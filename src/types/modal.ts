@@ -24,6 +24,7 @@ export interface BasicCafeModalProps extends BasicModalProps {
 export interface UseCardModalProps extends BasicCafeModalProps {
   onComplete: (showFootModal: boolean) => void;
   user_subscription_id: number;
+  visit: number;
 }
 
 export interface CancelBfModalProps extends BasicCafeModalProps {

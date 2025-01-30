@@ -33,7 +33,7 @@ const PaymentWrapper = ({
     showModal,
     handleSubmit,
     handleDateChange,
-  } = usePayment(initialStartDate);
+  } = usePayment(initialStartDate, cafe_name);
 
   return (
     <PaymentContext.Provider

@@ -105,6 +105,7 @@ const Card = ({
             cafe_name={cafe_name}
             user_subscription_id={user_subscription_id}
             onComplete={switchModal}
+            visit={visit}
           />
 
           {/* 구독권 관리 모달 */}
