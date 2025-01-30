@@ -3,7 +3,6 @@ import { CafeSubscription } from "src/types/payment";
 import { useSubscriptionStore } from "@store/useSubscriptionStore";
 import { tossPaymentApi } from "@api/client/tossPayment";
 import { subscriptionClientApi } from "@api/client/subscriptionClient";
-import FailModal from "@common/FailModal";
 
 export const usePayment = (
   initialStartDate: Date | null,
@@ -90,6 +89,8 @@ export const usePayment = (
     endDate,
     showModal,
     setShowModal,
+    showFailModal,
+    setShowFailModal,
     handleSubmit,
     handleDateChange,
   };
