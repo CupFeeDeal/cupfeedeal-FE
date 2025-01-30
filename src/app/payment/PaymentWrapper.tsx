@@ -67,7 +67,7 @@ const PaymentWrapper = ({
 
         {/* 연장∙구매 버튼 */}
         <button
-          className={`absolute bottom-10 w-[90%] left-1/2 -translate-x-1/2 z-30 shadow-card ${
+          className={`absolute bottom-10 w-[90%] left-1/2 -translate-x-1/2 z-30 shadow-card transition-colors ${
             startDate && endDate ? "btn-confirm" : "btn-invalid"
           }`}
           onClick={handleSubmit}

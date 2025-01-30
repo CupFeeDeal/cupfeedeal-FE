@@ -18,22 +18,24 @@ const ProfileBtn = ({ selectedId, setSelectedId }: ProfileBtnProps) => {
   ];
 
   return (
-    <div className="grid grid-cols-2 grid-rows-2 gap-6 w-[60%] mx-auto">
+    <div className="grid grid-cols-2 grid-rows-2 w-[70%] mx-auto">
       {profiles.map(({ Component, id, name }) => (
         <div
           key={id}
           onClick={() => setSelectedId(id)}
-          className="cursor-pointer space-y-2 transition-all duration-300"
+          className="cursor-pointer space-y-2 p-3  transition-all duration-300"
         >
-          <Component
-            className={`${
-              selectedId === id
-                ? "drop-shadow-basic"
-                : selectedId !== null
-                ? "opacity-30"
-                : ""
-            }`}
-          />
+          <div className="overflow-visible">
+            <Component
+              className={`${
+                selectedId === id
+                  ? "drop-shadow-basic"
+                  : selectedId !== null
+                  ? "opacity-30"
+                  : ""
+              }`}
+            />
+          </div>
           <p className="Subhead_2_bold font-medium text-center">{name}</p>
         </div>
       ))}
