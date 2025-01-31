@@ -38,11 +38,11 @@ const Card = ({
   const [showManageModal, setShowManageModal] = useState(false);
   const [currentBg, setCurrentBg] = useState(getSkeletonClass(backgroundClass));
 
-  // 스켈레톤에서 0.8초 뒤에 전환
+  // 스켈레톤에서 0.4초 뒤에 전환
   useEffect(() => {
     const timer = setTimeout(() => {
       setCurrentBg(backgroundClass);
-    }, 800);
+    }, 400);
 
     return () => clearTimeout(timer);
   }, [backgroundClass]);
