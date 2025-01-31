@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import { Setting, Coffee, Stamp } from "@assets/icons";
 import Cups from "./Cups";
@@ -12,6 +12,10 @@ import { getBottomSpacing } from "../_utils/CardHelpers";
 import UseCardModal from "./modal/UseCardModal";
 import FootModal from "./modal/FootModal";
 import ManageModal from "./modal/ManageModal";
+
+function getSkeletonClass(bgClass: string) {
+  return bgClass.replace(/^bg-card([1-3])$/, "bg-card$1-skeleton");
+}
 
 const Card = ({
   user_subscription_id,
@@ -32,6 +36,16 @@ const Card = ({
   const [showUseModal, setShowUseModal] = useState(false);
   const [showFootModal, setShowFootModal] = useState(false);
   const [showManageModal, setShowManageModal] = useState(false);
+  const [currentBg, setCurrentBg] = useState(getSkeletonClass(backgroundClass));
+
+  // 스켈레톤에서 0.8초 뒤에 전환
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setCurrentBg(backgroundClass);
+    }, 800);
+
+    return () => clearTimeout(timer);
+  }, [backgroundClass]);
 
   // 사용 완료 -> 발자국 모달 바꾸기
   const switchModal = (showFootModal: boolean) => {
@@ -45,7 +59,11 @@ const Card = ({
 
   return (
     <div
-      className={`${CARD_STYLES.common.cardContainer} ${backgroundClass} cursor-pointer`}
+      className={`
+        ${CARD_STYLES.common.cardContainer}
+        ${currentBg}
+        cursor-pointer
+      `}
     >
       {/* 카페 이름 */}
       <p

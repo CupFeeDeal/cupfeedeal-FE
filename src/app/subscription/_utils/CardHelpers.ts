@@ -23,7 +23,8 @@ export function getCardPosition(
 
 // 배경 이미지 불러오기
 export function getCardBackground(idx: number) {
-  return CARD_STYLES.backgrounds[idx % CARD_STYLES.backgrounds.length];
+  const { backgrounds } = CARD_STYLES;
+  return backgrounds[idx % backgrounds.length];
 }
 
 // cups 여백 불러오기

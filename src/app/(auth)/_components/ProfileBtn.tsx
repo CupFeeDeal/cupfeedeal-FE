@@ -29,14 +29,20 @@ const ProfileBtn = ({ selectedId, setSelectedId }: ProfileBtnProps) => {
             <Component
               className={`${
                 selectedId === id
-                  ? "drop-shadow-basic"
+                  ? "drop-shadow-basic "
                   : selectedId !== null
                   ? "opacity-30"
                   : ""
               }`}
             />
           </div>
-          <p className="Subhead_2_bold font-medium text-center">{name}</p>
+          <p
+            className={`Subhead_2_bold font-medium text-center ${
+              selectedId !== null && selectedId !== id ? "text-Grey-400" : ""
+            }`}
+          >
+            {name}
+          </p>
         </div>
       ))}
     </div>
