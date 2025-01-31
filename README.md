@@ -1,6 +1,6 @@
 <div align="center">
  
-#  CupfeeDeal
+#  [CupfeeDeal](https://cupfeedeal-intro.vercel.app)
 CEOS 20th<br/><br/>
 
 </div>
@@ -100,9 +100,9 @@ CEOS 20th<br/><br/>
 - 구독 내역의 경우 자신이 지금까지 구매한 (사용 완료/ 사용 중/ 사용 예정) 구독권들을 모아 볼 수 있으며, 검색 및 사용 가능 구독권만 보기 필터링 제공
 - 구독 내역에서 만료된 구독권은 다시 구독을, 구독 중인 카페는 연장 또는 취소 페이지로 이동
 - 지나간 컵캣에서는 구독권 구매에 따라 획득한 컵캣을 카페 이름과 함께 모아보도록 표시
-- 1일 뒤 재변경 가능한 닉네임 변경 기능 
+- 1일 뒤 재변경 가능한 닉네임 변경 기능
 - 메일과 문의 유형, 내용을 입력하여 전송하는 문의하기 기능
-- 로그아웃 및 회원탈퇴 
+- 로그아웃 및 회원탈퇴
 
 <br/><br/>
 
@@ -123,7 +123,7 @@ CEOS 20th<br/><br/>
 |                                                        송유선                                                         |                                                         최지원                                                         |
 | :-------------------------------------------------------------------------------------------------------------------: | :--------------------------------------------------------------------------------------------------------------------: |
 | <img src="https://github.com/user-attachments/assets/281dd200-27a1-44a3-b007-6f52474800d0" width="170" height="170"/> | <img src= "https://github.com/user-attachments/assets/f4658b95-d0c7-46d8-a3a9-f5fd2b28d730" width="150" height="150"/> |
-|                         (auth) + onboarding/ <br /> home/ <br/> payment/ <br/> subscription/                          |                    search/(?id=#) <br /> search/nearList/ <br /> mypage/ <br/> previous, history, ask, +@                     |
+|                         (auth) + onboarding/ <br /> home/ <br/> payment/ <br/> subscription/                          |                 search/(?id=#) <br /> search/nearList/ <br /> mypage/ <br/> previous, history, ask, +@                 |
 
 <br/>
 
@@ -166,16 +166,17 @@ CEOS 20th<br/><br/>
 3. 각 브랜치에서 작업 후 PR 생성 및 dev로 Merge
 
 ### Commit
-  | Type | Description |
-  | -------- | --------------------------------- |
-  | feat | 새로운 기능 추가 |
-  | fix | 버그 수정 |
-  | docs | README 수정 |
-  | style | 기능 수정 없는 코드 스타일 변경 |
-  | refactor | 코드 리팩토링 |
-  | chore | 패키지 매니저 수정, 그 외 기타 수정 |
-  | design | CSS 등 디자인 변경 |
-  | init | 개발 환경 세팅 |
+
+| Type     | Description                         |
+| -------- | ----------------------------------- |
+| feat     | 새로운 기능 추가                    |
+| fix      | 버그 수정                           |
+| docs     | README 수정                         |
+| style    | 기능 수정 없는 코드 스타일 변경     |
+| refactor | 코드 리팩토링                       |
+| chore    | 패키지 매니저 수정, 그 외 기타 수정 |
+| design   | CSS 등 디자인 변경                  |
+| init     | 개발 환경 세팅                      |
 
 <br/>
 
@@ -241,4 +242,5 @@ CEOS 20th<br/><br/>
  ┣ 📂store
  ┗ 📂types
 ```
+
 <br>
