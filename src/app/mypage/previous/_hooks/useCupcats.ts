@@ -17,6 +17,16 @@ export const levelToCount: { [key: number]: string } = {
   8: "여덟",
   9: "아홉",
   10: "열",
+  11: "열 한",
+  12: "열 두",
+  13: "열 세",
+  14: "열 네",
+  15: "열 다섯",
+  16: "열 여섯",
+  17: "열 일곱",
+  18: "열 여덟",
+  19: "열 아홉",
+  20: "스무",
 };
 
 // 컵캣 간격 커스텀
@@ -33,7 +43,7 @@ export const getColumnStyle = (
     if (colIndex === 2) return { right: "5%" };
   } else if (rowIndex === 1) {
     // 두 번째 줄 (4~6번)
-    if (colIndex === 0) return { left: "3%" };
+    if (colIndex === 0) return { left: "5%" };
     if (colIndex === 1) return { right: "22%" };
     if (colIndex === 2) return { left: "29.5%" };
   } else if (rowIndex === 2) {
