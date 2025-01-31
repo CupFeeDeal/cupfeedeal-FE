@@ -4,19 +4,20 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import ProfileBtn from "../_components/ProfileBtn";
 import { authApi } from "@api/client/auth";
-import { token } from "@api/token";
+import { useAuthStore } from "@store/useAuthStore";
 
 // 데모 시연용 프리뷰 로그인
 const ProfilePage = () => {
   const [selectedId, setSelectedId] = useState<number | null>(null);
   const router = useRouter();
+  const setAccessToken = useAuthStore((state) => state.setAccessToken);
 
   const handleNext = async () => {
     if (!selectedId) return;
 
     try {
       const response = await authApi.demoLogin(selectedId);
-      token.set(response.result.token);
+      setAccessToken(response.result.token);
       router.replace("/home");
     } catch (error) {
       console.error("데모 로그인 실패: ", error);

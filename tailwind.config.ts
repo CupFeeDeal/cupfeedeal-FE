@@ -54,12 +54,6 @@ const config: Config = {
         foot1: "url('/svg/Foot1.svg')",
         foot2: "url('/svg/Foot2.svg')",
         foot3: "url('/svg/Foot3.svg')",
-        "card1-skeleton":
-          "linear-gradient(295deg, #F1AFD3 -13.27%, #9495FD 91.1%)",
-        "card2-skeleton":
-          "linear-gradient(295deg, #3E48F2 -13.27%, #6F76FD 91.1%)",
-        "card3-skeleton":
-          "linear-gradient(295deg, #BB9DEB -13.27%, #F19ED8 91.1%)",
       },
       keyframes: {
         fadeIn: {
@@ -249,9 +243,6 @@ const config: Config = {
     "bg-card1",
     "bg-card2",
     "bg-card3",
-    "bg-card1-skeleton",
-    "bg-card2-skeleton",
-    "bg-card3-skeleton",
   ],
 };
 

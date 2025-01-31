@@ -28,6 +28,6 @@ export const CARD_STYLES = {
   common: {
     transition: "transition-[aspect-ratio] duration-500 ease-in-out",
     cardContainer:
-      "absolute w-full aspect-[21.8125/23] bg-cover p-6 overflow-hidden rounded-[1.75rem]",
+      "absolute w-full aspect-[21.8125/23] bg-cover p-6 overflow-hidden",
   },
 } as const;

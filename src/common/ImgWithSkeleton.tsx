@@ -35,7 +35,7 @@ const ImageWithSkeleton = ({
 
   return (
     <>
-      {/* 로딩 중일 때만 스켈레톤 덧씌우기 */}
+      {/* 로딩 중일때만 스켈레톤 덧씌우기 */}
       {isLoading && skeletonContent}
       <Image
         src={src}
@@ -45,7 +45,8 @@ const ImageWithSkeleton = ({
         className={`${className} ${
           isLoading ? "opacity-0" : "opacity-100"
         } transition-opacity duration-300`}
-        onLoadingComplete={() => setIsLoading(false)}
+        onLoad={() => setIsLoading(false)}
+        onError={() => setIsLoading(false)}
       />
     </>
   );
