@@ -45,7 +45,11 @@ const Card = ({
 
   return (
     <div
-      className={`${CARD_STYLES.common.cardContainer} ${backgroundClass} cursor-pointer`}
+      className={`
+        ${CARD_STYLES.common.cardContainer}
+        ${backgroundClass}
+        cursor-pointer
+      `}
     >
       {/* 카페 이름 */}
       <p

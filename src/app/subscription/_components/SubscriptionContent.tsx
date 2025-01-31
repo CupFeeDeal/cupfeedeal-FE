@@ -21,7 +21,12 @@ const SubscriptionContent = ({
   initialSubscriptions,
 }: Props) => {
   const [selectedIdx, setSelectedIdx] = useState(0);
+  const [mounted, setMounted] = useState(false);
   const { setSubscription, subscriptions, paw_count } = useSubscriptionStore();
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   // 초기 데이터 세팅
   useEffect(() => {
@@ -50,58 +55,60 @@ const SubscriptionContent = ({
           {"오늘의 커피 한 잔 마시고\n발자국을 모아봐요!"}
         </p>
 
-        <div className="relative my-8 overflow-hidden rounded-[1.25rem] animate-fade-in">
-          <CardBackground />
-          {subscriptions.length === 0 && (
-            <>
-              <h3 className="Headline_3 text-white absolute top-[19%] left-1/2 -translate-x-1/2 whitespace-nowrap">
-                현재 구독권이 없어요
-              </h3>
-              <Link
-                href="/search"
-                className="absolute top-[33%] left-1/2 -translate-x-1/2 Body_2_bold text-white bg-Grey-800 px-8 py-3 rounded-lg hover:bg-Grey-700 transition-colors"
-              >
-                구독권 둘러보기
-              </Link>
-            </>
-          )}
+        {mounted && (
+          <div className="relative my-8 overflow-hidden rounded-[1.25rem]">
+            <CardBackground className="animate-fade-in" />
+            {subscriptions.length === 0 && (
+              <>
+                <h3 className="Headline_3 text-white absolute top-[19%] left-1/2 -translate-x-1/2 whitespace-nowrap animate-fade-in">
+                  현재 구독권이 없어요
+                </h3>
+                <Link
+                  href="/search"
+                  className="absolute top-[33%] left-1/2 -translate-x-1/2 Body_2_bold text-white bg-Grey-800 px-8 py-3 rounded-lg animate-fade-in"
+                >
+                  구독권 둘러보기
+                </Link>
+              </>
+            )}
 
-          {/* 카드 리스트 */}
-          {subscriptions.length > 0 && (
-            <>
-              {subscriptions
-                .map((item, idx) => {
-                  const positionClass = getCardPosition(
-                    idx,
-                    selectedIdx,
-                    subscriptions.length
-                  );
-                  const backgroundClass = getCardBackground(idx);
+            {/* 카드 리스트 */}
+            {subscriptions.length > 0 && (
+              <>
+                {subscriptions
+                  .map((item, idx) => {
+                    const positionClass = getCardPosition(
+                      idx,
+                      selectedIdx,
+                      subscriptions.length
+                    );
+                    const backgroundClass = getCardBackground(idx);
 
-                  return (
-                    <div
-                      key={`card-${item.user_subscription_id}`}
-                      className={`
+                    return (
+                      <div
+                        key={`card-${item.user_subscription_id}`}
+                        className={`
                         absolute left-0 right-0 
                         transition-all duration-300 rounded-[1.25rem]
                         ${positionClass}
                       `}
-                      onClick={() => setSelectedIdx(idx)}
-                    >
-                      <Card
-                        {...item}
-                        idx={idx}
-                        total={subscriptions.length}
-                        backgroundClass={backgroundClass}
-                        showDetails={idx === selectedIdx}
-                      />
-                    </div>
-                  );
-                })
-                .reverse()}
-            </>
-          )}
-        </div>
+                        onClick={() => setSelectedIdx(idx)}
+                      >
+                        <Card
+                          {...item}
+                          idx={idx}
+                          total={subscriptions.length}
+                          backgroundClass={backgroundClass}
+                          showDetails={idx === selectedIdx}
+                        />
+                      </div>
+                    );
+                  })
+                  .reverse()}
+              </>
+            )}
+          </div>
+        )}
       </div>
     </div>
   );

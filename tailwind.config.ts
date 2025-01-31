@@ -70,7 +70,7 @@ const config: Config = {
         },
       },
       animation: {
-        "fade-in": "fadeIn 1.5s ease-in-out",
+        "fade-in": "fadeIn 2s ease-in-out",
         shimmer: "shimmer 1.5s infinite",
         floating: "floating 1.5s ease-in-out infinite",
       },
@@ -236,7 +236,14 @@ const config: Config = {
       });
     }),
   ],
-  safelist: ["bg-foot1", "bg-foot2", "bg-foot3"],
+  safelist: [
+    "bg-foot1",
+    "bg-foot2",
+    "bg-foot3",
+    "bg-card1",
+    "bg-card2",
+    "bg-card3",
+  ],
 };
 
 export default config;

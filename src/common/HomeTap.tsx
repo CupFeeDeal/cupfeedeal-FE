@@ -4,13 +4,13 @@ import { useState } from "react";
 import { Logo } from "@assets/icons";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { token } from "@api/token";
+import { useAuthStore } from "@store/useAuthStore";
 import LoginModal from "./LoginModal";
 
 const HomeTap = () => {
   const pathname = usePathname();
   const router = useRouter();
-  const accessToken = token.sync();
+  const accessToken = useAuthStore((state) => state.accessToken);
   const [showLoginModal, setShowLoginModal] = useState(false);
 
   const handleSubClick = () => {
@@ -30,12 +30,14 @@ const HomeTap = () => {
     <>
       <div className="flex justify-between items-center py-3 px-5">
         <Logo className="w-11" />
-        <Link
-          href={accessToken ? "/mypage" : "/"}
-          className="Caption_bold py-[0.31rem] px-[0.88rem] border border-solid border-black rounded-3xl"
-        >
-          {accessToken ? "마이페이지" : "로그인"}
-        </Link>
+        {accessToken !== null && (
+          <Link
+            href={accessToken ? "/mypage" : "/"}
+            className="Caption_bold py-[0.31rem] px-[0.88rem] border border-solid border-black rounded-3xl"
+          >
+            {accessToken ? "마이페이지" : "로그인"}
+          </Link>
+        )}
       </div>
 
       {/* HOME <=> 구독권 탭 */}

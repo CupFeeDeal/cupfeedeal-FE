@@ -1,6 +1,10 @@
 import * as React from "react";
 import type { SVGProps } from "react";
-const SvgProfile4 = (props: SVGProps<SVGSVGElement>) => (
+
+const SvgProfile4 = ({
+  selected = false,
+  ...props
+}: SVGProps<SVGSVGElement> & { selected?: boolean }) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     fill="none"
@@ -13,7 +17,7 @@ const SvgProfile4 = (props: SVGProps<SVGSVGElement>) => (
         cy={45}
         r={43.843}
         fill="#0E4E97"
-        stroke="#E3E8F5"
+        stroke={selected ? "#5DA9FF" : "#E3E8F5"}
         strokeWidth={1.686}
       />
       <mask

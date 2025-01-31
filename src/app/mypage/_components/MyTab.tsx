@@ -1,12 +1,14 @@
 "use client";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import { useAuthStore } from "@store/useAuthStore";
 
 // icons
 import { Back, MyTabCupcatBg, MyTabHistoryBg } from "@assets/icons";
 
 const MyTab = () => {
   const router = useRouter();
+  const logout = useAuthStore((state) => state.logout);
 
   // 탭 메뉴
   const menuList = [
@@ -34,8 +36,7 @@ const MyTab = () => {
 
   // 로그아웃
   const handleLogout = () => {
-    document.cookie =
-      "accessToken=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT";
+    logout();
     router.push("/");
   };
 

@@ -13,7 +13,7 @@ const ProfileBtn = ({ selectedId, setSelectedId }: ProfileBtnProps) => {
   const profiles = [
     { Component: Profile1, id: 11, name: "매일세잔" },
     { Component: Profile2, id: 12, name: "블랙카우" },
-    { Component: Profile3, id: 13, name: "습관성탈출" },
+    { Component: Profile3, id: 13, name: "습관성탈주" },
     { Component: Profile4, id: 14, name: "응애뉴비" },
   ];
 
@@ -27,16 +27,23 @@ const ProfileBtn = ({ selectedId, setSelectedId }: ProfileBtnProps) => {
         >
           <div className="overflow-visible">
             <Component
+              selected={selectedId === id}
               className={`${
                 selectedId === id
-                  ? "drop-shadow-basic"
+                  ? "drop-shadow-basic outline-black"
                   : selectedId !== null
                   ? "opacity-30"
                   : ""
               }`}
             />
           </div>
-          <p className="Subhead_2_bold font-medium text-center">{name}</p>
+          <p
+            className={`Subhead_2_bold font-medium text-center ${
+              selectedId !== null && selectedId !== id ? "text-Grey-400" : ""
+            }`}
+          >
+            {name}
+          </p>
         </div>
       ))}
     </div>

@@ -1,19 +1,10 @@
-<svg width="90" height="90" viewBox="0 0 90 90" fill="none" xmlns="http://www.w3.org/2000/svg">
-<g id="&#237;&#148;&#132;&#235;&#161;&#156;&#237;&#149;&#132; 1" clip-path="url(#clip0_2705_31397)">
-<g id="Group 1000005394">
-<circle id="Ellipse 25" cx="45" cy="45" r="43.8431" fill="#AAD2FF" stroke="#E3E8F5" stroke-width="1.68627"/>
-<mask id="mask0_2705_31397" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="2" y="2" width="86" height="86">
-<circle id="Ellipse 27" cx="45" cy="45" r="43" fill="#6EAAE8"/>
+<svg width="89" height="88" viewBox="0 0 89 88" fill="none" xmlns="http://www.w3.org/2000/svg">
+<circle cx="44.8572" cy="44" r="43.5" fill="#8FC3FF" stroke="#5DA9FF"/>
+<mask id="mask0_2765_15234" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="1" y="1" width="87" height="86">
+<circle cx="44.8572" cy="44" r="43" fill="#6EAAE8"/>
 </mask>
-<g mask="url(#mask0_2705_31397)">
-<circle id="Ellipse 28" cx="45.0003" cy="33.1964" r="16.0196" fill="white"/>
-<circle id="Ellipse 29" cx="45.0008" cy="88.8435" r="34.5686" fill="white"/>
+<g mask="url(#mask0_2765_15234)">
+<circle cx="44.8575" cy="32.1964" r="16.0196" fill="white"/>
+<circle cx="44.8579" cy="87.8435" r="34.5686" fill="white"/>
 </g>
-</g>
-</g>
-<defs>
-<clipPath id="clip0_2705_31397">
-<rect width="90" height="90" fill="white"/>
-</clipPath>
-</defs>
 </svg>
